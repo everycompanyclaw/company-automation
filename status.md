@@ -3,40 +3,33 @@
 ## Revenue Goal
 First client: This month!
 
-## Self-Selling Products (AUTONOMOUS)
+## Self-Selling Products
 
-| Product | Price | Status |
-|---------|-------|--------|
-| Python Scripts Bundle | $79 | ✅ Ready |
-| Zapier Templates | $49 | ✅ Ready |
-| AI Prompts Library | $29 | ✅ Ready |
+| Product | Price | Payment Link |
+|---------|-------|--------------|
+| Python Scripts Bundle | $79 | ⏳ Waiting |
+| Zapier Templates | $49 | ⏳ Waiting |
+| AI Prompts Library | $29 | ⏳ Waiting |
 
-## Sales System
-- ✅ Order handler script (automation/order_handler.py)
-- ✅ Landing pages for each product
-- ✅ Auto-delivery via email
+## Payment Setup
+- 📄 payments.html - Landing page for sign-up
+- 🔗 https://stripe.com - Click to sign up
+- 🔗 https://gumroad.com - Alternative
 
 ## What's Ready
-- ✅ Upwork profile
-- ✅ Fiverr gig  
-- ✅ GitHub: everycompanyclaw
-- ✅ Gmail: everycompanyclaw@gmail.com
-- ✅ Outreach v2
-- ✅ Portfolio website
-- ✅ Case studies
-- ✅ Auto-responder
+- ✅ Landing pages for each product
+- ✅ Order handling system
+- ✅ Payment buttons (need links)
+- ✅ Upwork/Fiverr profiles
+
+## Actions Needed
+1. Open payments.html
+2. Click Stripe (or Gumroad)
+3. Create account & products
+4. Get payment links
+5. Send to me
 
 ## Today's Actions
-- [x] Build Python Scripts Bundle ($79)
-- [x] Build Zapier Templates ($49)
-- [x] Build AI Prompts Library ($29)
-- [x] Create order handler
-- [x] Update landing pages
-
-## Revenue Model
-- $29-79: Digital products (passive)
-- $500-1500: Automation project
-- $1500-4000: AI integration
-
-## Orders Received
-0 (system ready)
+- [x] Create payments.html sign-up page
+- [x] List all products with prices
+- [x] Add payment processor links
