@@ -1,4 +1,5 @@
-# Company Cron Jobs
+# Social media content to Telegram (every 6 hours)
+0 */6 * * * /usr/bin/python3 /Users/macbookpro/.openclaw/workspace/company/social_poster.py >> /tmp/social_poster.log 2>&1
 
 # Morning operations check (8am Mon-Fri)
 0 8 * * 1-5 /usr/bin/python3 /Users/macbookpro/.openclaw/workspace/company/daily_runner.py operations >> /tmp/company_ops.log 2>&1
