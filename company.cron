@@ -1,0 +1,1 @@
+0 9 * * * /usr/bin/python3 /Users/macbookpro/.openclaw/workspace/company/auto_report.py >> /tmp/company_cron.log 2>&1
