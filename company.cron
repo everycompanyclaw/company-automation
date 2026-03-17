@@ -1,1 +1,10 @@
+# Company Cron Jobs
+
+# Daily report at 9am
 0 9 * * * /usr/bin/python3 /Users/macbookpro/.openclaw/workspace/company/auto_report.py >> /tmp/company_cron.log 2>&1
+
+# Check for new jobs (Mon-Fri 8am)
+0 8 * * 1-5 /usr/bin/python3 /Users/macbookpro/.openclaw/workspace/company/fetch_jobs.py >> /tmp/company_jobs.log 2>&1
+
+# Outreach followups (Tue, Thu 10am)
+0 10 * * 2,4 /usr/bin/python3 /Users/macbookpro/.openclaw/workspace/company/outreach_v2.py --followup >> /tmp/company_outreach.log 2>&1
