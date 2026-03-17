@@ -1,13 +1,4 @@
-# Company Management Cron Jobs
+# Company Management Cron Jobs - Every 30 Minutes
 
-# CEO reviews at 8am - makes decisions
-0 8 * * * /usr/bin/python3 /Users/macbookpro/.openclaw/workspace/company/management_chain.py ceo >> /tmp/ceo.log 2>&1
-
-# PM reports at 9am - assigns tasks
-0 9 * * * /usr/bin/python3 /Users/macbookpro/.openclaw/workspace/company/management_chain.py pm >> /tmp/pm.log 2>&1
-
-# Workers execute at 10am - do the work
-0 10 * * * /usr/bin/python3 /Users/macbookpro/.openclaw/workspace/company/management_chain.py workers >> /tmp/workers.log 2>&1
-
-# Full daily check at 8am
-0 8 * * * /usr/bin/python3 /Users/macbookpro/.openclaw/workspace/company/management_chain.py daily >> /tmp/management.log 2>&1
+# Management chain runs every 30 mins
+*/30 * * * * /usr/bin/python3 /Users/macbookpro/.openclaw/workspace/company/management_chain.py daily >> /tmp/management.log 2>&1
