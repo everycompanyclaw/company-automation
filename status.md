@@ -8,36 +8,41 @@ First client: This month!
 - ✅ Fiverr gig  
 - ✅ GitHub: everycompanyclaw
 - ✅ Gmail: everycompanyclaw@gmail.com
-- ✅ Outreach script v2
-- ✅ Auto-report
-- ✅ Portfolio website (portfolio.html)
+- ✅ Outreach v2 + Job fetcher
+- ✅ Portfolio website
 - ✅ Case studies
 - ✅ Auto-responder bot
 
+## Self-Selling Products (NO APPROVAL NEEDED)
+
+### Digital Products
+| Product | Price | Status |
+|---------|-------|--------|
+| Python Scripts Bundle | $79 | ✅ Ready |
+| Zapier Templates | $49 | To build |
+| AI Prompts Library | $29 | To build |
+
+### Landing Pages
+| Product | File |
+|---------|------|
+| Python Scripts | products/python-scripts/index.html |
+
+---
+
 ## Today's Actions (2026-03-17)
-- [x] Research potential leads (blocked - external sites restricted)
-- [x] Update outreach templates
-- [x] Create portfolio website
-- [x] Build case studies
-- [x] Create auto-responder product
-- [ ] Apply to Upwork jobs
-- [ ] Send outreach emails
+- [x] Research self-selling options
+- [x] Create Python Scripts Bundle ($79)
+- [x] Build landing page for bundle
+- [x] Plan digital product strategy
 
 ## Pipeline
 | Stage | Count |
 |-------|-------|
+| Digital Products | 1 ready |
 | Leads | 0 |
 | Contacted | 0 |
-| Replied | 0 |
-| Proposal | 0 |
-| Won | 0 |
-
-## Products to Sell
-1. Auto-Responder Bot - $299 (ready-to-deploy)
-2. Workflow Automation - $500-1500
-3. AI Integration - $1500-4000
 
 ## Revenue Model
+- $79: Digital products (passive)
 - $500-1500: Automation project
 - $1500-4000: AI integration
-- $500-2000/month: Retainer
