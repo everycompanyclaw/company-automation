@@ -1,73 +1,74 @@
 #!/usr/bin/env python3
 """
-CEO Agent - Makes high-level decisions
+CEO Agent - Makes PROFIT-FOCUSED decisions
 Runs every 30 minutes
 """
 import os
 import json
 from datetime import datetime
 
-REPORT_FILE = "/Users/macbookpro/.openclaw/workspace/company/automation/data/ceo_report.md"
-
-def ceo_review():
-    """CEO reviews company status and makes decisions"""
+def ceo_profit_decisions():
+    """CEO makes decisions that generate profit"""
     
-    # Check company metrics
+    # Check current status
     orders_file = "/Users/macbookpro/.openclaw/workspace/company/automation/data/orders.json"
-    jobs_file = "/Users/macbookpro/.openclaw/workspace/company/automation/data/jobs.json"
-    
-    orders = 0
-    jobs = 0
+    revenue = 0
     
     if os.path.exists(orders_file):
         with open(orders_file) as f:
-            orders = len(json.load(f))
+            orders = json.load(f)
+            revenue = sum(o.get('amount', 0) for o in orders) / 100
     
-    if os.path.exists(jobs_file):
-        with open(jobs_file) as f:
-            jobs = len(json.load(f))
+    # Generate profit actions
+    actions = []
     
-    # Make decisions based on status
-    decisions = []
+    # If no revenue → focus on MARKETING
+    if revenue == 0:
+        actions = [
+            "URGENT: No revenue!",
+            "1. Run Instagram poster NOW",
+            "2. Send more marketing",
+            "3. Post to multiple platforms",
+            "4. Consider discounts to get first sale"
+        ]
+    # If has revenue → focus on SCALING
+    else:
+        actions = [
+            f"💰 Revenue: ${revenue}",
+            "1. Continue marketing",
+            "2. Optimize for conversions",
+            "3. Create upsell products",
+            "4. Build repeat customers"
+        ]
     
-    if orders == 0:
-        decisions.append("⚠️ No orders yet - increase marketing push")
-    
-    if jobs == 0:
-        decisions.append("📋 No job leads - need to scout more")
-    
-    if orders > 0:
-        decisions.append("💰 Revenue coming in!")
-    
-    report = f"""# CEO Report - {datetime.now().strftime('%Y-%m-%d %H:%M')}
+    report = f"""# CEO Profit Decisions - {datetime.now().strftime('%Y-%m-%d %H:%M')}
 
-## 📊 Company Metrics
+## 💰 Revenue Status
 
 | Metric | Value |
 |--------|-------|
-| Orders | {orders} |
-| Job Leads | {jobs} |
-| Website | ✅ Up |
+| Revenue | ${revenue} |
+| Target | $1000/month |
 
-## 🎯 CEO Decisions
+## 🎯 Profit Actions
 
-{chr(10).join(['- ' + d for d in decisions]) if decisions else '- Keep running normally'}
+{chr(10).join([f"{i+1}. {a}" for i, a in enumerate(actions)])}
 
-## 📋 Action Items for PM
+## 🚀 Immediate Actions
 
-1. Scout new jobs
-2. Check for orders
-3. Run marketing
+- Run profit_generator.py
+- Post to Instagram
+- Send marketing
+- Check for orders
 
 ---
 *CEO: EveryCompanyClaw*
 """
     
-    with open(REPORT_FILE, "w") as f:
+    with open("/Users/macbookpro/.openclaw/workspace/company/automation/data/ceo_profit.md", "w") as f:
         f.write(report)
     
-    print(f"👔 CEO: Reviewed company - Orders: {orders}, Jobs: {jobs}")
-    return report
+    print(f"👔 CEO: Revenue ${revenue} - {len(actions)} actions generated")
 
 if __name__ == "__main__":
-    ceo_review()
+    ceo_profit_decisions()

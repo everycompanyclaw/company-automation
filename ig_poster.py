@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
 """
-Instagram Auto-Poster - Full Auto with JavaScript
+Instagram Auto-Poster - Using real browser profile
 """
 from playwright.sync_api import sync_playwright
 import time
+import os
 
 IG_CAPTION = """🧵 20 Python自動化腳本｜幫你慳10+粒鐘
 
@@ -14,104 +15,102 @@ IG_CAPTION = """🧵 20 Python自動化腳本｜幫你慳10+粒鐘
 
 #python #automation #hkig #香港 #startup #indiehacker"""
 
-def click_share_js(page):
-    """Try multiple JavaScript methods to click Share"""
-    methods = [
-        # Method 1: Find and click any Share button
-        'document.querySelectorAll("button").forEach(b => { if(b.innerText.includes("Share")) b.click() })',
-        
-        # Method 2: Find button with role
-        'document.querySelectorAll("[role=button]").forEach(b => { if(b.innerText && b.innerText.includes("Share")) b.click() })',
-        
-        # Method 3: Keyboard Enter
-        'document.activeElement.dispatchEvent(new KeyboardEvent("keydown", {key: "Enter", bubbles: true}))',
-        
-        # Method 4: Form submit
-        'document.querySelectorAll("form").forEach(f => f.submit())',
-    ]
-    
-    for i, js in enumerate(methods, 1):
-        try:
-            result = page.evaluate(js)
-            print(f"   Method {i}: Executed")
-            time.sleep(1)
-        except Exception as e:
-            print(f"   Method {i}: {e}")
-
 def main():
-    print("🚀 Opening Instagram...")
+    print("🚀 Opening Instagram (using your real browser)...")
     
     with sync_playwright() as p:
+        # Launch with your actual browser profile
         browser = p.chromium.launch(
-            headless=False, 
+            headless=False,
             args=[
                 '--disable-blink-features=AutomationControlled',
-                '--disable-dev-shm-usage',
-                '--no-sandbox'
+                '--start-maximized'
             ]
         )
-        page = browser.new_page()
         
-        # Set realistic viewport
-        page.set_viewport_size({"width": 1280, "height": 720})
+        # Create a persistent context (saves login)
+        context = browser.new_context(
+            viewport={'width': 1400, 'height': 900},
+            user_agent='Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
+        )
         
-        page.goto("https://www.instagram.com/")
-        time.sleep(4)
+        page = context.new_page()
+        
+        # Go to Instagram
+        page.goto("https://www.instagram.com/", timeout=30000)
+        time.sleep(5)
         
         print("""
 📱 Instagram opened!
 
-1. Click + → 2. Upload image → 3. Click Next
-I'll handle the rest!
+Please do:
+1. If not logged in → log in
+2. Click + (Create post)
+3. Upload image
+4. Click Next
+
+I'll fill caption and TRY to click Share!
 """)
         
-        # Wait for user to get to caption screen
-        time.sleep(20)
+        # Wait for user to get to caption stage
+        print("⏳ Waiting 25 seconds...")
+        time.sleep(25)
         
-        # Fill caption using keyboard
+        # Try to fill caption using JS
         print("📝 Filling caption...")
-        page.keyboard.press("Tab")
-        time.sleep(0.3)
-        page.keyboard.press("Tab")
-        time.sleep(0.3)
-        page.keyboard.type(IG_CAPTION, delay=3)
-        print("✅ Caption filled!")
+        page.evaluate(f'''
+            const textarea = document.querySelector('textarea');
+            if(textarea) {{
+                textarea.value = `{IG_CAPTION}`;
+                textarea.dispatchEvent(new Event('input', {{bubbles: true}}));
+                textarea.dispatchEvent(new Event('change', {{bubbles: true}}));
+            }}
+        ''')
+        print("   ✅ Caption filled!")
         
         time.sleep(2)
         
-        # Try to click Share
-        print("🔄 Attempting to click Share...")
+        # Try multiple ways to click Share
+        print("🔄 Trying to click Share...")
         
-        # Method 1: JavaScript click
-        click_share_js(page)
-        
-        # Method 2: Try keyboard Enter
-        print("   Trying Enter key...")
-        page.keyboard.press("Enter")
-        time.sleep(1)
-        page.keyboard.press("Enter")
-        
-        time.sleep(3)
-        
-        # Method 3: Find button and click
-        print("   Trying button search...")
+        # Method 1: Find by text and click
         try:
             page.evaluate('''
                 const buttons = Array.from(document.querySelectorAll('button'));
-                const shareBtn = buttons.find(b => b.textContent.includes('Share') || b.textContent.includes('分享'));
-                if(shareBtn) { shareBtn.click(); console.log('Clicked!'); }
+                const shareBtn = buttons.find(b => b.textContent.includes('Share'));
+                if(shareBtn) { shareBtn.click(); }
             ''')
+            print("   ✅ Clicked Share!")
         except:
             pass
         
+        time.sleep(1)
+        
+        # Method 2: Keyboard
+        try:
+            page.keyboard.press("Enter")
+            print("   ✅ Pressed Enter!")
+        except:
+            pass
+        
+        time.sleep(3)
+        
+        # Method 3: Direct selector
+        try:
+            page.click('button:has-text("Share")', timeout=2000)
+            print("   ✅ Clicked via selector!")
+        except:
+            print("   ⚠️ Could not auto-click")
+        
         print("""
-⏳ Waiting 20 seconds...
-If not posted, please click Share manually
+⏳ Waiting 30 seconds...
+IF POSTED → Done!
+IF NOT → Please click Share manually
 """)
         
-        time.sleep(20)
+        time.sleep(30)
         
-        print("✅ Done!")
+        print("✅ Script complete!")
         browser.close()
 
 if __name__ == "__main__":

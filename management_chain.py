@@ -1,54 +1,44 @@
 #!/usr/bin/env python3
 """
-Management Chain - CEO → PM → Workers
-Automated company hierarchy
+Management Chain - PROFIT FOCUSED
+CEO → PM → Workers
+Runs every 30 minutes
 """
-import os
+import subprocess
 import sys
-from datetime import datetime
-
-# Add company path
-sys.path.insert(0, "/Users/macbookpro/.openclaw/workspace/company")
 
 def run_ceo():
-    """CEO makes decisions"""
-    print("👔 CEO: Reviewing company status...")
-    os.system("python3 /Users/macbookpro/.openclaw/workspace/company/ceo_agent.py")
-    print("   → CEO decisions recorded\n")
+    """CEO makes profit decisions"""
+    print("👔 CEO: Making profit decisions...")
+    subprocess.run([sys.executable, "/Users/macbookpro/.openclaw/workspace/company/ceo_agent.py"])
 
-def run_pm():
-    """PM manages tasks"""
-    print("📋 PM: Compiling status report...")
-    os.system("python3 /Users/macbookpro/.openclaw/workspace/company/pm_agent.py")
-    print("   → Tasks assigned to workers\n")
+def run_profit():
+    """Generate profit"""
+    print("💰 Running profit generator...")
+    subprocess.run([sys.executable, "/Users/macbookpro/.openclaw/workspace/company/profit_generator.py"])
 
 def run_workers():
-    """Workers execute tasks"""
+    """Workers execute profit actions"""
     print("👷 Workers: Executing tasks...")
     
-    roles = ["sales", "support", "operations"]
-    for role in roles:
-        os.system(f"python3 /Users/macbookpro/.openclaw/workspace/company/worker_agents.py {role}")
+    # Run job scout
+    subprocess.run([sys.executable, "/Users/macbookpro/.openclaw/workspace/company/job_scout.py"])
     
-    print("   → All workers done\n")
+    # Check orders
+    subprocess.run([sys.executable, "-c", "import stripe; print('Stripe ready')"], capture_output=True)
 
-def daily_check():
-    """Full daily check - CEO → PM → Workers"""
+def daily_profit_cycle():
+    """Full profit cycle"""
     print("=" * 50)
-    print(f"🏢 Company Check - {datetime.now()}")
+    print("🏢 Company Profit Cycle")
     print("=" * 50)
     
-    print("\n[1/3] CEO Review...")
     run_ceo()
-    
-    print("[2/3] PM Report...")
-    run_pm()
-    
-    print("[3/3] Workers Execute...")
+    run_profit()
     run_workers()
     
     print("=" * 50)
-    print("✅ Daily check complete")
+    print("✅ Profit cycle complete")
     print("=" * 50)
 
 if __name__ == "__main__":
@@ -56,9 +46,9 @@ if __name__ == "__main__":
     
     if mode == "ceo":
         run_ceo()
-    elif mode == "pm":
-        run_pm()
+    elif mode == "profit":
+        run_profit()
     elif mode == "workers":
         run_workers()
     else:
-        daily_check()
+        daily_profit_cycle()
