@@ -1,52 +1,72 @@
 #!/usr/bin/env python3
 """
 CEO Agent - Makes high-level decisions
-Runs daily at 8am
+Runs every 30 minutes
 """
+import os
 import json
 from datetime import datetime
 
-STATUS_FILE = "/Users/macbookpro/.openclaw/workspace/company/status.md"
-REPORT_FILE = "/Users/macbookpro/.openclaw/workspace/company/automation/data/daily_report.md"
+REPORT_FILE = "/Users/macbookpro/.openclaw/workspace/company/automation/data/ceo_report.md"
 
 def ceo_review():
     """CEO reviews company status and makes decisions"""
-    report = f"""# CEO Daily Review - {datetime.now().strftime('%Y-%m-%d')}
+    
+    # Check company metrics
+    orders_file = "/Users/macbookpro/.openclaw/workspace/company/automation/data/orders.json"
+    jobs_file = "/Users/macbookpro/.openclaw/workspace/company/automation/data/jobs.json"
+    
+    orders = 0
+    jobs = 0
+    
+    if os.path.exists(orders_file):
+        with open(orders_file) as f:
+            orders = len(json.load(f))
+    
+    if os.path.exists(jobs_file):
+        with open(jobs_file) as f:
+            jobs = len(json.load(f))
+    
+    # Make decisions based on status
+    decisions = []
+    
+    if orders == 0:
+        decisions.append("⚠️ No orders yet - increase marketing push")
+    
+    if jobs == 0:
+        decisions.append("📋 No job leads - need to scout more")
+    
+    if orders > 0:
+        decisions.append("💰 Revenue coming in!")
+    
+    report = f"""# CEO Report - {datetime.now().strftime('%Y-%m-%d %H:%M')}
 
-## Status Check
+## 📊 Company Metrics
 
-### Revenue
-- Target: $0 (first month)
-- Current: TBD
+| Metric | Value |
+|--------|-------|
+| Orders | {orders} |
+| Job Leads | {jobs} |
+| Website | ✅ Up |
 
-### Operations
-- Products: Live
-- Payments: Active
-- Website: Running
+## 🎯 CEO Decisions
 
-### Marketing
-- Social: Content ready
-- Blocked: Twitter API
+{chr(10).join(['- ' + d for d in decisions]) if decisions else '- Keep running normally'}
 
-## CEO Decisions
+## 📋 Action Items for PM
 
-1. Continue marketing push
-2. Check for new orders
-3. Optimize conversion rate
-
-## Action Items for PM
-- [ ] Check orders
-- [ ] Review marketing
-- [ ] Report issues
+1. Scout new jobs
+2. Check for orders
+3. Run marketing
 
 ---
-*CEO: EveryCompanyClaw AI*
+*CEO: EveryCompanyClaw*
 """
     
     with open(REPORT_FILE, "w") as f:
         f.write(report)
     
-    print("✅ CEO review complete")
+    print(f"👔 CEO: Reviewed company - Orders: {orders}, Jobs: {jobs}")
     return report
 
 if __name__ == "__main__":

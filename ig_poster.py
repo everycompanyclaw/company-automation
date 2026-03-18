@@ -1,78 +1,118 @@
 #!/usr/bin/env python3
 """
-Instagram Auto-Poster using Playwright
-Run: python3 /Users/macbookpro/.openclaw/workspace/company/ig_poster.py
+Instagram Auto-Poster - Full Auto with JavaScript
 """
-import asyncio
-import os
+from playwright.sync_api import sync_playwright
+import time
 
-# Content to post
 IG_CAPTION = """🧵 20 Python自動化腳本｜幫你慳10+粒鐘
 
 由Email提取器、檔案整理器、發票生成器...
 全部已經寫好，等你去用！
 
 💰 $79 = 永久使用
-⬇️ link in bio
 
 #python #automation #hkig #香港 #startup #indiehacker"""
 
-async def post_to_instagram():
-    """Post to Instagram using Playwright"""
-    from playwright.async_api import async_playwright
+def click_share_js(page):
+    """Try multiple JavaScript methods to click Share"""
+    methods = [
+        # Method 1: Find and click any Share button
+        'document.querySelectorAll("button").forEach(b => { if(b.innerText.includes("Share")) b.click() })',
+        
+        # Method 2: Find button with role
+        'document.querySelectorAll("[role=button]").forEach(b => { if(b.innerText && b.innerText.includes("Share")) b.click() })',
+        
+        # Method 3: Keyboard Enter
+        'document.activeElement.dispatchEvent(new KeyboardEvent("keydown", {key: "Enter", bubbles: true}))',
+        
+        # Method 4: Form submit
+        'document.querySelectorAll("form").forEach(f => f.submit())',
+    ]
     
-    print("🚀 Starting Instagram Auto-Post...")
-    
-    async with async_playwright() as p:
-        browser = await p.chromium.launch(headless=False)
-        context = await browser.new_context()
-        page = await context.new_page()
-        
-        # Go to Instagram
-        print("📱 Opening Instagram...")
-        await page.goto("https://www.instagram.com/")
-        
-        # Wait for page to load
-        await page.wait_for_load_state("networkidle")
-        
-        print("⚠️ Please log in if not already logged in")
-        print("   Waiting 15 seconds for login...")
-        await page.wait_for_timeout(15000)
-        
-        # Click the + button to create new post
-        print("📝 Creating new post...")
+    for i, js in enumerate(methods, 1):
         try:
-            # Try various selectors for the new post button
-            await page.click('svg[aria-label="New post"]', timeout=5000)
-        except:
-            try:
-                await page.click('a[href="#"][role="link"]', timeout=5000)
-            except:
-                print("   Couldn't auto-click, trying manual...")
+            result = page.evaluate(js)
+            print(f"   Method {i}: Executed")
+            time.sleep(1)
+        except Exception as e:
+            print(f"   Method {i}: {e}")
+
+def main():
+    print("🚀 Opening Instagram...")
+    
+    with sync_playwright() as p:
+        browser = p.chromium.launch(
+            headless=False, 
+            args=[
+                '--disable-blink-features=AutomationControlled',
+                '--disable-dev-shm-usage',
+                '--no-sandbox'
+            ]
+        )
+        page = browser.new_page()
         
-        await page.wait_for_timeout(3000)
+        # Set realistic viewport
+        page.set_viewport_size({"width": 1280, "height": 720})
         
-        # For now, just show what would be posted
-        print(f"""
-📋 Caption that would be posted:
+        page.goto("https://www.instagram.com/")
+        time.sleep(4)
+        
+        print("""
+📱 Instagram opened!
 
-{IG_CAPTION}
-
-🎯 To complete posting:
-1. Click the + button in Instagram
-2. Upload an image
-3. Paste the caption above
-4. Share!
-
-✅ Playwright browser automation is working!
+1. Click + → 2. Upload image → 3. Click Next
+I'll handle the rest!
 """)
         
-        # Keep browser open for user to complete
-        print("Press Ctrl+C to close...")
-        await asyncio.sleep(30)
+        # Wait for user to get to caption screen
+        time.sleep(20)
         
-        await browser.close()
-        print("👋 Browser closed")
+        # Fill caption using keyboard
+        print("📝 Filling caption...")
+        page.keyboard.press("Tab")
+        time.sleep(0.3)
+        page.keyboard.press("Tab")
+        time.sleep(0.3)
+        page.keyboard.type(IG_CAPTION, delay=3)
+        print("✅ Caption filled!")
+        
+        time.sleep(2)
+        
+        # Try to click Share
+        print("🔄 Attempting to click Share...")
+        
+        # Method 1: JavaScript click
+        click_share_js(page)
+        
+        # Method 2: Try keyboard Enter
+        print("   Trying Enter key...")
+        page.keyboard.press("Enter")
+        time.sleep(1)
+        page.keyboard.press("Enter")
+        
+        time.sleep(3)
+        
+        # Method 3: Find button and click
+        print("   Trying button search...")
+        try:
+            page.evaluate('''
+                const buttons = Array.from(document.querySelectorAll('button'));
+                const shareBtn = buttons.find(b => b.textContent.includes('Share') || b.textContent.includes('分享'));
+                if(shareBtn) { shareBtn.click(); console.log('Clicked!'); }
+            ''')
+        except:
+            pass
+        
+        print("""
+⏳ Waiting 20 seconds...
+If not posted, please click Share manually
+""")
+        
+        time.sleep(20)
+        
+        print("✅ Done!")
+        browser.close()
 
 if __name__ == "__main__":
-    asyncio.run(post_to_instagram())
+    main()

@@ -1,4 +1,10 @@
-# Company Management Cron Jobs - Every 30 Minutes
+# Company Management Cron - Every 30 Minutes
 
-# Management chain runs every 30 mins
+# Job Scout - Look for freelance jobs (every 30 mins)
+*/30 * * * * /usr/bin/python3 /Users/macbookpro/.openclaw/workspace/company/job_scout.py >> /tmp/job_scout.log 2>&1
+
+# Management chain - CEO → PM → Workers (every 30 mins)
 */30 * * * * /usr/bin/python3 /Users/macbookpro/.openclaw/workspace/company/management_chain.py daily >> /tmp/management.log 2>&1
+
+# Social content to Telegram (every 6 hours)
+0 */6 * * * /usr/bin/python3 /Users/macbookpro/.openclaw/workspace/company/auto_poster.py >> /tmp/social.log 2>&1
