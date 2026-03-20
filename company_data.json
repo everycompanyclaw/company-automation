@@ -1,0 +1,64 @@
+{
+  "company": {
+    "name": "EveryCompanyClaw",
+    "status": "running",
+    "founded": "2026"
+  },
+  "agents": [
+    {
+      "name": "👔 CEO Agent",
+      "role": "Chief Executive Officer",
+      "status": "active",
+      "current_task": "Setting company strategy",
+      "last_action": "Reviewing profits",
+      "focus": "Growth & Revenue"
+    },
+    {
+      "name": "📢 Marketing Agent",
+      "role": "Chief Marketing Officer",
+      "status": "active",
+      "current_task": "Social media posting",
+      "last_action": "Content creation",
+      "focus": "Brand awareness"
+    },
+    {
+      "name": "💰 Sales Agent",
+      "role": "Sales Director",
+      "status": "active",
+      "current_task": "Cold outreach",
+      "last_action": "Lead generation",
+      "focus": "Customer acquisition"
+    },
+    {
+      "name": "⚙️ Operations Agent",
+      "role": "Operations Manager",
+      "status": "active",
+      "current_task": "Automating workflows",
+      "last_action": "Cron job management",
+      "focus": "Efficiency"
+    },
+    {
+      "name": "🧠 Learning Agent",
+      "role": "AI Learning System",
+      "status": "active",
+      "current_task": "Studying marketing strategies",
+      "last_action": "Analyzing competitors",
+      "focus": "Continuous improvement"
+    },
+    {
+      "name": "📊 Analytics Agent",
+      "role": "Data Analyst",
+      "status": "active",
+      "current_task": "Tracking metrics",
+      "last_action": "Report generation",
+      "focus": "Insights"
+    }
+  ],
+  "stats": {
+    "topics_learned": 36,
+    "actions_completed": 221,
+    "leads_generated": 0,
+    "posts_created": 15
+  },
+  "current_time": "2026-03-20 18:10"
+}
