@@ -7,42 +7,27 @@
   "pipeline_count": 0,
   "activities": [
     {
-      "time": "15:30",
-      "action": "learning",
-      "details": "Studied: viral_marketing"
-    },
-    {
-      "time": "15:30",
-      "action": "action",
-      "details": "Executed: write_sales_copy"
-    },
-    {
-      "time": "16:00",
-      "action": "learning",
-      "details": "Studied: email_newsletter"
-    },
-    {
-      "time": "16:00",
+      "time": "2026-",
       "action": "action",
       "details": "Executed: write_email_sequence"
     },
     {
-      "time": "17:32",
+      "time": "2026-",
       "action": "learning",
       "details": "Studied: call_to_action"
     },
     {
-      "time": "17:32",
+      "time": "2026-",
       "action": "action",
       "details": "Executed: cold_outreach"
     },
     {
-      "time": "18:00",
+      "time": "2026-",
       "action": "learning",
       "details": "Studied: blog_writing"
     },
     {
-      "time": "18:00",
+      "time": "2026-",
       "action": "action",
       "details": "Executed: guest_post"
     }
