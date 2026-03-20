@@ -3,23 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EveryCompanyClaw - Live CRM</title>
+    <title>EveryCompanyClaw - Live Virtual Office</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
             min-height: 100vh;
             color: #fff;
             padding: 20px;
         }
-        .container { max-width: 900px; margin: 0 auto; }
+        .container { max-width: 1000px; margin: 0 auto; }
         
         h1 {
             text-align: center;
-            font-size: 2.5em;
-            margin-bottom: 10px;
-            background: linear-gradient(90deg, #00d4ff, #7b2ff7);
+            font-size: 3em;
+            margin-bottom: 5px;
+            background: linear-gradient(90deg, #00d4ff, #00ff88);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
@@ -27,172 +27,303 @@
             text-align: center;
             color: #888;
             margin-bottom: 30px;
-        }
-        
-        .card {
-            background: rgba(255,255,255,0.05);
-            border-radius: 15px;
-            padding: 20px;
-            margin-bottom: 20px;
-            border: 1px solid rgba(255,255,255,0.1);
-        }
-        
-        .card h2 {
-            color: #00d4ff;
-            margin-bottom: 15px;
             font-size: 1.2em;
         }
         
+        /* Virtual Office Grid */
+        .office-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .office-card {
+            background: rgba(255,255,255,0.08);
+            border-radius: 20px;
+            padding: 25px;
+            border: 1px solid rgba(255,255,255,0.1);
+            text-align: center;
+        }
+        
+        .office-card h3 {
+            color: #00d4ff;
+            font-size: 1.1em;
+            margin-bottom: 15px;
+        }
+        
+        .robot-avatar {
+            font-size: 4em;
+            margin-bottom: 10px;
+        }
+        
+        .status-badge {
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            margin-top: 10px;
+        }
+        
+        .status-active {
+            background: rgba(0,255,136,0.2);
+            color: #00ff88;
+        }
+        
+        /* Current Task */
+        .current-task {
+            background: linear-gradient(135deg, rgba(0,212,255,0.1), rgba(0,255,136,0.1));
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            border: 2px solid #00d4ff;
+        }
+        
+        .current-task h2 {
+            color: #00d4ff;
+            margin-bottom: 20px;
+        }
+        
+        .task-display {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        
+        .task-box {
+            background: rgba(0,0,0,0.3);
+            padding: 20px 30px;
+            border-radius: 15px;
+            text-align: center;
+        }
+        
+        .task-label {
+            color: #888;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+        
+        .task-value {
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+        
+        .task-learning { color: #00ff88; }
+        .task-doing { color: #7b2ff7; }
+        
+        /* Stats Grid */
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 15px;
+            margin-bottom: 30px;
         }
         
         .stat {
             text-align: center;
-            padding: 15px;
-            background: rgba(0,0,0,0.3);
-            border-radius: 10px;
+            padding: 20px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 15px;
         }
         
         .stat-number {
-            font-size: 2em;
+            font-size: 2.5em;
             font-weight: bold;
-            color: #7b2ff7;
+            background: linear-gradient(90deg, #00d4ff, #7b2ff7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
         
         .stat-label {
             color: #888;
             font-size: 0.9em;
+            margin-top: 5px;
         }
         
-        .focus-current {
-            font-size: 1.3em;
-            color: #00ff88;
-            padding: 15px;
-            background: rgba(0,255,136,0.1);
-            border-radius: 10px;
-            margin-bottom: 10px;
+        /* Activity Feed */
+        .activity-feed {
+            background: rgba(255,255,255,0.05);
+            border-radius: 20px;
+            padding: 25px;
         }
         
-        .activity-list {
-            list-style: none;
+        .activity-feed h2 {
+            color: #00d4ff;
+            margin-bottom: 20px;
         }
         
-        .activity-list li {
-            padding: 10px;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
+        .activity-item {
             display: flex;
             justify-content: space-between;
+            padding: 15px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
         }
         
-        .activity-list li:last-child { border-bottom: none; }
+        .activity-item:last-child { border-bottom: none; }
         
-        .activity-time { color: #666; font-size: 0.9em; }
-        .activity-action { color: #00d4ff; }
+        .activity-time { color: #666; }
+        .activity-action { color: #00ff88; }
         
-        .pulse {
-            animation: pulse 2s infinite;
-        }
-        
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
-        }
-        
+        /* Live Indicator */
         .live-indicator {
             display: inline-block;
-            width: 10px;
-            height: 10px;
+            width: 12px;
+            height: 12px;
             background: #00ff88;
             border-radius: 50%;
             margin-right: 10px;
             animation: pulse 1.5s infinite;
         }
         
-        .updated {
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.2); }
+        }
+        
+        /* Products */
+        .products-section {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-top: 30px;
+        }
+        
+        .product-card {
+            background: rgba(255,255,255,0.08);
+            padding: 20px;
+            border-radius: 15px;
             text-align: center;
-            color: #666;
-            margin-top: 20px;
-            font-size: 0.9em;
+        }
+        
+        .product-price {
+            font-size: 1.8em;
+            color: #00ff88;
+            font-weight: bold;
+        }
+        
+        /* Footer */
+        .footer {
+            text-align: center;
+            color: #555;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
         }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>🏢 EveryCompanyClaw</h1>
-        <p class="subtitle">Live AI Company Dashboard</p>
+        <p class="subtitle">🤖 Live Virtual Office - AI Running 24/7</p>
         
-        <div class="card">
-            <h2><span class="live-indicator"></span>Current Status</h2>
-            <div class="focus-current">
-                🎯 Learning: <span id="current-topic">Loading...</span>
-            </div>
-            <div class="focus-current" style="background: rgba(123,47,247,0.1);">
-                ⚡ Doing: <span id="current-action">Loading...</span>
-            </div>
-        </div>
-        
-        <div class="card">
-            <h2>📊 Statistics</h2>
-            <div class="stats-grid">
-                <div class="stat">
-                    <div class="stat-number" id="topics-count">0</div>
-                    <div class="stat-label">Topics</div>
+        <!-- Current Task -->
+        <div class="current-task">
+            <h2><span class="live-indicator"></span>CURRENTLY WORKING ON</h2>
+            <div class="task-display">
+                <div class="task-box">
+                    <div class="task-label">🧠 LEARNING</div>
+                    <div class="task-value task-learning" id="current-topic">Loading...</div>
                 </div>
-                <div class="stat">
-                    <div class="stat-number" id="actions-count">0</div>
-                    <div class="stat-label">Actions</div>
-                </div>
-                <div class="stat">
-                    <div class="stat-number" id="leads-count">0</div>
-                    <div class="stat-label">Leads</div>
-                </div>
-                <div class="stat">
-                    <div class="stat-number" id="pipeline-count">0</div>
-                    <div class="stat-label">Pipeline</div>
+                <div class="task-box">
+                    <div class="task-label">⚡ DOING</div>
+                    <div class="task-value task-doing" id="current-action">Loading...</div>
                 </div>
             </div>
         </div>
         
-        <div class="card">
+        <!-- Stats -->
+        <div class="stats-grid">
+            <div class="stat">
+                <div class="stat-number" id="topics-count">0</div>
+                <div class="stat-label">Topics Studied</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number" id="actions-count">0</div>
+                <div class="stat-label">Actions Done</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number" id="leads-count">0</div>
+                <div class="stat-label">Leads</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number" id="pipeline-count">0</div>
+                <div class="stat-label">Pipeline</div>
+            </div>
+        </div>
+        
+        <!-- Activity Feed -->
+        <div class="activity-feed">
             <h2>⚡ Recent Activities</h2>
-            <ul class="activity-list" id="activities">
-                <li>Loading...</li>
-            </ul>
+            <div id="activities">
+                <div class="activity-item">Loading...</div>
+            </div>
         </div>
         
-        <div class="card">
-            <h2>🎯 Target Audience</h2>
-            <p>• Small business owners needing automation</p>
-            <p>• Startups needing AI integration</p>
-            <p>• Marketers wanting to save time</p>
-            <p>• Freelancers needing workflows</p>
+        <!-- Products -->
+        <div class="products-section">
+            <div class="product-card">
+                <div>🐍 Python Scripts</div>
+                <div class="product-price">$79</div>
+            </div>
+            <div class="product-card">
+                <div>⚡ Zapier Templates</div>
+                <div class="product-price">$49</div>
+            </div>
+            <div class="product-card">
+                <div>🤖 AI Prompts</div>
+                <div class="product-price">$29</div>
+            </div>
         </div>
         
-        <div class="card">
-            <h2>💰 Products</h2>
-            <p>• Python Scripts Bundle - $79</p>
-            <p>• Zapier Templates - $49</p>
-            <p>• AI Prompts Library - $29</p>
+        <div class="footer">
+            <p>🤖 Company running autonomously | <span class="live-indicator"></span> Live</p>
+            <p id="last-updated">Updated: Loading...</p>
         </div>
-        
-        <p class="updated">Updated: <span id="last-updated">Loading...</span></p>
     </div>
     
     <script>
-        async function loadDashboard() {
+        // Fetch live status from status.json
+        async function loadStatus() {
             try {
-                const now = new Date();
-                document.getElementById('last-updated').textContent = now.toLocaleString();
+                const response = await fetch('status.json');
+                const data = await response.json();
+                
+                // Update current task
+                document.getElementById('current-topic').textContent = data.current_topic || 'None';
+                document.getElementById('current-action').textContent = data.current_action || 'None';
+                
+                // Update stats
+                document.getElementById('topics-count').textContent = data.topics_count || 0;
+                document.getElementById('actions-count').textContent = data.actions_count || 0;
+                document.getElementById('leads-count').textContent = data.leads_count || 0;
+                document.getElementById('pipeline-count').textContent = data.pipeline_count || 0;
+                
+                // Update activities
+                const activitiesDiv = document.getElementById('activities');
+                activitiesDiv.innerHTML = '';
+                (data.activities || []).forEach(act => {
+                    activitiesDiv.innerHTML += `
+                        <div class="activity-item">
+                            <span class="activity-time">${act.time}</span>
+                            <span class="activity-action">${act.action}: ${act.details}</span>
+                        </div>
+                    `;
+                });
+                
+                // Update timestamp
+                document.getElementById('last-updated').textContent = 'Updated: ' + new Date().toLocaleString();
+                
             } catch(e) {
-                console.log('Dashboard loading...');
+                console.log('Loading status...', e);
             }
         }
         
-        loadDashboard();
-        setInterval(loadDashboard, 30000);
+        // Load on page load
+        loadStatus();
+        
+        // Refresh every 30 seconds
+        setInterval(loadStatus, 30000);
     </script>
 </body>
 </html>
