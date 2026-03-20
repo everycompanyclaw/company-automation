@@ -30,46 +30,6 @@
             font-size: 1.2em;
         }
         
-        /* Virtual Office Grid */
-        .office-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-            margin-bottom: 30px;
-        }
-        
-        .office-card {
-            background: rgba(255,255,255,0.08);
-            border-radius: 20px;
-            padding: 25px;
-            border: 1px solid rgba(255,255,255,0.1);
-            text-align: center;
-        }
-        
-        .office-card h3 {
-            color: #00d4ff;
-            font-size: 1.1em;
-            margin-bottom: 15px;
-        }
-        
-        .robot-avatar {
-            font-size: 4em;
-            margin-bottom: 10px;
-        }
-        
-        .status-badge {
-            display: inline-block;
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-size: 0.9em;
-            margin-top: 10px;
-        }
-        
-        .status-active {
-            background: rgba(0,255,136,0.2);
-            color: #00ff88;
-        }
-        
         /* Current Task */
         .current-task {
             background: linear-gradient(135deg, rgba(0,212,255,0.1), rgba(0,255,136,0.1));
@@ -202,7 +162,6 @@
             font-weight: bold;
         }
         
-        /* Footer */
         .footer {
             text-align: center;
             color: #555;
@@ -283,23 +242,19 @@
     </div>
     
     <script>
-        // Fetch live status from status.json
         async function loadStatus() {
             try {
                 const response = await fetch('status.json');
                 const data = await response.json();
                 
-                // Update current task
                 document.getElementById('current-topic').textContent = data.current_topic || 'None';
                 document.getElementById('current-action').textContent = data.current_action || 'None';
                 
-                // Update stats
                 document.getElementById('topics-count').textContent = data.topics_count || 0;
                 document.getElementById('actions-count').textContent = data.actions_count || 0;
                 document.getElementById('leads-count').textContent = data.leads_count || 0;
                 document.getElementById('pipeline-count').textContent = data.pipeline_count || 0;
                 
-                // Update activities
                 const activitiesDiv = document.getElementById('activities');
                 activitiesDiv.innerHTML = '';
                 (data.activities || []).forEach(act => {
@@ -311,18 +266,14 @@
                     `;
                 });
                 
-                // Update timestamp
                 document.getElementById('last-updated').textContent = 'Updated: ' + new Date().toLocaleString();
                 
             } catch(e) {
-                console.log('Loading status...', e);
+                console.log('Loading...', e);
             }
         }
         
-        // Load on page load
         loadStatus();
-        
-        // Refresh every 30 seconds
         setInterval(loadStatus, 30000);
     </script>
 </body>

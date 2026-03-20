@@ -1,15 +1,18 @@
 {
-  "current_topic": "marketing_strategy",
-  "current_action": "post_to_instagram",
-  "topics_count": 23,
-  "actions_count": 201,
+  "current_topic": "twitter_growth",
+  "current_action": "cold_outreach",
+  "topics_count": 35,
+  "actions_count": 165,
   "leads_count": 0,
   "pipeline_count": 0,
   "activities": [
-    {"time": "17:42", "action": "learning", "details": "Studied: marketing_strategy"},
-    {"time": "17:40", "action": "action", "details": "Executed: post_to_instagram"},
-    {"time": "17:35", "action": "learning", "details": "Studied: content_marketing"},
-    {"time": "17:30", "action": "action", "details": "Executed: cold_outreach"},
-    {"time": "17:25", "action": "learning", "details": "Studied: social_media"}
+    {"time": "18:00", "action": "learning", "details": "Studied: twitter_growth"},
+    {"time": "18:00", "action": "action", "details": "Executed: cold_outreach"},
+    {"time": "17:55", "action": "learning", "details": "Studied: instagram_ads"},
+    {"time": "17:50", "action": "action", "details": "Executed: guest_post"},
+    {"time": "17:45", "action": "learning", "details": "Studied: viral_marketing"},
+    {"time": "17:40", "action": "action", "details": "Executed: post_to_twitter"},
+    {"time": "17:35", "action": "learning", "details": "Studied: linkedin_b2b"},
+    {"time": "17:30", "action": "action", "details": "Executed: write_email_sequence"}
   ]
 }
