@@ -223,25 +223,33 @@
                 teamGrid.innerHTML = '';
                 
                 data.agents.forEach(agent => {
+                    const avatar = agent.name || '🤖';
+                    const name = agent.name || 'Agent';
+                    const role = agent.role || 'Team Member';
+                    const status = agent.status || 'active';
+                    const task = agent.current_task || 'Working';
+                    const doing = agent.what_doing || agent.last_action || 'Processing';
+                    const focus = agent.focus || 'General';
+                    
                     teamGrid.innerHTML += `
-                        <div class="agent-card ${agent.status}">
+                        <div class="agent-card ${status}">
                             <div class="agent-header">
-                                <div class="agent-avatar">${agent.name.split(' ')[0]}</div>
+                                <div class="agent-avatar">${avatar}</div>
                                 <div class="agent-info">
-                                    <h3>${agent.name.split(' ')[1]}</h3>
-                                    <div class="agent-role">${agent.role}</div>
-                                    <span class="agent-status status-${agent.status}">● ${agent.status}</span>
+                                    <h3>${name}</h3>
+                                    <div class="agent-role">${role}</div>
+                                    <span class="agent-status status-${status}">● ${status}</span>
                                 </div>
                             </div>
                             <div class="agent-task">
                                 <div class="task-label">CURRENT TASK</div>
-                                <div class="task-value">${agent.current_task}</div>
+                                <div class="task-value">${task}</div>
                             </div>
                             <div class="agent-task">
-                                <div class="task-label">LAST ACTION</div>
-                                <div class="task-value">${agent.last_action}</div>
+                                <div class="task-label">DOING NOW</div>
+                                <div class="task-value">${doing}</div>
                             </div>
-                            <div class="agent-focus">🎯 Focus: ${agent.focus}</div>
+                            <div class="agent-focus">🎯 Focus: ${focus}</div>
                         </div>
                     `;
                 });
