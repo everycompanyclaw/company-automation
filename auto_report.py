@@ -1,17 +1,16 @@
 #!/usr/bin/env python3
 """
-Company Auto-Runner - Runs company tasks automatically
+Company Auto-Runner - Detailed profit-focused reports
 """
 import requests
-import time
 import os
+import json
+from datetime import datetime
 
 BOTS = {
     "company": "8689117372:AAHWWbJqpIazdy1TxCOxFbJs1YrofmAGfVw",
     "notify": "8677779317:AAEaxRQmEpymFeer0sVPXe1YNMUqcURZACg"
 }
-
-GMAIL_APP_PASSWORD = os.environ.get("GMAIL_APP_PASSWORD", "ifwubwz pkqtievqh")
 
 def send_msg(bot, chat_id, text):
     try:
@@ -20,36 +19,70 @@ def send_msg(bot, chat_id, text):
     except:
         pass
 
-def search_jobs():
-    """Search for freelance jobs"""
+def get_company_status():
+    """Get detailed company status"""
     try:
-        r = requests.get("https://lite.duckduckgo.com/lite/?q=python+automation+freelance+jobs",
-                        timeout=15)
-        if "python" in r.text.lower():
-            return "Found Python automation jobs!"
-        return "Checking jobs..."
-    except:
-        return "Job search error"
+        with open("/tmp/learn_state.json", "r") as f:
+            state = json.load(f)
+        
+        topics = state.get("topics_done", [])
+        actions = state.get("actions_done", [])
+        
+        # Get last 5 topics and actions
+        recent_topics = topics[-5:] if topics else []
+        recent_actions = actions[-5:] if actions else []
+        
+        report = f"""
+🧠 LEARNING ({len(topics)} total)
+"""
+        for t in recent_topics:
+            report += f"   • {t}\n"
+        
+        report += f"""
+⚡ ACTIONS ({len(actions)} total)
+"""
+        for a in recent_actions:
+            report += f"   • {a}\n"
+        
+        return report, topics[-1] if topics else "None", len(topics), len(actions)
+    except Exception as e:
+        return f"\n⚠️ Error: {e}\n", "Error", 0, 0
 
 def send_report():
-    """Send daily company report"""
-    jobs = search_jobs()
+    """Send detailed daily company report"""
+    details, last_topic, topics_count, actions_count = get_company_status()
     
-    report = f"""🏢 Company Daily Report
+    report = f"""🏢 EVERYCOMPANYCLAW - DAILY REPORT
+━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-✅ System Status: Running
+📅 {datetime.now().strftime('%Y-%m-%d %H:%M')}
 
-📊 Job Search: {jobs}
+✅ STATUS: Running
 
-📋 Todo:
-- Continue outreach
-- Follow up leads
-- Update profiles
+💰 FOCUS: Revenue & Profit
 
-#automation #freelance #python"""
+📊 STATS
+   Topics Studied: {topics_count}
+   Actions Done: {actions_count}
+   Last Topic: {last_topic}
+
+{details}
+📋 TODAY'S PRIORITIES
+   • Generate leads
+   • Cold outreach
+   • Create offers
+   • Follow up prospects
+
+🌐 LINKS
+   Website: everycompanyclaw.github.io/company-automation/
+   Products: Python Scripts $79 | Zapier $49 | AI Prompts $29
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━
+#AI #Automation #Business
+"""
     
     send_msg("company", "96691420", report)
 
 if __name__ == "__main__":
     send_report()
-    print("Report sent!")
+    print("Detailed report sent!")

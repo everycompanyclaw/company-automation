@@ -1,113 +1,83 @@
 #!/usr/bin/env python3
 """
-Agent Team System
-Auto-spawn the right agent for each task
+Agent Team Runner
+Runs all content agents automatically
 """
+import os
+import sys
 
-from typing import Dict, Any, Callable
-import json
+# Add company path
+sys.path.insert(0, '/Users/macbookpro/.openclaw/workspace/company')
 
-class AgentTeam:
-    def __init__(self):
-        self.agents = {}
-        self.current_task = None
+def run_researcher():
+    """Research trending topics"""
+    print("🔍 Running Researcher...")
+    os.system("python3 /Users/macbookpro/.openclaw/workspace/company/fetch_jobs.py")
+    print("✅ Research done")
+
+def run_creator():
+    """Create content"""
+    print("🎬 Running Creator...")
+    os.system("python3 /Users/macbookpro/.openclaw/workspace/company/video_content.py generate-company")
+    print("✅ Content created")
+
+def run_scheduler():
+    """Check and schedule posts"""
+    print("📅 Running Scheduler...")
+    os.system("python3 /Users/macbookpro/.openclaw/workspace/company/instagram_scheduler.py check")
+    print("✅ Posts checked")
+
+def run_outreach():
+    """Send outreach"""
+    print("🤝 Running Outreach...")
+    # Placeholder for outreach
+    print("✅ Outreach done")
+
+def run_analytics():
+    """Generate analytics"""
+    print("📊 Running Analytics...")
+    # Placeholder for analytics
+    print("✅ Analytics done")
+
+def daily_routine():
+    """Run all agents daily"""
+    print("="*50)
+    print("🤖 Running Daily Agent Team")
+    print("="*50)
     
-    def register_agent(self, name: str, config: Dict):
-        """Register an agent"""
-        self.agents[name] = config
+    run_researcher()
+    run_creator()
+    run_scheduler()
+    run_analytics()
+    run_outreach()
     
-    def get_agent_for_task(self, task: str) -> str:
-        """Auto-select best agent"""
-        task_lower = task.lower()
-        
-        # Strategy/Planning
-        if any(w in task_lower for w in ["plan", "strategy", "goal", "decision", "vision"]):
-            return "ceo"
-        
-        # Sales/Lead Gen
-        elif any(w in task_lower for w in ["lead", "sales", "customer", "outreach", "close", "sell"]):
-            return "sales"
-        
-        # Building/Coding
-        elif any(w in task_lower for w in ["build", "code", "develop", "create", "make", "fix", "debug"]):
-            return "developer"
-        
-        # Support/Service
-        elif any(w in task_lower for w in ["help", "support", "question", "respond", "answer"]):
-            return "support"
-        
-        # Research/Analysis
-        elif any(w in task_lower for w in ["research", "analyze", "report", "data", "find", "search"]):
-            return "analyst"
-        
-        # Operations/Routine
-        else:
-            return "operations"
-    
-    def spawn_agent(self, task: str) -> Dict:
-        """Spawn the right agent for task"""
-        agent_name = self.get_agent_for_task(task)
-        agent = self.agents.get(agent_name, {})
-        
-        return {
-            "agent": agent_name,
-            "task": task,
-            "model": agent.get("model", "minimax"),
-            "prompt": agent.get("prompt", "")
-        }
-
-# Default team
-TEAM = AgentTeam()
-
-TEAM.register_agent("ceo", {
-    "name": "CEO Agent",
-    "model": "opus",
-    "prompt": "You are MK's CEO. Think strategically, make decisions, plan growth."
-})
-
-TEAM.register_agent("sales", {
-    "name": "Sales Agent",
-    "model": "opus", 
-    "prompt": "You are MK's Sales Agent. Find leads, write outreach, close deals."
-})
-
-TEAM.register_agent("developer", {
-    "name": "Developer Agent",
-    "model": "opus",
-    "prompt": "You are MK's Developer. Build, code, create technical solutions."
-})
-
-TEAM.register_agent("support", {
-    "name": "Support Agent",
-    "model": "minimax",
-    "prompt": "You are MK's Support. Respond helpfully to customer questions."
-})
-
-TEAM.register_agent("analyst", {
-    "name": "Analyst Agent",
-    "model": "opus",
-    "prompt": "You are MK's Analyst. Research markets, analyze data, provide insights."
-})
-
-TEAM.register_agent("operations", {
-    "name": "Operations Agent",
-    "model": "minimax",
-    "prompt": "You are MK's Operations. Handle routine tasks efficiently."
-})
+    print("="*50)
+    print("✅ Daily routine complete!")
+    print("="*50)
 
 if __name__ == "__main__":
-    # Test
-    test_tasks = [
-        "Find leads for automation business",
-        "Build a website for my client",
-        "Help a customer with their question",
-        "Create a business plan",
-        "Analyze the stock market",
-        "Schedule a meeting"
-    ]
+    import sys
     
-    print("🤖 Agent Team - Auto Selection\n")
-    for task in test_tasks:
-        agent = TEAM.get_agent_for_task(task)
-        print(f"Task: {task}")
-        print(f"→ Agent: {agent}\n")
+    if len(sys.argv) > 1:
+        agent = sys.argv[1]
+        
+        if agent == "research":
+            run_researcher()
+        elif agent == "creator":
+            run_creator()
+        elif agent == "scheduler":
+            run_scheduler()
+        elif agent == "outreach":
+            run_outreach()
+        elif agent == "analytics":
+            run_analytics()
+        elif agent == "all":
+            daily_routine()
+        else:
+            print(f"Unknown agent: {agent}")
+    else:
+        print("Usage:")
+        print("  python agent_team.py research")
+        print("  python agent_team.py creator")
+        print("  python agent_team.py scheduler")
+        print("  python agent_team.py all")

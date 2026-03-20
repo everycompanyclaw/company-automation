@@ -21,8 +21,8 @@ def run_workers():
     """Workers execute profit actions"""
     print("👷 Workers: Executing tasks...")
     
-    # Run job scout
-    subprocess.run([sys.executable, "/Users/macbookpro/.openclaw/workspace/company/job_scout.py"])
+    # Run aggressive learning (profit focused)
+    subprocess.run([sys.executable, "/Users/macbookpro/.openclaw/workspace/company/aggressive_learn.py"])
     
     # Check orders
     subprocess.run([sys.executable, "-c", "import stripe; print('Stripe ready')"], capture_output=True)

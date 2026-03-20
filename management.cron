@@ -1,7 +1,10 @@
-# Company Management Cron - PROFIT FOCUSED
+# Company Cron
 
-# CEO → PM → Profit Generator every 30 minutes
-*/30 * * * * /usr/bin/python3 /Users/macbookpro/.openclaw/workspace/company/management_chain.py daily >> /tmp/profit.log 2>&1
+# Self-learning (every 5 mins)
+*/5 * * * * cd /Users/macbookpro/.openclaw/workspace/company && python3 aggressive_learn.py >> /tmp/aggressive_learn.log 2>&1
 
-# Social media (Instagram/Telegram) every 6 hours
-0 */6 * * * /usr/bin/python3 /Users/macbookpro/.openclaw/workspace/company/ig_poster.py >> /tmp/ig.log 2>&1
+# Operations (every 30 mins)
+*/30 * * * * cd /Users/macbookpro/.openclaw/workspace/company && python3 auto_run.py >> /tmp/company.log 2>&1
+
+# Daily report (8pm every day)
+0 20 * * * /usr/bin/python3 /Users/macbookpro/.openclaw/workspace/company/weekly_telegram.py >> /tmp/daily_report.log 2>&1
