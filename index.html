@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EveryCompanyClaw - Live Dashboard</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, sans-serif; background: #0a0a0f; color: #fff; min-height: 100vh; }
+        .h { display: flex; justify-content: space-between; padding: 20px; background: #0f0f12; border-bottom: 1px solid #222; }
+        .l { font-size: 1.25rem; font-weight: 600; }
+        .n { display: flex; gap: 10px; }
+        .n a { padding: 8px 16px; background: #1a1a1f; border-radius: 8px; color: #fff; text-decoration: none; font-size: 0.875rem; }
+        .lb { display: flex; align-items: center; gap: 6px; padding: 6px 12px; background: rgba(34,197,94,0.1); border-radius: 20px; color: #22c55e; font-size: 0.75rem; }
+        .ld { width: 8px; height: 8px; border-radius: 50%; background: #22c55e; animation: p 2s infinite; }
+        @keyframes p { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+        .s { display: flex; gap: 16px; padding: 20px; overflow-x: auto; }
+        .sc { padding: 16px 24px; background: #1a1a1f; border-radius: 12px; display: flex; align-items: center; gap: 8px; }
+        .sv { font-weight: 600; color: #8b5cf6; font-size: 1.25rem; }
+        .sl { color: #6b7280; font-size: 0.875rem; }
+        .c { padding: 20px; }
+        .g { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+        .cd { background: #1a1a1f; border-radius: 12px; padding: 20px; }
+        .cd h3 { margin-bottom: 16px; font-size: 1.1rem; }
+        .pi { background: #252535; padding: 12px; border-radius: 8px; margin-bottom: 12px; }
+        .pm { display: flex; gap: 8px; font-size: 0.75rem; color: #6b7280; margin-bottom: 8px; }
+        .pc { font-size: 0.875rem; white-space: pre-wrap; }
+        .ps { display: flex; gap: 12px; font-size: 0.75rem; color: #6b7280; margin-top: 8px; }
+        .li { background: #252535; padding: 12px; border-radius: 8px; margin-bottom: 8px; }
+        .lh { display: flex; justify-content: space-between; margin-bottom: 4px; }
+        .lc { font-weight: 600; }
+        .ls { font-size: 0.7rem; padding: 2px 8px; background: #8b5cf620; color: #8b5cf6; border-radius: 10px; }
+        .le { font-size: 0.8rem; color: #6b7280; }
+        .f { text-align: center; padding: 30px; color: #4b5563; font-size: 0.8rem; }
+    </style>
+</head>
+<body>
+    <div class="h">
+        <div class="l">🏢 EveryCompanyClaw</div>
+        <div style="display:flex;gap:10px;align-items:center">
+            <div class="n"><a href="crm-dashboard.html">📊 CRM</a><a href="org-chart.html">🏢 Org</a></div>
+            <div class="lb"><span class="ld"></span>Live</div>
+        </div>
+    </div>
+    <div class="s">
+        <div class="sc"><span>📚</span><span class="sv">50</span><span class="sl">Topics</span></div>
+        <div class="sc"><span>⚡</span><span class="sv">520</span><span class="sl">Actions</span></div>
+        <div class="sc"><span>🎯</span><span class="sv">28</span><span class="sl">Leads</span></div>
+        <div class="sc"><span>👀</span><span class="sv">12</span><span class="sl">Clicked</span></div>
+        <div class="sc"><span>💬</span><span class="sv">5</span><span class="sl">Replied</span></div>
+    </div>
+    <div class="c">
+        <div class="g">
+            <div class="cd">
+                <h3>📸 Recent Posts (from Instagram)</h3>
+                <div class="pi">
+                    <div class="pm"><span>📸</span><span>Instagram</span><span>•</span><span>2026-03-22 19:48</span></div>
+                    <div class="pc">🤖 The Future of Version Control
+
+💡 AI Automation for Business
+💰 Save 10+ hours/week
+
+#automation #ai #startup #tech</div>
+                    <div class="ps"><span>❤️ 0</span><span>💬 0</span></div>
+                </div>
+                <div class="pi">
+                    <div class="pm"><span>📸</span><span>Instagram</span><span>•</span><span>2026-03-22 10:23</span></div>
+                    <div class="pc">Test from EveryCompanyClaw!</div>
+                    <div class="ps"><span>❤️ 0</span><span>💬 0</span></div>
+                </div>
+            </div>
+            <div class="cd">
+                <h3>🎯 Recent Leads (GitHub + HN)</h3>
+                <div class="li"><div class="lh"><span class="lc">openclaw</span><span class="ls">github</span></div><div class="le">hello@openclaw.github.io</div></div>
+                <div class="li"><div class="lh"><span class="lc">DeepSeek-V3</span><span class="ls">github</span></div><div class="le">hello@deepseek-ai.github.io</div></div>
+                <div class="li"><div class="lh"><span class="lc">awesome-llm-apps</span><span class="ls">github</span></div><div class="le">hello@Shubhamsaboo.github.io</div></div>
+                <div class="li"><div class="lh"><span class="lc">codex</span><span class="ls">github</span></div><div class="le">hello@openai.github.io</div></div>
+            </div>
+            <div class="cd">
+                <h3>📊 Pipeline</h3>
+                <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #333"><span style="color:#6b7280">Total</span><span style="color:#8b5cf6">28</span></div>
+                <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #333"><span style="color:#6b7280">Clicked</span><span style="color:#22c55e">12</span></div>
+                <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #333"><span style="color:#6b7280">Replied</span><span style="color:#f59e0b">5</span></div>
+                <div style="padding-top:16px"><div style="color:#6b7280;font-size:0.8rem">Rate</div><div style="font-size:2rem;font-weight:bold;color:#8b5cf6">18%</div></div>
+            </div>
+        </div>
+    </div>
+    <div class="f">Updated: 2026-03-23 | Data: Instagram, GitHub, Hacker News</div>
+</body>
+</html>
