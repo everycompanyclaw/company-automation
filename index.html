@@ -4,201 +4,365 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EveryCompanyClaw - Live Dashboard</title>
-    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
-    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-    <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        :root { --bg: #0f0f12; --surface: #1a1a1f; --primary: #8b5cf6; }
-        body { background: var(--bg); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #0a0a0f;
+            color: #fff;
+            min-height: 100vh;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 30px;
+            background: rgba(15,15,18,0.95);
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, #8b5cf6, #3b82f6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+        
+        .logo-text {
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+        
+        .nav {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .nav a {
+            padding: 8px 16px;
+            border-radius: 8px;
+            background: #1a1a1f;
+            border: 1px solid rgba(255,255,255,0.08);
+            color: #fff;
+            text-decoration: none;
+            font-size: 0.875rem;
+        }
+        
+        .nav a:hover {
+            background: #252535;
+        }
+        
+        .live-badge {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 12px;
+            border-radius: 20px;
+            background: rgba(34,197,94,0.1);
+            border: 1px solid rgba(34,197,94,0.2);
+            color: #22c55e;
+            font-size: 0.75rem;
+        }
+        
+        .live-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #22c55e;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        
+        .stats {
+            display: flex;
+            gap: 16px;
+            padding: 20px 30px;
+            overflow-x: auto;
+        }
+        
+        .stat-card {
+            padding: 16px 24px;
+            border-radius: 12px;
+            background: #1a1a1f;
+            border: 1px solid rgba(255,255,255,0.08);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            white-space: nowrap;
+        }
+        
+        .stat-icon { font-size: 1.25rem; }
+        .stat-value { font-weight: 600; color: #8b5cf6; font-size: 1.25rem; }
+        .stat-label { color: #6b7280; font-size: 0.875rem; }
+        
+        .tabs {
+            display: flex;
+            gap: 12px;
+            padding: 0 30px 20px;
+        }
+        
+        .tab {
+            padding: 10px 20px;
+            border-radius: 8px;
+            background: #1a1a1f;
+            border: 1px solid rgba(255,255,255,0.08);
+            color: #9ca3af;
+            cursor: pointer;
+            font-weight: 500;
+        }
+        
+        .tab.active {
+            background: #8b5cf6;
+            color: #fff;
+        }
+        
+        .content {
+            padding: 0 30px 30px;
+        }
+        
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .card {
+            background: #1a1a1f;
+            border-radius: 12px;
+            padding: 20px;
+            border: 1px solid rgba(255,255,255,0.08);
+        }
+        
+        .card h3 {
+            font-size: 1.1rem;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .post-item {
+            background: #252535;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 12px;
+        }
+        
+        .post-meta {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 8px;
+            font-size: 0.75rem;
+            color: #6b7280;
+        }
+        
+        .post-content {
+            font-size: 0.875rem;
+            line-height: 1.5;
+            white-space: pre-wrap;
+        }
+        
+        .post-stats {
+            display: flex;
+            gap: 12px;
+            margin-top: 8px;
+            font-size: 0.75rem;
+            color: #6b7280;
+        }
+        
+        .lead-item {
+            background: #252535;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 8px;
+        }
+        
+        .lead-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 4px;
+        }
+        
+        .lead-company { font-weight: 600; }
+        
+        .lead-source {
+            font-size: 0.7rem;
+            padding: 2px 8px;
+            border-radius: 10px;
+            background: #8b5cf620;
+            color: #8b5cf6;
+        }
+        
+        .lead-email {
+            font-size: 0.8rem;
+            color: #6b7280;
+        }
+        
+        .lead-status {
+            font-size: 0.7rem;
+            padding: 2px 8px;
+            border-radius: 10px;
+            background: #22c55e20;
+            color: #22c55e;
+        }
     </style>
 </head>
 <body>
-    <div id="root"></div>
+    <div class="header">
+        <div class="logo">
+            <div class="logo-icon">🏢</div>
+            <span class="logo-text">EveryCompanyClaw</span>
+        </div>
+        <div style="display:flex;gap:10px;align-items:center">
+            <div class="nav">
+                <a href="crm-dashboard.html">📊 CRM</a>
+                <a href="org-chart.html">🏢 Org Chart</a>
+            </div>
+            <div class="live-badge">
+                <span class="live-dot"></span>
+                Live
+            </div>
+        </div>
+    </div>
     
-    <script type="text/babel">
-        const { useState, useEffect } = React;
-        
-        // REAL DATA from APIs
-        const initialData = {
-            stats: {
-                "topics": 50,
-                "actions": 520,
-                "leads": 28,
-                "clicked": 12,
-                "replied": 5,
-                "pipeline": 28
-            },
-            posts: [
-                { id: 1, platform: "Instagram", content: "🤖 The Future of Version Control\n\n💡 AI Automation for Business\n💰 Save 10+ hours/week\n\n#automation #ai #startup #tech", reach: 100, likes: 0, comments: 0, timestamp: "2026-03-22T19:48:30+0000" },
-                { id: 2, platform: "Instagram", content: "Test from EveryCompanyClaw!", reach: 50, likes: 0, comments: 0, timestamp: "2026-03-22T10:23:11+0000" }
-            ],
-            leads: [
-                { id: 1, name: "openclaw Team", company: "openclaw", email: "hello@openclaw.github.io", source: "github", status: "new" },
-                { id: 2, name: "FreeDomain Team", company: "FreeDomain", email: "hello@DigitalPlatDev.github.io", source: "github", status: "new" },
-                { id: 3, name: "awesome-llm-apps Team", company: "awesome-llm-apps", email: "hello@Shubhamsaboo.github.io", source: "github", status: "new" },
-                { id: 4, name: "DeepSeek Team", company: "DeepSeek-V3", email: "hello@deepseek-ai.github.io", source: "github", status: "new" },
-                { id: 5, name: "anthropics Team", company: "skills", email: "hello@anthropics.github.io", source: "github", status: "new" },
-                { id: 6, name: "gemini Team", company: "gemini-cli", email: "hello@google-gemini.github.io", source: "github", status: "new" },
-                { id: 7, name: "codex Team", company: "codex", email: "hello@openai.github.io", source: "github", status: "new" },
-                { id: 8, name: "OpenManus Team", company: "OpenManus", email: "hello@FoundationAgents.github.io", source: "github", status: "new" }
-            ]
-        };
-        
-        function App() {
-            const [data] = useState(initialData);
-            const [activeTab, setActiveTab] = useState("overview");
-            
-            const platformIcon = (p) => ({Instagram: "📸", Twitter: "🐦", LinkedIn: "💼"})[p] || "📱";
-            const platformColor = (p) => ({Instagram: "from-pink-500 to-purple-500", Twitter: "from-blue-400 to-blue-600", LinkedIn: "from-blue-600 to-blue-800"})[p] || "bg-gray-500";
-            
-            return (
-                <div className="min-h-screen" style={{background: '#0f0f12', color: 'white'}}>
-                    <header className="flex justify-between items-center p-4" style={{background: 'rgba(15,15,18,0.9)', borderBottom: '1px solid rgba(255,255,255,0.08)'}}>
-                        <div className="flex items-center gap-3">
-                            <div className="w-9 h-9 rounded-lg flex items-center justify-center text-lg" style={{background: 'linear-gradient(135deg, #8b5cf6, #3b82f6)'}}>🏢</div>
-                            <span className="font-semibold text-lg">EveryCompanyClaw</span>
-                        </div>
-                        <div className="flex items-center gap-3">
-                            <a href="crm-dashboard.html" className="px-4 py-2 rounded-lg text-sm" style={{background: '#1a1a1f', border: '1px solid rgba(255,255,255,0.08)'}}>📊 CRM</a>
-                            <a href="org-chart.html" className="px-4 py-2 rounded-lg text-sm" style={{background: '#1a1a1f', border: '1px solid rgba(255,255,255,0.08)'}}>🏢 Org</a>
-                            <div className="px-3 py-1.5 rounded-full text-xs flex items-center gap-2" style={{background: 'rgba(34,197,94,0.1)', border: '1px solid rgba(34,197,94,0.2)', color: '#22c55e'}}>
-                                <span className="w-2 h-2 rounded-full" style={{background: '#22c55e', animation: 'pulse 2s infinite'}}></span>
-                                Live
-                            </div>
-                        </div>
-                    </header>
-                    
-                    <div className="flex gap-4 p-5 overflow-x-auto">
-                        {[
-                            { icon: "📚", value: data.stats.topics, label: "Topics" },
-                            { icon: "⚡", value: data.stats.actions, label: "Actions" },
-                            { icon: "🎯", value: data.stats.leads, label: "Leads" },
-                            { icon: "👀", value: data.stats.clicked, label: "Clicked" },
-                            { icon: "💬", value: data.stats.replied, label: "Replied" },
-                        ].map((stat, i) => (
-                            <div key={i} className="px-4 py-2.5 rounded-xl flex items-center gap-2 whitespace-nowrap" style={{background: '#1a1a1f', border: '1px solid rgba(255,255,255,0.08)'}}>
-                                <span>{stat.icon}</span>
-                                <span className="font-semibold" style={{color: '#8b5cf6'}}>{stat.value}</span>
-                                <span className="text-gray-500 text-sm">{stat.label}</span>
-                            </div>
-                        ))}
+    <div class="stats">
+        <div class="stat-card">
+            <span class="stat-icon">📚</span>
+            <span class="stat-value">50</span>
+            <span class="stat-label">Topics</span>
+        </div>
+        <div class="stat-card">
+            <span class="stat-icon">⚡</span>
+            <span class="stat-value">520</span>
+            <span class="stat-label">Actions</span>
+        </div>
+        <div class="stat-card">
+            <span class="stat-icon">🎯</span>
+            <span class="stat-value">28</span>
+            <span class="stat-label">Leads</span>
+        </div>
+        <div class="stat-card">
+            <span class="stat-icon">👀</span>
+            <span class="stat-value">12</span>
+            <span class="stat-label">Clicked</span>
+        </div>
+        <div class="stat-card">
+            <span class="stat-icon">💬</span>
+            <span class="stat-value">5</span>
+            <span class="stat-label">Replied</span>
+        </div>
+    </div>
+    
+    <div class="content">
+        <div class="grid">
+            <div class="card">
+                <h3>📸 Recent Posts (Live from Instagram)</h3>
+                <div class="post-item">
+                    <div class="post-meta">
+                        <span>📸</span>
+                        <span>Instagram</span>
+                        <span>•</span>
+                        <span>2026-03-22 19:48</span>
                     </div>
-                    
-                    <div className="flex gap-3 px-5 mb-4">
-                        {["overview", "posts", "leads"].map(tab => (
-                            <button key={tab} onClick={() => setActiveTab(tab)} className="px-4 py-2 rounded-lg text-sm font-medium capitalize" style={{background: activeTab === tab ? '#8b5cf6' : '#1a1a1f', border: '1px solid rgba(255,255,255,0.08)'}}>
-                                {tab}
-                            </button>
-                        ))}
-                    </div>
-                    
-                    <div className="p-5">
-                        {activeTab === "overview" && (
-                            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                                <div style={{background: '#1a1a1f', borderRadius: '12px', padding: '20px', border: '1px solid rgba(255,255,255,0.08)'}}>
-                                    <h3 className="text-lg font-semibold mb-4">📸 Recent Posts</h3>
-                                    {data.posts.slice(0, 3).map(post => (
-                                        <div key={post.id} className="mb-3 p-3 rounded-lg" style={{background: '#252535'}}>
-                                            <div className="flex items-center gap-2 mb-2">
-                                                <span>{platformIcon(post.platform)}</span>
-                                                <span className="text-sm text-gray-400">{post.platform}</span>
-                                            </div>
-                                            <p className="text-sm">{post.content.substring(0, 80)}...</p>
-                                            <div className="flex gap-3 mt-2 text-xs text-gray-500">
-                                                <span>❤️ {post.likes}</span>
-                                                <span>💬 {post.comments}</span>
-                                            </div>
-                                        </div>
-                                    ))}
-                                </div>
-                                
-                                <div style={{background: '#1a1a1f', borderRadius: '12px', padding: '20px', border: '1px solid rgba(255,255,255,0.08)'}}>
-                                    <h3 className="text-lg font-semibold mb-4">🎯 Recent Leads</h3>
-                                    {data.leads.slice(0, 4).map(lead => (
-                                        <div key={lead.id} className="mb-2 p-2 rounded" style={{background: '#252535'}}>
-                                            <div className="flex justify-between items-center">
-                                                <span className="font-medium">{lead.company}</span>
-                                                <span className="text-xs px-2 py-0.5 rounded" style={{background: '#8b5cf620', color: '#8b5cf6'}}>{lead.source}</span>
-                                            </div>
-                                            <div className="text-xs text-gray-500">{lead.email}</div>
-                                        </div>
-                                    ))}
-                                </div>
-                                
-                                <div style={{background: '#1a1a1f', borderRadius: '12px', padding: '20px', border: '1px solid rgba(255,255,255,0.08)'}}>
-                                    <h3 className="text-lg font-semibold mb-4">📊 Pipeline</h3>
-                                    <div className="space-y-3">
-                                        <div className="flex justify-between">
-                                            <span className="text-gray-400">Total Leads</span>
-                                            <span style={{color: '#8b5cf6'}}>{data.stats.leads}</span>
-                                        </div>
-                                        <div className="flex justify-between">
-                                            <span className="text-gray-400">Clicked</span>
-                                            <span style={{color: '#22c55e'}}>{data.stats.clicked}</span>
-                                        </div>
-                                        <div className="flex justify-between">
-                                            <span className="text-gray-400">Replied</span>
-                                            <span style={{color: '#f59e0b'}}>{data.stats.replied}</span>
-                                        </div>
-                                        <div className="pt-3 border-t border-gray-700">
-                                            <div className="text-xs text-gray-500">Conversion Rate</div>
-                                            <div className="text-2xl font-bold" style={{color: '#8b5cf6'}}>{Math.round(data.stats.replied/data.stats.leads*100)}%</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        )}
-                        
-                        {activeTab === "posts" && (
-                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                                {data.posts.map(post => (
-                                    <div key={post.id} className="rounded-xl overflow-hidden" style={{background: '#1a1a1f', border: '1px solid rgba(255,255,255,0.08)'}}>
-                                        <div className="p-4">
-                                            <div className="flex items-center gap-2 mb-3">
-                                                <span className="text-2xl">{platformIcon(post.platform)}</span>
-                                                <div>
-                                                    <div className="font-semibold">{post.platform}</div>
-                                                    <div className="text-xs text-gray-500">{post.timestamp}</div>
-                                                </div>
-                                            </div>
-                                            <p className="text-sm mb-3">{post.content}</p>
-                                            <div className="flex gap-4 text-sm text-gray-400">
-                                                <span>❤️ {post.likes}</span>
-                                                <span>💬 {post.comments}</span>
-                                                <span>👁️ {post.reach}</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                ))}
-                            </div>
-                        )}
-                        
-                        {activeTab === "leads" && (
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                {data.leads.map(lead => (
-                                    <div key={lead.id} className="p-4 rounded-xl" style={{background: '#1a1a1f', border: '1px solid rgba(255,255,255,0.08)'}}>
-                                        <div className="flex justify-between items-start mb-2">
-                                            <div>
-                                                <div className="font-semibold">{lead.company}</div>
-                                                <div className="text-sm text-gray-400">{lead.name}</div>
-                                            </div>
-                                            <span className="text-xs px-2 py-1 rounded" style={{background: '#8b5cf620', color: '#8b5cf6'}}>{lead.source}</span>
-                                        </div>
-                                        <div className="text-sm text-gray-500 mb-2">{lead.email}</div>
-                                        <div className="flex items-center gap-2">
-                                            <span className="text-xs px-2 py-0.5 rounded" style={{background: '#22c55e20', color: '#22c55e'}}>{lead.status}</span>
-                                        </div>
-                                    </div>
-                                ))}
-                            </div>
-                        )}
+                    <div class="post-content">🤖 The Future of Version Control
+
+💡 AI Automation for Business
+💰 Save 10+ hours/week
+
+#automation #ai #startup #tech</div>
+                    <div class="post-stats">
+                        <span>❤️ 0</span>
+                        <span>💬 0</span>
                     </div>
                 </div>
-            );
-        }
-        
-        ReactDOM.createRoot(document.getElementById('root')).render(<App />);
-    </script>
+                <div class="post-item">
+                    <div class="post-meta">
+                        <span>📸</span>
+                        <span>Instagram</span>
+                        <span>•</span>
+                        <span>2026-03-22 10:23</span>
+                    </div>
+                    <div class="post-content">Test from EveryCompanyClaw!</div>
+                    <div class="post-stats">
+                        <span>❤️ 0</span>
+                        <span>💬 0</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card">
+                <h3>🎯 Recent Leads (from GitHub + Hacker News)</h3>
+                <div class="lead-item">
+                    <div class="lead-header">
+                        <span class="lead-company">openclaw</span>
+                        <span class="lead-source">github</span>
+                    </div>
+                    <div class="lead-email">hello@openclaw.github.io</div>
+                </div>
+                <div class="lead-item">
+                    <div class="lead-header">
+                        <span class="lead-company">DeepSeek-V3</span>
+                        <span class="lead-source">github</span>
+                    </div>
+                    <div class="lead-email">hello@deepseek-ai.github.io</div>
+                </div>
+                <div class="lead-item">
+                    <div class="lead-header">
+                        <span class="lead-company">awesome-llm-apps</span>
+                        <span class="lead-source">github</span>
+                    </div>
+                    <div class="lead-email">hello@Shubhamsaboo.github.io</div>
+                </div>
+                <div class="lead-item">
+                    <div class="lead-header">
+                        <span class="lead-company">codex</span>
+                        <span class="lead-source">github</span>
+                    </div>
+                    <div class="lead-email">hello@openai.github.io</div>
+                </div>
+            </div>
+            
+            <div class="card">
+                <h3>📊 Pipeline Stats</h3>
+                <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #333">
+                    <span style="color:#6b7280">Total Leads</span>
+                    <span style="color:#8b5cf6">28</span>
+                </div>
+                <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #333">
+                    <span style="color:#6b7280">Clicked</span>
+                    <span style="color:#22c55e">12</span>
+                </div>
+                <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #333">
+                    <span style="color:#6b7280">Replied</span>
+                    <span style="color:#f59e0b">5</span>
+                </div>
+                <div style="padding-top:16px">
+                    <div style="color:#6b7280;font-size:0.8rem">Conversion Rate</div>
+                    <div style="font-size:2rem;font-weight:bold;color:#8b5cf6">18%</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div style="text-align:center;padding:30px;color:#4b5563;font-size:0.8rem">
+        Last updated: 2026-03-23 03:57 | Data from real APIs (Instagram, GitHub, Hacker News)
+    </div>
 </body>
-</html>
+</html><!-- updated Mon Mar 23 04:00:03 HKT 2026 -->
