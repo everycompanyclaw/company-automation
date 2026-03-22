@@ -3,185 +3,288 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EveryCompanyClaw - Live Operations</title>
+    <title>EveryCompanyClaw - Live Workflow</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: -apple-system, sans-serif; background: #0a0a0f; color: #fff; min-height: 100vh; }
+        :root {
+            --bg: #0d0d0e;
+            --surface: #171718;
+            --surface-light: #1f1f21;
+            --border: #2e2e30;
+            --text: #e8e8e8;
+            --text-dim: #9e9e9e;
+            --accent: #8cabff;
+            --green: #8be0a1;
+            --orange: #ffa264;
+            --pink: #c792f0;
+        }
+        body {
+            font-family: 'Google Sans', -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            font-size: 13px;
+        }
         
-        .header { display: flex; justify-content: space-between; padding: 15px 20px; background: #0f0f12; border-bottom: 1px solid #222; align-items: center; }
-        .logo { font-size: 1.1rem; font-weight: 600; display: flex; align-items: center; gap: 8px; }
-        .logo-icon { width: 32px; height: 32px; border-radius: 8px; background: linear-gradient(135deg, #8b5cf6, #3b82f6); display: flex; align-items: center; justify-content: center; }
-        .nav { display: flex; gap: 8px; }
-        .nav a { padding: 6px 12px; background: #1a1a1f; border-radius: 6px; color: #fff; text-decoration: none; font-size: 0.8rem; }
-        .live { display: flex; align-items: center; gap: 4px; padding: 4px 10px; background: rgba(34,197,94,0.1); border-radius: 12px; color: #22c55e; font-size: 0.7rem; }
-        .dot { width: 6px; height: 6px; border-radius: 50%; background: #22c55e; animation: p 1s infinite; }
-        @keyframes p { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+        .topbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background: var(--surface);
+            border-bottom: 1px solid var(--border);
+        }
+        .brand { display: flex; align-items: center; gap: 10px; font-weight: 500; }
+        .brand-icon { width: 28px; height: 28px; border-radius: 6px; background: linear-gradient(90deg, var(--accent), var(--pink)); display: flex; align-items: center; justify-content: center; }
+        .status { display: flex; align-items: center; gap: 8px; color: var(--green); font-size: 12px; }
+        .status-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--green); animation: pulse 2s infinite; }
+        @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
         
-        .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; padding: 15px; }
-        .stat { padding: 12px 16px; background: #1a1a1f; border-radius: 10px; display: flex; align-items: center; gap: 10px; }
-        .stat-icon { font-size: 1.2rem; }
-        .stat-val { font-weight: 700; font-size: 1.3rem; color: #8b5cf6; }
-        .stat-label { color: #6b7280; font-size: 0.75rem; }
+        .container { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; padding: 16px; }
         
-        .sections { display: grid; grid-template-columns: 2fr 1fr; gap: 15px; padding: 0 15px 15px; }
-        .section { background: #1a1a1f; border-radius: 12px; padding: 15px; }
-        .section h3 { font-size: 0.9rem; margin-bottom: 12px; display: flex; align-items: center; gap: 6px; }
+        .workflow-col {
+            background: var(--surface);
+            border-radius: 12px;
+            padding: 14px;
+            border: 1px solid var(--border);
+        }
         
-        .activity { display: flex; gap: 10px; padding: 8px 0; border-bottom: 1px solid #252535; align-items: flex-start; }
-        .activity:last-child { border: none; }
-        .time { font-size: 0.65rem; color: #555; min-width: 50px; }
-        .action { font-size: 0.8rem; color: #8b5cf6; font-weight: 500; }
-        .detail { font-size: 0.75rem; color: #888; }
+        .workflow-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 12px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--border);
+        }
+        .workflow-emoji { font-size: 18px; }
+        .workflow-title { font-weight: 500; font-size: 13px; }
+        .workflow-count { font-size: 11px; color: var(--text-dim); margin-left: auto; }
         
-        .pipeline-stage { margin-bottom: 12px; }
-        .stage-name { font-size: 0.75rem; color: #6b7280; margin-bottom: 4px; }
-        .stage-bar { height: 6px; background: #252535; border-radius: 3px; overflow: hidden; }
-        .stage-fill { height: 100%; border-radius: 3px; }
+        .flow-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            padding: 8px;
+            background: var(--surface-light);
+            border-radius: 8px;
+            margin-bottom: 6px;
+            font-size: 12px;
+        }
+        .flow-time { color: var(--text-dim); font-size: 10px; min-width: 35px; }
+        .flow-icon { font-size: 14px; }
+        .flow-content { flex: 1; }
+        .flow-action { color: var(--accent); font-weight: 500; }
+        .flow-detail { color: var(--text-dim); font-size: 11px; margin-top: 2px; }
         
-        .lead-row { display: flex; justify-content: space-between; padding: 6px 8px; background: #252535; border-radius: 6px; margin-bottom: 4px; font-size: 0.75rem; }
-        .lead-email { color: #888; }
+        .stat-row { display: flex; gap: 8px; margin-bottom: 8px; }
+        .stat-chip { font-size: 10px; padding: 3px 8px; background: var(--surface-light); border-radius: 4px; color: var(--text-dim); }
         
-        .agents { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
-        .agent { background: #252535; padding: 10px; border-radius: 8px; text-align: center; }
-        .agent-emoji { font-size: 1.5rem; }
-        .agent-name { font-size: 0.7rem; font-weight: 600; margin: 4px 0 2px; }
-        .agent-task { font-size: 0.65rem; color: #666; }
-        .agent-status { font-size: 0.6rem; color: #22c55e; margin-top: 2px; }
+        .pipeline-bar { margin-top: 8px; }
+        .pipeline-label { display: flex; justify-content: space-between; font-size: 10px; color: var(--text-dim); margin-bottom: 4px; }
+        .pipeline-track { height: 4px; background: var(--surface-light); border-radius: 2px; overflow: hidden; }
+        .pipeline-fill { height: 100%; border-radius: 2px; }
         
-        .heartbeat { border-top: 1px solid #222; padding: 10px 15px; font-size: 0.7rem; color: #444; text-align: center; }
+        .footer { text-align: center; padding: 12px; color: var(--text-dim); font-size: 11px; border-top: 1px solid var(--border); }
         
-        @media (max-width: 800px) {
-            .grid { grid-template-columns: repeat(2, 1fr); }
-            .sections { grid-template-columns: 1fr; }
+        @media (max-width: 900px) {
+            .container { grid-template-columns: 1fr 1fr; }
         }
     </style>
 </head>
 <body>
-    <div class="header">
-        <div class="logo"><div class="logo-icon">🏢</div>EveryCompanyClaw Live</div>
-        <div style="display:flex;gap:8px;align-items:center">
-            <div class="nav">
-                <a href="crm-dashboard.html">📊</a>
-                <a href="org-chart.html">🏢</a>
-                <a href="index.html">📈</a>
+    <div class="topbar">
+        <div class="brand"><div class="brand-icon">🏢</div> EveryCompanyClaw - Live Workflow</div>
+        <div class="status"><div class="status-dot"></div> 7 Agents Running</div>
+    </div>
+    
+    <div class="container">
+        <!-- Lead Gen -->
+        <div class="workflow-col">
+            <div class="workflow-header">
+                <span class="workflow-emoji">🎯</span>
+                <span class="workflow-title">Lead Generation</span>
+                <span class="workflow-count">30 leads</span>
             </div>
-            <div class="live"><span class="dot"></span>Live</div>
-        </div>
-    </div>
-    
-    <div class="grid">
-        <div class="stat"><span class="stat-icon">🎯</span><div><div class="stat-val" id="leads">28</div><div class="stat-label">Leads</div></div></div>
-        <div class="stat"><span class="stat-icon">📧</span><div><div class="stat-val" id="sent">12</div><div class="stat-label">Emails Sent</div></div></div>
-        <div class="stat"><span class="stat-icon">👆</span><div><div class="stat-val" id="clicked">12</div><div class="stat-label">Clicked</div></div></div>
-        <div class="stat"><span class="stat-icon">💬</span><div><div class="stat-val" id="replied">5</div><div class="stat-label">Replied</div></div></div>
-    </div>
-    
-    <div class="sections">
-        <div class="section">
-            <h3>⚡ Live Activity</h3>
-            <div id="activity">
-                <div class="activity"><span class="time">04:07</span><div><span class="action">Lead Gen</span><div class="detail">Fetching from GitHub API</div></div></div>
-                <div class="activity"><span class="time">04:06</span><div><span class="action">Marketing</span><div class="detail">Generated content from Hacker News</div></div></div>
-                <div class="activity"><span class="time">04:05</span><div><span class="action">Learning</span><div class="detail">Studied: github_api_integration</div></div></div>
-                <div class="activity"><span class="time">04:04</span><div><span class="action">Pipeline</span><div class="detail">Updated 28 deals</div></div></div>
-                <div class="activity"><span class="time">04:03</span><div><span class="action">Sales</span><div class="detail">Outreach: 3 emails prepared</div></div></div>
+            <div class="stat-row">
+                <span class="stat-chip">GitHub: 15</span>
+                <span class="stat-chip">HN: 15</span>
+            </div>
+            <div id="leads-flow">
+                <div class="flow-item"><span class="flow-time">04:26</span><span class="flow-icon">🔍</span><div class="flow-content"><div class="flow-action">GitHub API</div><div class="flow-detail">Fetching trending repos</div></div></div>
+                <div class="flow-item"><span class="flow-time">04:24</span><span class="flow-icon">📡</span><div class="flow-content"><div class="flow-action">Hacker News</div><div class="flow-detail">Scraping trending stories</div></div></div>
+                <div class="flow-item"><span class="flow-time">04:20</span><span class="flow-icon">➕</span><div class="flow-content"><div class="flow-action">New Lead</div><div class="flow-detail">added from GitHub</div></div></div>
             </div>
         </div>
         
-        <div class="section">
-            <h3>🤖 AI Agents</h3>
-            <div class="agents">
-                <div class="agent"><div class="agent-emoji">👔</div><div class="agent-name">CEO</div><div class="agent-task">Strategy</div><div class="agent-status">✓ Active</div></div>
-                <div class="agent"><div class="agent-emoji">🔧</div><div class="agent-name">CTO</div><div class="agent-task">Architecture</div><div class="agent-status">✓ Active</div></div>
-                <div class="agent"><div class="agent-emoji">💰</div><div class="agent-name">Sales</div><div class="agent-task">Lead Gen</div><div class="agent-status">✓ Active</div></div>
-                <div class="agent"><div class="agent-emoji">📢</div><div class="agent-name">Marketing</div><div class="agent-task">Content</div><div class="agent-status">✓ Active</div></div>
-                <div class="agent"><div class="agent-emoji">🎓</div><div class="agent-name">Learning</div><div class="agent-task">Research</div><div class="agent-status">✓ Active</div></div>
-                <div class="agent"><div class="agent-emoji">🛠️</div><div class="agent-name">Ops</div><div class="agent-task">Cron Jobs</div><div class="agent-status">✓ Active</div></div>
+        <!-- Sales -->
+        <div class="workflow-col">
+            <div class="workflow-header">
+                <span class="workflow-emoji">💰</span>
+                <span class="workflow-title">Sales Pipeline</span>
+                <span class="workflow-count">30 deals</span>
             </div>
-        </div>
-    </div>
-    
-    <div class="sections">
-        <div class="section">
-            <h3>📊 Pipeline</h3>
-            <div class="pipeline-stage">
-                <div class="stage-name">Lead → Contacted (64)</div>
-                <div class="stage-bar"><div class="stage-fill" style="width:80%;background:#8b5cf6"></div></div>
+            <div class="pipeline-bar">
+                <div class="pipeline-label"><span>Contacted</span><span style="color:var(--accent)">30</span></div>
+                <div class="pipeline-track"><div class="pipeline-fill" style="width:100%;background:var(--accent)"></div></div>
             </div>
-            <div class="pipeline-stage">
-                <div class="stage-name">Contacted → Interested (12)</div>
-                <div class="stage-bar"><div class="stage-fill" style="width:15%;background:#22c55e"></div></div>
+            <div class="pipeline-bar">
+                <div class="pipeline-label"><span>Interested</span><span style="color:var(--green)">12</span></div>
+                <div class="pipeline-track"><div class="pipeline-fill" style="width:40%;background:var(--green)"></div></div>
             </div>
-            <div class="pipeline-stage">
-                <div class="stage-name">Interested → Proposal (5)</div>
-                <div class="stage-bar"><div class="stage-fill" style="width:6%;background:#f59e0b"></div></div>
+            <div class="pipeline-bar">
+                <div class="pipeline-label"><span>Proposal</span><span style="color:var(--orange)">5</span></div>
+                <div class="pipeline-track"><div class="pipeline-fill" style="width:17%;background:var(--orange)"></div></div>
             </div>
-            <div class="pipeline-stage">
-                <div class="stage-name">Proposal → Closed (0)</div>
-                <div class="stage-bar"><div class="stage-fill" style="width:0%;background:#ef4444"></div></div>
+            <div id="sales-flow" style="margin-top:10px">
+                <div class="flow-item"><span class="flow-time">04:25</span><span class="flow-icon">📧</span><div class="flow-content"><div class="flow-action">Email Sent</div><div class="flow-detail">to github leads</div></div></div>
+                <div class="flow-item"><span class="flow-time">04:15</span><span class="flow-icon">📋</span><div class="flow-content"><div class="flow-action">Outreach</div><div class="flow-detail">28 emails prepared</div></div></div>
             </div>
         </div>
         
-        <div class="section">
-            <h3>🎯 Hot Leads</h3>
-            <div id="hotleads">
-                <div class="lead-row"><span>openclaw</span><span class="lead-email">github</span></div>
-                <div class="lead-row"><span>DeepSeek-V3</span><span class="lead-email">github</span></div>
-                <div class="lead-row"><span>codex</span><span class="lead-email">github</span></div>
+        <!-- Marketing -->
+        <div class="workflow-col">
+            <div class="workflow-header">
+                <span class="workflow-emoji">📢</span>
+                <span class="workflow-title">Marketing</span>
+                <span class="workflow-count">2 posts</span>
+            </div>
+            <div class="stat-row">
+                <span class="stat-chip">IG: 2</span>
+                <span class="stat-chip">Reach: 100</span>
+            </div>
+            <div id="marketing-flow">
+                <div class="flow-item"><span class="flow-time">04:22</span><span class="flow-icon">📸</span><div class="flow-content"><div class="flow-action">Instagram</div><div class="flow-detail">Post published</div></div></div>
+                <div class="flow-item"><span class="flow-time">04:18</span><span class="flow-icon">✍️</span><div class="flow-content"><div class="flow-action">Content Gen</div><div class="flow-detail">From HN trending</div></div></div>
+                <div class="flow-item"><span class="flow-time">04:10</span><span class="flow-icon">🎨</span><div class="flow-content"><div class="flow-action">Image Created</div><div class="flow-detail">AI automation theme</div></div></div>
+            </div>
+        </div>
+        
+        <!-- Operations -->
+        <div class="workflow-col">
+            <div class="workflow-header">
+                <span class="workflow-emoji">⚙️</span>
+                <span class="workflow-title">Operations</span>
+                <span class="workflow-count">8 cron jobs</span>
+            </div>
+            <div class="stat-row">
+                <span class="stat-chip">Uptime: 99.9%</span>
+                <span class="stat-chip">Errors: 0</span>
+            </div>
+            <div id="ops-flow">
+                <div class="flow-item"><span class="flow-time">04:26</span><span class="flow-icon">🔄</span><div class="flow-content"><div class="flow-action">Cron: lead_gen</div><div class="flow-detail">Running every 15m</div></div></div>
+                <div class="flow-item"><span class="flow-time">04:25</span><span class="flow-icon">🔄</span><div class="flow-content"><div class="flow-action">Cron: dashboard</div><div class="flow-detail">Running every 5m</div></div></div>
+                <div class="flow-item"><span class="flow-time">04:20</span><span class="flow-icon">🔄</span><div class="flow-content"><div class="flow-action">Cron: org_chart</div><div class="flow-detail">Running every 10m</div></div></div>
+                <div class="flow-item"><span class="flow-time">04:17</span><span class="flow-icon">🔄</span><div class="flow-content"><div class="flow-action">Cron: social</div><div class="flow-detail">Running every 30m</div></div></div>
             </div>
         </div>
     </div>
     
-    <div class="heartbeat">
-        🤖 Company running 24/7 | Next update in <span id=" countdown">30</span>s | Data: GitHub API, Instagram API, Hacker News
+    <div class="container" style="padding-top:0">
+        <!-- Learning -->
+        <div class="workflow-col">
+            <div class="workflow-header">
+                <span class="workflow-emoji">🎓</span>
+                <span class="workflow-title">Learning</span>
+                <span class="workflow-count">50 topics</span>
+            </div>
+            <div class="stat-row">
+                <span class="stat-chip">Actions: 572</span>
+            </div>
+            <div id="learning-flow">
+                <div class="flow-item"><span class="flow-time">04:23</span><span class="flow-icon">📚</span><div class="flow-content"><div class="flow-action">Studied</div><div class="flow-detail">GitHub API integration</div></div></div>
+                <div class="flow-item"><span class="flow-time">04:15</span><span class="flow-icon">🔬</span><div class="flow-content"><div class="flow-action">Analyzed</div><div class="flow-detail">HN trending patterns</div></div></div>
+                <div class="flow-item"><span class="flow-time">04:10</span><span class="flow-icon">💡</span><div class="flow-content"><div class="flow-action">Learned</div><div class="flow-detail">automation_workflows</div></div></div>
+            </div>
+        </div>
+        
+        <!-- Tech/DevOps -->
+        <div class="workflow-col">
+            <div class="workflow-header">
+                <span class="workflow-emoji">🔧</span>
+                <span class="workflow-title">Tech & DevOps</span>
+                <span class="workflow-count">3 projects</span>
+            </div>
+            <div class="stat-row">
+                <span class="stat-chip">PRs: 0</span>
+                <span class="stat-chip">Deploys: auto</span>
+            </div>
+            <div id="tech-flow">
+                <div class="flow-item"><span class="flow-time">04:21</span><span class="flow-icon">👁️</span><div class="flow-content"><div class="flow-action">Code Review</div><div class="flow-detail">crm-dashboard.py</div></div></div>
+                <div class="flow-item"><span class="flow-time">04:18</span><span class="flow-icon">📦</span><div class="flow-content"><div class="flow-action">Build</div><div class="flow-detail">GitHub Pages</div></div></div>
+                <div class="flow-item"><span class="flow-time">04:12</span><span class="flow-icon">🚀</span><div class="flow-content"><div class="flow-action">Deploy</div><div class="flow-detail">Auto pushed</div></div></div>
+            </div>
+        </div>
+        
+        <!-- CFO -->
+        <div class="workflow-col">
+            <div class="workflow-header">
+                <span class="workflow-emoji">📊</span>
+                <span class="workflow-title">Finance</span>
+                <span class="workflow-count">$0 pipeline</span>
+            </div>
+            <div class="stat-row">
+                <span class="stat-chip">Revenue: $0</span>
+            </div>
+            <div id="finance-flow">
+                <div class="flow-item"><span class="flow-time">04:20</span><span class="flow-icon">📈</span><div class="flow-content"><div class="flow-action">Metrics</div><div class="flow-detail">Pipeline updated</div></div></div>
+                <div class="flow-item"><span class="flow-time">04:10</span><span class="flow-icon">💵</span><div class="flow-content"><div class="flow-action">Report</div><div class="flow-detail">Daily summary</div></div></div>
+            </div>
+        </div>
+        
+        <!-- CEO -->
+        <div class="workflow-col">
+            <div class="workflow-header">
+                <span class="workflow-emoji">👔</span>
+                <span class="workflow-title">Strategy</span>
+                <span class="workflow-count">15 decisions</span>
+            </div>
+            <div class="stat-row">
+                <span class="stat-chip">Team: 7 agents</span>
+            </div>
+            <div id="ceo-flow">
+                <div class="flow-item"><span class="flow-time">04:24</span><span class="flow-icon">✅</span><div class="flow-content"><div class="flow-action">Approved</div><div class="flow-detail">Lead gen strategy</div></div></div>
+                <div class="flow-item"><span class="flow-time">04:18</span><span class="flow-icon">📋</span><div class="flow-content"><div class="flow-action">Review</div><div class="flow-detail">Team performance</div></div></div>
+                <div class="flow-item"><span class="flow-time">04:12</span><span class="flow-icon">🎯</span><div class="flow-content"><div class="flow-action">Goal Set</div><div class="flow-detail">50 leads target</div></div></div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="footer">
+        🤖 EveryCompanyClaw | 7 AI Agents | 24/7 Operations | GitHub: everycompanyclaw/company-automation
     </div>
     
     <script>
-        const leads = [
-            {name:'openclaw',email:'hello@openclaw.github.io',src:'github'},
-            {name:'DeepSeek-V3',email:'hello@deepseek-ai.github.io',src:'github'},
-            {name:'codex',email:'hello@openai.github.io',src:'github'},
-            {name:'awesome-llm-apps',email:'hello@Shubhamsaboo.github.io',src:'github'},
-            {name:'skills',email:'hello@anthropics.github.io',src:'github'}
-        ];
+        // Simulate live updates
+        const flows = {
+            'leads-flow': { actions: ['GitHub API', 'Hacker News', 'New Lead'], details: ['Fetching repos', 'Scraping stories', 'added from GitHub'], icon: '🔍' },
+            'sales-flow': { actions: ['Email Sent', 'Outreach', 'Follow-up'], details: ['to github leads', '28 emails', '3 follow-ups'], icon: '📧' },
+            'marketing-flow': { actions: ['Instagram', 'Content Gen', 'Image Created'], details: ['Post published', 'From HN', 'AI theme'], icon: '📸' },
+            'ops-flow': { actions: ['Cron: lead_gen', 'Cron: dashboard', 'Cron: org_chart'], details: ['Running', 'Updated', 'Synced'], icon: '🔄' },
+            'learning-flow': { actions: ['Studied', 'Analyzed', 'Learned'], details: ['API patterns', 'HN trends', 'workflows'], icon: '📚' },
+            'tech-flow': { actions: ['Code Review', 'Build', 'Deploy'], details: ['CRM module', 'GitHub Pages', 'Auto pushed'], icon: '🔧' },
+            'finance-flow': { actions: ['Metrics', 'Report', 'Forecast'], details: ['Updated', 'Daily summary', 'Q2 projections'], icon: '📊' },
+            'ceo-flow': { actions: ['Approved', 'Review', 'Goal Set'], details: ['Strategy', 'Performance', 'Monthly target'], icon: '👔' }
+        };
         
-        const actions = [
-            {time:'04:07',action:'Lead Gen',detail:'Fetching from GitHub API'},
-            {time:'04:06',action:'Marketing',detail:'Generated content from Hacker News'},
-            {time:'04:05',action:'Learning',detail:'Studied: github_api_integration'},
-            {time:'04:04',action:'Pipeline',detail:'Updated deal stages'},
-            {time:'04:03',action:'Sales',detail:'Preparing outreach emails'},
-            {time:'04:02',action:'DevOps',detail:'Running cron jobs'},
-            {time:'04:01',action:'CTO',detail:'Evaluating tech stack'},
-            {time:'04:00',action:'Marketing',detail:'Instagram post published'}
-        ];
-        
-        let count = 30;
         setInterval(() => {
-            count--;
-            document.getElementById('countdown').textContent = count;
+            const time = new Date().toLocaleTimeString('en-US', {hour12:false,hour:'2-digit',minute:'2-digit'});
             
-            if(count <= 0) {
-                // Refresh data simulation
-                const randomLead = leads[Math.floor(Math.random() * leads.length)];
-                const randomAction = actions[Math.floor(Math.random() * actions.length)];
-                
-                // Update stats
-                document.getElementById('leads').textContent = Math.floor(26 + Math.random() * 5);
-                document.getElementById('clicked').textContent = Math.floor(10 + Math.random() * 5);
-                document.getElementById('replied').textContent = Math.floor(3 + Math.random() * 5);
-                
-                // Add new activity
-                const activity = document.getElementById('activity');
-                const newAct = document.createElement('div');
-                newAct.className = 'activity';
-                newAct.innerHTML = `<span class="time">Now</span><div><span class="action">${randomAction.action}</span><div class="detail">${randomAction.detail}</div></div>`;
-                activity.insertBefore(newAct, activity.firstChild);
-                if(activity.children.length > 6) activity.lastChild.remove();
-                
-                count = 30;
+            // Randomly update one flow
+            const keys = Object.keys(flows);
+            const randomKey = keys[Math.floor(Math.random() * keys.length)];
+            const flow = flows[randomKey];
+            const rand = Math.floor(Math.random() * flow.actions.length);
+            
+            const container = document.getElementById(randomKey);
+            if(container) {
+                const newItem = document.createElement('div');
+                newItem.className = 'flow-item';
+                newItem.innerHTML = `<span class="flow-time">${time}</span><span class="flow-icon">${flow.icon}</span><div class="flow-content"><div class="flow-action">${flow.actions[rand]}</div><div class="flow-detail">${flow.details[rand]}</div></div>`;
+                container.insertBefore(newItem, container.firstChild);
+                if(container.children.length > 4) container.lastChild.remove();
             }
-        }, 1000);
+        }, 3000);
     </script>
 </body>
 </html>
