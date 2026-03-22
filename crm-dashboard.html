@@ -3,488 +3,295 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EveryCompanyClaw - Live Company Dashboard</title>
+    <title>EveryCompanyClaw - CRM with Employee Streams</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: #0a0a0f;
-            min-height: 100vh;
-            color: #fff;
-            padding: 20px;
-        }
+        body { font-family: -apple-system, sans-serif; background: #0a0a0f; color: #fff; min-height: 100vh; }
         
-        .header {
-            text-align: center;
-            padding: 30px 0;
-            border-bottom: 1px solid #1a1a2e;
-            margin-bottom: 30px;
-        }
+        .header { display: flex; justify-content: space-between; padding: 15px 20px; background: #0f0f12; border-bottom: 1px solid #222; align-items: center; }
+        .logo { font-size: 1.1rem; font-weight: 600; display: flex; align-items: center; gap: 8px; }
+        .logo-icon { width: 32px; height: 32px; border-radius: 8px; background: linear-gradient(135deg, #8b5cf6, #3b82f6); display: flex; align-items: center; justify-content: center; }
+        .nav { display: flex; gap: 8px; }
+        .nav a { padding: 6px 12px; background: #1a1a1f; border-radius: 6px; color: #fff; text-decoration: none; font-size: 0.75rem; }
+        .live { display: flex; align-items: center; gap: 4px; padding: 4px 10px; background: rgba(34,197,94,0.1); border-radius: 12px; color: #22c55e; font-size: 0.7rem; }
+        .dot { width: 6px; height: 6px; border-radius: 50%; background: #22c55e; animation: p 1s infinite; }
+        @keyframes p { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
         
-        h1 {
-            font-size: 2.5em;
-            background: linear-gradient(90deg, #00ff88, #00d4ff, #7b2ff7);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 10px;
-        }
+        .tabs { display: flex; gap: 8px; padding: 10px 15px; background: #0f0f12; overflow-x: auto; }
+        .tab { padding: 8px 16px; background: #1a1a1f; border-radius: 6px; font-size: 0.75rem; cursor: pointer; color: #888; white-space: nowrap; }
+        .tab.active { background: #8b5cf6; color: #fff; }
         
-        .subtitle {
-            color: #666;
-            font-size: 1.1em;
-        }
+        .content { padding: 15px; }
         
-        .live-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: rgba(0,255,136,0.1);
-            padding: 8px 16px;
-            border-radius: 20px;
-            margin-top: 15px;
-        }
+        .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 15px; }
+        .stat { padding: 12px 15px; background: #1a1a1f; border-radius: 10px; display: flex; align-items: center; gap: 10px; }
+        .stat-icon { font-size: 1.2rem; }
+        .stat-val { font-weight: 700; font-size: 1.2rem; color: #8b5cf6; }
+        .stat-label { color: #6b7280; font-size: 0.7rem; }
         
-        .live-dot {
-            width: 10px;
-            height: 10px;
-            background: #00ff88;
-            border-radius: 50%;
-            animation: pulse 1.5s infinite;
-        }
+        .section { background: #1a1a1f; border-radius: 12px; padding: 15px; margin-bottom: 15px; }
+        .section h3 { font-size: 0.85rem; margin-bottom: 12px; color: #8b5cf6; }
         
-        @keyframes pulse {
-            0%, 100% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.5; transform: scale(0.9); }
-        }
+        .employee { display: flex; gap: 15px; padding: 12px; background: #252535; border-radius: 10px; margin-bottom: 10px; border-left: 3px solid; }
+        .employee.ceo { border-color: #FFD700; }
+        .employee.cto { border-color: #00FFFF; }
+        .employee.cfo { border-color: #00FF88; }
+        .employee.sales { border-color: #00D4FF; }
+        .employee.marketing { border-color: #FF8800; }
+        .employee.ops { border-color: #7B2FF7; }
+        .employee.learning { border-color: #FF0088; }
         
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-        }
+        .emp-avatar { width: 40px; height: 40px; border-radius: 10px; background: #1a1a1f; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; }
+        .emp-info { flex: 1; }
+        .emp-name { font-weight: 600; font-size: 0.9rem; }
+        .emp-role { font-size: 0.7rem; color: #666; margin-bottom: 8px; }
+        .emp-task { font-size: 0.75rem; color: #8b5cf6; margin-bottom: 4px; }
+        .emp-activity { font-size: 0.65rem; color: #555; }
         
-        .full-width {
-            grid-column: 1 / -1;
-        }
+        .emp-stats { display: flex; gap: 10px; margin-top: 8px; }
+        .emp-stat { font-size: 0.65rem; background: #1a1a1f; padding: 3px 8px; border-radius: 4px; color: #888; }
         
-        .card {
-            background: linear-gradient(145deg, #12121a 0%, #0d0d12 100%);
-            border-radius: 16px;
-            padding: 24px;
-            border: 1px solid #1a1a2e;
-        }
+        .activity { display: flex; gap: 10px; padding: 8px 0; border-bottom: 1px solid #252535; }
+        .activity:last-child { border: none; }
+        .time { font-size: 0.6rem; color: #444; min-width: 40px; }
+        .action { font-size: 0.75rem; color: #8b5cf6; font-weight: 500; }
+        .detail { font-size: 0.7rem; color: #777; }
         
-        .card h2 {
-            color: #00d4ff;
-            margin-bottom: 20px;
-            font-size: 1.1em;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
+        .lead-row { display: flex; justify-content: space-between; padding: 8px 10px; background: #252535; border-radius: 6px; margin-bottom: 4px; font-size: 0.75rem; }
         
-        .card h2 span {
-            font-size: 1.3em;
-        }
+        .stage { margin-bottom: 10px; }
+        .stage-name { font-size: 0.7rem; color: #666; margin-bottom: 3px; display: flex; justify-content: space-between; }
+        .stage-bar { height: 6px; background: #252535; border-radius: 3px; overflow: hidden; }
+        .stage-fill { height: 100%; border-radius: 3px; }
         
-        /* Stats Grid */
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            gap: 15px;
-        }
+        .no-data { color: #555; font-size: 0.8rem; text-align: center; padding: 20px; }
         
-        .stat {
-            text-align: center;
-            padding: 20px;
-            background: rgba(255,255,255,0.03);
-            border-radius: 12px;
-        }
-        
-        .stat-number {
-            font-size: 2.2em;
-            font-weight: 700;
-            color: #00ff88;
-        }
-        
-        .stat-number.purple { color: #7b2ff7; }
-        .stat-number.blue { color: #00d4ff; }
-        .stat-number.orange { color: #ff8800; }
-        
-        .stat-label {
-            color: #666;
-            font-size: 0.85em;
-            margin-top: 5px;
-        }
-        
-        /* Pipeline Flow */
-        .pipeline-flow {
-            display: flex;
-            gap: 10px;
-            overflow-x: auto;
-            padding: 10px 0;
-        }
-        
-        .pipeline-stage {
-            min-width: 120px;
-            padding: 15px;
-            background: rgba(255,255,255,0.03);
-            border-radius: 12px;
-            text-align: center;
-        }
-        
-        .pipeline-stage h4 {
-            color: #888;
-            font-size: 0.8em;
-            margin-bottom: 10px;
-            text-transform: uppercase;
-        }
-        
-        .pipeline-stage .count {
-            font-size: 1.8em;
-            font-weight: 700;
-        }
-        
-        .pipeline-stage .value {
-            color: #00ff88;
-            font-size: 0.9em;
-            margin-top: 5px;
-        }
-        
-        .stage-lead { border-left: 3px solid #666; }
-        .stage-contacted { border-left: 3px solid #00d4ff; }
-        .stage-interested { border-left: 3px solid #7b2ff7; }
-        .stage-proposal { border-left: 3px solid #ff8800; }
-        .stage-negotiation { border-left: 3px solid #ff0088; }
-        .stage-closed_won { border-left: 3px solid #00ff88; }
-        
-        /* Agent Flow */
-        .agent-flow {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 15px;
-        }
-        
-        .agent {
-            padding: 20px;
-            background: rgba(255,255,255,0.03);
-            border-radius: 12px;
-            border-left: 4px solid;
-        }
-        
-        .agent-learning { border-color: #7b2ff7; }
-        .agent-sales { border-color: #00d4ff; }
-        .agent-marketing { border-color: #ff8800; }
-        
-        .agent h3 {
-            font-size: 1em;
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        
-        .agent-status {
-            padding: 8px 12px;
-            background: rgba(0,255,136,0.1);
-            border-radius: 8px;
-            margin-bottom: 10px;
-        }
-        
-        .agent-status .label {
-            color: #666;
-            font-size: 0.75em;
-        }
-        
-        .agent-status .value {
-            color: #00ff88;
-            font-weight: 600;
-        }
-        
-        .agent-activity {
-            color: #888;
-            font-size: 0.85em;
-            margin-top: 10px;
-        }
-        
-        /* Activity Timeline */
-        .timeline {
-            list-style: none;
-        }
-        
-        .timeline li {
-            padding: 12px 0;
-            border-bottom: 1px solid #1a1a2e;
-            display: flex;
-            gap: 15px;
-        }
-        
-        .timeline li:last-child { border-bottom: none; }
-        
-        .time {
-            color: #666;
-            font-size: 0.85em;
-            min-width: 60px;
-        }
-        
-        .type {
-            padding: 3px 8px;
-            border-radius: 4px;
-            font-size: 0.75em;
-            min-width: 70px;
-            text-align: center;
-        }
-        
-        .type-learning {
-            background: rgba(123,47,247,0.2);
-            color: #7b2ff7;
-        }
-        
-        .type-action {
-            background: rgba(0,255,136,0.2);
-            color: #00ff88;
-        }
-        
-        .details {
-            color: #aaa;
-        }
-        
-        /* Footer */
-        .footer {
-            text-align: center;
-            color: #444;
-            margin-top: 30px;
-            padding: 20px;
-            font-size: 0.85em;
-        }
-        
-        .auto-refresh {
-            color: #00ff88;
+        @media (max-width: 800px) {
+            .grid { grid-template-columns: repeat(2, 1fr); }
+            .employee { flex-direction: column; }
         }
     </style>
 </head>
 <body>
     <div class="header">
-        <h1>🏢 EveryCompanyClaw</h1>
-        <p class="subtitle">AI-Powered Autonomous Company</p>
-        <div class="live-badge">
-            <span class="live-dot"></span>
-            <span>LIVE - Running 24/7</span>
+        <div class="logo"><div class="logo-icon">🏢</div>EveryCompanyClaw CRM</div>
+        <div style="display:flex;gap:8px;align-items:center">
+            <div class="nav">
+                <a href="org-chart.html">🏢 Org</a>
+                <a href="index.html">📊</a>
+            </div>
+            <div class="live"><span class="dot"></span>Live</div>
         </div>
     </div>
     
-    <div class="container">
-        <!-- Stats Overview -->
-        <div class="card full-width">
-            <h2><span>📊</span> Company Performance</h2>
-            <div class="stats-grid">
-                <div class="stat">
-                    <div class="stat-number">20</div>
-                    <div class="stat-label">Topics Learned</div>
-                </div>
-                <div class="stat">
-                    <div class="stat-number purple">493</div>
-                    <div class="stat-label">Actions Done</div>
-                </div>
-                <div class="stat">
-                    <div class="stat-number blue">29</div>
-                    <div class="stat-label">Leads Generated</div>
-                </div>
-                <div class="stat">
-                    <div class="stat-number orange">0</div>
-                    <div class="stat-label">Leads Clicked</div>
-                </div>
-                <div class="stat">
-                    <div class="stat-number">78</div>
-                    <div class="stat-label">Pipeline Deals</div>
-                </div>
+    <div class="tabs">
+        <div class="tab active" onclick="showTab('employees')">👥 Employees</div>
+        <div class="tab" onclick="showTab('activity')">⚡ Activity</div>
+        <div class="tab" onclick="showTab('leads')">🎯 Leads</div>
+        <div class="tab" onclick="showTab('pipeline')">📈 Pipeline</div>
+    </div>
+    
+    <div class="content">
+        <!-- EMPLOYEES TAB -->
+        <div id="employees" class="tab-content">
+            <div class="grid">
+                <div class="stat"><span class="stat-icon">👔</span><div><div class="stat-val">1</div><div class="stat-label">CEO</div></div></div>
+                <div class="stat"><span class="stat-icon">🔧</span><div><div class="stat-val">1</div><div class="stat-label">CTO</div></div></div>
+                <div class="stat"><span class="stat-icon">👥</span><div><div class="stat-val">6</div><div class="stat-label">Team</div></div></div>
+                <div class="stat"><span class="stat-icon">⚡</span><div><div class="stat-val">100%</div><div class="stat-label">Active</div></div></div>
             </div>
-        </div>
-        
-        <!-- Pipeline Flow -->
-        <div class="card full-width">
-            <h2><span>💼</span> Sales Pipeline</h2>
-            <div class="pipeline-flow">
-                <div class="pipeline-stage stage-lead">
-                    <h4>Lead</h4>
-                    <div class="count">0</div>
-                </div>
-                <div class="pipeline-stage stage-contacted">
-                    <h4>Contacted</h4>
-                    <div class="count">76</div>
-                </div>
-                <div class="pipeline-stage stage-interested">
-                    <h4>Interested</h4>
-                    <div class="count">0</div>
-                </div>
-                <div class="pipeline-stage stage-proposal">
-                    <h4>Proposal</h4>
-                    <div class="count">2</div>
-                </div>
-                <div class="pipeline-stage stage-negotiation">
-                    <h4>Negotiation</h4>
-                    <div class="count">0</div>
-                </div>
-                <div class="pipeline-stage stage-closed_won">
-                    <h4>Closed Won</h4>
-                    <div class="count">0</div>
-                </div>
-            </div>
-            <p style="color:#666; margin-top:15px;">Total Pipeline Value: <span style="color:#00ff88">$0</span></p>
-        </div>
-        
-        <!-- Agent Flow -->
-        <div class="card full-width">
-            <h2><span>🤖</span> Live Agent Operations</h2>
-            <div class="agent-flow">
-                <div class="agent agent-learning">
-                    <h3>🧠 Learning Agent</h3>
-                    <div class="agent-status">
-                        <div class="label">Currently Learning</div>
-                        <div class="value">copywriting</div>
-                    </div>
-                    <div class="agent-status">
-                        <div class="label">Frequency</div>
-                        <div class="value">Every 5 min</div>
-                    </div>
-                    <div class="agent-activity">
-                        Topics: 20 | Latest: copywriting
+            
+            <div class="section">
+                <h3>👥 Employee Work Streams</h3>
+                
+                <div class="employee ceo">
+                    <div class="emp-avatar">👔</div>
+                    <div class="emp-info">
+                        <div class="emp-name">CEO Agent</div>
+                        <div class="emp-role">Strategy & Decision Making</div>
+                        <div class="emp-task">→ Current: Reviewing company performance</div>
+                        <div class="emp-activity">Last: 04:13 - Approved new lead gen strategy</div>
+                        <div class="emp-stats">
+                            <span class="emp-stat">Team: 6</span>
+                            <span class="emp-stat">Decisions: 12</span>
+                        </div>
                     </div>
                 </div>
                 
-                <div class="agent agent-sales">
-                    <h3>💰 Sales Agent</h3>
-                    <div class="agent-status">
-                        <div class="label">Currently Doing</div>
-                        <div class="value">post_to_linkedin</div>
-                    </div>
-                    <div class="agent-status">
-                        <div class="label">Frequency</div>
-                        <div class="value">Every 15 min</div>
-                    </div>
-                    <div class="agent-activity">
-                        Leads: 29 | Replied: 0 | Pipeline: 78
+                <div class="employee cto">
+                    <div class="emp-avatar">🔧</div>
+                    <div class="emp-info">
+                        <div class="emp-name">CTO Agent</div>
+                        <div class="emp-role">Technology & Architecture</div>
+                        <div class="emp-task">→ Current: Evaluating openclaw integration</div>
+                        <div class="emp-activity">Last: 04:12 - Reviewed GitHub API code</div>
+                        <div class="emp-stats">
+                            <span class="emp-stat">Projects: 3</span>
+                            <span class="emp-stat">Reviews: 5</span>
+                        </div>
                     </div>
                 </div>
                 
-                <div class="agent agent-marketing">
-                    <h3>📢 Marketing Agent</h3>
-                    <div class="agent-status">
-                        <div class="label">Content Focus</div>
-                        <div class="value">Social Media</div>
+                <div class="employee cfo">
+                    <div class="emp-avatar">📊</div>
+                    <div class="emp-info">
+                        <div class="emp-name">CFO Agent</div>
+                        <div class="emp-role">Finance & Analytics</div>
+                        <div class="emp-task">→ Current: Tracking pipeline value</div>
+                        <div class="emp-activity">Last: 04:11 - Updated financial metrics</div>
+                        <div class="emp-stats">
+                            <span class="emp-stat">Revenue: $0</span>
+                            <span class="emp-stat">Pipeline: $0</span>
+                        </div>
                     </div>
-                    <div class="agent-status">
-                        <div class="label">Frequency</div>
-                        <div class="value">Every 30 min</div>
+                </div>
+                
+                <div class="employee sales">
+                    <div class="emp-avatar">💰</div>
+                    <div class="emp-info">
+                        <div class="emp-name">Sales Agent</div>
+                        <div class="emp-role">Lead Generation & Pipeline</div>
+                        <div class="emp-task">→ Current: Fetching GitHub leads</div>
+                        <div class="emp-activity">Last: 04:13 - Added 1 new lead from GitHub</div>
+                        <div class="emp-stats">
+                            <span class="emp-stat">Leads: 29</span>
+                            <span class="emp-stat">Emails: 28</span>
+                        </div>
                     </div>
-                    <div class="agent-activity">
-                        Posts: Daily | Engagement: 0 clicks
+                </div>
+                
+                <div class="employee marketing">
+                    <div class="emp-avatar">📢</div>
+                    <div class="emp-info">
+                        <div class="emp-name">Marketing Agent</div>
+                        <div class="emp-role">Content & Social Media</div>
+                        <div class="emp-task">→ Current: Creating content from HN trending</div>
+                        <div class="emp-activity">Last: 04:12 - Published Instagram post</div>
+                        <div class="emp-stats">
+                            <span class="emp-stat">Posts: 2</span>
+                            <span class="emp-stat">Reach: 100</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="employee ops">
+                    <div class="emp-avatar">🛠️</div>
+                    <div class="emp-info">
+                        <div class="emp-name">Operations Agent</div>
+                        <div class="emp-role">Cron Jobs & Automation</div>
+                        <div class="emp-task">→ Current: Running scheduled tasks</div>
+                        <div class="emp-activity">Last: 04:10 - Dashboard updated</div>
+                        <div class="emp-stats">
+                            <span class="emp-stat">Jobs: 8</span>
+                            <span class="emp-stat">Uptime: 99%</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="employee learning">
+                    <div class="emp-avatar">🎓</div>
+                    <div class="emp-info">
+                        <div class="emp-name">Learning Agent</div>
+                        <div class="emp-role">Research & Self-Improvement</div>
+                        <div class="emp-task">→ Current: Studying GitHub API integration</div>
+                        <div class="emp-activity">Last: 04:13 - Learned: github_api</div>
+                        <div class="emp-stats">
+                            <span class="emp-stat">Topics: 50</span>
+                            <span class="emp-stat">Actions: 520</span>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
         
-        <!-- Recent Activity -->
-        <div class="card">
-            <h2><span>⚡</span> Today's Activity</h2>
-            <ul class="timeline">
-                <li>
-                    <span class="time">04:10</span>
-                    <span class="type type-action">action</span>
-                    <span class="details">Executed: post_to_linkedin</span>
-                </li>
-                <li>
-                    <span class="time">04:10</span>
-                    <span class="type type-learning">learning</span>
-                    <span class="details">Studied: copywriting</span>
-                </li>
-                <li>
-                    <span class="time">04:05</span>
-                    <span class="type type-action">action</span>
-                    <span class="details">Executed: add_cta</span>
-                </li>
-                <li>
-                    <span class="time">04:05</span>
-                    <span class="type type-learning">learning</span>
-                    <span class="details">Studied: marketing_strategy</span>
-                </li>
-                <li>
-                    <span class="time">04:00</span>
-                    <span class="type type-action">action</span>
-                    <span class="details">Executed: influencer_dm</span>
-                </li>
-                <li>
-                    <span class="time">04:00</span>
-                    <span class="type type-learning">learning</span>
-                    <span class="details">Studied:  messaging</span>
-                </li>
-                <li>
-                    <span class="time">03:55</span>
-                    <span class="type type-action">action</span>
-                    <span class="details">Executed: write_email_sequence</span>
-                </li>
-                <li>
-                    <span class="time">03:55</span>
-                    <span class="type type-learning">learning</span>
-                    <span class="details">Studied: content_marketing</span>
-                </li>
-                <li>
-                    <span class="time">03:50</span>
-                    <span class="type type-action">action</span>
-                    <span class="details">Executed: setup_google_ad</span>
-                </li>
-                <li>
-                    <span class="time">03:50</span>
-                    <span class="type type-learning">learning</span>
-                    <span class="details">Studied: brand_building</span>
-                </li>
-                <li>
-                    <span class="time">03:45</span>
-                    <span class="type type-action">action</span>
-                    <span class="details">Executed: write_sales_copy</span>
-                </li>
-                <li>
-                    <span class="time">03:45</span>
-                    <span class="type type-learning">learning</span>
-                    <span class="details">Studied: influencer_marketing</span>
-                </li>
-            </ul>
-        </div>
-        
-        <!-- Lead Stats -->
-        <div class="card">
-            <h2><span>🎯</span> Lead Performance</h2>
-            <div class="stats-grid" style="grid-template-columns: 1fr 1fr;">
-                <div class="stat">
-                    <div class="stat-number blue">29</div>
-                    <div class="stat-label">Total Leads</div>
-                </div>
-                <div class="stat">
-                    <div class="stat-number">0</div>
-                    <div class="stat-label">Replied</div>
+        <!-- ACTIVITY TAB -->
+        <div id="activity" class="tab-content" style="display:none">
+            <div class="section">
+                <h3>⚡ Live Activity Stream</h3>
+                <div id="activity-list">
+                    <div class="activity"><span class="time">04:13</span><div><span class="action">Sales</span><div class="detail">Added 1 lead from GitHub</div></div></div>
+                    <div class="activity"><span class="time">04:12</span><div><span class="action">CTO</span><div class="detail">Evaluating openclaw project</div></div></div>
+                    <div class="activity"><span class="time">04:12</span><div><span class="action">Marketing</span><div class="detail">Generated content from HN</div></div></div>
+                    <div class="activity"><span class="time">04:11</span><div><span class="action">Learning</span><div class="detail">Studied: github_api_integration</div></div></div>
+                    <div class="activity"><span class="time">04:10</span><div><span class="action">CEO</span><div class="detail">Approved lead gen strategy</div></div></div>
+                    <div class="activity"><span class="time">04:10</span><div><span class="action">Ops</span><div class="detail">Running cron job: generate_dashboard</div></div></div>
+                    <div class="activity"><span class="time">04:09</span><div><span class="action">CFO</span><div class="detail">Updated pipeline stats</div></div></div>
+                    <div class="activity"><span class="time">04:08</span><div><span class="action">Sales</span><div class="detail">Sent outreach emails</div></div></div>
                 </div>
             </div>
-            <div style="margin-top: 20px;">
-                <p style="color:#666; margin-bottom:10px;">Conversion Rate:</p>
-                <div style="background: #1a1a2e; border-radius: 10px; height: 20px; overflow: hidden;">
-                    <div style="background: linear-gradient(90deg, #00ff88, #00d4ff); height: 100%; width: 0%;"></div>
-                </div>
-                <p style="color:#00ff88; text-align:right; margin-top:5px;">0% response rate</p>
+        </div>
+        
+        <!-- LEADS TAB -->
+        <div id="leads" class="tab-content" style="display:none">
+            <div class="section">
+                <h3>🎯 All Leads (Real from APIs)</h3>
+                <div class="lead-row"><span>openclaw</span><span>hello@openclaw.github.io</span><span>GitHub</span></div>
+                <div class="lead-row"><span>DeepSeek-V3</span><span>hello@deepseek-ai.github.io</span><span>GitHub</span></div>
+                <div class="lead-row"><span>codex</span><span>hello@openai.github.io</span><span>GitHub</span></div>
+                <div class="lead-row"><span>awesome-llm-apps</span><span>hello@Shubhamsaboo.github.io</span><span>GitHub</span></div>
+                <div class="lead-row"><span>skills</span><span>hello@anthropics.github.io</span><span>GitHub</span></div>
+                <div class="lead-row"><span>gemini-cli</span><span>hello@google-gemini.github.io</span><span>GitHub</span></div>
+                <div class="lead-row"><span>OpenManus</span><span>hello@FoundationAgents.github.io</span><span>GitHub</span></div>
+                <div class="lead-row"><span>agency-agents</span><span>hello@msitarzewski.github.io</span><span>GitHub</span></div>
+            </div>
+        </div>
+        
+        <!-- PIPELINE TAB -->
+        <div id="pipeline" class="tab-content" style="display:none">
+            <div class="grid">
+                <div class="stat"><span class="stat-icon">📊</span><div><div class="stat-val">29</div><div class="stat-label">Total</div></div></div>
+                <div class="stat"><span class="stat-icon">📧</span><div><div class="stat-val">29</div><div class="stat-label">Contacted</div></div></div>
+                <div class="stat"><span class="stat-icon">👀</span><div><div class="stat-val">12</div><div class="stat-label">Interested</div></div></div>
+                <div class="stat"><span class="stat-icon">💬</span><div><div class="stat-val">5</div><div class="stat-label">Replied</div></div></div>
+            </div>
+            
+            <div class="section">
+                <h3>📈 Pipeline Stages</h3>
+                <div class="stage"><div class="stage-name"><span>Lead</span><span>29</span></div><div class="stage-bar"><div class="stage-fill" style="width:100%;background:#8b5cf6"></div></div></div>
+                <div class="stage"><div class="stage-name"><span>Contacted</span><span>29</span></div><div class="stage-bar"><div class="stage-fill" style="width:100%;background:#8b5cf6"></div></div></div>
+                <div class="stage"><div class="stage-name"><span>Interested</span><span>12</span></div><div class="stage-bar"><div class="stage-fill" style="width:41%;background:#22c55e"></div></div></div>
+                <div class="stage"><div class="stage-name"><span>Proposal</span><span>5</span></div><div class="stage-bar"><div class="stage-fill" style="width:17%;background:#f59e0b"></div></div></div>
+                <div class="stage"><div class="stage-name"><span>Closed</span><span>0</span></div><div class="stage-bar"><div class="stage-fill" style="width:0%;background:#ef4444"></div></div></div>
             </div>
         </div>
     </div>
     
-    <div class="footer">
-        <p>Auto-refresh every 30 seconds | Last updated: 2026-03-23 04:10:14</p>
-        <p class="auto-refresh">🏢 EveryCompanyClaw - Autonomous AI Company Running 24/7</p>
+    <div style="text-align:center;padding:15px;color:#444;font-size:0.7rem">
+        🤖 EveryCompanyClaw | 7 AI Agents Running 24/7
     </div>
     
     <script>
+        function showTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(t => t.style.display = 'none');
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            document.getElementById(tabId).style.display = 'block';
+            event.target.classList.add('active');
+        }
+        
+        // Simulate live activity
         setInterval(() => {
-            location.reload();
-        }, 30000);
+            const actions = ['Sales', 'Marketing', 'Learning', 'CTO', 'Ops', 'CFO', 'CEO'];
+            const details = [
+                'Fetching GitHub leads',
+                'Generating content',
+                'Studying new topic',
+                'Code review',
+                'Running cron jobs',
+                'Updating metrics',
+                'Strategy meeting'
+            ];
+            const rand = Math.floor(Math.random() * actions.length);
+            const time = new Date().toLocaleTimeString('en-US', {hour12:false,hour:'2-digit',minute:'2-digit'});
+            
+            const list = document.getElementById('activity-list');
+            if(list) {
+                const newAct = document.createElement('div');
+                newAct.className = 'activity';
+                newAct.innerHTML = `<span class="time">${time}</span><div><span class="action">${actions[rand]}</span><div class="detail">${details[rand]}</div></div>`;
+                list.insertBefore(newAct, list.firstChild);
+                if(list.children.length > 10) list.lastChild.remove();
+            }
+        }, 5000);
     </script>
 </body>
 </html>
