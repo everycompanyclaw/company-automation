@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EveryCompanyClaw - Company Org Chart</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'SF Pro Display', -apple-system, sans-serif;
+            background: #0a0a0f;
+            min-height: 100vh;
+            color: #fff;
+            padding: 20px;
+        }
+        
+        .header {
+            text-align: center;
+            padding: 30px;
+            background: linear-gradient(135deg, #1a1a2e 0%, #0d0d12 100%);
+            border-radius: 20px;
+            margin-bottom: 30px;
+        }
+        
+        h1 {
+            font-size: 2.5em;
+            background: linear-gradient(90deg, #00ff88, #00d4ff, #7b2ff7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .subtitle { color: #666; margin-top: 10px; }
+        
+        .org-chart {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 40px;
+        }
+        
+        .level {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .agent-card {
+            background: #151520;
+            border-radius: 16px;
+            padding: 20px;
+            min-width: 200px;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 2px solid transparent;
+        }
+        
+        .agent-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.5);
+        }
+        
+        .emoji { font-size: 2.5em; margin-bottom: 10px; }
+        
+        .name { font-size: 1.2em; font-weight: bold; margin-bottom: 5px; }
+        
+        .role { color: #888; font-size: 0.9em; margin-bottom: 10px; }
+        
+        .task {
+            background: #1a1a2e;
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 0.85em;
+            color: #aaa;
+            margin-bottom: 10px;
+        }
+        
+        .stats {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .stat {
+            background: #252535;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            color: #00ff88;
+        }
+        
+        .team-badge {
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px solid #333;
+        }
+        
+        .team-label { color: #555; font-size: 0.75em; }
+        
+        .team-members {
+            display: flex;
+            gap: 5px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 5px;
+        }
+        
+        .team-member {
+            background: #333;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 0.7em;
+            color: #aaa;
+        }
+        
+        .connector {
+            width: 2px;
+            height: 20px;
+            background: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🏢 EveryCompanyClaw</h1>
+        <p class="subtitle">AI-Powered CompanyOrg Chart | 2026-03-23 03:37</p>
+    </div>
+    
+    <div class="org-chart">
+        <div class="level">
+        <div class="agent-card" style="border-color: #FFD700">
+            <div class="emoji">👔</div>
+            <div class="name">CEO Agent</div>
+            <div class="role">Strategy & Decision Making</div>
+            <div class="task">Company Strategy & Vision</div>
+            <div class="stats">
+                <span class="stat">team_size: 10</span>
+                <span class="stat">autonomy: 100%</span>
+            </div>
+        </div>
+        </div>
+        <div class="connector"></div>
+        <div class="level">
+        <div class="agent-card" style="border-color: #00FFFF">
+            <div class="emoji">🔧</div>
+            <div class="name">CTO Agent</div>
+            <div class="role">Technology & Architecture</div>
+            <div class="task">Tech Stack & Architecture</div>
+            <div class="stats">
+                <span class="stat">projects: 5</span>
+                <span class="stat">team: 3</span>
+            </div>
+        </div>
+        <div class="agent-card" style="border-color: #00FF88">
+            <div class="emoji">📊</div>
+            <div class="name">CFO Agent</div>
+            <div class="role">Finance & Analytics</div>
+            <div class="task">Financial Analytics</div>
+            <div class="stats">
+                <span class="stat">revenue: $0</span>
+                <span class="stat">pipeline_value: $0</span>
+            </div>
+        </div>
+        <div class="agent-card" style="border-color: #00D4FF">
+            <div class="emoji">💰</div>
+            <div class="name">Sales Agent</div>
+            <div class="role">Lead Generation & Pipeline</div>
+            <div class="task">Lead Gen: 26 leads, 78 deals</div>
+            <div class="stats">
+                <span class="stat">leads: 26</span>
+                <span class="stat">deals: 78</span>
+            </div>
+        </div>
+        <div class="agent-card" style="border-color: #FF8800">
+            <div class="emoji">📢</div>
+            <div class="name">Marketing Agent</div>
+            <div class="role">Content & Social Media</div>
+            <div class="task">Social Media & Content Creation</div>
+            <div class="stats">
+                <span class="stat">posts: Daily</span>
+            </div>
+        </div>
+        <div class="agent-card" style="border-color: #7B2FF7">
+            <div class="emoji">🛠️</div>
+            <div class="name">Operations Agent</div>
+            <div class="role">Daily Operations & Automation</div>
+            <div class="task">Cron Jobs & System Maintenance</div>
+            <div class="stats">
+                <span class="stat">jobs: 8 active</span>
+            </div>
+        </div>
+        </div>
+        <div class="connector"></div>
+        <div class="level">
+        <div class="agent-card" style="border-color: #7B2FF7">
+            <div class="emoji">🤖</div>
+            <div class="name">VP Engineering</div>
+            <div class="role">Engineering Management</div>
+            <div class="task">Managing Engineering Projects</div>
+            <div class="stats">
+                <span class="stat">open_prs: 0</span>
+                <span class="stat">bugs: 0</span>
+            <div class="team-badge">
+                <div class="team-label">Reports to: CTO</div>
+                <div class="team-members">
+                    <span class="team-member">Backend Lead</span>
+                    <span class="team-member">Frontend Lead</span>
+                    <span class="team-member">QA Lead</span>
+                </div>
+            </div>
+        </div>
+        <div class="agent-card" style="border-color: #4ECDC4">
+            <div class="emoji">🚀</div>
+            <div class="name">DevOps Engineer</div>
+            <div class="role">Infrastructure & CI/CD</div>
+            <div class="task">CI/CD & Infrastructure</div>
+            <div class="stats">
+                <span class="stat">uptime: 99.9%</span>
+                <span class="stat">deploys: Auto</span>
+        </div>
+        <div class="agent-card" style="border-color: #FF0088">
+            <div class="emoji">🎓</div>
+            <div class="name">Learning Agent</div>
+            <div class="role">Self-Improvement & Research</div>
+            <div class="task">Learning: call_to_action</div>
+            <div class="stats">
+                <span class="stat">topics: 13</span>
+                <span class="stat">actions: 484</span>
+            <div class="team-badge">
+                <div class="team-label">Reports to: CTO</div>
+                <div class="team-members">
+                    <span class="team-member">Researcher</span>
+                    <span class="team-member">Pattern Analyzer</span>
+                    <span class="team-member">Strategy Learner</span>
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+</body>
+</html>

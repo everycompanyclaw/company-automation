@@ -1,74 +1,42 @@
 #!/usr/bin/env python3
 """
-Social Media Auto-Poster
-Sends ready-to-post content to Telegram for one-tap sharing
+Social Poster - saves posts to JSON
 """
+import json
 import os
+from datetime import datetime
 
-CONTENT_FILE = "/Users/macbookpro/.openclaw/workspace/company/automation/data/social_queue.md"
+POSTS_FILE = "/tmp/real_posts.json"
 
-POSTS = [
-    {
-        "platform": "Instagram",
-        "caption": """🧵 20 Python自動化腳本｜幫你慳10+粒鐘
+def load_posts():
+    if os.path.exists(POSTS_FILE):
+        with open(POSTS_FILE, "r") as f:
+            return json.load(f)
+    return {"posts": []}
 
-由Email提取器、檔案整理器、發票生成器...
-全部已經寫好，等你去用！
+def save_posts(posts):
+    with open(POSTS_FILE, "w") as f:
+        json.dump(posts, f, indent=2)
 
-💰 $79 = 永久使用
-⬇️ link in bio
+def add_post(platform, content, link=""):
+    posts = load_posts()
+    posts["posts"].insert(0, {
+        "id": len(posts["posts"]) + 1,
+        "platform": platform,
+        "content": content,
+        "link": link,
+        "posted": datetime.now().strftime("%Y-%m-%d %H:%M"),
+        "reach": 0,
+        "likes": 0,
+        "comments": 0
+    })
+    save_posts(posts)
+    print(f"✅ Added {platform} post")
 
-#python #automation #hkig #香港 #startup #indiehacker""",
-        "image": "ig-post.html"
-    },
-    {
-        "platform": "Threads", 
-        "caption": """🧵 我build咗一個自己運作既公司
-
-佢會24/7自動賣嘢、收錢、發貨
-
-products:
-- Python腳本套裝 $79
-- Zapier範本 $49
-- AI提示詞 $29
-
-link: everycompanyclaw.github.io/company-automation/
-
-#buildinpublic #startup #香港""",
-        "image": None
-    },
-    {
-        "platform": "Twitter",
-        "caption": """🧵 Built 20 Python scripts that automate repetitive tasks - saves 10+ hours/week
-
-Email extractor, CSV converter, file organizer, invoice generator & more
-
-$79 - instant download
-
-👉 https://everycompanyclaw.github.io/company-automation/
-
-#automation #python #buildinpublic""",
-        "image": None
-    }
-]
-
-def get_next_post():
-    """Get next post to share"""
-    if POSTS:
-        return POSTS[0]
-    return None
-
-def generate_telegram_message(post):
-    """Generate message for Telegram"""
-    msg = f"""📱 *{post['platform']} Post Ready*
-
-{post['caption']}
-
----
-Copy and post!"""
-    return msg
-
+# Demo - add your recent post
 if __name__ == "__main__":
-    post = get_next_post()
-    if post:
-        print(generate_telegram_message(post))
+    add_post(
+        "Instagram", 
+        "🧵 20 Python自動化腳本｜幫你慳10+粒鐘 由Email提取器、檔案整理器、發票生成器... 全部已經寫好，等你去用！ 💰 $79 = 永久使用 ⬇️ link in bio #python #automation #hkig #香港 #startup #indiehacker",
+        "https://instagram.com/p/your_post_id"
+    )

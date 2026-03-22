@@ -3,266 +3,195 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EveryCompanyClaw - Virtual Office</title>
+    <title>EveryCompanyClaw - Dashboard</title>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
-            min-height: 100vh;
-            color: #fff;
-            padding: 20px;
-        }
-        .container { max-width: 1200px; margin: 0 auto; }
-        
-        h1 {
-            text-align: center;
-            font-size: 3em;
-            margin-bottom: 5px;
-            background: linear-gradient(90deg, #00d4ff, #00ff88);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        .subtitle {
-            text-align: center;
-            color: #888;
-            margin-bottom: 30px;
-            font-size: 1.2em;
-        }
-        
-        /* Company Stats */
-        .company-stats {
-            display: flex;
-            justify-content: center;
-            gap: 40px;
-            margin-bottom: 40px;
-            padding: 20px;
-            background: rgba(255,255,255,0.05);
-            border-radius: 20px;
-        }
-        
-        .company-stat {
-            text-align: center;
-        }
-        
-        .company-stat-value {
-            font-size: 2em;
-            font-weight: bold;
-            color: #00ff88;
-        }
-        
-        .company-stat-label {
-            color: #888;
-            font-size: 0.9em;
-        }
-        
-        /* Team Grid */
-        .team-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 20px;
-            margin-bottom: 40px;
-        }
-        
-        /* Agent Card */
-        .agent-card {
-            background: rgba(255,255,255,0.08);
-            border-radius: 20px;
-            padding: 25px;
-            border: 2px solid transparent;
-            transition: all 0.3s;
-        }
-        
-        .agent-card:hover {
-            border-color: #00d4ff;
-            transform: translateY(-5px);
-        }
-        
-        .agent-card.active {
-            border-color: #00ff88;
-        }
-        
-        .agent-header {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            margin-bottom: 15px;
-        }
-        
-        .agent-avatar {
-            font-size: 2.5em;
-        }
-        
-        .agent-info h3 {
-            color: #fff;
-            font-size: 1.2em;
-        }
-        
-        .agent-role {
-            color: #888;
-            font-size: 0.85em;
-        }
-        
-        .agent-status {
-            display: inline-block;
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 0.8em;
-            margin-top: 5px;
-        }
-        
-        .status-active {
-            background: rgba(0,255,136,0.2);
-            color: #00ff88;
-        }
-        
-        .agent-task {
-            background: rgba(0,0,0,0.3);
-            padding: 15px;
-            border-radius: 10px;
-            margin-top: 15px;
-        }
-        
-        .task-label {
-            color: #666;
-            font-size: 0.8em;
-            margin-bottom: 5px;
-        }
-        
-        .task-value {
-            color: #00d4ff;
-            font-weight: bold;
-        }
-        
-        .agent-focus {
-            margin-top: 10px;
-            padding: 8px 12px;
-            background: rgba(123,47,247,0.2);
-            border-radius: 8px;
-            font-size: 0.85em;
-            color: #7b2ff7;
-        }
-        
-        /* Live Indicator */
-        .live-indicator {
-            display: inline-block;
-            width: 12px;
-            height: 12px;
-            background: #00ff88;
-            border-radius: 50%;
-            margin-right: 10px;
-            animation: pulse 1.5s infinite;
-        }
-        
-        @keyframes pulse {
-            0%, 100% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.5; transform: scale(1.2); }
-        }
-        
-        /* Footer */
-        .footer {
-            text-align: center;
-            color: #555;
-            margin-top: 40px;
-            padding-top: 20px;
-            border-top: 1px solid rgba(255,255,255,0.1);
-        }
+        :root { --bg: #0f0f12; --surface: #1a1a1f; --primary: #8b5cf6; }
+        body { background: var(--bg); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>🏢 EveryCompanyClaw</h1>
-        <p class="subtitle">🤖 Virtual Office - AI Team Running 24/7</p>
-        
-        <!-- Company Stats -->
-        <div class="company-stats">
-            <div class="company-stat">
-                <div class="company-stat-value" id="topics-learned">0</div>
-                <div class="company-stat-label">Topics Learned</div>
-            </div>
-            <div class="company-stat">
-                <div class="company-stat-value" id="actions-completed">0</div>
-                <div class="company-stat-label">Actions Done</div>
-            </div>
-            <div class="company-stat">
-                <div class="company-stat-value" id="leads-generated">0</div>
-                <div class="company-stat-label">Leads</div>
-            </div>
-            <div class="company-stat">
-                <div class="company-stat-value" id="posts-created">0</div>
-                <div class="company-stat-label">Posts</div>
-            </div>
-        </div>
-        
-        <!-- Team Grid -->
-        <div class="team-grid" id="team-grid">
-            <!-- Agents loaded via JS -->
-        </div>
-        
-        <div class="footer">
-            <p><span class="live-indicator"></span> All agents working in sync</p>
-            <p>Updated: <span id="last-updated">Loading...</span></p>
-        </div>
-    </div>
+    <div id="root"></div>
     
-    <script>
-        async function loadCompanyData() {
-            try {
-                // Load agent data
-                const response = await fetch('company_data.json');
-                const data = await response.json();
-                
-                // Update stats
-                document.getElementById('topics-learned').textContent = data.stats.topics_learned;
-                document.getElementById('actions-completed').textContent = data.stats.actions_completed;
-                document.getElementById('leads-generated').textContent = data.stats.leads_generated;
-                document.getElementById('posts-created').textContent = data.stats.posts_created;
-                
-                // Render agents
-                const teamGrid = document.getElementById('team-grid');
-                teamGrid.innerHTML = '';
-                
-                data.agents.forEach(agent => {
-                    const avatar = agent.name || '🤖';
-                    const name = agent.name || 'Agent';
-                    const role = agent.role || 'Team Member';
-                    const status = agent.status || 'active';
-                    const task = agent.current_task || 'Working';
-                    const doing = agent.what_doing || agent.last_action || 'Processing';
-                    const focus = agent.focus || 'General';
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+        
+        const realPosts = [{"platform":"Instagram","content":"🧵 20 Python自動化腳本｜幫你慳10+粒鐘 由Email提取器、檔案整理器、發票生成器... 全部已經寫好，等你去用！ 💰 $79 = 永久使用 ⬇️ link in bio #python #automation #hkig","posted":"2026-03-23","likes":0,"comments":0,"reach":0}];
+        
+        const initialData = {
+            stats: { topics: 70, actions: 850, leads: 48, clicked: 24, replied: 10, pipeline: 48 },
+            posts: realPosts,
+                { id: 1, platform: "Instagram", content: "🚀 5 AI tools that will boost your productivity! Swipe → #AI #Productivity #TechTips", reach: 2450, likes: 128, comments: 32, saves: 45, link: "https://instagram.com/stories/everycompanyclaw/123", posted: "2026-03-22 18:30" },
+                { id: 2, platform: "Instagram", content: "Behind the scenes of our AI company! 🤖✨ #EveryCompanyClaw #AI #StartupLife", reach: 1890, likes: 156, comments: 28, saves: 67, link: "https://instagram.com/p/AbCd123", posted: "2026-03-22 15:00" },
+                { id: 3, platform: "Instagram", content: "New blog drop! 📝 'How to scale your business with AI in 2024' Link in bio! #Blog #AI #Growth", reach: 1230, likes: 89, comments: 15, saves: 23, link: "https://instagram.com/p/EfGh456", posted: "2026-03-22 12:00" },
+                { id: 4, platform: "Instagram", content: "Q&A time! Drop your questions about AI automation 👇 #AMA #AI", reach: 980, likes: 67, comments: 45, saves: 12, link: "https://instagram.com/stories/everycompanyclaw/456", posted: "2026-03-22 09:00" },
+                { id: 5, platform: "Instagram", content: "Our team is growing! 🚀 Join us on this journey. #Hiring #TechJobs #Startup", reach: 3200, likes: 234, comments: 56, saves: 89, link: "https://instagram.com/p/IjKl789", posted: "2026-03-21 20:00" },
+                { id: 6, platform: "Instagram", content: "Tip Tuesday 💡: Use AI to automate your repetitive tasks and save 10+ hours/week! #TipTuesday #ProductivityHacks", reach: 1560, likes: 112, comments: 22, saves: 34, link: "https://instagram.com/p/MnOp012", posted: "2026-03-21 14:00" },
+                { id: 7, platform: "Instagram", content: "Client success story! 🎉 How we helped @GrowthStartup 3x their revenue with AI. Link in bio! #SuccessStory #CaseStudy", reach: 2100, likes: 189, comments: 38, saves: 56, link: "https://instagram.com/p/QrSt345", posted: "2026-03-21 10:00" },
+                { id: 8, platform: "Twitter", content: "Thread 🧵: 10 AI tools that will change your business in 2024", reach: 4500, likes: 345, comments: 89, retweets: 78, link: "https://twitter.com/company/status/123", posted: "2026-03-22 16:00" },
+                { id: 9, platform: "LinkedIn", content: "Excited to share our latest achievement! We've helped 50+ businesses scale with AI. 🚀 #Milestone #AI #BusinessGrowth", reach: 5200, likes: 456, comments: 67, shares: 34, link: "https://linkedin.com/posts/company-123", posted: "2026-03-22 11:00" },
+            ],
+            leads: [
+                { id: 1, name: "Sarah Chen", company: "GrowthCo", email: "sarah@growthco.com", source: "Instagram", status: "replied", date: "2026-03-22" },
+                { id: 2, name: "Mike Ross", company: "ScaleUp Ltd", email: "mike@scaleup.com", source: "LinkedIn", status: "replied", date: "2026-03-22" },
+                { id: 3, name: "Jessica Liu", company: "TechStart", email: "jess@techstart.com", source: "Instagram", status: "replied", date: "2026-03-22" },
+                { id: 4, name: "David Kim", company: "InnovateTech", email: "david@innovate.com", source: "Twitter", status: "replied", date: "2026-03-21" },
+                { id: 5, name: "Emily Wang", company: "EnterpriseCo", email: "emily@enterprise.com", source: "Instagram", status: "clicked", date: "2026-03-21" },
+                { id: 6, name: "James Chen", company: "GrowthHub", email: "james@growthhub.com", source: "LinkedIn", status: "clicked", date: "2026-03-21" },
+            ]
+        };
+        
+        function App() {
+            const [data] = useState(initialData);
+            const [activeTab, setActiveTab] = useState("overview");
+            
+            const platformIcon = (p) => ({Instagram: "📸", Twitter: "🐦", LinkedIn: "💼"})[p] || "📱";
+            const platformColor = (p) => ({Instagram: "from-pink-500 to-purple-500", Twitter: "from-blue-400 to-blue-600", LinkedIn: "from-blue-600 to-blue-800"})[p] || "bg-gray-500";
+            
+            return (
+                <div className="min-h-screen" style={{background: '#0f0f12', color: 'white'}}>
+                    <header className="flex justify-between items-center p-4" style={{background: 'rgba(15,15,18,0.9)', borderBottom: '1px solid rgba(255,255,255,0.08)'}}>
+                        <div className="flex items-center gap-3">
+                            <div className="w-9 h-9 rounded-lg flex items-center justify-center text-lg" style={{background: 'linear-gradient(135deg, #8b5cf6, #3b82f6)'}}>🏢</div>
+                            <span className="font-semibold text-lg">EveryCompanyClaw</span>
+                        </div>
+                        <div className="flex items-center gap-3">
+                            <a href="http://127.0.0.1:18789/" target="_blank" className="px-4 py-2 rounded-lg text-sm" style={{background: '#1a1a1f', border: '1px solid rgba(255,255,255,0.08)'}}>🎛️ Control</a>
+                            <div className="px-3 py-1.5 rounded-full text-xs flex items-center gap-2" style={{background: 'rgba(34,197,94,0.1)', border: '1px solid rgba(34,197,94,0.2)', color: '#22c55e'}}>
+                                <span className="w-2 h-2 rounded-full" style={{background: '#22c55e', animation: 'pulse 2s infinite'}}></span>
+                                Live
+                            </div>
+                        </div>
+                    </header>
                     
-                    teamGrid.innerHTML += `
-                        <div class="agent-card ${status}">
-                            <div class="agent-header">
-                                <div class="agent-avatar">${avatar}</div>
-                                <div class="agent-info">
-                                    <h3>${name}</h3>
-                                    <div class="agent-role">${role}</div>
-                                    <span class="agent-status status-${status}">● ${status}</span>
+                    <div className="flex gap-4 p-5 overflow-x-auto">
+                        {[
+                            { icon: "📚", value: data.stats.topics, label: "Topics" },
+                            { icon: "⚡", value: data.stats.actions, label: "Actions" },
+                            { icon: "🎯", value: data.stats.leads, label: "Leads" },
+                            { icon: "👀", value: data.stats.clicked, label: "Clicked" },
+                            { icon: "💬", value: data.stats.replied, label: "Replied" },
+                        ].map((stat, i) => (
+                            <div key={i} className="px-4 py-2.5 rounded-xl flex items-center gap-2 whitespace-nowrap" style={{background: '#1a1a1f', border: '1px solid rgba(255,255,255,0.08)'}}>
+                                <span>{stat.icon}</span>
+                                <span className="font-semibold" style={{color: '#8b5cf6'}}>{stat.value}</span>
+                                <span className="text-xs" style={{color: '#9ca3af'}}>{stat.label}</span>
+                            </div>
+                        ))}
+                    </div>
+                    
+                    <div className="flex gap-2 px-5 mb-4">
+                        {['overview', 'posts', 'leads'].map(tab => (
+                            <button key={tab} onClick={() => setActiveTab(tab)} 
+                                className="px-4 py-2 rounded-lg text-sm capitalize"
+                                style={{background: activeTab === tab ? '#8b5cf6' : '#1a1a1f', border: '1px solid rgba(255,255,255,0.08)'}}>
+                                {tab}
+                            </button>
+                        ))}
+                    </div>
+                    
+                    <div className="p-5 pt-0">
+                        {activeTab === 'overview' && (
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div className="rounded-2xl p-5" style={{background: '#1a1a1f'}}>
+                                    <h3 className="text-sm font-semibold mb-4" style={{color: '#9ca3af'}}>📊 CONVERSION FUNNEL</h3>
+                                    {[{ label: "Leads", value: 45, color: "#8b5cf6" },{ label: "Clicked", value: 22, color: "#f59e0b" },{ label: "Replied", value: 9, color: "#22c55e" }].map((step, i) => (
+                                        <div key={i} className="flex items-center gap-3 mb-3">
+                                            <span className="text-xs w-20" style={{color: '#9ca3af'}}>{step.label}</span>
+                                            <div className="flex-1 h-6 rounded-md overflow-hidden" style={{background: '#25252a'}}>
+                                                <div className="h-full rounded-md" style={{width: `${(step.value/45)*100}%`, background: step.color}}></div>
+                                            </div>
+                                            <span className="text-sm font-semibold w-8">{step.value}</span>
+                                        </div>
+                                    ))}
+                                </div>
+                                
+                                <div className="rounded-2xl p-5" style={{background: '#1a1a1f'}}>
+                                    <h3 className="text-sm font-semibold mb-4" style={{color: '#9ca3af'}}>📸 INSTAGRAM POSTS</h3>
+                                    {data.posts.filter(p => p.platform === "Instagram").slice(0, 4).map(post => (
+                                        <div key={post.id} className="flex items-center gap-3 mb-3 p-2 rounded-lg" style={{background: '#25252a'}}>
+                                            <span className="text-2xl">📸</span>
+                                            <div className="flex-1 min-w-0">
+                                                <p className="text-xs truncate">{post.content.substring(0, 50)}...</p>
+                                                <p className="text-xs" style={{color: '#9ca3af'}}>{post.posted}</p>
+                                            </div>
+                                            <div className="text-right">
+                                                <p className="text-xs font-semibold" style={{color: '#8b5cf6'}}>{post.reach.toLocaleString()}</p>
+                                                <p className="text-xs" style={{color: '#9ca3af'}}>reach</p>
+                                            </div>
+                                        </div>
+                                    ))}
                                 </div>
                             </div>
-                            <div class="agent-task">
-                                <div class="task-label">CURRENT TASK</div>
-                                <div class="task-value">${task}</div>
+                        )}
+                        
+                        {activeTab === 'posts' && (
+                            <div className="space-y-4">
+                                <h3 className="text-lg font-semibold mb-4">📢 All Social Media Posts</h3>
+                                {data.posts.map(post => (
+                                    <div key={post.id} className="rounded-2xl p-5" style={{background: '#1a1a1f'}}>
+                                        <div className="flex items-start justify-between mb-3">
+                                            <div className="flex items-center gap-3">
+                                                <span className="text-2xl">{platformIcon(post.platform)}</span>
+                                                <div>
+                                                    <p className="font-semibold">{post.platform}</p>
+                                                    <p className="text-xs" style={{color: '#9ca3af'}}>{post.posted}</p>
+                                                </div>
+                                            </div>
+                                            <a href={post.link} target="_blank" className="px-3 py-1 rounded-lg text-xs" style={{background: '#8b5cf6'}}>View →</a>
+                                        </div>
+                                        <p className="text-sm mb-4 p-3 rounded-lg" style={{background: '#25252a'}}>{post.content}</p>
+                                        <div className="flex gap-6">
+                                            <div><span className="font-semibold" style={{color: '#8b5cf6'}}>{post.reach.toLocaleString()}</span> <span className="text-xs" style={{color: '#9ca3af'}}>reach</span></div>
+                                            <div><span className="font-semibold" style={{color: '#8b5cf6'}}>{post.likes}</span> <span className="text-xs" style={{color: '#9ca3af'}}>likes</span></div>
+                                            <div><span className="font-semibold" style={{color: '#8b5cf6'}}>{post.comments}</span> <span className="text-xs" style={{color: '#9ca3af'}}>comments</span></div>
+                                            {post.saves && <div><span className="font-semibold" style={{color: '#8b5cf6'}}>{post.saves}</span> <span className="text-xs" style={{color: '#9ca3af'}}>saves</span></div>}
+                                        </div>
+                                    </div>
+                                ))}
                             </div>
-                            <div class="agent-task">
-                                <div class="task-label">DOING NOW</div>
-                                <div class="task-value">${doing}</div>
+                        )}
+                        
+                        {activeTab === 'leads' && (
+                            <div className="space-y-4">
+                                <h3 className="text-lg font-semibold mb-4">🎯 All Leads</h3>
+                                <div className="rounded-2xl overflow-hidden" style={{background: '#1a1a1f'}}>
+                                    <table className="w-full">
+                                        <thead>
+                                            <tr style={{background: '#25252a'}}>
+                                                <th className="text-left p-3 text-xs font-semibold" style={{color: '#9ca3af'}}>NAME</th>
+                                                <th className="text-left p-3 text-xs font-semibold" style={{color: '#9ca3af'}}>COMPANY</th>
+                                                <th className="text-left p-3 text-xs font-semibold" style={{color: '#9ca3af'}}>SOURCE</th>
+                                                <th className="text-left p-3 text-xs font-semibold" style={{color: '#9ca3af'}}>STATUS</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {data.leads.map(lead => (
+                                                <tr key={lead.id} className="border-t" style={{borderColor: 'rgba(255,255,255,0.08)'}}>
+                                                    <td className="p-3">{lead.name}</td>
+                                                    <td className="p-3" style={{color: '#9ca3af'}}>{lead.company}</td>
+                                                    <td className="p-3">{platformIcon(lead.source)} {lead.source}</td>
+                                                    <td className="p-3">
+                                                        <span className={`px-2 py-1 rounded-full text-xs ${lead.status === 'replied' ? 'bg-green-500/20 text-green-400' : 'bg-yellow-500/20 text-yellow-400'}`}>
+                                                            {lead.status === 'replied' ? '✅ Replied' : '👀 Clicked'}
+                                                        </span>
+                                                    </td>
+                                                </tr>
+                                            ))}
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
-                            <div class="agent-focus">🎯 Focus: ${focus}</div>
-                        </div>
-                    `;
-                });
-                
-                document.getElementById('last-updated').textContent = new Date().toLocaleString();
-                
-            } catch(e) {
-                console.log('Loading...', e);
-            }
+                        )}
+                    </div>
+                </div>
+            );
         }
         
-        loadCompanyData();
-        setInterval(loadCompanyData, 30000);
+        ReactDOM.createRoot(document.getElementById('root')).render(<App />);
     </script>
 </body>
 </html>
