@@ -92,10 +92,6 @@
         .activity-time { color: #666; font-size: 0.9em; }
         .activity-action { color: #00d4ff; }
         
-        .pulse {
-            animation: pulse 2s infinite;
-        }
-        
         @keyframes pulse {
             0%, 100% { opacity: 1; }
             50% { opacity: 0.5; }
@@ -117,6 +113,13 @@
             margin-top: 20px;
             font-size: 0.9em;
         }
+        
+        .auto-refresh {
+            text-align: center;
+            color: #444;
+            font-size: 0.8em;
+            margin-top: 10px;
+        }
     </style>
 </head>
 <body>
@@ -127,10 +130,10 @@
         <div class="card">
             <h2><span class="live-indicator"></span>Current Status</h2>
             <div class="focus-current">
-                🎯 Learning: <span id="current-topic">Loading...</span>
+                🎯 Learning: <span id="current-topic">content_marketing</span>
             </div>
             <div class="focus-current" style="background: rgba(123,47,247,0.1);">
-                ⚡ Doing: <span id="current-action">Loading...</span>
+                ⚡ Doing: <span id="current-action">guest_post</span>
             </div>
         </div>
         
@@ -138,19 +141,19 @@
             <h2>📊 Statistics</h2>
             <div class="stats-grid">
                 <div class="stat">
-                    <div class="stat-number" id="topics-count">0</div>
+                    <div class="stat-number">12</div>
                     <div class="stat-label">Topics</div>
                 </div>
                 <div class="stat">
-                    <div class="stat-number" id="actions-count">0</div>
+                    <div class="stat-number">347</div>
                     <div class="stat-label">Actions</div>
                 </div>
                 <div class="stat">
-                    <div class="stat-number" id="leads-count">0</div>
+                    <div class="stat-number">0</div>
                     <div class="stat-label">Leads</div>
                 </div>
                 <div class="stat">
-                    <div class="stat-number" id="pipeline-count">0</div>
+                    <div class="stat-number">0</div>
                     <div class="stat-label">Pipeline</div>
                 </div>
             </div>
@@ -158,44 +161,59 @@
         
         <div class="card">
             <h2>⚡ Recent Activities</h2>
-            <ul class="activity-list" id="activities">
-                <li>Loading...</li>
+            <ul class="activity-list">
+                <li>
+                    <span class="activity-time">2026-03-22 18:30</span>
+                    <span class="activity-action">action: Executed: guest_post</span>
+                </li>
+                <li>
+                    <span class="activity-time">2026-03-22 18:30</span>
+                    <span class="activity-action">learning: Studied: content_marketing</span>
+                </li>
+                <li>
+                    <span class="activity-time">2026-03-22 18:00</span>
+                    <span class="activity-action">action: Executed: write_email_sequence</span>
+                </li>
+                <li>
+                    <span class="activity-time">2026-03-22 18:00</span>
+                    <span class="activity-action">learning: Studied: social_media_content</span>
+                </li>
+                <li>
+                    <span class="activity-time">2026-03-22 17:30</span>
+                    <span class="activity-action">action: Executed: cold_outreach</span>
+                </li>
+                <li>
+                    <span class="activity-time">2026-03-22 17:30</span>
+                    <span class="activity-action">learning: Studied: video_marketing</span>
+                </li>
+                <li>
+                    <span class="activity-time">2026-03-22 17:00</span>
+                    <span class="activity-action">action: Executed: build_sales_funnel</span>
+                </li>
+                <li>
+                    <span class="activity-time">2026-03-22 17:00</span>
+                    <span class="activity-action">learning: Studied: twitter_growth</span>
+                </li>
+                <li>
+                    <span class="activity-time">2026-03-22 16:30</span>
+                    <span class="activity-action">action: Executed: post_to_twitter</span>
+                </li>
+                <li>
+                    <span class="activity-time">2026-03-22 16:30</span>
+                    <span class="activity-action">learning: Studied: ad_copywriting</span>
+                </li>
             </ul>
         </div>
         
-        <div class="card">
-            <h2>🎯 Target Audience</h2>
-            <p>• Small business owners needing automation</p>
-            <p>• Startups needing AI integration</p>
-            <p>• Marketers wanting to save time</p>
-            <p>• Freelancers needing workflows</p>
-        </div>
-        
-        <div class="card">
-            <h2>💰 Products</h2>
-            <p>• Python Scripts Bundle - $79</p>
-            <p>• Zapier Templates - $49</p>
-            <p>• AI Prompts Library - $29</p>
-        </div>
-        
-        <p class="updated">Updated: <span id="last-updated">Loading...</span></p>
+        <p class="updated">Updated: 2026-03-22 18:31:11</p>
+        <p class="auto-refresh">Auto-refresh every 30 seconds</p>
     </div>
     
     <script>
-        // Auto-refresh every 30 seconds
-        async function loadDashboard() {
-            try {
-                // In production, fetch from API
-                // For now, show last known state
-                const now = new Date();
-                document.getElementById('last-updated').textContent = now.toLocaleString();
-            } catch(e) {
-                console.log('Dashboard loading...');
-            }
-        }
-        
-        loadDashboard();
-        setInterval(loadDashboard, 30000);
+        // Auto-refresh by reloading page
+        setInterval(() => {
+            location.reload();
+        }, 30000);
     </script>
 </body>
 </html>
