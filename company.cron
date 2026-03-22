@@ -3,11 +3,14 @@
 # Learning + Action (every 5 min - FAST!)
 */5 * * * * /usr/local/bin/python3 /Users/macbookpro/.openclaw/workspace/company/aggressive_learn.py >> /tmp/aggressive_learn.log 2>&1
 
-# Lead Generation (every 15 min - FAST!)
+# Lead Generation - REAL DATA (every 15 min)
 */15 * * * * /usr/local/bin/python3 /Users/macbookpro/.openclaw/workspace/company/lead_gen.py >> /tmp/lead_gen.log 2>&1
 
 # Generate live dashboard (every 5 min)
 */5 * * * * /usr/local/bin/python3 /Users/macbookpro/.openclaw/workspace/company/generate_dashboard.py >> /tmp/dashboard.log 2>&1
+
+# Update Org Chart with Tech Roles (every 10 min)
+*/10 * * * * /usr/local/bin/python3 /Users/macbookpro/.openclaw/workspace/company/org_chart.py >> /tmp/org_chart.log 2>&1
 
 # Sales outreach (every 30 min)
 */30 * * * * /usr/local/bin/python3 /Users/macbookpro/.openclaw/workspace/company/daily_runner.py sales >> /tmp/company_sales.log 2>&1
@@ -18,6 +21,9 @@
 # Operations check (every 15 min)
 */15 * * * * /usr/local/bin/python3 /Users/macbookpro/.openclaw/workspace/company/daily_runner.py operations >> /tmp/company_ops.log 2>&1
 
+# Tech/DevOps check (every 15 min) - NEW
+*/15 * * * * /usr/local/bin/python3 /Users/macbookpro/.openclaw/workspace/company/daily_runner.py tech >> /tmp/company_tech.log 2>&1
+
 # CRM dashboard to Telegram (every 30 min)
 */30 * * * * /usr/local/bin/python3 /Users/macbookpro/.openclaw/workspace/company/crm_telegram.py >> /tmp/crm.log 2>&1
 
@@ -26,3 +32,6 @@
 
 # Threads Auto-Post - Daily at 2pm
 0 14 * * * /usr/local/bin/python3 /Users/macbookpro/.openclaw/workspace/company/threads_content.py >> /tmp/threads_content.log 2>&1
+
+# GitHub Pages Push - Daily at 6am
+0 6 * * * cd /Users/macbookpro/.openclaw/workspace/company && git add -A && git commit -m "Auto-update: $(date)" && git push origin main >> /tmp/github_push.log 2>&1
