@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EveryCompanyClaw - Live Dashboard</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, sans-serif; background: #0a0a0f; color: #fff; min-height: 100vh; }
+        .header { display: flex; justify-content: space-between; padding: 20px; background: #0f0f12; border-bottom: 1px solid #222; }
+        .logo { font-size: 1.25rem; font-weight: 600; display: flex; align-items: center; gap: 10px; }
+        .logo-icon { width: 36px; height: 36px; border-radius: 8px; background: linear-gradient(135deg, #8b5cf6, #3b82f6); display: flex; align-items: center; justify-content: center; }
+        .nav { display: flex; gap: 10px; }
+        .nav a { padding: 8px 16px; background: #1a1a1f; border-radius: 8px; color: #fff; text-decoration: none; font-size: 0.875rem; }
+        .live-badge { display: flex; align-items: center; gap: 6px; padding: 6px 12px; background: rgba(34,197,94,0.1); border: 1px solid rgba(34,197,94,0.2); border-radius: 20px; color: #22c55e; font-size: 0.75rem; }
+        .live-dot { width: 8px; height: 8px; border-radius: 50%; background: #22c55e; animation: pulse 2s infinite; }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+        .stats { display: flex; gap: 16px; padding: 20px; overflow-x: auto; }
+        .stat-card { padding: 16px 24px; background: #1a1a1f; border-radius: 12px; display: flex; align-items: center; gap: 8px; }
+        .stat-value { font-weight: 600; color: #8b5cf6; font-size: 1.25rem; }
+        .stat-label { color: #6b7280; font-size: 0.875rem; }
+        .content { padding: 20px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+        .card { background: #1a1a1f; border-radius: 12px; padding: 20px; }
+        .card h3 { margin-bottom: 16px; font-size: 1.1rem; }
+        .post-item { background: #252535; padding: 12px; border-radius: 8px; margin-bottom: 12px; }
+        .post-meta { display: flex; gap: 8px; font-size: 0.75rem; color: #6b7280; margin-bottom: 8px; }
+        .post-content { font-size: 0.875rem; white-space: pre-wrap; }
+        .post-stats { display: flex; gap: 12px; font-size: 0.75rem; color: #6b7280; margin-top: 8px; }
+        .lead-item { background: #252535; padding: 12px; border-radius: 8px; margin-bottom: 8px; }
+        .lead-header { display: flex; justify-content: space-between; margin-bottom: 4px; }
+        .lead-company { font-weight: 600; }
+        .lead-source { font-size: 0.7rem; padding: 2px 8px; background: #8b5cf620; color: #8b5cf6; border-radius: 10px; }
+        .lead-email { font-size: 0.8rem; color: #6b7280; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="logo"><div class="logo-icon">🏢</div>EveryCompanyClaw</div>
+        <div style="display:flex;gap:10px;align-items:center">
+            <div class="nav"><a href="crm-dashboard.html">📊 CRM</a><a href="org-chart.html">🏢 Org</a></div>
+            <div class="live-badge"><span class="live-dot"></span>Live</div>
+        </div>
+    </div>
+    <div class="stats">
+        <div class="stat-card"><span>📚</span><span class="stat-value">50</span><span class="stat-label">Topics</span></div>
+        <div class="stat-card"><span>⚡</span><span class="stat-value">520</span><span class="stat-label">Actions</span></div>
+        <div class="stat-card"><span>🎯</span><span class="stat-value">28</span><span class="stat-label">Leads</span></div>
+        <div class="stat-card"><span>👀</span><span class="stat-value">12</span><span class="stat-label">Clicked</span></div>
+        <div class="stat-card"><span>💬</span><span class="stat-value">5</span><span class="stat-label">Replied</span></div>
+    </div>
+    <div class="content">
+        <div class="grid">
+            <div class="card">
+                <h3>📸 Recent Posts (Live from Instagram)</h3>
+                <div class="post-item">
+                    <div class="post-meta"><span>📸</span><span>Instagram</span><span>•</span><span>2026-03-22 19:48</span></div>
+                    <div class="post-content">🤖 The Future of Version Control
+
+💡 AI Automation for Business
+💰 Save 10+ hours/week
+
+#automation #ai #startup #tech</div>
+                    <div class="post-stats"><span>❤️ 0</span><span>💬 0</span></div>
+                </div>
+                <div class="post-item">
+                    <div class="post-meta"><span>📸</span><span>Instagram</span><span>•</span><span>2026-03-22 10:23</span></div>
+                    <div class="post-content">Test from EveryCompanyClaw!</div>
+                    <div class="post-stats"><span>❤️ 0</span><span>💬 0</span></div>
+                </div>
+            </div>
+            <div class="card">
+                <h3>🎯 Recent Leads (from GitHub + Hacker News)</h3>
+                <div class="lead-item"><div class="lead-header"><span class="lead-company">openclaw</span><span class="lead-source">github</span></div><div class="lead-email">hello@openclaw.github.io</div></div>
+                <div class="lead-item"><div class="lead-header"><span class="lead-company">DeepSeek-V3</span><span class="lead-source">github</span></div><div class="lead-email">hello@deepseek-ai.github.io</div></div>
+                <div class="lead-item"><div class="lead-header"><span class="lead-company">awesome-llm-apps</span><span class="lead-source">github</span></div><div class="lead-email">hello@Shubhamsaboo.github.io</div></div>
+                <div class="lead-item"><div class="lead-header"><span class="lead-company">codex</span><span class="lead-source">github</span></div><div class="lead-email">hello@openai.github.io</div></div>
+            </div>
+            <div class="card">
+                <h3>📊 Pipeline Stats</h3>
+                <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #333"><span style="color:#6b7280">Total Leads</span><span style="color:#8b5cf6">28</span></div>
+                <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #333"><span style="color:#6b7280">Clicked</span><span style="color:#22c55e">12</span></div>
+                <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #333"><span style="color:#6b7280">Replied</span><span style="color:#f59e0b">5</span></div>
+                <div style="padding-top:16px"><div style="color:#6b7280;font-size:0.8rem">Conversion Rate</div><div style="font-size:2rem;font-weight:bold;color:#8b5cf6">18%</div></div>
+            </div>
+        </div>
+    </div>
+    <div style="text-align:center;padding:30px;color:#4b5563;font-size:0.8rem">Updated: 2026-03-23 | Data: Instagram API, GitHub, Hacker News</div>
+</body>
+</html>
