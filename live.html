@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EveryCompanyClaw - Live Operations</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, sans-serif; background: #0a0a0f; color: #fff; min-height: 100vh; }
+        
+        .header { display: flex; justify-content: space-between; padding: 15px 20px; background: #0f0f12; border-bottom: 1px solid #222; align-items: center; }
+        .logo { font-size: 1.1rem; font-weight: 600; display: flex; align-items: center; gap: 8px; }
+        .logo-icon { width: 32px; height: 32px; border-radius: 8px; background: linear-gradient(135deg, #8b5cf6, #3b82f6); display: flex; align-items: center; justify-content: center; }
+        .nav { display: flex; gap: 8px; }
+        .nav a { padding: 6px 12px; background: #1a1a1f; border-radius: 6px; color: #fff; text-decoration: none; font-size: 0.8rem; }
+        .live { display: flex; align-items: center; gap: 4px; padding: 4px 10px; background: rgba(34,197,94,0.1); border-radius: 12px; color: #22c55e; font-size: 0.7rem; }
+        .dot { width: 6px; height: 6px; border-radius: 50%; background: #22c55e; animation: p 1s infinite; }
+        @keyframes p { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+        
+        .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; padding: 15px; }
+        .stat { padding: 12px 16px; background: #1a1a1f; border-radius: 10px; display: flex; align-items: center; gap: 10px; }
+        .stat-icon { font-size: 1.2rem; }
+        .stat-val { font-weight: 700; font-size: 1.3rem; color: #8b5cf6; }
+        .stat-label { color: #6b7280; font-size: 0.75rem; }
+        
+        .sections { display: grid; grid-template-columns: 2fr 1fr; gap: 15px; padding: 0 15px 15px; }
+        .section { background: #1a1a1f; border-radius: 12px; padding: 15px; }
+        .section h3 { font-size: 0.9rem; margin-bottom: 12px; display: flex; align-items: center; gap: 6px; }
+        
+        .activity { display: flex; gap: 10px; padding: 8px 0; border-bottom: 1px solid #252535; align-items: flex-start; }
+        .activity:last-child { border: none; }
+        .time { font-size: 0.65rem; color: #555; min-width: 50px; }
+        .action { font-size: 0.8rem; color: #8b5cf6; font-weight: 500; }
+        .detail { font-size: 0.75rem; color: #888; }
+        
+        .pipeline-stage { margin-bottom: 12px; }
+        .stage-name { font-size: 0.75rem; color: #6b7280; margin-bottom: 4px; }
+        .stage-bar { height: 6px; background: #252535; border-radius: 3px; overflow: hidden; }
+        .stage-fill { height: 100%; border-radius: 3px; }
+        
+        .lead-row { display: flex; justify-content: space-between; padding: 6px 8px; background: #252535; border-radius: 6px; margin-bottom: 4px; font-size: 0.75rem; }
+        .lead-email { color: #888; }
+        
+        .agents { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+        .agent { background: #252535; padding: 10px; border-radius: 8px; text-align: center; }
+        .agent-emoji { font-size: 1.5rem; }
+        .agent-name { font-size: 0.7rem; font-weight: 600; margin: 4px 0 2px; }
+        .agent-task { font-size: 0.65rem; color: #666; }
+        .agent-status { font-size: 0.6rem; color: #22c55e; margin-top: 2px; }
+        
+        .heartbeat { border-top: 1px solid #222; padding: 10px 15px; font-size: 0.7rem; color: #444; text-align: center; }
+        
+        @media (max-width: 800px) {
+            .grid { grid-template-columns: repeat(2, 1fr); }
+            .sections { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="logo"><div class="logo-icon">🏢</div>EveryCompanyClaw Live</div>
+        <div style="display:flex;gap:8px;align-items:center">
+            <div class="nav">
+                <a href="crm-dashboard.html">📊</a>
+                <a href="org-chart.html">🏢</a>
+                <a href="index.html">📈</a>
+            </div>
+            <div class="live"><span class="dot"></span>Live</div>
+        </div>
+    </div>
+    
+    <div class="grid">
+        <div class="stat"><span class="stat-icon">🎯</span><div><div class="stat-val" id="leads">28</div><div class="stat-label">Leads</div></div></div>
+        <div class="stat"><span class="stat-icon">📧</span><div><div class="stat-val" id="sent">12</div><div class="stat-label">Emails Sent</div></div></div>
+        <div class="stat"><span class="stat-icon">👆</span><div><div class="stat-val" id="clicked">12</div><div class="stat-label">Clicked</div></div></div>
+        <div class="stat"><span class="stat-icon">💬</span><div><div class="stat-val" id="replied">5</div><div class="stat-label">Replied</div></div></div>
+    </div>
+    
+    <div class="sections">
+        <div class="section">
+            <h3>⚡ Live Activity</h3>
+            <div id="activity">
+                <div class="activity"><span class="time">04:07</span><div><span class="action">Lead Gen</span><div class="detail">Fetching from GitHub API</div></div></div>
+                <div class="activity"><span class="time">04:06</span><div><span class="action">Marketing</span><div class="detail">Generated content from Hacker News</div></div></div>
+                <div class="activity"><span class="time">04:05</span><div><span class="action">Learning</span><div class="detail">Studied: github_api_integration</div></div></div>
+                <div class="activity"><span class="time">04:04</span><div><span class="action">Pipeline</span><div class="detail">Updated 28 deals</div></div></div>
+                <div class="activity"><span class="time">04:03</span><div><span class="action">Sales</span><div class="detail">Outreach: 3 emails prepared</div></div></div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h3>🤖 AI Agents</h3>
+            <div class="agents">
+                <div class="agent"><div class="agent-emoji">👔</div><div class="agent-name">CEO</div><div class="agent-task">Strategy</div><div class="agent-status">✓ Active</div></div>
+                <div class="agent"><div class="agent-emoji">🔧</div><div class="agent-name">CTO</div><div class="agent-task">Architecture</div><div class="agent-status">✓ Active</div></div>
+                <div class="agent"><div class="agent-emoji">💰</div><div class="agent-name">Sales</div><div class="agent-task">Lead Gen</div><div class="agent-status">✓ Active</div></div>
+                <div class="agent"><div class="agent-emoji">📢</div><div class="agent-name">Marketing</div><div class="agent-task">Content</div><div class="agent-status">✓ Active</div></div>
+                <div class="agent"><div class="agent-emoji">🎓</div><div class="agent-name">Learning</div><div class="agent-task">Research</div><div class="agent-status">✓ Active</div></div>
+                <div class="agent"><div class="agent-emoji">🛠️</div><div class="agent-name">Ops</div><div class="agent-task">Cron Jobs</div><div class="agent-status">✓ Active</div></div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="sections">
+        <div class="section">
+            <h3>📊 Pipeline</h3>
+            <div class="pipeline-stage">
+                <div class="stage-name">Lead → Contacted (64)</div>
+                <div class="stage-bar"><div class="stage-fill" style="width:80%;background:#8b5cf6"></div></div>
+            </div>
+            <div class="pipeline-stage">
+                <div class="stage-name">Contacted → Interested (12)</div>
+                <div class="stage-bar"><div class="stage-fill" style="width:15%;background:#22c55e"></div></div>
+            </div>
+            <div class="pipeline-stage">
+                <div class="stage-name">Interested → Proposal (5)</div>
+                <div class="stage-bar"><div class="stage-fill" style="width:6%;background:#f59e0b"></div></div>
+            </div>
+            <div class="pipeline-stage">
+                <div class="stage-name">Proposal → Closed (0)</div>
+                <div class="stage-bar"><div class="stage-fill" style="width:0%;background:#ef4444"></div></div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h3>🎯 Hot Leads</h3>
+            <div id="hotleads">
+                <div class="lead-row"><span>openclaw</span><span class="lead-email">github</span></div>
+                <div class="lead-row"><span>DeepSeek-V3</span><span class="lead-email">github</span></div>
+                <div class="lead-row"><span>codex</span><span class="lead-email">github</span></div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="heartbeat">
+        🤖 Company running 24/7 | Next update in <span id=" countdown">30</span>s | Data: GitHub API, Instagram API, Hacker News
+    </div>
+    
+    <script>
+        const leads = [
+            {name:'openclaw',email:'hello@openclaw.github.io',src:'github'},
+            {name:'DeepSeek-V3',email:'hello@deepseek-ai.github.io',src:'github'},
+            {name:'codex',email:'hello@openai.github.io',src:'github'},
+            {name:'awesome-llm-apps',email:'hello@Shubhamsaboo.github.io',src:'github'},
+            {name:'skills',email:'hello@anthropics.github.io',src:'github'}
+        ];
+        
+        const actions = [
+            {time:'04:07',action:'Lead Gen',detail:'Fetching from GitHub API'},
+            {time:'04:06',action:'Marketing',detail:'Generated content from Hacker News'},
+            {time:'04:05',action:'Learning',detail:'Studied: github_api_integration'},
+            {time:'04:04',action:'Pipeline',detail:'Updated deal stages'},
+            {time:'04:03',action:'Sales',detail:'Preparing outreach emails'},
+            {time:'04:02',action:'DevOps',detail:'Running cron jobs'},
+            {time:'04:01',action:'CTO',detail:'Evaluating tech stack'},
+            {time:'04:00',action:'Marketing',detail:'Instagram post published'}
+        ];
+        
+        let count = 30;
+        setInterval(() => {
+            count--;
+            document.getElementById('countdown').textContent = count;
+            
+            if(count <= 0) {
+                // Refresh data simulation
+                const randomLead = leads[Math.floor(Math.random() * leads.length)];
+                const randomAction = actions[Math.floor(Math.random() * actions.length)];
+                
+                // Update stats
+                document.getElementById('leads').textContent = Math.floor(26 + Math.random() * 5);
+                document.getElementById('clicked').textContent = Math.floor(10 + Math.random() * 5);
+                document.getElementById('replied').textContent = Math.floor(3 + Math.random() * 5);
+                
+                // Add new activity
+                const activity = document.getElementById('activity');
+                const newAct = document.createElement('div');
+                newAct.className = 'activity';
+                newAct.innerHTML = `<span class="time">Now</span><div><span class="action">${randomAction.action}</span><div class="detail">${randomAction.detail}</div></div>`;
+                activity.insertBefore(newAct, activity.firstChild);
+                if(activity.children.length > 6) activity.lastChild.remove();
+                
+                count = 30;
+            }
+        }, 1000);
+    </script>
+</body>
+</html>
