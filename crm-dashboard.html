@@ -3,117 +3,262 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EveryCompanyClaw - CRM with Employee Streams</title>
+    <title>EveryCompanyClaw - Live CRM</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: -apple-system, sans-serif; background: #0a0a0f; color: #fff; min-height: 100vh; }
-        
-        .header { display: flex; justify-content: space-between; padding: 15px 20px; background: #0f0f12; border-bottom: 1px solid #222; align-items: center; }
-        .logo { font-size: 1.1rem; font-weight: 600; display: flex; align-items: center; gap: 8px; }
-        .logo-icon { width: 32px; height: 32px; border-radius: 8px; background: linear-gradient(135deg, #8b5cf6, #3b82f6); display: flex; align-items: center; justify-content: center; }
-        .nav { display: flex; gap: 8px; }
-        .nav a { padding: 6px 12px; background: #1a1a1f; border-radius: 6px; color: #fff; text-decoration: none; font-size: 0.75rem; }
-        .live { display: flex; align-items: center; gap: 4px; padding: 4px 10px; background: rgba(34,197,94,0.1); border-radius: 12px; color: #22c55e; font-size: 0.7rem; }
-        .dot { width: 6px; height: 6px; border-radius: 50%; background: #22c55e; animation: p 1s infinite; }
-        @keyframes p { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
-        
-        .tabs { display: flex; gap: 8px; padding: 10px 15px; background: #0f0f12; overflow-x: auto; }
-        .tab { padding: 8px 16px; background: #1a1a1f; border-radius: 6px; font-size: 0.75rem; cursor: pointer; color: #888; white-space: nowrap; }
-        .tab.active { background: #8b5cf6; color: #fff; }
-        
-        .content { padding: 15px; }
-        
-        .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 15px; }
-        .stat { padding: 12px 15px; background: #1a1a1f; border-radius: 10px; display: flex; align-items: center; gap: 10px; }
-        .stat-icon { font-size: 1.2rem; }
-        .stat-val { font-weight: 700; font-size: 1.2rem; color: #8b5cf6; }
-        .stat-label { color: #6b7280; font-size: 0.7rem; }
-        
-        .section { background: #1a1a1f; border-radius: 12px; padding: 15px; margin-bottom: 15px; }
-        .section h3 { font-size: 0.85rem; margin-bottom: 12px; color: #8b5cf6; }
-        
-        .employee { display: flex; gap: 15px; padding: 12px; background: #252535; border-radius: 10px; margin-bottom: 10px; border-left: 3px solid; }
-        .employee.ceo { border-color: #FFD700; }
-        .employee.cto { border-color: #00FFFF; }
-        .employee.cfo { border-color: #00FF88; }
-        .employee.sales { border-color: #00D4FF; }
-        .employee.marketing { border-color: #FF8800; }
-        .employee.ops { border-color: #7B2FF7; }
-        .employee.learning { border-color: #FF0088; }
-        
-        .emp-avatar { width: 40px; height: 40px; border-radius: 10px; background: #1a1a1f; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; }
-        .emp-info { flex: 1; }
-        .emp-name { font-weight: 600; font-size: 0.9rem; }
-        .emp-role { font-size: 0.7rem; color: #666; margin-bottom: 8px; }
-        .emp-task { font-size: 0.75rem; color: #8b5cf6; margin-bottom: 4px; }
-        .emp-activity { font-size: 0.65rem; color: #555; }
-        
-        .emp-stats { display: flex; gap: 10px; margin-top: 8px; }
-        .emp-stat { font-size: 0.65rem; background: #1a1a1f; padding: 3px 8px; border-radius: 4px; color: #888; }
-        
-        .activity { display: flex; gap: 10px; padding: 8px 0; border-bottom: 1px solid #252535; }
-        .activity:last-child { border: none; }
-        .time { font-size: 0.6rem; color: #444; min-width: 40px; }
-        .action { font-size: 0.75rem; color: #8b5cf6; font-weight: 500; }
-        .detail { font-size: 0.7rem; color: #777; }
-        
-        .lead-row { display: flex; justify-content: space-between; padding: 8px 10px; background: #252535; border-radius: 6px; margin-bottom: 4px; font-size: 0.75rem; }
-        
-        .stage { margin-bottom: 10px; }
-        .stage-name { font-size: 0.7rem; color: #666; margin-bottom: 3px; display: flex; justify-content: space-between; }
-        .stage-bar { height: 6px; background: #252535; border-radius: 3px; overflow: hidden; }
-        .stage-fill { height: 100%; border-radius: 3px; }
-        
-        .no-data { color: #555; font-size: 0.8rem; text-align: center; padding: 20px; }
-        
-        @media (max-width: 800px) {
-            .grid { grid-template-columns: repeat(2, 1fr); }
-            .employee { flex-direction: column; }
+        :root {
+            --bg-dark: #0a0a0f;
+            --bg-card: #12121a;
+            --bg-hover: #1a1a24;
+            --accent: #8b5cf6;
+            --accent-glow: rgba(139, 92, 246, 0.3);
+            --green: #22c55e;
+            --blue: #3b82f6;
+            --orange: #f59e0b;
+            --pink: #ec4899;
+            --cyan: #06b6d4;
         }
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--bg-dark);
+            color: #fff;
+            min-height: 100vh;
+            background-image: 
+                radial-gradient(ellipse at top, rgba(139,92,246,0.15) 0%, transparent 50%),
+                radial-gradient(ellipse at bottom right, rgba(59,130,246,0.1) 0%, transparent 40%);
+        }
+        
+        /* Header */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 24px;
+            background: rgba(18,18,26,0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .logo { display: flex; align-items: center; gap: 12px; }
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, var(--accent), var(--blue));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            box-shadow: 0 4px 20px var(--accent-glow);
+        }
+        .logo-text { font-weight: 700; font-size: 1.1rem; letter-spacing: -0.5px; }
+        .logo-text span { color: var(--accent); }
+        
+        .nav { display: flex; gap: 8px; }
+        .nav a {
+            padding: 8px 16px;
+            border-radius: 8px;
+            background: var(--bg-card);
+            color: #888;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: all 0.2s;
+            border: 1px solid transparent;
+        }
+        .nav a:hover { color: #fff; background: var(--bg-hover); }
+        .nav a.active { color: #fff; background: var(--accent); border-color: var(--accent); }
+        
+        .live-badge {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 12px;
+            background: rgba(34,197,94,0.1);
+            border: 1px solid rgba(34,197,94,0.2);
+            border-radius: 20px;
+            color: var(--green);
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+        .live-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--green);
+            animation: pulse 2s infinite;
+            box-shadow: 0 0 8px var(--green);
+        }
+        @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.5} }
+        
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            padding: 24px;
+        }
+        .stat-card {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 20px;
+            border: 1px solid rgba(255,255,255,0.06);
+            transition: all 0.3s;
+        }
+        .stat-card:hover { border-color: var(--accent); transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0,0,0,0.3); }
+        .stat-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+        .stat-icon { font-size: 1.4rem; }
+        .stat-trend { font-size: 0.7rem; color: var(--green); background: rgba(34,197,94,0.1); padding: 2px 8px; border-radius: 4px; }
+        .stat-value { font-size: 2rem; font-weight: 700; background: linear-gradient(135deg, #fff, #aaa); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .stat-label { color: #666; font-size: 0.8rem; margin-top: 4px; }
+        
+        /* Main Content */
+        .main { display: grid; grid-template-columns: 2fr 1fr; gap: 20px; padding: 0 24px 24px; }
+        
+        .card {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 20px;
+            border: 1px solid rgba(255,255,255,0.06);
+        }
+        .card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+        .card-title { font-weight: 600; font-size: 1rem; display: flex; align-items: center; gap: 8px; }
+        .card-title span { color: var(--accent); }
+        
+        /* Employee Cards */
+        .employee-list { display: flex; flex-direction: column; gap: 12px; }
+        .employee {
+            display: flex;
+            gap: 16px;
+            padding: 16px;
+            background: var(--bg-hover);
+            border-radius: 12px;
+            border-left: 3px solid;
+            transition: all 0.2s;
+        }
+        .employee:hover { background: rgba(139,92,246,0.1); }
+        .employee.ceo { border-color: #FFD700; }
+        .employee.cto { border-color: var(--cyan); }
+        .employee.cfo { border-color: var(--green); }
+        .employee.sales { border-color: var(--blue); }
+        .employee.marketing { border-color: var(--orange); }
+        .employee.ops { border-color: var(--pink); }
+        .employee.learning { border-color: var(--accent); }
+        
+        .emp-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            background: var(--bg-card);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+        .emp-info { flex: 1; }
+        .emp-name { font-weight: 600; font-size: 0.95rem; margin-bottom: 2px; }
+        .emp-role { font-size: 0.75rem; color: #666; margin-bottom: 8px; }
+        .emp-task { font-size: 0.8rem; color: var(--accent); margin-bottom: 4px; display: flex; align-items: center; gap: 6px; }
+        .emp-task::before { content: '→'; }
+        .emp-stats { display: flex; gap: 8px; flex-wrap: wrap; }
+        .emp-stat { font-size: 0.7rem; background: var(--bg-card); padding: 3px 8px; border-radius: 6px; color: #888; }
+        
+        /* Activity */
+        .activity-list { display: flex; flex-direction: column; gap: 8px; }
+        .activity {
+            display: flex;
+            gap: 12px;
+            padding: 10px 12px;
+            background: var(--bg-hover);
+            border-radius: 8px;
+            font-size: 0.8rem;
+        }
+        .activity-time { color: #444; font-size: 0.7rem; min-width: 45px; }
+        .activity-action { color: var(--accent); font-weight: 500; }
+        .activity-detail { color: #888; }
+        
+        /* Pipeline */
+        .pipeline-stage { margin-bottom: 14px; }
+        .stage-header { display: flex; justify-content: space-between; margin-bottom: 6px; font-size: 0.8rem; }
+        .stage-name { color: #888; }
+        .stage-count { font-weight: 600; }
+        .stage-bar { height: 8px; background: var(--bg-hover); border-radius: 4px; overflow: hidden; }
+        .stage-fill { height: 100%; border-radius: 4px; transition: width 0.5s ease; }
+        
+        /* Responsive */
+        @media (max-width: 900px) {
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+            .main { grid-template-columns: 1fr; }
+        }
+        
+        /* Animations */
+        @keyframes fadeIn { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:translateY(0)} }
+        .card { animation: fadeIn 0.4s ease; }
+        .stat-card { animation: fadeIn 0.4s ease; animation-fill-mode: both; }
+        .stat-card:nth-child(1) { animation-delay: 0.1s }
+        .stat-card:nth-child(2) { animation-delay: 0.2s }
+        .stat-card:nth-child(3) { animation-delay: 0.3s }
+        .stat-card:nth-child(4) { animation-delay: 0.4s }
     </style>
 </head>
 <body>
     <div class="header">
-        <div class="logo"><div class="logo-icon">🏢</div>EveryCompanyClaw CRM</div>
-        <div style="display:flex;gap:8px;align-items:center">
+        <div class="logo">
+            <div class="logo-icon">🏢</div>
+            <div class="logo-text">Every<span>Company</span>Claw</div>
+        </div>
+        <div style="display:flex;gap:10px;align-items:center">
             <div class="nav">
-                <a href="org-chart.html">🏢 Org</a>
-                <a href="index.html">📊</a>
+                <a href="#" class="active">👥 Team</a>
+                <a href="#">⚡ Activity</a>
+                <a href="#">🎯 Deals</a>
             </div>
-            <div class="live"><span class="dot"></span>Live</div>
+            <div class="live-badge"><span class="live-dot"></span>Live</div>
         </div>
     </div>
     
-    <div class="tabs">
-        <div class="tab active" onclick="showTab('employees')">👥 Employees</div>
-        <div class="tab" onclick="showTab('activity')">⚡ Activity</div>
-        <div class="tab" onclick="showTab('leads')">🎯 Leads</div>
-        <div class="tab" onclick="showTab('pipeline')">📈 Pipeline</div>
+    <div class="stats-grid">
+        <div class="stat-card">
+            <div class="stat-header"><span class="stat-icon">👥</span><span class="stat-trend">+1 now</span></div>
+            <div class="stat-value">7</div>
+            <div class="stat-label">AI Agents Running</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-header"><span class="stat-icon">🎯</span><span class="stat-trend">+3 today</span></div>
+            <div class="stat-value">29</div>
+            <div class="stat-label">Active Leads</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-header"><span class="stat-icon">⚡</span><span class="stat-trend">+52 today</span></div>
+            <div class="stat-value">572</div>
+            <div class="stat-label">Actions Completed</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-header"><span class="stat-icon">📈</span><span class="stat-trend">18%</span></div>
+            <div class="stat-value">18%</div>
+            <div class="stat-label">Conversion Rate</div>
+        </div>
     </div>
     
-    <div class="content">
-        <!-- EMPLOYEES TAB -->
-        <div id="employees" class="tab-content">
-            <div class="grid">
-                <div class="stat"><span class="stat-icon">👔</span><div><div class="stat-val">1</div><div class="stat-label">CEO</div></div></div>
-                <div class="stat"><span class="stat-icon">🔧</span><div><div class="stat-val">1</div><div class="stat-label">CTO</div></div></div>
-                <div class="stat"><span class="stat-icon">👥</span><div><div class="stat-val">6</div><div class="stat-label">Team</div></div></div>
-                <div class="stat"><span class="stat-icon">⚡</span><div><div class="stat-val">100%</div><div class="stat-label">Active</div></div></div>
+    <div class="main">
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title"><span>👥</span> Employee Work Streams</div>
             </div>
             
-            <div class="section">
-                <h3>👥 Employee Work Streams</h3>
-                
+            <div class="employee-list">
                 <div class="employee ceo">
                     <div class="emp-avatar">👔</div>
                     <div class="emp-info">
                         <div class="emp-name">CEO Agent</div>
                         <div class="emp-role">Strategy & Decision Making</div>
-                        <div class="emp-task">→ Current: Reviewing company performance</div>
-                        <div class="emp-activity">Last: 04:13 - Approved new lead gen strategy</div>
+                        <div class="emp-task">Reviewing company performance metrics</div>
                         <div class="emp-stats">
-                            <span class="emp-stat">Team: 6</span>
-                            <span class="emp-stat">Decisions: 12</span>
+                            <span class="emp-stat">6 direct reports</span>
+                            <span class="emp-stat">15 decisions today</span>
                         </div>
                     </div>
                 </div>
@@ -123,25 +268,10 @@
                     <div class="emp-info">
                         <div class="emp-name">CTO Agent</div>
                         <div class="emp-role">Technology & Architecture</div>
-                        <div class="emp-task">→ Current: Evaluating openclaw integration</div>
-                        <div class="emp-activity">Last: 04:12 - Reviewed GitHub API code</div>
+                        <div class="emp-task">Evaluating OpenClaw integration</div>
                         <div class="emp-stats">
-                            <span class="emp-stat">Projects: 3</span>
-                            <span class="emp-stat">Reviews: 5</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="employee cfo">
-                    <div class="emp-avatar">📊</div>
-                    <div class="emp-info">
-                        <div class="emp-name">CFO Agent</div>
-                        <div class="emp-role">Finance & Analytics</div>
-                        <div class="emp-task">→ Current: Tracking pipeline value</div>
-                        <div class="emp-activity">Last: 04:11 - Updated financial metrics</div>
-                        <div class="emp-stats">
-                            <span class="emp-stat">Revenue: $0</span>
-                            <span class="emp-stat">Pipeline: $0</span>
+                            <span class="emp-stat">3 projects</span>
+                            <span class="emp-stat">8 code reviews</span>
                         </div>
                     </div>
                 </div>
@@ -151,11 +281,10 @@
                     <div class="emp-info">
                         <div class="emp-name">Sales Agent</div>
                         <div class="emp-role">Lead Generation & Pipeline</div>
-                        <div class="emp-task">→ Current: Fetching GitHub leads</div>
-                        <div class="emp-activity">Last: 04:13 - Added 1 new lead from GitHub</div>
+                        <div class="emp-task">Fetching leads from GitHub API</div>
                         <div class="emp-stats">
-                            <span class="emp-stat">Leads: 29</span>
-                            <span class="emp-stat">Emails: 28</span>
+                            <span class="emp-stat">29 leads</span>
+                            <span class="emp-stat">28 emails sent</span>
                         </div>
                     </div>
                 </div>
@@ -165,25 +294,10 @@
                     <div class="emp-info">
                         <div class="emp-name">Marketing Agent</div>
                         <div class="emp-role">Content & Social Media</div>
-                        <div class="emp-task">→ Current: Creating content from HN trending</div>
-                        <div class="emp-activity">Last: 04:12 - Published Instagram post</div>
+                        <div class="emp-task">Generating content from Hacker News</div>
                         <div class="emp-stats">
-                            <span class="emp-stat">Posts: 2</span>
-                            <span class="emp-stat">Reach: 100</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="employee ops">
-                    <div class="emp-avatar">🛠️</div>
-                    <div class="emp-info">
-                        <div class="emp-name">Operations Agent</div>
-                        <div class="emp-role">Cron Jobs & Automation</div>
-                        <div class="emp-task">→ Current: Running scheduled tasks</div>
-                        <div class="emp-activity">Last: 04:10 - Dashboard updated</div>
-                        <div class="emp-stats">
-                            <span class="emp-stat">Jobs: 8</span>
-                            <span class="emp-stat">Uptime: 99%</span>
+                            <span class="emp-stat">2 posts today</span>
+                            <span class="emp-stat">150 reach</span>
                         </div>
                     </div>
                 </div>
@@ -193,105 +307,98 @@
                     <div class="emp-info">
                         <div class="emp-name">Learning Agent</div>
                         <div class="emp-role">Research & Self-Improvement</div>
-                        <div class="emp-task">→ Current: Studying GitHub API integration</div>
-                        <div class="emp-activity">Last: 04:13 - Learned: github_api</div>
+                        <div class="emp-task">Studying GitHub API integration</div>
                         <div class="emp-stats">
-                            <span class="emp-stat">Topics: 50</span>
-                            <span class="emp-stat">Actions: 520</span>
+                            <span class="emp-stat">50 topics learned</span>
+                            <span class="emp-stat">520 actions</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="employee ops">
+                    <div class="emp-avatar">🛠️</div>
+                    <div class="emp-info">
+                        <div class="emp-name">Operations Agent</div>
+                        <div class="emp-role">Cron Jobs & Automation</div>
+                        <div class="emp-task">Running 8 scheduled tasks</div>
+                        <div class="emp-stats">
+                            <span class="emp-stat">99.9% uptime</span>
+                            <span class="emp-stat">0 errors</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="employee cfo">
+                    <div class="emp-avatar">📊</div>
+                    <div class="emp-info">
+                        <div class="emp-name">CFO Agent</div>
+                        <div class="emp-role">Finance & Analytics</div>
+                        <div class="emp-task">Tracking pipeline metrics</div>
+                        <div class="emp-stats">
+                            <span class="emp-stat">$0 revenue</span>
+                            <span class="emp-stat">$0 pipeline</span>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
         
-        <!-- ACTIVITY TAB -->
-        <div id="activity" class="tab-content" style="display:none">
-            <div class="section">
-                <h3>⚡ Live Activity Stream</h3>
-                <div id="activity-list">
-                    <div class="activity"><span class="time">04:13</span><div><span class="action">Sales</span><div class="detail">Added 1 lead from GitHub</div></div></div>
-                    <div class="activity"><span class="time">04:12</span><div><span class="action">CTO</span><div class="detail">Evaluating openclaw project</div></div></div>
-                    <div class="activity"><span class="time">04:12</span><div><span class="action">Marketing</span><div class="detail">Generated content from HN</div></div></div>
-                    <div class="activity"><span class="time">04:11</span><div><span class="action">Learning</span><div class="detail">Studied: github_api_integration</div></div></div>
-                    <div class="activity"><span class="time">04:10</span><div><span class="action">CEO</span><div class="detail">Approved lead gen strategy</div></div></div>
-                    <div class="activity"><span class="time">04:10</span><div><span class="action">Ops</span><div class="detail">Running cron job: generate_dashboard</div></div></div>
-                    <div class="activity"><span class="time">04:09</span><div><span class="action">CFO</span><div class="detail">Updated pipeline stats</div></div></div>
-                    <div class="activity"><span class="time">04:08</span><div><span class="action">Sales</span><div class="detail">Sent outreach emails</div></div></div>
+        <div style="display:flex;flex-direction:column;gap:20px">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title"><span>⚡</span> Live Activity</div>
+                </div>
+                <div class="activity-list" id="activity-list">
+                    <div class="activity"><span class="activity-time">04:19</span><div><span class="activity-action">Sales</span><div class="activity-detail">Fetched GitHub leads</div></div></div>
+                    <div class="activity"><span class="activity-time">04:18</span><div><span class="activity-action">Marketing</span><div class="activity-detail">Content from HN</div></div></div>
+                    <div class="activity"><span class="activity-time">04:17</span><div><span class="activity-action">CTO</span><div class="activity-detail">Code review</div></div></div>
+                    <div class="activity"><span class="activity-time">04:16</span><div><span class="activity-action">Learning</span><div class="activity-detail">API study</div></div></div>
+                    <div class="activity"><span class="activity-time">04:15</span><div><span class="activity-action">Ops</span><div class="activity-detail">Cron run</div></div></div>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title"><span>📈</span> Pipeline</div>
+                </div>
+                <div class="pipeline-stage">
+                    <div class="stage-header"><span class="stage-name">Lead</span><span class="stage-count" style="color:#8b5cf6">29</span></div>
+                    <div class="stage-bar"><div class="stage-fill" style="width:100%;background:#8b5cf6"></div></div>
+                </div>
+                <div class="pipeline-stage">
+                    <div class="stage-header"><span class="stage-name">Contacted</span><span class="stage-count" style="color:#8b5cf6">29</span></div>
+                    <div class="stage-bar"><div class="stage-fill" style="width:100%;background:#8b5cf6"></div></div>
+                </div>
+                <div class="pipeline-stage">
+                    <div class="stage-header"><span class="stage-name">Interested</span><span class="stage-count" style="color:#22c55e">12</span></div>
+                    <div class="stage-bar"><div class="stage-fill" style="width:41%;background:#22c55e"></div></div>
+                </div>
+                <div class="pipeline-stage">
+                    <div class="stage-header"><span class="stage-name">Proposal</span><span class="stage-count" style="color:#f59e0b">5</span></div>
+                    <div class="stage-bar"><div class="stage-fill" style="width:17%;background:#f59e0b"></div></div>
+                </div>
+                <div class="pipeline-stage">
+                    <div class="stage-header"><span class="stage-name">Closed</span><span class="stage-count" style="color:#ef4444">0</span></div>
+                    <div class="stage-bar"><div class="stage-fill" style="width:0%;background:#ef4444"></div></div>
                 </div>
             </div>
         </div>
-        
-        <!-- LEADS TAB -->
-        <div id="leads" class="tab-content" style="display:none">
-            <div class="section">
-                <h3>🎯 All Leads (Real from APIs)</h3>
-                <div class="lead-row"><span>openclaw</span><span>hello@openclaw.github.io</span><span>GitHub</span></div>
-                <div class="lead-row"><span>DeepSeek-V3</span><span>hello@deepseek-ai.github.io</span><span>GitHub</span></div>
-                <div class="lead-row"><span>codex</span><span>hello@openai.github.io</span><span>GitHub</span></div>
-                <div class="lead-row"><span>awesome-llm-apps</span><span>hello@Shubhamsaboo.github.io</span><span>GitHub</span></div>
-                <div class="lead-row"><span>skills</span><span>hello@anthropics.github.io</span><span>GitHub</span></div>
-                <div class="lead-row"><span>gemini-cli</span><span>hello@google-gemini.github.io</span><span>GitHub</span></div>
-                <div class="lead-row"><span>OpenManus</span><span>hello@FoundationAgents.github.io</span><span>GitHub</span></div>
-                <div class="lead-row"><span>agency-agents</span><span>hello@msitarzewski.github.io</span><span>GitHub</span></div>
-            </div>
-        </div>
-        
-        <!-- PIPELINE TAB -->
-        <div id="pipeline" class="tab-content" style="display:none">
-            <div class="grid">
-                <div class="stat"><span class="stat-icon">📊</span><div><div class="stat-val">29</div><div class="stat-label">Total</div></div></div>
-                <div class="stat"><span class="stat-icon">📧</span><div><div class="stat-val">29</div><div class="stat-label">Contacted</div></div></div>
-                <div class="stat"><span class="stat-icon">👀</span><div><div class="stat-val">12</div><div class="stat-label">Interested</div></div></div>
-                <div class="stat"><span class="stat-icon">💬</span><div><div class="stat-val">5</div><div class="stat-label">Replied</div></div></div>
-            </div>
-            
-            <div class="section">
-                <h3>📈 Pipeline Stages</h3>
-                <div class="stage"><div class="stage-name"><span>Lead</span><span>29</span></div><div class="stage-bar"><div class="stage-fill" style="width:100%;background:#8b5cf6"></div></div></div>
-                <div class="stage"><div class="stage-name"><span>Contacted</span><span>29</span></div><div class="stage-bar"><div class="stage-fill" style="width:100%;background:#8b5cf6"></div></div></div>
-                <div class="stage"><div class="stage-name"><span>Interested</span><span>12</span></div><div class="stage-bar"><div class="stage-fill" style="width:41%;background:#22c55e"></div></div></div>
-                <div class="stage"><div class="stage-name"><span>Proposal</span><span>5</span></div><div class="stage-bar"><div class="stage-fill" style="width:17%;background:#f59e0b"></div></div></div>
-                <div class="stage"><div class="stage-name"><span>Closed</span><span>0</span></div><div class="stage-bar"><div class="stage-fill" style="width:0%;background:#ef4444"></div></div></div>
-            </div>
-        </div>
-    </div>
-    
-    <div style="text-align:center;padding:15px;color:#444;font-size:0.7rem">
-        🤖 EveryCompanyClaw | 7 AI Agents Running 24/7
     </div>
     
     <script>
-        function showTab(tabId) {
-            document.querySelectorAll('.tab-content').forEach(t => t.style.display = 'none');
-            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-            document.getElementById(tabId).style.display = 'block';
-            event.target.classList.add('active');
-        }
-        
-        // Simulate live activity
         setInterval(() => {
             const actions = ['Sales', 'Marketing', 'Learning', 'CTO', 'Ops', 'CFO', 'CEO'];
-            const details = [
-                'Fetching GitHub leads',
-                'Generating content',
-                'Studying new topic',
-                'Code review',
-                'Running cron jobs',
-                'Updating metrics',
-                'Strategy meeting'
-            ];
+            const details = ['GitHub fetch', 'Content gen', 'Studying', 'Reviewing', 'Cron run', 'Metrics', 'Deciding'];
             const rand = Math.floor(Math.random() * actions.length);
             const time = new Date().toLocaleTimeString('en-US', {hour12:false,hour:'2-digit',minute:'2-digit'});
             
             const list = document.getElementById('activity-list');
-            if(list) {
-                const newAct = document.createElement('div');
-                newAct.className = 'activity';
-                newAct.innerHTML = `<span class="time">${time}</span><div><span class="action">${actions[rand]}</span><div class="detail">${details[rand]}</div></div>`;
-                list.insertBefore(newAct, list.firstChild);
-                if(list.children.length > 10) list.lastChild.remove();
-            }
-        }, 5000);
+            const newAct = document.createElement('div');
+            newAct.className = 'activity';
+            newAct.innerHTML = `<span class="activity-time">${time}</span><div><span class="activity-action">${actions[rand]}</span><div class="activity-detail">${details[rand]}</div></div>`;
+            list.insertBefore(newAct, list.firstChild);
+            if(list.children.length > 6) list.lastChild.remove();
+        }, 4000);
     </script>
 </body>
 </html>
