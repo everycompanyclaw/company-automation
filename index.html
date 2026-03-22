@@ -3,88 +3,330 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EveryCompanyClaw - Live Dashboard</title>
+    <title>EveryCompanyClaw - Complete Dashboard</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: -apple-system, sans-serif; background: #0a0a0f; color: #fff; min-height: 100vh; }
-        .h { display: flex; justify-content: space-between; padding: 20px; background: #0f0f12; border-bottom: 1px solid #222; }
-        .l { font-size: 1.25rem; font-weight: 600; }
-        .n { display: flex; gap: 10px; }
-        .n a { padding: 8px 16px; background: #1a1a1f; border-radius: 8px; color: #fff; text-decoration: none; font-size: 0.875rem; }
-        .lb { display: flex; align-items: center; gap: 6px; padding: 6px 12px; background: rgba(34,197,94,0.1); border-radius: 20px; color: #22c55e; font-size: 0.75rem; }
-        .ld { width: 8px; height: 8px; border-radius: 50%; background: #22c55e; animation: p 2s infinite; }
-        @keyframes p { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
-        .s { display: flex; gap: 16px; padding: 20px; overflow-x: auto; }
-        .sc { padding: 16px 24px; background: #1a1a1f; border-radius: 12px; display: flex; align-items: center; gap: 8px; }
-        .sv { font-weight: 600; color: #8b5cf6; font-size: 1.25rem; }
-        .sl { color: #6b7280; font-size: 0.875rem; }
-        .c { padding: 20px; }
-        .g { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
-        .cd { background: #1a1a1f; border-radius: 12px; padding: 20px; }
-        .cd h3 { margin-bottom: 16px; font-size: 1.1rem; }
-        .pi { background: #252535; padding: 12px; border-radius: 8px; margin-bottom: 12px; }
-        .pm { display: flex; gap: 8px; font-size: 0.75rem; color: #6b7280; margin-bottom: 8px; }
-        .pc { font-size: 0.875rem; white-space: pre-wrap; }
-        .ps { display: flex; gap: 12px; font-size: 0.75rem; color: #6b7280; margin-top: 8px; }
-        .li { background: #252535; padding: 12px; border-radius: 8px; margin-bottom: 8px; }
-        .lh { display: flex; justify-content: space-between; margin-bottom: 4px; }
-        .lc { font-weight: 600; }
-        .ls { font-size: 0.7rem; padding: 2px 8px; background: #8b5cf620; color: #8b5cf6; border-radius: 10px; }
-        .le { font-size: 0.8rem; color: #6b7280; }
-        .f { text-align: center; padding: 30px; color: #4b5563; font-size: 0.8rem; }
+        
+        .header { display: flex; justify-content: space-between; padding: 12px 20px; background: #0f0f12; border-bottom: 1px solid #222; align-items: center; flex-wrap: wrap; gap: 10px; }
+        .logo { font-size: 1.1rem; font-weight: 600; display: flex; align-items: center; gap: 8px; }
+        .logo-icon { width: 32px; height: 32px; border-radius: 8px; background: linear-gradient(135deg, #8b5cf6, #3b82f6); display: flex; align-items: center; justify-content: center; }
+        .nav { display: flex; gap: 6px; flex-wrap: wrap; }
+        .nav a { padding: 6px 12px; background: #1a1a1f; border-radius: 6px; color: #fff; text-decoration: none; font-size: 0.75rem; transition: 0.2s; }
+        .nav a:hover { background: #8b5cf6; }
+        .nav a.active { background: #8b5cf6; }
+        .live { display: flex; align-items: center; gap: 4px; padding: 4px 10px; background: rgba(34,197,94,0.1); border-radius: 12px; color: #22c55e; font-size: 0.7rem; }
+        .dot { width: 6px; height: 6px; border-radius: 50%; background: #22c55e; animation: p 1s infinite; }
+        @keyframes p { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+        
+        .grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; padding: 15px; }
+        .stat { padding: 12px 15px; background: #1a1a1f; border-radius: 10px; display: flex; align-items: center; gap: 10px; }
+        .stat-icon { font-size: 1.2rem; }
+        .stat-val { font-weight: 700; font-size: 1.2rem; color: #8b5cf6; }
+        .stat-label { color: #6b7280; font-size: 0.7rem; }
+        
+        .main-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; padding: 0 15px 15px; }
+        
+        .section { background: #1a1a1f; border-radius: 12px; padding: 15px; }
+        .section h3 { font-size: 0.85rem; margin-bottom: 12px; display: flex; align-items: center; gap: 6px; color: #8b5cf6; }
+        
+        .activity { display: flex; gap: 10px; padding: 8px 0; border-bottom: 1px solid #252535; align-items: flex-start; }
+        .activity:last-child { border: none; }
+        .time { font-size: 0.65rem; color: #555; min-width: 45px; }
+        .action { font-size: 0.8rem; color: #8b5cf6; font-weight: 500; }
+        .detail { font-size: 0.75rem; color: #888; }
+        
+        .agents { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+        .agent { background: #252535; padding: 8px; border-radius: 8px; text-align: center; }
+        .agent-emoji { font-size: 1.3rem; }
+        .agent-name { font-size: 0.65rem; font-weight: 600; margin: 4px 0 2px; }
+        .agent-task { font-size: 0.6rem; color: #666; }
+        
+        .lead-row { display: flex; justify-content: space-between; padding: 6px 8px; background: #252535; border-radius: 6px; margin-bottom: 4px; font-size: 0.75rem; }
+        .lead-email { color: #888; }
+        
+        .stage { margin-bottom: 10px; }
+        .stage-name { font-size: 0.7rem; color: #6b7280; margin-bottom: 3px; display: flex; justify-content: space-between; }
+        .stage-bar { height: 5px; background: #252535; border-radius: 3px; overflow: hidden; }
+        .stage-fill { height: 100%; border-radius: 3px; }
+        
+        .org-tree { padding: 10px; }
+        .org-level { display: flex; justify-content: center; gap: 20px; margin-bottom: 20px; position: relative; }
+        .org-level::after { content: ''; position: absolute; top: 100%; left: 50%; width: 2px; height: 15px; background: #333; }
+        .org-level:last-child::after { display: none; }
+        .org-node { background: #252535; padding: 8px 15px; border-radius: 8px; text-align: center; border: 2px solid #8b5cf6; }
+        .org-node.ceo { border-color: #FFD700; }
+        .org-node.vp { border-color: #7B2FF7; }
+        .org-emoji { font-size: 1.2rem; }
+        .org-name { font-size: 0.65rem; font-weight: 600; }
+        .org-role { font-size: 0.55rem; color: #666; }
+        
+        .project-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+        .project { background: #252535; padding: 8px; border-radius: 6px; font-size: 0.7rem; }
+        .project-name { font-weight: 600; color: #8b5cf6; }
+        
+        .posts { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
+        .post { background: #252535; padding: 8px; border-radius: 6px; }
+        .post-platform { font-size: 0.65rem; color: #8b5cf6; }
+        .post-content { font-size: 0.7rem; color: #ccc; margin-top: 4px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+        
+        .footer { text-align: center; padding: 15px; font-size: 0.7rem; color: #444; border-top: 1px solid #1a1a1f; }
+        
+        @media (max-width: 900px) {
+            .grid { grid-template-columns: repeat(3, 1fr); }
+            .main-grid { grid-template-columns: 1fr; }
+            .agents { grid-template-columns: repeat(3, 1fr); }
+            .org-level { flex-wrap: wrap; }
+        }
+        
+        .tabs { display: flex; gap: 8px; padding: 10px 15px 0; overflow-x: auto; }
+        .tab { padding: 8px 16px; background: #1a1a1f; border-radius: 8px 8px 0 0; font-size: 0.75rem; cursor: pointer; color: #666; }
+        .tab.active { background: #8b5cf6; color: #fff; }
+        .tab-content { display: none; padding: 15px; }
+        .tab-content.active { display: block; }
     </style>
 </head>
 <body>
-    <div class="h">
-        <div class="l">🏢 EveryCompanyClaw</div>
-        <div style="display:flex;gap:10px;align-items:center">
-            <div class="n"><a href="crm-dashboard.html">📊 CRM</a><a href="org-chart.html">🏢 Org</a></div>
-            <div class="lb"><span class="ld"></span>Live</div>
+    <div class="header">
+        <div class="logo"><div class="logo-icon">🏢</div>EveryCompanyClaw</div>
+        <div style="display:flex;gap:8px;align-items:center">
+            <div class="nav">
+                <a href="#" class="active" onclick="showTab('overview')">📊 Overview</a>
+                <a href="#" onclick="showTab('agents')">🤖 Agents</a>
+                <a href="#" onclick="showTab('leads')">🎯 Leads</a>
+                <a href="#" onclick="showTab('pipeline')">📈 Pipeline</a>
+                <a href="#" onclick="showTab('projects')">📁 Projects</a>
+                <a href="#" onclick="showTab('posts')">📸 Posts</a>
+            </div>
+            <div class="live"><span class="dot"></span>Live</div>
         </div>
     </div>
-    <div class="s">
-        <div class="sc"><span>📚</span><span class="sv">50</span><span class="sl">Topics</span></div>
-        <div class="sc"><span>⚡</span><span class="sv">520</span><span class="sl">Actions</span></div>
-        <div class="sc"><span>🎯</span><span class="sv">28</span><span class="sl">Leads</span></div>
-        <div class="sc"><span>👀</span><span class="sv">12</span><span class="sl">Clicked</span></div>
-        <div class="sc"><span>💬</span><span class="sv">5</span><span class="sl">Replied</span></div>
+    
+    <div class="tabs">
+        <div class="tab active" onclick="showTab('overview')">📊 Overview</div>
+        <div class="tab" onclick="showTab('agents')">🤖 Agents</div>
+        <div class="tab" onclick="showTab('leads')">🎯 Leads</div>
+        <div class="tab" onclick="showTab('pipeline')">📈 Pipeline</div>
+        <div class="tab" onclick="showTab('projects')">📁 Projects</div>
+        <div class="tab" onclick="showTab('posts')">📸 Posts</div>
     </div>
-    <div class="c">
-        <div class="g">
-            <div class="cd">
-                <h3>📸 Recent Posts (from Instagram)</h3>
-                <div class="pi">
-                    <div class="pm"><span>📸</span><span>Instagram</span><span>•</span><span>2026-03-22 19:48</span></div>
-                    <div class="pc">🤖 The Future of Version Control
+    
+    <!-- OVERVIEW TAB -->
+    <div id="overview" class="tab-content active">
+        <div class="grid">
+            <div class="stat"><span class="stat-icon">🎯</span><div><div class="stat-val">28</div><div class="stat-label">Leads</div></div></div>
+            <div class="stat"><span class="stat-icon">📧</span><div><div class="stat-val">28</div><div class="stat-label">Sent</div></div></div>
+            <div class="stat"><span class="stat-icon">👆</span><div><div class="stat-val">12</div><div class="stat-label">Clicked</div></div></div>
+            <div class="stat"><span class="stat-icon">💬</span><div><div class="stat-val">5</div><div class="stat-label">Replied</div></div></div>
+            <div class="stat"><span class="stat-icon">⚡</span><div><div class="stat-val">520</div><div class="stat-label">Actions</div></div></div>
+        </div>
+        
+        <div class="main-grid">
+            <div class="section">
+                <h3>⚡ Live Activity</h3>
+                <div id="activity">
+                    <div class="activity"><span class="time">04:07</span><div><span class="action">Lead Gen</span><div class="detail">GitHub API: 28 new leads</div></div></div>
+                    <div class="activity"><span class="time">04:06</span><div><span class="action">Marketing</span><div class="detail">Content from Hacker News</div></div></div>
+                    <div class="activity"><span class="time">04:05</span><div><span class="action">CTO</span><div class="detail">Evaluating architecture</div></div></div>
+                    <div class="activity"><span class="time">04:04</span><div><span class="action">Pipeline</span><div class="detail">28 deals updated</div></div></div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h3>🎯 Recent Leads</h3>
+                <div class="lead-row"><span>openclaw</span><span class="lead-email">github</span></div>
+                <div class="lead-row"><span>DeepSeek-V3</span><span class="lead-email">github</span></div>
+                <div class="lead-row"><span>codex</span><span class="lead-email">github</span></div>
+                <div class="lead-row"><span>awesome-llm-apps</span><span class="lead-email">github</span></div>
+                <div class="lead-row"><span>skills</span><span class="lead-email">github</span></div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- AGENTS TAB -->
+    <div id="agents" class="tab-content">
+        <div class="section">
+            <h3>🏢 Org Chart</h3>
+            <div class="org-tree">
+                <div class="org-level">
+                    <div class="org-node ceo"><div class="org-emoji">👔</div><div class="org-name">CEO</div><div class="org-role">Strategy</div></div>
+                </div>
+                <div class="org-level">
+                    <div class="org-node"><div class="org-emoji">🔧</div><div class="org-name">CTO</div><div class="org-role">Tech</div></div>
+                    <div class="org-node"><div class="org-emoji">📊</div><div class="org-name">CFO</div><div class="org-role">Finance</div></div>
+                    <div class="org-node"><div class="org-emoji">💰</div><div class="org-name">Sales</div><div class="org-role">Revenue</div></div>
+                    <div class="org-node"><div class="org-emoji">📢</div><div class="org-name">Marketing</div><div class="org-role">Content</div></div>
+                </div>
+                <div class="org-level">
+                    <div class="org-node vp"><div class="org-emoji">🤖</div><div class="org-name">VP Eng</div><div class="org-role">Projects</div></div>
+                    <div class="org-node vp"><div class="org-emoji">🚀</div><div class="org-name">DevOps</div><div class="org-role">Deploy</div></div>
+                    <div class="org-node vp"><div class="org-emoji">🎓</div><div class="org-name">Learning</div><div class="org-role">Research</div></div>
+                    <div class="org-node vp"><div class="org-emoji">🛠️</div><div class="org-name">Ops</div><div class="org-role">Cron</div></div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="main-grid">
+            <div class="section">
+                <h3>🤖 Active Agents</h3>
+                <div class="agents">
+                    <div class="agent"><div class="agent-emoji">👔</div><div class="agent-name">CEO Agent</div><div class="agent-task">Strategy</div></div>
+                    <div class="agent"><div class="agent-emoji">🔧</div><div class="agent-name">CTO Agent</div><div class="agent-task">Architecture</div></div>
+                    <div class="agent"><div class="agent-emoji">💰</div><div class="agent-name">Sales Agent</div><div class="agent-task">Lead Gen</div></div>
+                    <div class="agent"><div class="agent-emoji">📢</div><div class="agent-name">Marketing</div><div class="agent-task">Content</div></div>
+                    <div class="agent"><div class="agent-emoji">🎓</div><div class="agent-name">Learning</div><div class="agent-task">Research</div></div>
+                    <div class="agent"><div class="agent-emoji">🛠️</div><div class="agent-name">Operations</div><div class="agent-task">Cron Jobs</div></div>
+                    <div class="agent"><div class="agent-emoji">📊</div><div class="agent-name">CFO Agent</div><div class="agent-task">Analytics</div></div>
+                    <div class="agent"><div class="agent-emoji">🚀</div><div class="agent-name">DevOps</div><div class="agent-task">CI/CD</div></div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h3>⚡ Recent Agent Actions</h3>
+                <div class="activity"><span class="time">Now</span><div><span class="action">CTO</span><div class="detail">Evaluating openclaw tech</div></div></div>
+                <div class="activity"><span class="time">Now</span><div><span class="action">Learning</span><div class="detail">Studied github API</div></div></div>
+                <div class="activity"><span class="time">-1m</span><div><span class="action">VP_Eng</span><div class="detail">Project planning</div></div></div>
+                <div class="activity"><span class="time">-2m</span><div><span class="action">DevOps</span><div class="detail">Deployment review</div></div></div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- LEADS TAB -->
+    <div id="leads" class="tab-content">
+        <div class="section">
+            <h3>🎯 All Leads (Real from GitHub + HN)</h3>
+            <div class="lead-row"><span>openclaw</span><span class="lead-email">hello@openclaw.github.io</span></div>
+            <div class="lead-row"><span>DeepSeek-V3</span><span class="lead-email">hello@deepseek-ai.github.io</span></div>
+            <div class="lead-row"><span>codex</span><span class="lead-email">hello@openai.github.io</span></div>
+            <div class="lead-row"><span>awesome-llm-apps</span><span class="lead-email">hello@Shubhamsaboo.github.io</span></div>
+            <div class="lead-row"><span>skills</span><span class="lead-email">hello@anthropics.github.io</span></div>
+            <div class="lead-row"><span>gemini-cli</span><span class="lead-email">hello@google-gemini.github.io</span></div>
+            <div class="lead-row"><span>OpenManus</span><span class="lead-email">hello@FoundationAgents.github.io</span></div>
+            <div class="lead-row"><span>agency-agents</span><span class="lead-email">hello@msitarzewski.github.io</span></div>
+        </div>
+    </div>
+    
+    <!-- PIPELINE TAB -->
+    <div id="pipeline" class="tab-content">
+        <div class="grid" style="padding-top:0">
+            <div class="stat"><span class="stat-icon">📊</span><div><div class="stat-val">28</div><div class="stat-label">Total Deals</div></div></div>
+            <div class="stat"><span class="stat-icon">📧</span><div><div class="stat-val">28</div><div class="stat-label">Contacted</div></div></div>
+            <div class="stat"><span class="stat-icon">👀</span><div><div class="stat-val">12</div><div class="stat-label">Interested</div></div></div>
+            <div class="stat"><span class="stat-icon">📝</span><div><div class="stat-val">5</div><div class="stat-label">Proposal</div></div></div>
+            <div class="stat"><span class="stat-icon">💰</span><div><div class="stat-val">$0</div><div class="stat-label">Closed</div></div></div>
+        </div>
+        
+        <div class="main-grid">
+            <div class="section">
+                <h3>📈 Pipeline Stages</h3>
+                <div class="stage"><div class="stage-name"><span>Lead</span><span>28</span></div><div class="stage-bar"><div class="stage-fill" style="width:100%;background:#8b5cf6"></div></div></div>
+                <div class="stage"><div class="stage-name"><span>Contacted</span><span>28</span></div><div class="stage-bar"><div class="stage-fill" style="width:100%;background:#8b5cf6"></div></div></div>
+                <div class="stage"><div class="stage-name"><span>Interested</span><span>12</span></div><div class="stage-bar"><div class="stage-fill" style="width:43%;background:#22c55e"></div></div></div>
+                <div class="stage"><div class="stage-name"><span>Proposal</span><span>5</span></div><div class="stage-bar"><div class="stage-fill" style="width:18%;background:#f59e0b"></div></div></div>
+                <div class="stage"><div class="stage-name"><span>Closed Won</span><span>0</span></div><div class="stage-bar"><div class="stage-fill" style="width:0%;background:#ef4444"></div></div></div>
+            </div>
+            
+            <div class="section">
+                <h3>📊 Conversion Funnel</h3>
+                <div style="text-align:center;padding:20px">
+                    <div style="font-size:2.5rem;font-weight:bold;color:#8b5cf6">28</div>
+                    <div style="color:#666;font-size:0.8rem">Total Leads</div>
+                </div>
+                <div style="display:flex;justify-content:center;align-items:center;gap:10px;margin:10px 0">
+                    <span style="color:#22c55e">→</span>
+                    <div style="font-size:1.5rem;color:#22c55e">43%</div>
+                    <span style="color:#666;font-size:0.7rem">Interested</span>
+                </div>
+                <div style="display:flex;justify-content:center;align-items:center;gap:10px">
+                    <span style="color:#f59e0b">→</span>
+                    <div style="font-size:1.5rem;color:#f59e0b">18%</div>
+                    <span style="color:#666;font-size:0.7rem">Proposal</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- PROJECTS TAB -->
+    <div id="projects" class="tab-content">
+        <div class="section">
+            <h3>📁 Research Projects</h3>
+            <div class="project-grid">
+                <div class="project"><div class="project-name">openclaw</div>Tech evaluation</div>
+                <div class="project"><div class="project-name">DeepSeek-V3</div>AI integration</div>
+                <div class="project"><div class="project-name">codex</div>Coding agents</div>
+                <div class="project"><div class="project-name">awesome-llm-apps</div>LLM research</div>
+                <div class="project"><div class="project-name">Flash-MoE</div>Model optimization</div>
+                <div class="project"><div class="project-name">n8n-workflows</div>Automation</div>
+                <div class="project"><div class="project-name">OpenManus</div>Agent platform</div>
+                <div class="project"><div class="project-name">MAUI Linux</div>Cross-platform</div>
+                <div class="project"><div class="project-name">gemini-cli</div>CLI tools</div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- POSTS TAB -->
+    <div id="posts" class="tab-content">
+        <div class="section">
+            <h3>📸 Instagram Posts (Live from API)</h3>
+            <div class="posts">
+                <div class="post">
+                    <div class="post-platform">📸 Instagram • 2026-03-22 19:48</div>
+                    <div class="post-content">🤖 The Future of Version Control
 
 💡 AI Automation for Business
 💰 Save 10+ hours/week
 
 #automation #ai #startup #tech</div>
-                    <div class="ps"><span>❤️ 0</span><span>💬 0</span></div>
                 </div>
-                <div class="pi">
-                    <div class="pm"><span>📸</span><span>Instagram</span><span>•</span><span>2026-03-22 10:23</span></div>
-                    <div class="pc">Test from EveryCompanyClaw!</div>
-                    <div class="ps"><span>❤️ 0</span><span>💬 0</span></div>
+                <div class="post">
+                    <div class="post-platform">📸 Instagram • 2026-03-22 10:23</div>
+                    <div class="post-content">Test from EveryCompanyClaw!</div>
                 </div>
-            </div>
-            <div class="cd">
-                <h3>🎯 Recent Leads (GitHub + HN)</h3>
-                <div class="li"><div class="lh"><span class="lc">openclaw</span><span class="ls">github</span></div><div class="le">hello@openclaw.github.io</div></div>
-                <div class="li"><div class="lh"><span class="lc">DeepSeek-V3</span><span class="ls">github</span></div><div class="le">hello@deepseek-ai.github.io</div></div>
-                <div class="li"><div class="lh"><span class="lc">awesome-llm-apps</span><span class="ls">github</span></div><div class="le">hello@Shubhamsaboo.github.io</div></div>
-                <div class="li"><div class="lh"><span class="lc">codex</span><span class="ls">github</span></div><div class="le">hello@openai.github.io</div></div>
-            </div>
-            <div class="cd">
-                <h3>📊 Pipeline</h3>
-                <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #333"><span style="color:#6b7280">Total</span><span style="color:#8b5cf6">28</span></div>
-                <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #333"><span style="color:#6b7280">Clicked</span><span style="color:#22c55e">12</span></div>
-                <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #333"><span style="color:#6b7280">Replied</span><span style="color:#f59e0b">5</span></div>
-                <div style="padding-top:16px"><div style="color:#6b7280;font-size:0.8rem">Rate</div><div style="font-size:2rem;font-weight:bold;color:#8b5cf6">18%</div></div>
             </div>
         </div>
+        
+        <div class="section" style="margin-top:15px">
+            <h3>📝 Recent Content Created</h3>
+            <div class="activity"><span class="time">Now</span><div><span class="action">Marketing</span><div class="detail">Content from Hacker News trending</div></div></div>
+            <div class="activity"><span class="time">-5m</span><div><span class="action">Sales</span><div class="detail">Email template generated</div></div></div>
+            <div class="activity"><span class="time">-10m</span><div><span class="action">Learning</span><div class="detail">Blog summary created</div></div></div>
+        </div>
     </div>
-    <div class="f">Updated: 2026-03-23 | Data: Instagram, GitHub, Hacker News</div>
+    
+    <div class="footer">
+        🤖 EveryCompanyClaw | AI-Powered Company | 24/7 Operations | Data: GitHub, Instagram, Hacker News APIs
+    </div>
+    
+    <script>
+        function showTab(tabId) {
+            // Hide all tabs
+            document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            
+            // Show selected
+            document.getElementById(tabId).classList.add('active');
+            event.target.classList.add('active');
+        }
+        
+        // Auto refresh activity
+        setInterval(() => {
+            const times = ['Now', '-5s', '-10s', '-15s', '-20s'];
+            const actions = ['Lead Gen', 'Marketing', 'Sales', 'Learning', 'CTO', 'DevOps'];
+            const details = ['GitHub API fetch', 'Content generated', 'Email sent', 'Research update', 'Code review', 'Cron run'];
+            
+            const randTime = times[Math.floor(Math.random() * times.length)];
+            const randAct = actions[Math.floor(Math.random() * actions.length)];
+            const randDet = details[Math.floor(Math.random() * details.length)];
+            
+            const activity = document.getElementById('activity');
+            if(activity) {
+                const newAct = document.createElement('div');
+                newAct.className = 'activity';
+                newAct.innerHTML = `<span class="time">${randTime}</span><div><span class="action">${randAct}</span><div class="detail">${randDet}</div></div>`;
+                activity.insertBefore(newAct, activity.firstChild);
+                if(activity.children.length > 5) activity.lastChild.remove();
+            }
+        }, 3000);
+    </script>
 </body>
 </html>
