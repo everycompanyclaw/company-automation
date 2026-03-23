@@ -8,7 +8,7 @@ from datetime import datetime
 
 COMPANY_PATH = "/Users/macbookpro/.openclaw/workspace/company"
 TELEGRAM_BOT = "8689117372:AAHWWbJqpIazdy1TxCOxFbJs1YrofmAGfVw"
-NOTIFY_BOT = "8677779317:AAEaxRQmEpymFeer0sVPXe1YNMUqcURZACg"
+NOTIFY_BOT = "8689117372:AAHWWbJqpIazdy1TxCOxFbJs1YrofmAGfVw"
 CHAT_ID = "96691420"
 
 # Content topics for HK market

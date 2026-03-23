@@ -8,7 +8,7 @@ from concurrent.futures import ThreadPoolExecutor
 import json
 
 BOTS = {
-    "notify": "8677779317:AAEaxRQmEpymFeer0sVPXe1YNMUqcURZACg",
+    "notify": "8689117372:AAHWWbJqpIazdy1TxCOxFbJs1YrofmAGfVw",
     "company": "8689117372:AAHWWbJqpIazdy1TxCOxFbJs1YrofmAGfVw"
 }
 

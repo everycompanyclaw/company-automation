@@ -8,7 +8,7 @@ import time
 from concurrent.futures import ThreadPoolExecutor
 
 BOTS = {
-    "personal": "8677779317:AAEaxRQmEpymFeer0sVPXe1YNMUqcURZACg",
+    "personal": "8689117372:AAHWWbJqpIazdy1TxCOxFbJs1YrofmAGfVw",
     "company": "8689117372:AAHWWbJqpIazdy1TxCOxFbJs1YrofmAGfVw"
 }
 

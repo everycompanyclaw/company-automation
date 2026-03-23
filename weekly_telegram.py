@@ -8,7 +8,7 @@ import requests
 from datetime import datetime
 
 # Telegram Notify Bot
-TELEGRAM_TOKEN = "8677779317:AAEaxRQmEpymFeer0sVPXe1YNMUqcURZACg"
+TELEGRAM_TOKEN = "8689117372:AAHWWbJqpIazdy1TxCOxFbJs1YrofmAGfVw"
 CHAT_ID = "96691420"
 
 def get_stats():

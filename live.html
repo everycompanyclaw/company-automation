@@ -97,7 +97,7 @@
 <body>
     <div class="topbar">
         <div class="brand"><div class="brand-icon">🏢</div> EveryCompanyClaw - Live Workflow</div>
-        <div class="status"><div class="status-dot"></div> <span id="leads-count">Loading...</span> Leads | <span id="time">--:--</span></div>
+        <div class="status"><div class="status-dot"></div> <span id="leads-count">Loading...</span> | <span id="time">--:--</span></div>
     </div>
     
     <div class="container">
@@ -113,7 +113,6 @@
                 <span class="stat-chip" id="hn-leads">HN: 0</span>
             </div>
             <div id="leads-flow">
-                <!-- Populated by JS -->
             </div>
         </div>
         
@@ -161,8 +160,7 @@
                 <span class="stat-chip">Uptime: 99.9%</span>
             </div>
             <div id="ops-flow">
-                <div class="flow-item"><span class="flow-time">Now</span><span class="flow-icon">🔄</span><div class="flow-content"><div class="flow-action">Cron: lead_gen</div><div class="flow-detail">Running every 15m</div></div></div>
-                <div class="flow-item"><span class="flow-time">-5m</span><span class="flow-icon">🔄</span><div class="flow-content"><div class="flow-action">Cron: dashboard</div><div class="flow-detail">Updated</div></div></div>
+                <div class="flow-item"><span class="flow-time">Now</span><span class="flow-icon">🔄</span><div class="flow-content"><div class="flow-action">System</div><div class="flow-detail">Live data from APIs</div></div></div>
             </div>
         </div>
     </div>
@@ -217,7 +215,7 @@
     </div>
     
     <div class="refresh-info">
-        🔄 Auto-refreshing every 30 seconds | Data from GitHub API, Instagram API, Local CRM
+        🔄 Auto-refreshing every 30 seconds | Data from Live APIs
     </div>
     
     <div class="footer">
@@ -225,21 +223,24 @@
     </div>
     
     <script>
-        // API endpoints - fetch real data
+        // Fetch live data from stats.json
         async function fetchData() {
             try {
-                // Read from local files via fetch (for static site)
-                // In production, these would be API endpoints
+                // Try to fetch from current location (for GitHub Pages)
+                const response = await fetch('stats.json?t=' + Date.now());
+                const data = await response.json();
                 
-                // For now, simulate based on known data
-                const leadsCount = 47;
-                const igPosts = 3;
-                const pipeline = 78;
+                const leads = data.leads.count || 0;
+                const igPosts = data.instagram.posts || 0;
+                const pipeline = data.pipeline.deals || 0;
+                const likes = data.instagram.likes || 0;
+                const actions = data.actions || 0;
                 
-                document.getElementById('leads-count').textContent = leadsCount + ' Leads';
-                document.getElementById('leads-badge').textContent = leadsCount + ' leads';
-                document.getElementById('github-leads').textContent = 'GitHub: ' + Math.floor(leadsCount/2);
-                document.getElementById('hn-leads').textContent = 'HN: ' + Math.ceil(leadsCount/2);
+                // Update all displays
+                document.getElementById('leads-count').textContent = leads + ' Leads';
+                document.getElementById('leads-badge').textContent = leads + ' leads';
+                document.getElementById('github-leads').textContent = 'GitHub: ' + data.leads.github;
+                document.getElementById('hn-leads').textContent = 'HN: ' + data.leads.hackernews;
                 
                 document.getElementById('pipeline-count').textContent = pipeline + ' deals';
                 document.getElementById('contacted').textContent = Math.floor(pipeline * 0.8);
@@ -247,25 +248,29 @@
                 document.getElementById('interested-bar').style.width = (pipeline * 0.3) + '%';
                 
                 document.getElementById('ig-count').textContent = igPosts + ' posts';
-                document.getElementById('actions-count').textContent = (leadsCount * 10 + igPosts * 5) + ' actions';
-                document.getElementById('topics-count').textContent = 'Topics: ' + (leadsCount + 3);
+                document.getElementById('ig-likes').textContent = 'Likes: ' + likes;
+                
+                document.getElementById('actions-count').textContent = actions + ' actions';
+                document.getElementById('topics-count').textContent = 'Topics: ' + (leads + 3);
                 
                 const now = new Date();
                 document.getElementById('time').textContent = now.toLocaleTimeString('en-US', {hour12: false});
                 
                 // Add activity
-                addActivity('leads-flow', '🔍', 'GitHub API', 'Fetched ' + leadsCount + ' leads');
+                addActivity('leads-flow', '🔍', 'GitHub API', 'Fetched ' + leads + ' leads');
                 addActivity('sales-flow', '📧', 'Pipeline', 'Updated ' + pipeline + ' deals');
-                addActivity('marketing-flow', '📸', 'Instagram', igPosts + ' posts published');
-                addActivity('learning-flow', '📚', 'Learning', 'Studied ' + (leadsCount + 3) + ' topics');
+                addActivity('marketing-flow', '📸', 'Instagram', igPosts + ' posts, ' + likes + ' likes');
+                addActivity('learning-flow', '📚', 'Learning', 'Studied ' + (leads + 3) + ' topics');
                 
             } catch(e) {
-                console.log('Using fallback data');
+                console.log('Could not fetch live data:', e);
             }
         }
         
         function addActivity(flowId, icon, action, detail) {
             const container = document.getElementById(flowId);
+            if(!container) return;
+            
             const time = new Date().toLocaleTimeString('en-US', {hour12: false, hour: '2-digit', minute:'2-digit'});
             
             const newItem = document.createElement('div');

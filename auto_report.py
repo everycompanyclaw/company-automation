@@ -9,7 +9,7 @@ from datetime import datetime
 
 BOTS = {
     "company": "8689117372:AAHWWbJqpIazdy1TxCOxFbJs1YrofmAGfVw",
-    "notify": "8677779317:AAEaxRQmEpymFeer0sVPXe1YNMUqcURZACg"
+    "notify": "8689117372:AAHWWbJqpIazdy1TxCOxFbJs1YrofmAGfVw"
 }
 
 def send_msg(bot, chat_id, text):

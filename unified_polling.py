@@ -7,7 +7,7 @@ from telegram import Update
 from telegram.ext import Application, CommandHandler, MessageHandler, filters, ContextTypes
 
 # Both bots
-PERSONAL_BOT_TOKEN = "8677779317:AAEaxRQmEpymFeer0sVPXe1YNMUqcURZACg"
+PERSONAL_BOT_TOKEN = "8689117372:AAHWWbJqpIazdy1TxCOxFbJs1YrofmAGfVw"
 COMPANY_BOT_TOKEN = "8689117372:AAHWWbJqpIazdy1TxCOxFbJs1YrofmAGfVw"
 
 # Keywords for auto-routing

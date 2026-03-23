@@ -9,7 +9,7 @@ from concurrent.futures import ThreadPoolExecutor
 
 # Bot tokens  
 BOTS = {
-    "personal": os.environ.get("PERSONAL_BOT_TOKEN", "8677779317:AAEaxRQmEpymFeer0sVPXe1YNMUqcURZACg"),
+    "personal": os.environ.get("PERSONAL_BOT_TOKEN", "8689117372:AAHWWbJqpIazdy1TxCOxFbJs1YrofmAGfVw"),
     "company": os.environ.get("COMPANY_BOT_TOKEN", "8689117372:AAHWWbJqpIazdy1TxCOxFbJs1YrofmAGfVw")
 }
 

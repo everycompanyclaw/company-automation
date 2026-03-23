@@ -9,8 +9,8 @@
 # Generate live dashboard (DISABLED - filtered out)
 # */5 * * * * /usr/local/bin/python3 /Users/macbookpro/.openclaw/workspace/company/generate_dashboard.py >> /tmp/dashboard.log 2>&1
 
-# Project Dashboard API (every 5 min) - Live data from APIs
-*/5 * * * * /usr/local/bin/python3 /Users/macbookpro/.openclaw/workspace/company/projects/startup-automation/update_api.py >> /tmp/project_dashboard.log 2>&1
+# Save Live Stats JSON (every 5 min) - For live dashboard
+*/5 * * * * /usr/local/bin/python3 /Users/macbookpro/.openclaw/workspace/company/save_stats.py >> /tmp/save_stats.log 2>&1
 
 # Update Org Chart with Tech Roles (every 10 min)
 */10 * * * * /usr/local/bin/python3 /Users/macbookpro/.openclaw/workspace/company/org_chart.py >> /tmp/org_chart.log 2>&1

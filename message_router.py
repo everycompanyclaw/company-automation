@@ -4,7 +4,7 @@ Message Router
 Routes messages to correct bot
 """
 
-PERSONAL_BOT_TOKEN = "8677779317:AAEaxRQmEpymFeer0sVPXe1YNMUqcURZACg"
+PERSONAL_BOT_TOKEN = "8689117372:AAHWWbJqpIazdy1TxCOxFbJs1YrofmAGfVw"
 COMPANY_BOT_TOKEN = "8689117372:AAHWWbJqpIazdy1TxCOxFbJs1YrofmAGfVw"
 
 def route_message(text, chat_id="96691420"):

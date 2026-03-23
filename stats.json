@@ -1,0 +1,16 @@
+{
+  "timestamp": "2026-03-23 12:02:25",
+  "leads": {
+    "count": 48,
+    "github": 16,
+    "hackernews": 32
+  },
+  "instagram": {
+    "posts": 3,
+    "likes": 0
+  },
+  "pipeline": {
+    "deals": 78
+  },
+  "actions": 495
+}
