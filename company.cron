@@ -6,8 +6,8 @@
 # Lead Generation - REAL DATA (every 15 min)
 */15 * * * * /usr/local/bin/python3 /Users/macbookpro/.openclaw/workspace/company/lead_gen.py >> /tmp/lead_gen.log 2>&1
 
-# Generate live dashboard (every 5 min)
-*/5 * * * * /usr/local/bin/python3 /Users/macbookpro/.openclaw/workspace/company/generate_dashboard.py >> /tmp/dashboard.log 2>&1
+# Generate live dashboard (DISABLED - filtered out)
+# */5 * * * * /usr/local/bin/python3 /Users/macbookpro/.openclaw/workspace/company/generate_dashboard.py >> /tmp/dashboard.log 2>&1
 
 # Project Dashboard API (every 5 min) - Live data from APIs
 */5 * * * * /usr/local/bin/python3 /Users/macbookpro/.openclaw/workspace/company/projects/startup-automation/update_api.py >> /tmp/project_dashboard.log 2>&1
@@ -42,5 +42,5 @@
 # GitHub Pages Push - Daily at 6am
 0 6 * * * cd /Users/macbookpro/.openclaw/workspace/company && git add -A && git commit -m "Auto-update: $(date)" && git push origin main >> /tmp/github_push.log 2>&1
 
-# Daily Report to CompanyBot (8pm)
-0 20 * * * /usr/local/bin/python3 /Users/macbookpro/.openclaw/workspace/company/daily_report_company.py >> /tmp/company_report.log 2>&1
+# Daily Report to CompanyBot (DISABLED - no messages to user)
+# 0 20 * * * /usr/local/bin/python3 /Users/macbookpro/.openclaw/workspace/company/daily_report_company.py >> /tmp/company_report.log 2>&1
