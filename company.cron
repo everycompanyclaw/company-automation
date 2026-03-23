@@ -33,5 +33,11 @@
 # Threads Auto-Post - Daily at 2pm
 0 14 * * * /usr/local/bin/python3 /Users/macbookpro/.openclaw/workspace/company/threads_content.py >> /tmp/threads_content.log 2>&1
 
+# Project Publisher - Every 3 days (rotates through leads + audiences)
+0 9 */3 * * /usr/local/bin/python3 /Users/macbookpro/.openclaw/workspace/company/project_publisher.py >> /tmp/project_publisher.log 2>&1
+
 # GitHub Pages Push - Daily at 6am
 0 6 * * * cd /Users/macbookpro/.openclaw/workspace/company && git add -A && git commit -m "Auto-update: $(date)" && git push origin main >> /tmp/github_push.log 2>&1
+
+# Daily Report to CompanyBot (8pm)
+0 20 * * * /usr/local/bin/python3 /Users/macbookpro/.openclaw/workspace/company/daily_report_company.py >> /tmp/company_report.log 2>&1
