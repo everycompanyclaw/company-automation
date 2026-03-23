@@ -41,9 +41,7 @@ def route_message(text):
 
 def send_message(bot_token, chat_id, text):
     """DISABLED - User requested no messages"""
-    return  # Disabled
-    url = f"https://api.telegram.org/bot{bot_token}/sendMessage"
-    requests.post(url, json={"chat_id": chat_id, "text": text})
+    return  # Disabled - no messages sent
 
 def main():
     """Main polling loop"""
