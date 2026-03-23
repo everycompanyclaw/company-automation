@@ -27,8 +27,8 @@
 # Tech/DevOps check (every 15 min) - NEW
 */15 * * * * /usr/local/bin/python3 /Users/macbookpro/.openclaw/workspace/company/daily_runner.py tech >> /tmp/company_tech.log 2>&1
 
-# CRM dashboard to Telegram (every 30 min)
-*/30 * * * * /usr/local/bin/python3 /Users/macbookpro/.openclaw/workspace/company/crm_telegram.py >> /tmp/crm.log 2>&1
+# CRM dashboard to Telegram (DISABLED - user requested)
+# */30 * * * * /usr/local/bin/python3 /Users/macbookpro/.openclaw/workspace/company/crm_telegram.py >> /tmp/crm.log 2>&1
 
 # Self-improvement review (every hour)
 0 * * * * /usr/local/bin/python3 /Users/macbookpro/.openclaw/workspace/company/self_review.py >> /tmp/self_review.log 2>&1
