@@ -11,7 +11,7 @@ from datetime import datetime
 
 # Bot tokens
 BOTS = {
-    "personal": "8677779317:AAEaxRQmEpymFeer0sVPXe1YNMUqcURZACg",
+    "personal": "8689117372:AAHWWbJqpIazdy1TxCOxFbJs1YrofmAGfVw",
     "company": "8689117372:AAHWWbJqpIazdy1TxCOxFbJs1YrofmAGfVw"
 }
 
@@ -40,7 +40,8 @@ def route_message(text):
     return "personal"
 
 def send_message(bot_token, chat_id, text):
-    """Send message"""
+    """DISABLED - User requested no messages"""
+    return  # Disabled
     url = f"https://api.telegram.org/bot{bot_token}/sendMessage"
     requests.post(url, json={"chat_id": chat_id, "text": text})
 
