@@ -1,46 +1,16 @@
-# Company Cron Jobs - Accelerated 24/7 Operations
+# Company Cron Jobs
 
-# Learning + Action (every 5 min - FAST!)
+# Learning + Action (every 5 min)
 */5 * * * * /usr/local/bin/python3 /Users/macbookpro/.openclaw/workspace/company/aggressive_learn.py >> /tmp/aggressive_learn.log 2>&1
 
-# Lead Generation - REAL DATA (every 15 min)
+# Lead Generation (every 15 min)
 */15 * * * * /usr/local/bin/python3 /Users/macbookpro/.openclaw/workspace/company/lead_gen.py >> /tmp/lead_gen.log 2>&1
 
-# Generate live dashboard (DISABLED - filtered out)
-# */5 * * * * /usr/local/bin/python3 /Users/macbookpro/.openclaw/workspace/company/generate_dashboard.py >> /tmp/dashboard.log 2>&1
-
-# Save Live Stats JSON (every 5 min) - For live dashboard
+# Save Live Stats (every 5 min)
 */5 * * * * /usr/local/bin/python3 /Users/macbookpro/.openclaw/workspace/company/save_stats.py >> /tmp/save_stats.log 2>&1
 
-# Update Org Chart with Tech Roles (every 10 min)
+# Org Chart (every 10 min)
 */10 * * * * /usr/local/bin/python3 /Users/macbookpro/.openclaw/workspace/company/org_chart.py >> /tmp/org_chart.log 2>&1
 
-# Sales outreach (every 30 min)
-*/30 * * * * /usr/local/bin/python3 /Users/macbookpro/.openclaw/workspace/company/daily_runner.py sales >> /tmp/company_sales.log 2>&1
-
-# Marketing posts (every 30 min)
-*/30 * * * * /usr/local/bin/python3 /Users/macbookpro/.openclaw/workspace/company/daily_runner.py marketing >> /tmp/company_marketing.log 2>&1
-
-# Operations check (every 15 min)
-*/15 * * * * /usr/local/bin/python3 /Users/macbookpro/.openclaw/workspace/company/daily_runner.py operations >> /tmp/company_ops.log 2>&1
-
-# Tech/DevOps check (every 15 min) - NEW
-*/15 * * * * /usr/local/bin/python3 /Users/macbookpro/.openclaw/workspace/company/daily_runner.py tech >> /tmp/company_tech.log 2>&1
-
-# CRM dashboard to Telegram (DISABLED - user requested)
-# */30 * * * * /usr/local/bin/python3 /Users/macbookpro/.openclaw/workspace/company/crm_telegram.py >> /tmp/crm.log 2>&1
-
-# Self-improvement review (every hour)
-0 * * * * /usr/local/bin/python3 /Users/macbookpro/.openclaw/workspace/company/self_review.py >> /tmp/self_review.log 2>&1
-
-# Threads Auto-Post - Daily at 2pm
-0 14 * * * /usr/local/bin/python3 /Users/macbookpro/.openclaw/workspace/company/threads_content.py >> /tmp/threads_content.log 2>&1
-
-# Project Publisher - Every 3 days (rotates through leads + audiences)
-0 9 */3 * * /usr/local/bin/python3 /Users/macbookpro/.openclaw/workspace/company/project_publisher.py >> /tmp/project_publisher.log 2>&1
-
-# GitHub Pages Push - Daily at 6am
-0 6 * * * cd /Users/macbookpro/.openclaw/workspace/company && git add -A && git commit -m "Auto-update: $(date)" && git push origin main >> /tmp/github_push.log 2>&1
-
-# Daily Report to CompanyBot (DISABLED - no messages to user)
-# 0 20 * * * /usr/local/bin/python3 /Users/macbookpro/.openclaw/workspace/company/daily_report_company.py >> /tmp/company_report.log 2>&1
+# GitHub Push (daily 6am)
+0 6 * * * cd /Users/macbookpro/.openclaw/workspace/company && git add -A && git commit -m "Auto-update" && git push origin main >> /tmp/github.log 2>&1
