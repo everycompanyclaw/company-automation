@@ -16,16 +16,17 @@ def analyze_message(message_data):
     # HIGH priority - ALWAYS forward these
     high_priority_triggers = [
         "error", "failed", "critical", "alert",
-        "approved", "completed successfully", 
-        "new lead", "deal closed", "revenue",
+        "approved", "deal closed", "revenue",
         "security", "breach", "down"
     ]
     
-    # Filter out routine noise
+    # FILTER OUT - Routine noise patterns
     noise_patterns = [
         "heartbeat", "all systems running", "batch processing",
         "cron completed", "running normally", "check complete",
-        "no action needed", "nothing new"
+        "no action needed", "nothing new", "dashboard updated",
+        "generated successfully", "✅", "completed successfully",
+        "check complete", "all good"
     ]
     
     # Check if it's noise first
@@ -39,7 +40,7 @@ def analyze_message(message_data):
         return {
             "forward": False,
             "priority": "NONE",
-            "reason": "Routine noise - filtered out",
+            "reason": "Routine bot message - filtered out",
             "message": ""
         }
     
@@ -53,8 +54,8 @@ def analyze_message(message_data):
                 "message": message_data.get("content", "")[:200]
             }
     
-    # Check for leads/sales/pipeline updates
-    important_context = ["leads", "pipeline", "sales", "posted", "published", "created", "generated"]
+    # Check for significant business updates
+    important_context = ["new lead", "leads generated", "posted to", "sale", "pipeline", "revenue", "deal"]
     for trigger in important_context:
         if trigger in content:
             return {
