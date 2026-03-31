@@ -1,0 +1,177 @@
+#!/usr/bin/env python3
+"""
+Daily Company Status Report Generator
+Generates a markdown status report with GitHub stats, recent commits,
+and Paperclip issue data.
+"""
+
+import urllib.request
+import json
+import subprocess
+from datetime import datetime
+
+# Configuration
+PAPERCLIP_API = "http://127.0.0.1:3100"
+COMPANY_ID = "fc7c695b-cc98-4539-a814-29d536b32ae2"
+GITHUB_REPO = "everycompanyclaw/company-automation"
+GIT_DIR = "/tmp/company-automation"
+
+
+def get_github_stats():
+    """Fetch GitHub stars and forks for the repo."""
+    url = f"https://api.github.com/repos/{GITHUB_REPO}"
+    try:
+        req = urllib.request.Request(url, headers={"Accept": "application/vnd.github.v3+json"})
+        with urllib.request.urlopen(req, timeout=10) as resp:
+            data = json.loads(resp.read().decode())
+            return {
+                "stars": data.get("stargazers_count", 0),
+                "forks": data.get("forks_count", 0),
+                "open_issues": data.get("open_issues_count", 0),
+                "description": data.get("description", "N/A"),
+                "url": data.get("html_url", ""),
+            }
+    except Exception as e:
+        return {"stars": "N/A", "forks": "N/A", "open_issues": "N/A", "error": str(e)}
+
+
+def get_git_log():
+    """Get recent git commits."""
+    try:
+        result = subprocess.run(
+            ["git", "log", "--oneline", "-5"],
+            cwd=GIT_DIR,
+            capture_output=True,
+            text=True,
+            timeout=10,
+        )
+        if result.returncode == 0:
+            return [line.strip() for line in result.stdout.strip().split("\n") if line.strip()]
+        return ["(git log failed or not a git repo)"]
+    except Exception as e:
+        return [f"(git error: {e})"]
+
+
+def get_paperclip_issues():
+    """Fetch issues from Paperclip API."""
+    url = f"{PAPERCLIP_API}/api/companies/{COMPANY_ID}/issues"
+    try:
+        req = urllib.request.Request(url, headers={"Accept": "application/json"})
+        with urllib.request.urlopen(req, timeout=10) as resp:
+            data = json.loads(resp.read().decode())
+            if isinstance(data, dict) and "items" in data:
+                return data["items"]
+            elif isinstance(data, list):
+                return data
+            return []
+    except Exception as e:
+        return []
+
+
+def get_paperclip_agents():
+    """Fetch agents from Paperclip API."""
+    url = f"{PAPERCLIP_API}/api/companies/{COMPANY_ID}/agents"
+    try:
+        req = urllib.request.Request(url, headers={"Accept": "application/json"})
+        with urllib.request.urlopen(req, timeout=10) as resp:
+            data = json.loads(resp.read().decode())
+            if isinstance(data, dict) and "items" in data:
+                return data["items"]
+            elif isinstance(data, list):
+                return data
+            return []
+    except Exception as e:
+        return []
+
+
+def generate_report():
+    """Generate the markdown status report."""
+    now = datetime.now().strftime("%Y-%m-%d %H:%M:%S %Z")
+
+    # Gather data
+    gh_stats = get_github_stats()
+    git_log = get_git_log()
+    issues = get_paperclip_issues()
+    agents = get_paperclip_agents()
+
+    # Count statuses
+    open_issues = [i for i in issues if i.get("status") in ("open", "in_progress", "pending")]
+    done_issues = [i for i in issues if i.get("status") == "done"]
+
+    report = f"""# 📊 Daily Company Status Report
+
+**Generated:** {now}
+
+---
+
+## 🐙 GitHub Stats — [{GITHUB_REPO}](https://github.com/{GITHUB_REPO})
+
+| Metric | Value |
+|--------|-------|
+| ⭐ Stars | {gh_stats.get('stars', 'N/A')} |
+| 🍴 Forks | {gh_stats.get('forks', 'N/A')} |
+| 🐛 Open Issues | {gh_stats.get('open_issues', 'N/A')} |
+| 📝 Description | {gh_stats.get('description', 'N/A')} |
+
+---
+
+## 📜 Recent Commits (Last 5)
+
+```
+"""
+    for line in git_log:
+        report += f"{line}\n"
+
+    report += f"""```
+
+---
+
+## 📋 Paperclip Issues — {COMPANY_ID}
+
+| Status | Count |
+|--------|-------|
+| 🔵 Open / In Progress | {len(open_issues)} |
+| ✅ Done | {len(done_issues)} |
+| **Total** | **{len(issues)}** |
+
+"""
+
+    if issues:
+        report += "### Open Issues\n\n"
+        for issue in open_issues:
+            title = issue.get("title", "Untitled")
+            issue_id = issue.get("identifier", issue.get("id", ""))
+            status = issue.get("status", "unknown")
+            priority = issue.get("priority", "N/A")
+            report += f"- **[{issue_id}]** {title} — `{status}` / `{priority}`\n"
+    else:
+        report += "*No issues found.*\n"
+
+    report += f"""\n---
+
+## 🤖 Paperclip Agents
+
+| Metric | Count |
+|--------|-------|
+| Total Agents | {len(agents)} |
+
+"""
+
+    if agents:
+        report += "### Active Agents\n\n"
+        for agent in agents:
+            name = agent.get("name", agent.get("id", "Unknown"))
+            status = agent.get("status", "N/A")
+            report += f"- **{name}** — `{status}`\n"
+    else:
+        report += "*No agents found.*\n"
+
+    report += f"""\n---
+
+*Report generated by EveryCompanyClaw DevAgent — {now}*
+"""
+    return report
+
+
+if __name__ == "__main__":
+    print(generate_report())
