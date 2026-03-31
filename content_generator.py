@@ -22,8 +22,8 @@ from datetime import datetime
 
 # ===== CONFIG =====
 API_KEY = os.environ.get("MINIMAX_API_KEY", "")
-API_HOST = os.environ.get("MINIMAX_API_HOST", "https://api.minimaxi.com")
-MODEL = "MiniMax-Text-01"  # or MiniMax-Text-01
+API_HOST = os.environ.get("ANTHROPIC_BASE_URL", "https://api.minimaxi.com/anthropic")
+MODEL = "MiniMax-M2.7"  # Anthropic-compatible API
 
 # Fallback content themes if no API key
 FALLBACK_TOPICS = [
@@ -36,12 +36,13 @@ FALLBACK_TOPICS = [
 
 
 def search_web(query: str) -> list:
-    """Search the web using MiniMax MCP tool via direct API."""
+    """Search the web using MiniMax API (Anthropic-compatible)."""
     if not API_KEY:
         print("⚠️ MINIMAX_API_KEY not set — using fallback topics")
         return []
 
-    url = f"{API_HOST}/api/v1/web_search"
+    # MiniMax uses their own search endpoint
+    search_url = "https://api.minimaxi.com/api/v1/web_search"
     headers = {
         "Authorization": f"Bearer {API_KEY}",
         "Content-Type": "application/json",
@@ -49,47 +50,44 @@ def search_web(query: str) -> list:
     payload = {"query": query, "count": 5}
 
     try:
-        resp = requests.post(url, headers=headers, json=payload, timeout=15)
+        resp = requests.post(search_url, headers=headers, json=payload, timeout=5)
         if resp.status_code == 200:
             data = resp.json()
             return data.get("data", {}).get("results", [])
         else:
-            print(f"⚠️ Web search failed: {resp.status_code}")
             return []
     except Exception as e:
-        print(f"⚠️ Web search error: {e}")
         return []
 
 
 def generate_text(prompt: str) -> str:
-    """Generate text using MiniMax API."""
+    """Generate text using MiniMax API (Anthropic-compatible)."""
     if not API_KEY:
         return ""
 
-    url = f"{API_HOST}/api/v1/text/chatcompletion_v2"
+    url = f"{API_HOST}/v1/messages"
     headers = {
         "Authorization": f"Bearer {API_KEY}",
         "Content-Type": "application/json",
+        "anthropic-version": "2023-06-01",
     }
     payload = {
         "model": MODEL,
+        "max_tokens": 8000,  # Needs to be high enough to get past extended thinking
         "messages": [{"role": "user", "content": prompt}],
-        "max_tokens": 300,
-        "temperature": 0.8,
     }
 
     try:
-        resp = requests.post(url, headers=headers, json=payload, timeout=30)
+        resp = requests.post(url, headers=headers, json=payload, timeout=120)
         if resp.status_code == 200:
             data = resp.json()
-            return (
-                data.get("data", {})
-                .get("choices", [{}])[0]
-                .get("messages", [{}])[0]
-                .get("content", "")
-            )
+            # Extract text content (skip thinking blocks)
+            for block in data.get("content", []):
+                if block.get("type") == "text":
+                    return block.get("text", "").strip()
+            return ""
         else:
-            print(f"⚠️ Generate failed: {resp.status_code}")
+            print(f"⚠️ Generate failed: {resp.status_code} — {resp.text[:200]}")
             return ""
     except Exception as e:
         print(f"⚠️ Generate error: {e}")
