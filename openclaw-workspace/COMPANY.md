@@ -53,6 +53,16 @@ DevAgent checks every 15 min for assigned open issues.
 - Product Hunt launch
 - $1000 first revenue
 
+## Social Pipeline (MiniMax-powered) ✅
+
+- **MiniMax API key:** Configured ✅
+- **content_generator.py:** AI generates Instagram (Cantonese) + Threads (English) posts
+- **auto_post_to_social.py:** Playwright posts to IG + Threads every 6 hours
+- **social_pipeline.sh:** generate → post, every 6 hours via cron
+- **Cron:** `0 */6 * * *`
+
+First real AI-generated post: Cantonese Instagram caption about AI automation for startups.
+
 ## Pending
 
 - [ ] Set token budget

@@ -72,6 +72,5 @@ MK does NOT run day-to-day operations — that's EveryCompanyClaw's job.
 
 ## Pending Items (from Board)
 
-- [ ] Provide MiniMax API key (for web_search + understand_image)
 - [ ] Set token budget (monthly cap for AI spend)
 - [ ] Approve first major expenditure (if > threshold)
