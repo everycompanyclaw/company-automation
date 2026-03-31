@@ -1,5 +1,7 @@
 #!/bin/bash
-# MiniMax Social Pipeline — Generate content + post to IG + Threads
+# MiniMax Social Pipeline — Different content for Threads vs IG
+# Threads: MK's personal account (@milo_chen018)
+# Instagram: Company account (@everycompanyclaw)
 # Runs daily at 7 PM via cron
 
 LOG="/tmp/social_pipeline.log"
@@ -27,15 +29,16 @@ if [ -f "$SCRIPT_DIR/generated_posts.json" ]; then
     THREADS_POST=$(python3 -c "import json; print(json.load(open('$SCRIPT_DIR/generated_posts.json'))['threads'])")
     IG_POST=$(python3 -c "import json; print(json.load(open('$SCRIPT_DIR/generated_posts.json'))['instagram'])")
 else
-    echo "$(date): No generated posts found" >> $LOG
+    echo "$(date): No generated posts found, using fallback" >> $LOG
     exit 1
 fi
 
-# Step 2: Post to Instagram (Playwright) + Threads (API)
-echo "$(date): Posting to Instagram (Playwright)..." >> $LOG
+# Step 2: Post to Instagram (company account) — different content
+echo "$(date): Posting to Instagram (company account)..." >> $LOG
 /usr/bin/python3 "$SCRIPT_DIR/auto_post_to_social.py" --platform instagram --content "$IG_POST" >> $LOG 2>&1
 
-echo "$(date): Posting to Threads (API)..." >> $LOG
+# Step 3: Post to Threads (personal account @milo_chen018) — different content
+echo "$(date): Posting to Threads (@milo_chen018)..." >> $LOG
 TOKEN=$(cat "$SCRIPT_DIR/.threads_token" 2>/dev/null)
 if [ -n "$TOKEN" ]; then
     RESULT=$(curl -s -X POST "https://graph.threads.net/me/threads" \
