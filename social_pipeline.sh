@@ -55,4 +55,5 @@ fi
 # Send notification to MK
 python3 "$SCRIPT_DIR/daily_report.py" >> $LOG 2>&1
 
+# Note: content files saved locally only, NOT pushed to git
 echo "$(date): Done." >> $LOG

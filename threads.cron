@@ -1,2 +1,0 @@
-# Threads-only posting — every 6 hours
-0 */6 * * * /usr/bin/python3 /tmp/company-automation/threads_poster.py >> /tmp/threads_poster.log 2>&1

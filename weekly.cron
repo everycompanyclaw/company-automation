@@ -1,4 +1,0 @@
-# Weekly Report Cron
-
-# Generate and send weekly report every Sunday at 18:00
-0 18 * * 0 /usr/bin/python3 /Users/macbookpro/.openclaw/workspace/company/weekly_report.py >> /tmp/weekly_report.log 2>&1
