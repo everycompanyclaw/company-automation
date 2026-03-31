@@ -38,13 +38,17 @@ echo "$(date): Posting to Instagram (Playwright)..." >> $LOG
 echo "$(date): Posting to Threads (API)..." >> $LOG
 TOKEN=$(cat "$SCRIPT_DIR/.threads_token" 2>/dev/null)
 if [ -n "$TOKEN" ]; then
-    curl -s -X POST "https://graph.threads.net/me/threads" \
+    RESULT=$(curl -s -X POST "https://graph.threads.net/me/threads" \
         -d "access_token=$TOKEN" \
         -d "media_type=text" \
-        -d "text=$THREADS_POST" >> $LOG 2>&1
+        -d "text=$THREADS_POST")
+    echo "Threads result: $RESULT" >> $LOG
     echo "Threads API post done" >> $LOG
 else
     echo "No Threads token found" >> $LOG
 fi
+
+# Send notification to MK
+python3 "$SCRIPT_DIR/daily_report.py" >> $LOG 2>&1
 
 echo "$(date): Done." >> $LOG
