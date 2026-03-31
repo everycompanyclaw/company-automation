@@ -1,2 +1,6 @@
 .env
 .threads_token
+generated_posts.json
+*.md
+*.png
+*.jpg
