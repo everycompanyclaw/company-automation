@@ -1,7 +1,7 @@
 #!/bin/bash
-# MiniMax Social Pipeline — Different content for Threads vs IG
-# Threads: MK's personal account (@milo_chen018)
-# Instagram: Company account (@everycompanyclaw)
+# Social Pipeline — Different content for Threads vs IG
+# Threads: @milo_chen018 (personal) — different CN content
+# Instagram: @everycompanyclaw (company) — different content
 # Runs daily at 7 PM via cron
 
 LOG="/tmp/social_pipeline.log"
@@ -33,20 +33,21 @@ else
     exit 1
 fi
 
-# Step 2: Post to Instagram (company account) — different content
-echo "$(date): Posting to Instagram (company account)..." >> $LOG
-/usr/bin/python3 "$SCRIPT_DIR/auto_post_to_social.py" --platform instagram --content "$IG_POST" >> $LOG 2>&1
+# Step 2: Post to Instagram (company @everycompanyclaw) — IG API
+echo "$(date): Posting to Instagram (@everycompanyclaw)..." >> $LOG
+IG_IMAGE_URL="https://raw.githubusercontent.com/everycompanyclaw/company-automation/openclaw-integration/pixel-cat-pixar.png"
+python3 "$SCRIPT_DIR/ig_api_poster.py" "/tmp/ig_caption.txt" "$IG_IMAGE_URL" 2>&1 || echo "IG post failed" >> $LOG
 
-# Step 3: Post to Threads (personal account @milo_chen018) — different content
+# Step 3: Post to Threads (@milo_chen018) — different CN content
 echo "$(date): Posting to Threads (@milo_chen018)..." >> $LOG
 TOKEN=$(cat "$SCRIPT_DIR/.threads_token" 2>/dev/null)
 if [ -n "$TOKEN" ]; then
+    echo "$THREADS_POST" > /tmp/threads_caption.txt
     RESULT=$(curl -s -X POST "https://graph.threads.net/me/threads" \
         -d "access_token=$TOKEN" \
         -d "media_type=text" \
         -d "text=$THREADS_POST")
     echo "Threads result: $RESULT" >> $LOG
-    echo "Threads API post done" >> $LOG
 else
     echo "No Threads token found" >> $LOG
 fi
