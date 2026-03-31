@@ -20,7 +20,7 @@ cd "$SCRIPT_DIR"
 echo "$(date): Generating content..." >> $LOG
 TOPICS=("AI automation business" "build in public startup" "indie hacker tools" "passive income automation" "AI company 24/7")
 TOPIC=${TOPICS[$RANDOM % ${#TOPICS[@]}]}
-python3 "$SCRIPT_DIR/content_generator.py" --topic "$TOPIC" >> $LOG 2>&1
+MINIMAX_API_KEY="$MINIMAX_API_KEY" python3 "$SCRIPT_DIR/content_generator.py" --topic "$TOPIC" >> $LOG 2>&1
 
 # Load generated posts
 if [ -f "$SCRIPT_DIR/generated_posts.json" ]; then
@@ -36,6 +36,15 @@ echo "$(date): Posting to Instagram (Playwright)..." >> $LOG
 /usr/bin/python3 "$SCRIPT_DIR/auto_post_to_social.py" --platform instagram --content "$IG_POST" >> $LOG 2>&1
 
 echo "$(date): Posting to Threads (API)..." >> $LOG
-python3 "$SCRIPT_DIR/threads_api_poster.py" --post "$THREADS_POST" >> $LOG 2>&1
+TOKEN=$(cat "$SCRIPT_DIR/.threads_token" 2>/dev/null)
+if [ -n "$TOKEN" ]; then
+    curl -s -X POST "https://graph.threads.net/me/threads" \
+        -d "access_token=$TOKEN" \
+        -d "media_type=text" \
+        -d "text=$THREADS_POST" >> $LOG 2>&1
+    echo "Threads API post done" >> $LOG
+else
+    echo "No Threads token found" >> $LOG
+fi
 
 echo "$(date): Done." >> $LOG

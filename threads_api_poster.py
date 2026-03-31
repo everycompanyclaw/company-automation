@@ -72,26 +72,19 @@ def get_long_lived_token(short_token, app_id, app_secret):
     return resp.json()
 
 def get_threads_user_id(token):
-    """Get Threads user ID from Instagram account."""
-    url = "https://graph.facebook.com/v19.0/me/accounts"
-    params = {"access_token": token}
+    """Get Threads user ID from token."""
+    url = "https://graph.threads.net/me"
+    params = {"access_token": token, "fields": "id,name"}
     resp = requests.get(url, params=params, timeout=15)
     data = resp.json()
-    if "data" in data and len(data["data"]) > 0:
-        return data["data"][0].get("id")
-    # Try Instagram business account linked to Threads
-    url2 = "https://graph.facebook.com/v19.0/me"
-    params2 = {"access_token": token, "fields": "instagram_business_account"}
-    resp2 = requests.get(url2, params=params2, timeout=15)
-    data2 = resp2.json()
-    return data2.get("instagram_business_account", {}).get("id")
+    return data.get("id")
 
 def post_to_threads(token, thread_id, content):
     """Post text content to Threads via Graph API."""
-    url = f"https://graph.facebook.com/v19.0/{thread_id}/threads"
+    url = "https://graph.threads.net/me/threads"
     params = {"access_token": token}
-    data = {"message": content}
-    resp = requests.post(url, params=params, json=data, timeout=30)
+    data = {"media_type": "text", "text": content}
+    resp = requests.post(url, params=params, data=data, timeout=30)
     return resp.json()
 
 def setup(app_id, app_secret):
@@ -172,11 +165,13 @@ def main():
         config = json.loads(CONFIG_FILE.read_text())
         thread_id = config.get("thread_id")
     
+    # thread_id is the Threads user ID
     if not thread_id:
-        print("⚠️ Thread ID not found. Setting up...")
+        print("⚠️ Thread ID not found. Getting from token...")
         thread_id = get_threads_user_id(token)
         if thread_id:
             CONFIG_FILE.write_text(json.dumps({"thread_id": thread_id, "app_id": app_id}))
+            print(f"✅ Thread ID: {thread_id}")
     
     if not thread_id:
         print("❌ Could not determine Threads account ID.")
