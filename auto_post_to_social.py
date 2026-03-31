@@ -259,18 +259,29 @@ async def post_to_threads(browser, caption: str):
         await context.close()
 
 
+# Top-level argument parser
+_parser = argparse.ArgumentParser(description="Auto-post to Instagram & Threads")
+_parser.add_argument("--platform", choices=["instagram", "threads", "both"], default="both")
+_parser.add_argument("--content", "-c", help="Custom caption (overrides default)")
+_parser.add_argument("--post-index", "-i", type=int, default=0, help="Which post to use (0, 1, 2...)")
+_parser.add_argument("--image", help="Image file path to post")
+_parser.add_argument("--keep-open", action="store_true", help="Keep browser open after posting")
+_parser.add_argument("--dry-run", action="store_true", help="Show post content without publishing")
+
 async def main():
-    parser = argparse.ArgumentParser(description="Auto-post to Instagram & Threads")
-    parser.add_argument("--platform", choices=["instagram", "threads", "both"], default="both")
-    parser.add_argument("--content", "-c", help="Custom caption (overrides default)")
-    parser.add_argument("--post-index", "-i", type=int, default=0, help="Which post to use (0, 1, 2...)")
-    parser.add_argument("--image", help="Image file path to post")
-    parser.add_argument("--keep-open", action="store_true", help="Keep browser open after posting")
+    args = _parser.parse_args()
     
-    args = parser.parse_args()
-    
-    print("🚀 Starting Auto-Poster...")
+    print("🚀 Auto-Poster")
     print(f"   Platform: {args.platform}")
+    
+    if args.dry_run:
+        idx_ig = min(args.post_index, len(POSTS["instagram"]) - 1)
+        idx_th = min(args.post_index, len(POSTS["threads"]) - 1)
+        print("\n📱 [DRY RUN] Instagram caption:")
+        print(POSTS["instagram"][idx_ig])
+        print("\n📘 [DRY RUN] Threads caption:")
+        print(POSTS["threads"][idx_th])
+        return
     
     async with async_playwright() as p:
         # Launch browser (reuse existing session if possible)
