@@ -132,26 +132,32 @@ canvas {
   display: flex; gap: 10px; justify-content: center;
   margin: 14px 0 8px;
 }
-#approval-panel .ap-btn {
-  font-family: 'Press Start 2P', monospace;
-  font-size: 7px; padding: 7px 12px;
-  border: 3px solid;
-  cursor: pointer; image-rendering: pixelated;
+#approval-panel .ap-status {
+  font-size: 8px; padding: 8px 0; margin: 8px 0;
+  text-align: center; min-height: 24px;
 }
-#btn-approve {
-  background: #00aa44; color: #fff;
-  border-color: #007722;
-  box-shadow: 3px 3px 0 #004411;
+#approval-panel .ap-status.reviewing {
+  color: #ffd700;
 }
-#btn-approve:hover { background: #00cc55; }
-#btn-decline {
-  background: #cc2200; color: #fff;
-  border-color: #881100;
-  box-shadow: 3px 3px 0 #440000;
+#approval-panel .ap-status.reviewing::after {
+  content: '';
+  display: inline-block;
+  width: 6px; height: 6px;
+  background: #ffd700;
+  border-radius: 50%;
+  margin-left: 8px;
+  vertical-align: middle;
+  animation: reviewPulse 0.5s ease-in-out infinite alternate;
 }
-#btn-decline:hover { background: #ee3300; }
-#approval-panel .ap-footer {
-  font-size: 5px; color: #888; margin-top: 6px;
+@keyframes reviewPulse {
+  from { opacity: 0.3; transform: scale(0.8); }
+  to { opacity: 1; transform: scale(1.2); }
+}
+#approval-panel .ap-status.approved {
+  color: #00ff66; font-size: 9px; text-shadow: 2px 2px 0 #006622;
+}
+#approval-panel .ap-status.declined {
+  color: #ff4444; font-size: 9px; text-shadow: 2px 2px 0 #881111;
 }
 </style>
 </head>
@@ -166,18 +172,16 @@ canvas {
   <div id="game-wrap">
     <div id="canvas-wrap">
       <canvas id="game"></canvas>
-      <div id="hiring-banner">🏢 HIRING OPPORTUNITY DETECTED — Approval Required!</div>
+      <div id="hiring-banner">🏢 HIRING OPPORTUNITY DETECTED — AI CEO Reviewing...</div>
       <div id="approval-overlay">
         <div id="approval-panel">
           <div class="ap-title">🏢 HIRING OPPORTUNITY!</div>
-          <div class="ap-subtitle">A new agent wants to join the team!</div>
+          <div class="ap-subtitle">AI CEO (EveryCompanyClaw) is reviewing...</div>
           <div class="ap-row">Role: <strong id="ap-role">—</strong></div>
           <div class="ap-row">Color: <span id="ap-color-swatch" class="ap-color-swatch"></span> <span id="ap-color-name">—</span></div>
           <div class="ap-buttons">
-            <button class="ap-btn" id="btn-approve">✅ APPROVE</button>
-            <button class="ap-btn" id="btn-decline">❌ DECLINE</button>
+            <div class="ap-status reviewing" id="ap-status">🏢 AI CEO REVIEWING...</div>
           </div>
-          <div class="ap-footer">(CEO approval required)</div>
         </div>
       </div>
     </div>
@@ -207,7 +211,7 @@ canvas {
 const TILE = 32;
 const MAP_W = 20, MAP_H = 15;
 const canvas = document.getElementById('game');
-const ctx = canvas.getContext('22d');
+const ctx = canvas.getContext('2d');
 canvas.width = MAP_W * TILE;
 canvas.height = MAP_H * TILE;
 
@@ -439,7 +443,6 @@ const AGENT_DISPLAY={CEO:'CEO',DevAgent:'DEV',SocialAgent:'SOCIAL',OpsAgent:'OPS
 
 // === PENDING HIRE OPPORTUNITY ===
 let pendingHireOpportunity=null; // null or {type, color, colorName}
-let pendingHireTimeout=null;
 const HIRE_POOL=['MarketerAgent','SalesAgent','AnalystAgent','SupportAgent','ResearcherAgent','DesignerAgent','WriterAgent','FinanceAgent'];
 const HIRED=new Set(['CEO','DevAgent']);
 
@@ -465,7 +468,41 @@ function showApprovalPanel(role, color, colorName){
   const swatch=document.getElementById('ap-color-swatch');
   swatch.style.background=color;
   document.getElementById('ap-color-name').textContent=colorName;
+  document.getElementById('ap-status').textContent='🏢 AI CEO REVIEWING...';
+  document.getElementById('ap-status').className='ap-status reviewing';
   document.getElementById('approval-overlay').classList.add('active');
+  // AI CEO auto-decides after 2 seconds
+  setTimeout(()=>reviewHireAfterDelay(),2000);
+}
+
+function reviewHireAfterDelay(){
+  if(!pendingHireOpportunity) return;
+  const approved=Math.random()<0.7;
+  const typeName=AGENT_DISPLAY[pendingHireOpportunity.type]||pendingHireOpportunity.type;
+  const statusEl=document.getElementById('ap-status');
+  if(approved){
+    statusEl.textContent='✅ APPROVED!';
+    statusEl.className='ap-status approved';
+    logActivity('AI CEO APPROVED hiring: '+typeName+' — opportunity accepted.');
+    flashMessage('AI CEO APPROVED: '+typeName+' is joining!');
+    setTimeout(()=>{
+      approveHire();
+    },500);
+  } else {
+    statusEl.textContent='❌ DECLINED';
+    statusEl.className='ap-status declined';
+    logActivity('AI CEO DECLINED hiring: '+typeName+' — opportunity passed.');
+    flashMessage('AI CEO DECLINED: '+typeName+' will not join.');
+    setTimeout(()=>{
+      declineHire();
+    },3000);
+  }
+}
+
+function logActivity(msg){
+  const log=document.getElementById('activity-log');
+  const ts=new Date().toTimeString().slice(0,5);
+  log.textContent='['+ts+'] '+msg;
 }
 function hideApprovalPanel(){
   document.getElementById('approval-overlay').classList.remove('active');
@@ -503,15 +540,12 @@ function approveHire(){
 }
 
 function declineHire(){
-  if(pendingHireOpportunity){
-    flashMessage('Hiring declined for '+AGENT_DISPLAY[pendingHireOpportunity.type]+'.');
-  }
+  // Decision message already shown by reviewHireAfterDelay
   clearPendingHire();
 }
 
 function clearPendingHire(){
   pendingHireOpportunity=null;
-  if(pendingHireTimeout){ clearTimeout(pendingHireTimeout); pendingHireTimeout=null; }
   hideHiringBanner();
   hideApprovalPanel();
 }
@@ -530,20 +564,8 @@ function checkPendingHire(){
     };
     showHiringBanner();
     showApprovalPanel(AGENT_DISPLAY[type]||type, pendingHireOpportunity.color, pendingHireOpportunity.color);
-    // Auto-decline after 60 seconds
-    pendingHireTimeout=setTimeout(()=>{
-      if(pendingHireOpportunity){
-        flashMessage('Hiring opportunity expired for '+AGENT_DISPLAY[pendingHireOpportunity.type]+'.');
-        lastNewHire=Date.now();
-        clearPendingHire();
-      }
-    },60000);
   }
 }
-
-// Wire up buttons
-document.getElementById('btn-approve').addEventListener('click',approveHire);
-document.getElementById('btn-decline').addEventListener('click',declineHire);
 
 function initAgents(){
   agents=[

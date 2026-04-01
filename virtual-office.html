@@ -172,7 +172,7 @@ canvas {
   <div id="game-wrap">
     <div id="canvas-wrap">
       <canvas id="game"></canvas>
-      <div id="hiring-banner">🏢 HIRING OPPORTUNITY DETECTED — Approval Required!</div>
+      <div id="hiring-banner">🏢 HIRING OPPORTUNITY DETECTED — AI CEO Reviewing...</div>
       <div id="approval-overlay">
         <div id="approval-panel">
           <div class="ap-title">🏢 HIRING OPPORTUNITY!</div>
@@ -540,9 +540,7 @@ function approveHire(){
 }
 
 function declineHire(){
-  if(pendingHireOpportunity){
-    flashMessage('Hiring declined for '+AGENT_DISPLAY[pendingHireOpportunity.type]+'.');
-  }
+  // Decision message already shown by reviewHireAfterDelay
   clearPendingHire();
 }
 
