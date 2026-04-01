@@ -4,36 +4,50 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>EveryCompanyClaw HQ - Virtual Office</title>
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 <style>
+  /* ═══════════════════════════════════════════════
+     RESET & ROOT VARIABLES - 16-COLOR PALETTE
+  ═══════════════════════════════════════════════ */
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   :root {
-    --bg: #050818;
-    --cyan: #00f5ff;
-    --purple: #bf5fff;
-    --pink: #ff5fa0;
-    --green: #5fffb0;
-    --orange: #ff8c42;
-    --grid-line: rgba(0,245,255,0.15);
-    --grid-glow: rgba(0,245,255,0.4);
-    --hud-border: rgba(0,245,255,0.3);
-    --hud-bg: rgba(5,8,24,0.85);
+    --bg:         #0a0a0a;
+    --floor:      #1a1a2e;
+    --grid-line:  #2d2d4a;
+    --ui-border:  #444466;
+    --ui-border2: #333355;
+    --text:       #ffffff;
+    --text-dim:   #aaaaaa;
+    --text-darker:#666688;
+    --cyan:       #00f5ff;
+    --purple:     #aa55ff;
+    --pink:       #ff55aa;
+    --green:      #00ff88;
+    --orange:     #ffaa00;
+    --red:        #ff5555;
+    --blue:       #55aaff;
+    --yellow:     #ffff55;
+    --teal:       #55ffcc;
+    --dim-green:  #338855;
+    --scanline:   rgba(0,0,0,0.15);
+    --pixel:      'Press Start 2P', monospace;
   }
 
   body {
     background: var(--bg);
-    font-family: 'Inter', sans-serif;
-    color: #fff;
+    font-family: var(--pixel);
+    color: var(--text);
     overflow: hidden;
     width: 100vw;
     height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
+    image-rendering: pixelated;
   }
 
-  /* Scanline overlay */
+  /* CRT scanline overlay */
   body::after {
     content: '';
     position: fixed;
@@ -42,8 +56,8 @@
       0deg,
       transparent,
       transparent 2px,
-      rgba(0,0,0,0.08) 2px,
-      rgba(0,0,0,0.08) 4px
+      var(--scanline) 2px,
+      var(--scanline) 4px
     );
     pointer-events: none;
     z-index: 9999;
@@ -54,616 +68,503 @@
     content: '';
     position: fixed;
     inset: 0;
-    background: radial-gradient(ellipse at center, transparent 60%, rgba(0,0,0,0.6) 100%);
+    background: radial-gradient(ellipse at center, transparent 55%, rgba(0,0,0,0.7) 100%);
     pointer-events: none;
     z-index: 9998;
   }
 
+  /* ═══════════════════════════════════════════════
+     PIXEL BORDER MIXIN (stepped corners)
+  ═══════════════════════════════════════════════ */
+  .pixel-box {
+    border: 4px solid var(--ui-border);
+    box-shadow:
+      inset -4px -4px 0 var(--ui-border2),
+      4px 4px 0 rgba(0,0,0,0.5);
+  }
+
+  /* ═══════════════════════════════════════════════
+     HUD CONTAINER
+  ═══════════════════════════════════════════════ */
   #hud {
     position: relative;
     width: 1100px;
     height: 700px;
     background: var(--bg);
-    border: 1px solid var(--hud-border);
-    box-shadow: 0 0 60px rgba(0,245,255,0.1), inset 0 0 60px rgba(0,0,0,0.5);
+    border: 4px solid var(--ui-border);
+    box-shadow:
+      inset 0 0 0 2px var(--ui-border2),
+      0 0 0 2px #000,
+      8px 8px 0 rgba(0,0,0,0.8);
+    overflow: hidden;
   }
 
-  /* Corner decorations */
+  /* Corner step-decorations */
   .corner {
     position: absolute;
-    width: 30px;
-    height: 30px;
+    width: 16px;
+    height: 16px;
+    background: var(--ui-border);
     z-index: 100;
   }
-  .corner-tl { top: -1px; left: -1px; border-top: 2px solid var(--cyan); border-left: 2px solid var(--cyan); }
-  .corner-tr { top: -1px; right: -1px; border-top: 2px solid var(--cyan); border-right: 2px solid var(--cyan); }
-  .corner-bl { bottom: -1px; left: -1px; border-bottom: 2px solid var(--cyan); border-left: 2px solid var(--cyan); }
-  .corner-br { bottom: -1px; right: -1px; border-bottom: 2px solid var(--cyan); border-right: 2px solid var(--cyan); }
+  .corner-tl { top: -4px; left: -4px; }
+  .corner-tr { top: -4px; right: -4px; }
+  .corner-bl { bottom: -4px; left: -4px; }
+  .corner-br { bottom: -4px; right: -4px; }
 
-  /* ===== TOP BAR ===== */
+  /* ═══════════════════════════════════════════════
+     TOP BAR
+  ═══════════════════════════════════════════════ */
   #topbar {
     position: absolute;
     top: 0; left: 0; right: 0;
-    height: 48px;
-    background: linear-gradient(180deg, rgba(0,245,255,0.08) 0%, transparent 100%);
-    border-bottom: 1px solid rgba(0,245,255,0.2);
+    height: 52px;
+    background: var(--floor);
+    border-bottom: 4px solid var(--ui-border);
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 20px;
+    padding: 0 16px;
     z-index: 50;
   }
   #topbar h1 {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 16px;
-    font-weight: 900;
-    letter-spacing: 4px;
+    font-size: 10px;
     color: var(--cyan);
-    text-shadow: 0 0 20px var(--cyan), 0 0 40px rgba(0,245,255,0.5);
+    text-shadow: 2px 2px 0 #004455;
+    letter-spacing: 1px;
   }
-  #clock {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 13px;
-    color: rgba(255,255,255,0.7);
-    letter-spacing: 2px;
-  }
-  #status-badge {
+  #topbar-center {
     display: flex;
     align-items: center;
-    gap: 8px;
-    font-family: 'Orbitron', sans-serif;
+    gap: 16px;
+  }
+  .stat-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+  }
+  .stat-label {
+    font-size: 5px;
+    color: var(--text-darker);
+  }
+  .stat-value {
+    font-size: 8px;
+    color: var(--text);
+  }
+  #clock-box {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 3px;
+  }
+  #clock {
     font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 2px;
+    color: var(--text);
+    letter-spacing: 1px;
+  }
+  #status-badge {
+    font-size: 6px;
     color: var(--green);
-    border: 1px solid var(--green);
-    padding: 4px 12px;
-    border-radius: 2px;
-    background: rgba(95,255,176,0.05);
-    animation: badge-pulse 2s ease-in-out infinite;
+    letter-spacing: 1px;
+    animation: blink-text 1s step-end infinite;
   }
-  @keyframes badge-pulse {
-    0%, 100% { box-shadow: 0 0 5px rgba(95,255,176,0.3); }
-    50% { box-shadow: 0 0 15px rgba(95,255,176,0.6); }
-  }
-  .badge-dot {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: var(--green);
-    animation: dot-blink 1s step-end infinite;
-  }
-  @keyframes dot-blink {
+  @keyframes blink-text {
     0%, 100% { opacity: 1; }
-    50% { opacity: 0.2; }
+    50% { opacity: 0.3; }
+  }
+  #status-badge::before {
+    content: '▶ ';
+  }
+  #team-count {
+    font-size: 7px;
+    color: var(--orange);
+    letter-spacing: 1px;
   }
 
-  /* ===== BOTTOM BAR ===== */
+  /* ═══════════════════════════════════════════════
+     BOTTOM LOG BAR
+  ═══════════════════════════════════════════════ */
   #bottombar {
     position: absolute;
     bottom: 0; left: 0; right: 0;
-    height: 70px;
-    background: linear-gradient(0deg, rgba(0,245,255,0.06) 0%, transparent 100%);
-    border-top: 1px solid rgba(0,245,255,0.15);
+    height: 52px;
+    background: var(--floor);
+    border-top: 4px solid var(--ui-border);
     display: flex;
     align-items: center;
-    justify-content: space-around;
-    padding: 0 20px;
+    padding: 0 12px;
+    gap: 8px;
     z-index: 50;
   }
-  .agent-status {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    background: rgba(0,0,0,0.3);
-    border: 1px solid rgba(255,255,255,0.08);
-    border-radius: 4px;
-    padding: 8px 14px;
-    min-width: 180px;
-  }
-  .agent-avatar {
-    width: 28px;
-    height: 28px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 14px;
-    flex-shrink: 0;
-  }
-  .agent-info { flex: 1; }
-  .agent-name {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 9px;
+  #log-label {
+    font-size: 6px;
+    color: var(--text-darker);
     letter-spacing: 1px;
-    color: rgba(255,255,255,0.6);
-    margin-bottom: 4px;
-  }
-  .agent-task {
-    font-size: 10px;
-    color: rgba(255,255,255,0.8);
     white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    max-width: 110px;
   }
-  .activity-bar {
-    width: 100%;
-    height: 3px;
-    background: rgba(255,255,255,0.1);
-    border-radius: 2px;
-    margin-top: 4px;
+  #activity-log {
+    flex: 1;
     overflow: hidden;
+    display: flex;
+    gap: 12px;
+    align-items: center;
   }
-  .activity-fill {
-    height: 100%;
-    border-radius: 2px;
-    transition: width 1s ease;
+  .log-entry {
+    font-size: 6px;
+    color: var(--text-dim);
+    white-space: nowrap;
+    flex-shrink: 0;
+    padding: 3px 6px;
+    border: 2px solid var(--ui-border2);
+    background: rgba(0,0,0,0.3);
+    animation: log-scroll 20s linear infinite;
+  }
+  .log-entry.hi { color: var(--cyan); border-color: var(--cyan); background: rgba(0,245,255,0.05); }
+  @keyframes log-scroll {
+    0%   { opacity: 0.6; }
+    10%  { opacity: 1; }
+    90%  { opacity: 1; }
+    100% { opacity: 0.6; }
   }
 
-  /* ===== LEFT PANEL - MINIMAP ===== */
+  /* ═══════════════════════════════════════════════
+     LEFT MINIMAP
+  ═══════════════════════════════════════════════ */
   #minimap-panel {
     position: absolute;
-    left: 12px;
+    left: 10px;
     top: 60px;
-    width: 120px;
-    background: var(--hud-bg);
-    border: 1px solid var(--hud-border);
-    border-radius: 4px;
-    padding: 10px;
+    width: 100px;
     z-index: 50;
   }
-  #minimap-panel h3 {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 8px;
-    letter-spacing: 2px;
-    color: var(--cyan);
-    margin-bottom: 8px;
+  #minimap-label {
+    font-size: 5px;
+    color: var(--text-darker);
     text-align: center;
+    margin-bottom: 4px;
+    letter-spacing: 1px;
   }
   #minimap {
-    width: 100px;
+    width: 80px;
     height: 80px;
-    background: rgba(0,0,0,0.4);
-    border: 1px solid rgba(0,245,255,0.2);
-    position: relative;
+    border: 3px solid var(--ui-border);
+    background: var(--bg);
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 1fr;
     gap: 2px;
     padding: 2px;
+    box-shadow: inset 0 0 0 1px var(--ui-border2);
   }
   .mm-room {
-    border-radius: 2px;
-    font-size: 7px;
+    border: 2px solid transparent;
+    font-size: 5px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-family: 'Orbitron', sans-serif;
-    letter-spacing: 0.5px;
     position: relative;
-    overflow: hidden;
+    transition: all 0.5s;
   }
-  .mm-ops { background: rgba(0,245,255,0.15); border: 1px solid rgba(0,245,255,0.3); color: var(--cyan); }
-  .mm-lead { background: rgba(191,95,255,0.15); border: 1px solid rgba(191,95,255,0.3); color: var(--purple); }
-  .mm-social { background: rgba(255,95,160,0.15); border: 1px solid rgba(255,95,160,0.3); color: var(--pink); }
-  .mm-break { background: rgba(95,255,176,0.15); border: 1px solid rgba(95,255,176,0.3); color: var(--green); }
-
-  /* ===== RIGHT PANEL - ACTIVITY LOG ===== */
-  #log-panel {
+  .mm-room.active { border-color: var(--cyan); background: rgba(0,245,255,0.1); }
+  .mm-room.dim { opacity: 0.3; }
+  .mm-dot {
     position: absolute;
-    right: 12px;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    transform: translate(-50%,-50%);
+    z-index: 5;
+    transition: left 0.5s, top 0.5s;
+  }
+
+  /* ═══════════════════════════════════════════════
+     RIGHT STATS PANEL
+  ═══════════════════════════════════════════════ */
+  #stats-panel {
+    position: absolute;
+    right: 10px;
     top: 60px;
-    width: 160px;
-    background: var(--hud-bg);
-    border: 1px solid var(--hud-border);
-    border-radius: 4px;
-    padding: 10px;
+    width: 110px;
     z-index: 50;
   }
-  #log-panel h3 {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 8px;
-    letter-spacing: 2px;
-    color: var(--cyan);
-    margin-bottom: 8px;
+  #stats-label {
+    font-size: 5px;
+    color: var(--text-darker);
     text-align: center;
+    margin-bottom: 4px;
+    letter-spacing: 1px;
   }
-  #activity-log {
-    height: 80px;
-    overflow: hidden;
+  #stats-box {
+    border: 3px solid var(--ui-border);
+    background: var(--bg);
+    padding: 6px;
     display: flex;
-    flex-direction: column-reverse;
-    gap: 3px;
+    flex-direction: column;
+    gap: 6px;
+    box-shadow: inset -3px -3px 0 var(--ui-border2);
   }
-  .log-entry {
-    font-size: 8.5px;
-    color: rgba(255,255,255,0.55);
-    line-height: 1.4;
-    padding: 2px 4px;
-    border-left: 2px solid rgba(0,245,255,0.3);
-    animation: log-fade-in 0.5s ease;
+  .stat-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 3px;
+    border-bottom: 1px solid var(--ui-border2);
   }
-  @keyframes log-fade-in {
-    from { opacity: 0; transform: translateX(10px); }
-    to { opacity: 1; transform: translateX(0); }
+  .stat-row:last-child { border-bottom: none; padding-bottom: 0; }
+  .stat-row-label { font-size: 5px; color: var(--text-darker); }
+  .stat-row-val   { font-size: 7px; color: var(--text); }
+  #hires-display {
+    margin-top: 4px;
+    font-size: 6px;
+    color: var(--orange);
+    text-align: center;
+    padding: 4px;
+    border: 2px solid var(--orange);
+    background: rgba(255,170,0,0.05);
   }
-  .log-entry .ts { color: rgba(0,245,255,0.4); font-family: 'Orbitron', sans-serif; font-size: 7px; }
-  .log-entry.highlight { color: rgba(255,255,255,0.85); border-left-color: var(--cyan); }
 
-  /* ===== OFFICE VIEW ===== */
+  /* ═══════════════════════════════════════════════
+     OFFICE VIEWPORT
+  ═══════════════════════════════════════════════ */
   #office-wrap {
     position: absolute;
-    top: 50px;
-    left: 145px;
-    right: 182px;
-    bottom: 72px;
+    top: 52px;
+    left: 120px;
+    right: 130px;
+    bottom: 52px;
     display: flex;
     align-items: center;
     justify-content: center;
-    perspective: 800px;
+    perspective: 900px;
+    overflow: hidden;
   }
 
   #office {
     position: relative;
-    width: 800px;
+    width: 760px;
     height: 520px;
     transform-style: preserve-3d;
     transform: rotateX(55deg) rotateZ(-45deg);
   }
 
-  /* Floor grid */
+  /* Floor with pixel tile grid */
   #floor {
     position: absolute;
     inset: 0;
-    background:
-      repeating-linear-gradient(0deg, var(--grid-line) 0px, var(--grid-line) 1px, transparent 1px, transparent 50px),
-      repeating-linear-gradient(90deg, var(--grid-line) 0px, var(--grid-line) 1px, transparent 1px, transparent 50px);
-    border: 1px solid rgba(0,245,255,0.2);
+    background-color: var(--floor);
+    background-image:
+      repeating-linear-gradient(0deg, var(--grid-line) 0px, var(--grid-line) 1px, transparent 1px, transparent 40px),
+      repeating-linear-gradient(90deg, var(--grid-line) 0px, var(--grid-line) 1px, transparent 1px, transparent 40px);
+    border: 2px solid var(--ui-border);
+    box-shadow: inset 0 0 40px rgba(0,0,0,0.5);
   }
 
-  /* Room zones */
+  /* ═══════════════════════════════════════════════
+     ROOMS
+  ═══════════════════════════════════════════════ */
   .room {
     position: absolute;
-    border: 1px solid rgba(255,255,255,0.12);
+    border: 2px solid transparent;
     overflow: hidden;
-    transition: box-shadow 0.3s;
+    transition: border-color 0.5s, box-shadow 0.5s;
   }
-  .room:hover .room-tooltip { opacity: 1; transform: translateY(0); }
+  .room.active {
+    border-color: var(--room-color, var(--cyan));
+    box-shadow: inset 0 0 20px rgba(0,0,0,0.3);
+  }
+  .room.locked {
+    opacity: 0.15;
+    border-color: var(--ui-border2) !important;
+  }
+  .room-glow {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 0.5s;
+    pointer-events: none;
+  }
+  .room.active .room-glow { opacity: 1; }
 
   .room-label {
     position: absolute;
     top: 6px;
     left: 8px;
-    font-family: 'Orbitron', sans-serif;
-    font-size: 7px;
-    letter-spacing: 1.5px;
-    opacity: 0.5;
-    text-transform: uppercase;
+    font-size: 6px;
+    opacity: 0.6;
     z-index: 5;
-    text-shadow: 0 0 10px currentColor;
-    pointer-events: none;
+    text-shadow: 1px 1px 0 #000;
+    letter-spacing: 1px;
   }
 
+  /* Room tooltip */
+  .room:hover .room-tooltip { opacity: 1; }
   .room-tooltip {
     position: absolute;
-    bottom: 8px;
+    bottom: 6px;
     left: 50%;
-    transform: translateX(-50%) translateY(5px);
-    background: rgba(0,0,0,0.88);
-    border: 1px solid rgba(255,255,255,0.15);
-    border-radius: 4px;
-    padding: 6px 10px;
-    font-size: 9px;
+    transform: translateX(-50%) translateY(4px);
+    background: rgba(0,0,0,0.95);
+    border: 3px solid var(--room-color, var(--cyan));
+    padding: 8px;
+    font-size: 6px;
     white-space: nowrap;
     opacity: 0;
-    transition: opacity 0.3s, transform 0.3s;
+    transition: opacity 0.2s, transform 0.2s;
     z-index: 20;
     text-align: center;
     pointer-events: none;
+    box-shadow: 4px 4px 0 rgba(0,0,0,0.5);
   }
   .room-tooltip .tip-title {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 8px;
+    font-size: 7px;
+    margin-bottom: 5px;
+    color: var(--room-color, var(--cyan));
     letter-spacing: 1px;
-    margin-bottom: 4px;
   }
-  .room-tooltip .tip-stats { color: rgba(255,255,255,0.7); line-height: 1.6; }
+  .room-tooltip .tip-line { color: var(--text-dim); margin: 2px 0; line-height: 1.6; }
 
-  #ops-room {
-    top: 0; left: 0;
-    width: 50%; height: 50%;
-    background: rgba(0,245,255,0.03);
-    border-color: rgba(0,245,255,0.15);
-  }
-  #ops-room .room-label { color: var(--cyan); }
-  #ops-room .room-tooltip { border-color: rgba(0,245,255,0.3); }
-  #ops-room .tip-title { color: var(--cyan); }
+  /* ROOM COLORS */
+  #ops-room    { --room-color: var(--cyan);   top: 0;    left: 0;    width: 50%; height: 50%; }
+  #lead-room   { --room-color: var(--purple); top: 0;    right: 0;   width: 50%; height: 50%; }
+  #social-room { --room-color: var(--pink);   bottom: 0; left: 0;    width: 50%; height: 50%; }
+  #break-room  { --room-color: var(--green);  bottom: 0; right: 0;   width: 50%; height: 50%; }
 
-  #lead-room {
-    top: 0; right: 0;
-    width: 50%; height: 50%;
-    background: rgba(191,95,255,0.03);
-    border-color: rgba(191,95,255,0.15);
-  }
-  #lead-room .room-label { color: var(--purple); }
-  #lead-room .room-tooltip { border-color: rgba(191,95,255,0.3); }
-  #lead-room .tip-title { color: var(--purple); }
-
-  #social-room {
-    bottom: 0; left: 0;
-    width: 50%; height: 50%;
-    background: rgba(255,95,160,0.03);
-    border-color: rgba(255,95,160,0.15);
-  }
-  #social-room .room-label { color: var(--pink); }
-  #social-room .room-tooltip { border-color: rgba(255,95,160,0.3); }
-  #social-room .tip-title { color: var(--pink); }
-
-  #break-room {
-    bottom: 0; right: 0;
-    width: 50%; height: 50%;
-    background: rgba(95,255,176,0.03);
-    border-color: rgba(95,255,176,0.15);
-  }
-  #break-room .room-label { color: var(--green); }
-  #break-room .room-tooltip { border-color: rgba(95,255,176,0.3); }
-  #break-room .tip-title { color: var(--green); }
-
-  /* Room ambient glow */
-  .room::after {
-    content: '';
+  /* Room floor tiles */
+  .room-tiles {
     position: absolute;
     inset: 0;
-    opacity: 0.06;
-    animation: room-pulse 4s ease-in-out infinite;
-    pointer-events: none;
-  }
-  #ops-room::after { background: radial-gradient(ellipse at 30% 30%, var(--cyan), transparent 70%); animation-delay: 0s; }
-  #lead-room::after { background: radial-gradient(ellipse at 70% 30%, var(--purple), transparent 70%); animation-delay: 1s; }
-  #social-room::after { background: radial-gradient(ellipse at 30% 70%, var(--pink), transparent 70%); animation-delay: 2s; }
-  #break-room::after { background: radial-gradient(ellipse at 70% 70%, var(--green), transparent 70%); animation-delay: 3s; }
-  @keyframes room-pulse {
-    0%, 100% { opacity: 0.03; }
-    50% { opacity: 0.08; }
+    background-image:
+      repeating-linear-gradient(0deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 1px, transparent 1px, transparent 20px),
+      repeating-linear-gradient(90deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 1px, transparent 1px, transparent 20px);
   }
 
-  /* ===== ROOM DECOR ELEMENTS ===== */
+  /* Ambient glow per room */
+  #ops-room    .room-glow { background: radial-gradient(ellipse at 25% 25%, rgba(0,245,255,0.15), transparent 65%); }
+  #lead-room   .room-glow { background: radial-gradient(ellipse at 75% 25%, rgba(170,85,255,0.15), transparent 65%); }
+  #social-room .room-glow { background: radial-gradient(ellipse at 25% 75%, rgba(255,85,170,0.15), transparent 65%); }
+  #break-room  .room-glow { background: radial-gradient(ellipse at 75% 75%, rgba(0,255,136,0.15), transparent 65%); }
 
-  /* Desk shapes */
-  .desk {
+  /* Pixel desks */
+  .pixel-desk {
     position: absolute;
-    background: rgba(255,255,255,0.05);
-    border: 1px solid rgba(255,255,255,0.1);
-    border-radius: 2px;
+    border: 2px solid rgba(255,255,255,0.15);
+    background: rgba(0,0,0,0.3);
   }
-  .desk::before {
+  .pixel-desk::after {
     content: '';
     position: absolute;
     top: 3px; left: 3px; right: 3px; bottom: 50%;
-    background: rgba(0,245,255,0.15);
-    border-radius: 1px;
-    animation: screen-flicker 3s ease-in-out infinite;
+    background: var(--desk-color, var(--cyan));
+    opacity: 0.2;
+    animation: screen-flicker 4s step-end infinite;
   }
   @keyframes screen-flicker {
-    0%, 90%, 100% { opacity: 1; }
-    92% { opacity: 0.5; }
-    94% { opacity: 1; }
+    0%, 92%, 96%, 100% { opacity: 0.2; }
+    94% { opacity: 0.05; }
   }
 
-  /* Data streams in ops */
-  .data-stream {
+  /* ═══════════════════════════════════════════════
+     PIXEL AGENTS - CSS box-shadow sprite method
+  ═══════════════════════════════════════════════ */
+  .pixel-agent {
     position: absolute;
-    width: 2px;
-    background: linear-gradient(180deg, transparent, var(--cyan), transparent);
-    opacity: 0.3;
-    animation: stream-flow 2s linear infinite;
-  }
-  @keyframes stream-flow {
-    0% { transform: translateY(-100%); opacity: 0; }
-    30% { opacity: 0.4; }
-    100% { transform: translateY(200px); opacity: 0; }
-  }
-
-  /* Particles in ops */
-  .particle {
-    position: absolute;
-    border-radius: 50%;
+    width: 4px;
+    height: 4px;
+    z-index: 15;
     pointer-events: none;
   }
-  .particle-glow {
-    background: var(--cyan);
-    animation: float-particle 4s ease-in-out infinite;
-  }
-  .particle-purple {
-    background: var(--purple);
-    animation: float-particle 5s ease-in-out infinite;
-  }
-  @keyframes float-particle {
-    0%, 100% { transform: translateY(0) scale(1); opacity: 0.6; }
-    50% { transform: translateY(-20px) scale(1.3); opacity: 1; }
-  }
-
-  /* Funnel arrows in lead lab */
-  .funnel-arrow {
+  .pixel-agent-label {
     position: absolute;
-    width: 20px;
-    height: 2px;
-    background: linear-gradient(90deg, var(--purple), transparent);
-    opacity: 0.4;
-    animation: funnel-flow 2.5s ease-in-out infinite;
+    top: -14px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 5px;
+    white-space: nowrap;
+    color: var(--text-dim);
+    text-shadow: 1px 1px 0 #000, -1px -1px 0 #000;
+    letter-spacing: 0.5px;
   }
-  @keyframes funnel-flow {
-    0% { transform: translateX(0); opacity: 0.2; }
-    50% { opacity: 0.6; }
-    100% { transform: translateX(30px); opacity: 0.2; }
-  }
-
-  /* Post icons in social */
-  .post-icon {
+  .pixel-agent-shadow {
     position: absolute;
-    width: 8px;
-    height: 8px;
-    border-radius: 2px;
-    animation: post-pop 3s ease-in-out infinite;
-  }
-  @keyframes post-pop {
-    0%, 70% { transform: scale(0); opacity: 0; }
-    80% { transform: scale(1.2); opacity: 1; }
-    90% { transform: scale(1); opacity: 0.8; }
-    100% { transform: scale(0.8); opacity: 0.4; }
-  }
-
-  /* Coffee cup in break */
-  .coffee-cup {
-    position: absolute;
-    width: 10px;
-    height: 8px;
-    border: 1px solid var(--green);
-    border-radius: 0 0 3px 3px;
-    opacity: 0.4;
-    background: rgba(95,255,176,0.1);
-  }
-  .coffee-cup::before {
-    content: '';
-    position: absolute;
-    right: -4px;
-    top: 1px;
-    width: 3px;
-    height: 5px;
-    border: 1px solid var(--green);
-    border-radius: 2px;
-  }
-
-  /* Chat bubble */
-  .chat-bubble {
-    position: absolute;
-    width: 12px;
-    height: 8px;
-    border: 1px solid var(--pink);
-    border-radius: 4px;
-    background: rgba(255,95,160,0.1);
-    animation: chat-pop 4s ease-in-out infinite;
-  }
-  .chat-bubble::after {
-    content: '';
-    position: absolute;
-    bottom: -4px;
-    left: 2px;
-    width: 0;
-    height: 0;
-    border-left: 3px solid transparent;
-    border-right: 3px solid transparent;
-    border-top: 4px solid var(--pink);
-  }
-  @keyframes chat-pop {
-    0%, 60% { transform: scale(0); opacity: 0; }
-    70% { transform: scale(1.1); opacity: 0.8; }
-    85% { transform: scale(1); opacity: 0.6; }
-    100% { transform: scale(0.5); opacity: 0; }
-  }
-
-  /* ===== AGENTS ===== */
-  .agent {
-    position: absolute;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    z-index: 10;
-    transition: none;
-    pointer-events: none;
-  }
-  .agent-shadow {
-    position: absolute;
-    bottom: -6px;
-    width: 20px;
-    height: 6px;
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 16px;
+    height: 4px;
     background: rgba(0,0,0,0.4);
     border-radius: 50%;
-    filter: blur(2px);
-    transition: transform 0.5s;
-  }
-  .agent-body {
-    width: 20px;
-    height: 24px;
-    border-radius: 6px 6px 4px 4px;
-    position: relative;
-    animation: agent-idle 1.5s ease-in-out infinite;
-    box-shadow: 0 0 12px currentColor;
-  }
-  @keyframes agent-idle {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-2px); }
-  }
-  .agent-head {
-    width: 14px;
-    height: 14px;
-    border-radius: 50%;
-    position: absolute;
-    top: -10px;
-    left: 3px;
-    background: rgba(255,255,255,0.15);
-    border: 1px solid rgba(255,255,255,0.3);
-    animation: head-nod 2s ease-in-out infinite;
-  }
-  @keyframes head-nod {
-    0%, 80%, 100% { transform: rotate(0deg); }
-    85% { transform: rotate(5deg); }
-    90% { transform: rotate(-3deg); }
-    95% { transform: rotate(2deg); }
-  }
-  .agent-icon {
-    position: absolute;
-    top: -18px;
-    right: -8px;
-    font-size: 9px;
-    filter: drop-shadow(0 0 3px currentColor);
-  }
-  .agent-label {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 6px;
-    letter-spacing: 0.5px;
-    margin-top: 2px;
-    color: rgba(255,255,255,0.6);
-    text-shadow: 0 0 5px currentColor;
-    white-space: nowrap;
+    filter: blur(1px);
   }
 
-  /* Agent colors */
-  .agent-ceo .agent-body { background: linear-gradient(135deg, rgba(0,245,255,0.6), rgba(0,245,255,0.2)); border: 1px solid var(--cyan); color: var(--cyan); }
-  .agent-dev .agent-body { background: linear-gradient(135deg, rgba(191,95,255,0.6), rgba(191,95,255,0.2)); border: 1px solid var(--purple); color: var(--purple); }
-  .agent-social .agent-body { background: linear-gradient(135deg, rgba(255,95,160,0.6), rgba(255,95,160,0.2)); border: 1px solid var(--pink); color: var(--pink); }
-  .agent-ops .agent-body { background: linear-gradient(135deg, rgba(95,255,176,0.6), rgba(95,255,176,0.2)); border: 1px solid var(--green); color: var(--green); }
-
-  /* Walking animation overlay */
-  .agent.walking .agent-body {
-    animation: agent-walk 0.4s steps(2) infinite, agent-idle 1.5s ease-in-out infinite;
+  /* Agent walking animation */
+  .pixel-agent.walking {
+    animation: agent-walk-frame 0.3s steps(2) infinite;
   }
-  @keyframes agent-walk {
-    0% { transform: translateY(0) rotate(-2deg); }
-    50% { transform: translateY(-3px) rotate(2deg); }
+  @keyframes agent-walk-frame {
+    0%   { transform: translateY(0) rotate(-2deg); }
+    50%  { transform: translateY(-4px) rotate(2deg); }
     100% { transform: translateY(0) rotate(-2deg); }
   }
 
-  /* ===== RESPONSIVE ===== */
-  @media (max-width: 1150px) {
-    #hud { width: 95vw; height: 90vh; }
-    #office-wrap { left: 140px; right: 175px; }
-    #office { transform: rotateX(55deg) rotateZ(-45deg) scale(0.85); }
+  /* Idle bob */
+  .pixel-agent.idle {
+    animation: agent-idle-bob 1.2s ease-in-out infinite;
   }
-  @media (max-width: 900px) {
-    #minimap-panel { display: none; }
-    #office-wrap { left: 15px; right: 15px; }
-    #office { transform: rotateX(55deg) rotateZ(-45deg) scale(0.7); }
-    #log-panel { width: 130px; }
+  @keyframes agent-idle-bob {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-2px); }
   }
 
-  /* Neon floor glow animation */
-  @keyframes grid-glow-pulse {
-    0%, 100% { box-shadow: inset 0 0 30px rgba(0,245,255,0.03); }
-    50% { box-shadow: inset 0 0 60px rgba(0,245,255,0.08); }
+  /* NEW HIRE animation */
+  .new-hire-banner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 200;
+    text-align: center;
+    pointer-events: none;
+    animation: new-hire-anim 2.5s ease forwards;
   }
-  #floor { animation: grid-glow-pulse 4s ease-in-out infinite; }
+  .new-hire-banner .nhtext {
+    font-size: 14px;
+    color: var(--yellow);
+    text-shadow: 3px 3px 0 #664400, -1px -1px 0 #000;
+    letter-spacing: 2px;
+    animation: new-hire-pulse 0.3s step-end infinite;
+  }
+  .new-hire-banner .nhname {
+    font-size: 9px;
+    color: var(--text);
+    margin-top: 8px;
+    letter-spacing: 1px;
+  }
+  @keyframes new-hire-anim {
+    0%   { opacity: 0; transform: translate(-50%,-50%) scale(0.5); }
+    15%  { opacity: 1; transform: translate(-50%,-50%) scale(1.2); }
+    30%  { transform: translate(-50%,-50%) scale(1); }
+    75%  { opacity: 1; }
+    100% { opacity: 0; transform: translate(-50%,-50%) scale(1); }
+  }
+  @keyframes new-hire-pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+  }
+
+  /* ═══════════════════════════════════════════════
+     RESPONSIVE
+  ═══════════════════════════════════════════════ */
+  @media (max-width: 1150px) {
+    #hud { width: 98vw; height: 95vh; }
+    #office-wrap { left: 115px; right: 125px; }
+    #office { transform: rotateX(55deg) rotateZ(-45deg) scale(0.82); }
+  }
+  @media (max-width: 900px) {
+    #minimap-panel, #stats-panel { display: none; }
+    #office-wrap { left: 12px; right: 12px; }
+    #office { transform: rotateX(55deg) rotateZ(-45deg) scale(0.68); }
+  }
 </style>
 </head>
 <body>
@@ -675,211 +576,408 @@
   <div class="corner corner-bl"></div>
   <div class="corner corner-br"></div>
 
-  <!-- Top Bar -->
+  <!-- TOP BAR -->
   <div id="topbar">
     <h1>EVERYCOMPANYCLAW HQ</h1>
-    <div id="clock">--:--:--</div>
-    <div id="status-badge">
-      <div class="badge-dot"></div>
-      24/7 ACTIVE
+    <div id="topbar-center">
+      <div class="stat-box">
+        <span class="stat-label">LEADS</span>
+        <span class="stat-value" id="s-leads">48</span>
+      </div>
+      <div class="stat-box">
+        <span class="stat-label">PIPELINE</span>
+        <span class="stat-value" id="s-pipeline">78</span>
+      </div>
+      <div class="stat-box">
+        <span class="stat-label">ACTIONS</span>
+        <span class="stat-value" id="s-actions">495</span>
+      </div>
+      <div class="stat-box">
+        <span class="stat-label">POSTS</span>
+        <span class="stat-value" id="s-posts">3</span>
+      </div>
+      <div id="team-count">TEAM: <span id="agent-count">2</span>/8</div>
+    </div>
+    <div id="clock-box">
+      <div id="clock">--:--:--</div>
+      <div id="status-badge">24/7 ONLINE</div>
     </div>
   </div>
 
-  <!-- Left: Mini-map -->
+  <!-- LEFT MINIMAP -->
   <div id="minimap-panel">
-    <h3>FACILITY MAP</h3>
+    <div id="minimap-label">FACILITY MAP</div>
     <div id="minimap">
-      <div class="mm-room mm-ops" id="mm-ops">OPS</div>
-      <div class="mm-room mm-lead" id="mm-lead">LAB</div>
-      <div class="mm-room mm-social" id="mm-social">SOC</div>
-      <div class="mm-room mm-break" id="mm-break">BRK</div>
+      <div class="mm-room active" id="mm-ops" data-room="ops">OPS</div>
+      <div class="mm-room" id="mm-lead" data-room="lead">LAB</div>
+      <div class="mm-room dim" id="mm-social" data-room="social">SOC</div>
+      <div class="mm-room dim" id="mm-break" data-room="break">BRK</div>
     </div>
   </div>
 
-  <!-- Right: Activity Log -->
-  <div id="log-panel">
-    <h3>ACTIVITY LOG</h3>
-    <div id="activity-log"></div>
+  <!-- RIGHT STATS -->
+  <div id="stats-panel">
+    <div id="stats-label">METRICS</div>
+    <div id="stats-box">
+      <div class="stat-row">
+        <span class="stat-row-label">CONV.</span>
+        <span class="stat-row-val" id="s-conv">34%</span>
+      </div>
+      <div class="stat-row">
+        <span class="stat-row-label">HOT</span>
+        <span class="stat-row-val" id="s-hot">12</span>
+      </div>
+      <div class="stat-row">
+        <span class="stat-row-label">REACH</span>
+        <span class="stat-row-val" id="s-reach">1.2K</span>
+      </div>
+      <div class="stat-row">
+        <span class="stat-row-label">SCORE</span>
+        <span class="stat-row-val" id="s-score">78</span>
+      </div>
+      <div id="hires-display">HIRES: <span id="hires-count">0</span></div>
+    </div>
   </div>
 
-  <!-- Office View -->
+  <!-- OFFICE VIEWPORT -->
   <div id="office-wrap">
     <div id="office">
-
       <div id="floor"></div>
 
-      <!-- OPERATIONS ROOM -->
-      <div class="room" id="ops-room">
-        <div class="room-label">◈ Operations Room</div>
+      <!-- OPS ROOM -->
+      <div class="room active" id="ops-room" style="--room-color:var(--cyan);">
+        <div class="room-glow"></div>
+        <div class="room-tiles"></div>
+        <div class="room-label">◈ OPERATIONS</div>
         <div class="room-tooltip">
           <div class="tip-title">OPERATIONS</div>
-          <div class="tip-stats">
-            Leads: <span id="stat-leads">48</span><br>
-            Pipeline: <span id="stat-pipeline">78</span><br>
-            Conv. Rate: 34%
-          </div>
+          <div class="tip-line">Leads: <span id="stat-leads">48</span></div>
+          <div class="tip-line">Pipeline: <span id="stat-pipeline">78</span></div>
+          <div class="tip-line">Conv. Rate: 34%</div>
         </div>
         <!-- Desks -->
-        <div class="desk" style="width:60px;height:30px;top:40%;left:15%;"></div>
-        <div class="desk" style="width:60px;height:30px;top:40%;left:35%;"></div>
-        <div class="desk" style="width:60px;height:30px;top:40%;left:55%;"></div>
-        <!-- Data streams -->
-        <div class="data-stream" style="left:18%;top:5%;height:40px;animation-delay:0s;"></div>
-        <div class="data-stream" style="left:38%;top:5%;height:35px;animation-delay:0.5s;"></div>
-        <div class="data-stream" style="left:58%;top:5%;height:45px;animation-delay:1s;"></div>
-        <div class="data-stream" style="left:78%;top:5%;height:30px;animation-delay:1.5s;"></div>
-        <!-- Particles -->
-        <div class="particle particle-glow" style="width:4px;height:4px;left:20%;top:30%;animation-delay:0.2s;"></div>
-        <div class="particle particle-glow" style="width:3px;height:3px;left:40%;top:50%;animation-delay:0.7s;"></div>
-        <div class="particle particle-glow" style="width:5px;height:5px;left:60%;top:25%;animation-delay:1.2s;"></div>
-        <div class="particle particle-glow" style="width:3px;height:3px;left:75%;top:55%;animation-delay:1.8s;"></div>
-        <div class="particle particle-glow" style="width:4px;height:4px;left:30%;top:70%;animation-delay:2.2s;"></div>
+        <div class="pixel-desk" style="width:48px;height:24px;top:35%;left:12%;--desk-color:var(--cyan);"></div>
+        <div class="pixel-desk" style="width:48px;height:24px;top:35%;left:32%;--desk-color:var(--cyan);"></div>
+        <div class="pixel-desk" style="width:48px;height:24px;top:35%;left:52%;--desk-color:var(--cyan);"></div>
+        <div class="pixel-desk" style="width:48px;height:24px;top:60%;left:22%;--desk-color:var(--cyan);"></div>
+        <div class="pixel-desk" style="width:48px;height:24px;top:60%;left:42%;--desk-color:var(--cyan);"></div>
       </div>
 
       <!-- LEAD LAB -->
-      <div class="room" id="lead-room">
-        <div class="room-label">◈ Lead Lab</div>
+      <div class="room" id="lead-room" style="--room-color:var(--purple);">
+        <div class="room-glow"></div>
+        <div class="room-tiles"></div>
+        <div class="room-label">◈ LEAD LAB</div>
         <div class="room-tooltip">
           <div class="tip-title">LEAD LAB</div>
-          <div class="tip-stats">
-            Hot Leads: <span id="stat-hot">12</span><br>
-            Warm: 24 | Cold: 15<br>
-            Score Avg: 78
-          </div>
+          <div class="tip-line">Hot: <span id="stat-hot">12</span></div>
+          <div class="tip-line">Warm: 24 | Cold: 15</div>
+          <div class="tip-line">Score Avg: 78</div>
         </div>
-        <!-- Funnel arrows -->
-        <div class="funnel-arrow" style="left:30%;top:20%;animation-delay:0s;"></div>
-        <div class="funnel-arrow" style="left:40%;top:35%;animation-delay:0.3s;"></div>
-        <div class="funnel-arrow" style="left:50%;top:50%;animation-delay:0.6s;"></div>
-        <div class="funnel-arrow" style="left:35%;top:65%;animation-delay:0.9s;"></div>
-        <div class="funnel-arrow" style="left:55%;top:25%;animation-delay:1.2s;"></div>
-        <!-- Purple particles -->
-        <div class="particle particle-purple" style="width:4px;height:4px;left:25%;top:35%;animation-delay:0.3s;"></div>
-        <div class="particle particle-purple" style="width:3px;height:3px;left:50%;top:55%;animation-delay:0.8s;"></div>
-        <div class="particle particle-purple" style="width:5px;height:5px;left:70%;top:30%;animation-delay:1.5s;"></div>
+        <!-- Desks -->
+        <div class="pixel-desk" style="width:48px;height:24px;top:35%;left:32%;--desk-color:var(--purple);"></div>
+        <div class="pixel-desk" style="width:48px;height:24px;top:35%;left:52%;--desk-color:var(--purple);"></div>
+        <div class="pixel-desk" style="width:48px;height:24px;top:60%;left:42%;--desk-color:var(--purple);"></div>
+        <div class="pixel-desk" style="width:48px;height:24px;top:60%;left:62%;--desk-color:var(--purple);"></div>
       </div>
 
       <!-- SOCIAL STUDIO -->
-      <div class="room" id="social-room">
-        <div class="room-label">◈ Social Studio</div>
+      <div class="room locked" id="social-room" style="--room-color:var(--pink);">
+        <div class="room-glow"></div>
+        <div class="room-tiles"></div>
+        <div class="room-label">◈ SOCIAL</div>
         <div class="room-tooltip">
           <div class="tip-title">SOCIAL STUDIO</div>
-          <div class="tip-stats">
-            Posts: <span id="stat-posts">3</span><br>
-            Today's: 1 | Engaged: 24<br>
-            Reach: 1.2K
-          </div>
+          <div class="tip-line">Posts: <span id="stat-posts">3</span></div>
+          <div class="tip-line">Engaged: 24</div>
+          <div class="tip-line">Reach: 1.2K</div>
         </div>
-        <!-- Post icons -->
-        <div class="post-icon" style="background:var(--pink);left:20%;top:30%;animation-delay:0s;"></div>
-        <div class="post-icon" style="background:var(--pink);left:55%;top:25%;animation-delay:1s;"></div>
-        <div class="post-icon" style="background:var(--pink);left:35%;top:55%;animation-delay:2s;"></div>
-        <div class="post-icon" style="background:var(--pink);left:70%;top:60%;animation-delay:2.5s;"></div>
-        <!-- Chat bubbles -->
-        <div class="chat-bubble" style="left:25%;top:20%;animation-delay:0.5s;"></div>
-        <div class="chat-bubble" style="left:60%;top:40%;animation-delay:1.5s;"></div>
-        <div class="chat-bubble" style="left:45%;top:70%;animation-delay:2.5s;"></div>
+        <div class="pixel-desk" style="width:48px;height:24px;top:35%;left:22%;--desk-color:var(--pink);"></div>
+        <div class="pixel-desk" style="width:48px;height:24px;top:35%;left:42%;--desk-color:var(--pink);"></div>
+        <div class="pixel-desk" style="width:48px;height:24px;top:60%;left:32%;--desk-color:var(--pink);"></div>
       </div>
 
       <!-- BREAK ROOM -->
-      <div class="room" id="break-room">
-        <div class="room-label">◈ Break Room</div>
+      <div class="room locked" id="break-room" style="--room-color:var(--green);">
+        <div class="room-glow"></div>
+        <div class="room-tiles"></div>
+        <div class="room-label">◈ BREAK ROOM</div>
         <div class="room-tooltip">
           <div class="tip-title">BREAK ROOM</div>
-          <div class="tip-stats">
-            Morale: 94%<br>
-            Coffee: ☕ x3<br>
-            Break Taken: 2min ago
-          </div>
+          <div class="tip-line">Morale: 94%</div>
+          <div class="tip-line">Coffee: x3</div>
         </div>
-        <!-- Coffee cups -->
-        <div class="coffee-cup" style="left:25%;top:35%;"></div>
-        <div class="coffee-cup" style="left:60%;top:55%;"></div>
-        <div class="coffee-cup" style="left:40%;top:65%;"></div>
+        <div class="pixel-desk" style="width:48px;height:24px;top:35%;left:32%;--desk-color:var(--green);"></div>
+        <div class="pixel-desk" style="width:48px;height:24px;top:35%;left:52%;--desk-color:var(--green);"></div>
+        <div class="pixel-desk" style="width:48px;height:24px;top:60%;left:42%;--desk-color:var(--green);"></div>
       </div>
 
-      <!-- AGENTS -->
-      <div class="agent agent-ceo" id="agent-ceo">
-        <div class="agent-label">CEO AGENT</div>
-        <div class="agent-body">
-          <div class="agent-head"></div>
-          <div class="agent-icon">📊</div>
-        </div>
-        <div class="agent-shadow"></div>
-      </div>
-
-      <div class="agent agent-dev" id="agent-dev">
-        <div class="agent-label">DEV AGENT</div>
-        <div class="agent-body">
-          <div class="agent-head"></div>
-          <div class="agent-icon">💻</div>
-        </div>
-        <div class="agent-shadow"></div>
-      </div>
-
-      <div class="agent agent-social" id="agent-social">
-        <div class="agent-label">SOCIAL AGENT</div>
-        <div class="agent-body">
-          <div class="agent-head"></div>
-          <div class="agent-icon">📱</div>
-        </div>
-        <div class="agent-shadow"></div>
-      </div>
-
-      <div class="agent agent-ops" id="agent-ops">
-        <div class="agent-label">OPS AGENT</div>
-        <div class="agent-body">
-          <div class="agent-head"></div>
-          <div class="agent-icon">⚙️</div>
-        </div>
-        <div class="agent-shadow"></div>
-      </div>
+      <!-- Agents rendered here by JS -->
+      <div id="agent-layer"></div>
 
     </div><!-- /office -->
   </div><!-- /office-wrap -->
 
-  <!-- Bottom Bar: Agent Status -->
+  <!-- BOTTOM LOG BAR -->
   <div id="bottombar">
-    <div class="agent-status" id="status-ceo">
-      <div class="agent-avatar" style="background:rgba(0,245,255,0.2);border:1px solid var(--cyan);">🤖</div>
-      <div class="agent-info">
-        <div class="agent-name">CEO AGENT</div>
-        <div class="agent-task" id="task-ceo">Monitoring HQ...</div>
-        <div class="activity-bar"><div class="activity-fill" id="bar-ceo" style="width:75%;background:var(--cyan);"></div></div>
-      </div>
-    </div>
-    <div class="agent-status" id="status-dev">
-      <div class="agent-avatar" style="background:rgba(191,95,255,0.2);border:1px solid var(--purple);">💻</div>
-      <div class="agent-info">
-        <div class="agent-name">DEV AGENT</div>
-        <div class="agent-task" id="task-dev">Writing code...</div>
-        <div class="activity-bar"><div class="activity-fill" id="bar-dev" style="width:90%;background:var(--purple);"></div></div>
-      </div>
-    </div>
-    <div class="agent-status" id="status-social">
-      <div class="agent-avatar" style="background:rgba(255,95,160,0.2);border:1px solid var(--pink);">📱</div>
-      <div class="agent-info">
-        <div class="agent-name">SOCIAL AGENT</div>
-        <div class="agent-task" id="task-social">Posting update...</div>
-        <div class="activity-bar"><div class="activity-fill" id="bar-social" style="width:60%;background:var(--pink);"></div></div>
-      </div>
-    </div>
-    <div class="agent-status" id="status-ops">
-      <div class="agent-avatar" style="background:rgba(95,255,176,0.2);border:1px solid var(--green);">⚙️</div>
-      <div class="agent-info">
-        <div class="agent-name">OPS AGENT</div>
-        <div class="agent-task" id="task-ops">Processing leads...</div>
-        <div class="activity-bar"><div class="activity-fill" id="bar-ops" style="width:80%;background:var(--green);"></div></div>
-      </div>
+    <div id="log-label">LOG▶</div>
+    <div id="activity-log">
+      <div class="log-entry">INITIALIZING HQ...</div>
     </div>
   </div>
 
 </div><!-- /hud -->
 
 <script>
-// ─────────────────────────────────────────────
-//  Clock
-// ─────────────────────────────────────────────
+// ═══════════════════════════════════════════════════════════
+//  CONSTANTS
+// ═══════════════════════════════════════════════════════════
+const OFFICE_W = 760;
+const OFFICE_H = 520;
+const MAX_AGENTS = 8;
+const HIRE_INTERVAL_MS = 30000;  // check every 30s
+const HIRE_CHANCE = 0.2;         // 20% chance
+
+// Agent colors pool
+const AGENT_COLORS = ['#ff5555','#ffaa00','#55aaff','#ff55aa','#55ffaa','#ffff55','#55ffcc','#ff88ff'];
+const AGENT_ROLES = [
+  'MARKETER','SALES','ANALYST','SUPPORT','HR','FINANCE','LEGAL','QA'
+];
+const AGENT_TASKS = {
+  CEO:     ['Monitoring HQ...','Reviewing metrics...','Board update...','Hiring agents...'],
+  DEV:     ['Writing code...','Reviewing PR...','Deploying...','Debugging...'],
+  DEFAULT: ['Working...','Processing...','Analyzing...','Updating...'],
+};
+
+// Room centers (normalized 0-1)
+const ROOMS = {
+  ops:    { x: 0.22, y: 0.22, el: 'ops-room',    color: '#00f5ff' },
+  lead:   { x: 0.72, y: 0.22, el: 'lead-room',   color: '#aa55ff' },
+  social: { x: 0.22, y: 0.72, el: 'social-room', color: '#ff55aa' },
+  break:  { x: 0.72, y: 0.72, el: 'break-room',  color: '#00ff88' },
+};
+const ROOM_KEYS = ['ops','lead','social','break'];
+
+// ═══════════════════════════════════════════════════════════
+//  STATE
+// ═══════════════════════════════════════════════════════════
+let agents = [];         // array of agent objects
+let hiresCount = 0;
+let lastTimestamp = 0;
+
+// ═══════════════════════════════════════════════════════════
+//  PIXEL AGENT SPRITE GENERATOR
+//  Creates a 10x12 pixel sprite using box-shadow
+// ═══════════════════════════════════════════════════════════
+function buildAgentSprite(color) {
+  // Simple 10x12 pixel humanoid sprite
+  // Each row: 10 pixels, each pixel = 4px wide
+  // 0=transparent, 1=color, 2=darker shade
+  const rows = [
+    [0,0,0,1,1,1,1,0,0,0],  // head top
+    [0,0,1,1,1,1,1,1,0,0],  // head
+    [0,0,1,2,1,1,2,1,0,0],  // face detail
+    [0,0,1,1,1,1,1,1,0,0],  // head bottom
+    [0,0,0,1,1,1,1,0,0,0],  // neck
+    [0,1,1,1,1,1,1,1,1,0],  // torso top
+    [0,1,1,1,1,1,1,1,1,0],  // torso
+    [0,0,1,1,1,1,1,1,0,0],  // torso bottom / belt
+    [0,0,1,0,1,1,0,1,0,0],  // hips
+    [0,1,1,0,0,0,0,1,1,0],  // legs top
+    [0,1,1,0,0,0,0,1,1,0],  // legs
+    [0,1,0,0,0,0,0,0,1,0],  // feet
+  ];
+
+  const dark = shadeColor(color, -40);
+  const shadow = [];
+  rows.forEach((row, r) => {
+    row.forEach((pixel, c) => {
+      if (pixel === 0) return;
+      const px = pixel === 2 ? dark : color;
+      shadow.push(`${c*4}px ${r*4}px 0 ${px}`);
+    });
+  });
+
+  return shadow.join(',\n    ');
+}
+
+function shadeColor(color, pct) {
+  const num = parseInt(color.replace('#',''), 16);
+  const r = Math.max(0, Math.min(255, (num >> 16) + pct));
+  const g = Math.max(0, Math.min(255, ((num >> 8) & 0xff) + pct));
+  const b = Math.max(0, Math.min(255, (num & 0xff) + pct));
+  return `rgb(${r},${g},${b})`;
+}
+
+// ═══════════════════════════════════════════════════════════
+//  CREATE AGENT DOM
+// ═══════════════════════════════════════════════════════════
+function createAgentDOM(agent) {
+  const el = document.createElement('div');
+  el.className = 'pixel-agent idle';
+  el.id = agent.id;
+  el.style.left = agent.x + 'px';
+  el.style.top  = agent.y + 'px';
+
+  const shadow = buildAgentSprite(agent.color);
+  el.style.cssText += `
+    width: 4px;
+    height: 4px;
+    box-shadow: ${shadow};
+  `;
+
+  const label = document.createElement('div');
+  label.className = 'pixel-agent-label';
+  label.textContent = agent.name;
+  el.appendChild(label);
+
+  const shadowEl = document.createElement('div');
+  shadowEl.className = 'pixel-agent-shadow';
+  el.appendChild(shadowEl);
+
+  document.getElementById('agent-layer').appendChild(el);
+  return el;
+}
+
+// ═══════════════════════════════════════════════════════════
+//  HIRE NEW AGENT
+// ═══════════════════════════════════════════════════════════
+function hireAgent(role, color) {
+  const id = 'agent-' + role.toLowerCase().replace(' ', '-') + '-' + Date.now();
+  const roomIdx = agents.length % ROOM_KEYS.length;
+  const roomKey = ROOM_KEYS[roomIdx];
+  const room = ROOMS[roomKey];
+
+  // Start off-screen (bottom-left corner, walk in)
+  const startX = -40;
+  const startY = OFFICE_H + 20;
+  const targetX = room.x * OFFICE_W + (Math.random() - 0.5) * 60;
+  const targetY = room.y * OFFICE_H + (Math.random() - 0.5) * 40;
+
+  const agent = {
+    id,
+    name: role,
+    color,
+    role,
+    x: startX,
+    y: startY,
+    targetX,
+    targetY,
+    speed: 0.08 + Math.random() * 0.04,
+    state: 'walking-in',   // walking-in → idle/working → moving
+    stateTimer: 0,
+    workTime: 4000 + Math.random() * 8000,
+    walkTime: 3000,
+    waypoints: buildWaypoints(roomKey),
+    wpIdx: 0,
+    tasks: AGENT_TASKS[role.toUpperCase()] || AGENT_TASKS.DEFAULT,
+    taskIdx: 0,
+    roomKey,
+  };
+
+  agents.push(agent);
+  createAgentDOM(agent);
+
+  // Show NEW HIRE banner
+  showNewHireBanner(role, color);
+
+  // Update UI
+  document.getElementById('agent-count').textContent = agents.length;
+  document.getElementById('hires-count').textContent = ++hiresCount;
+
+  addLog(role + ' HIRED! New ' + role + ' joining...', true);
+
+  // Expand office if needed
+  updateRoomStates();
+
+  // Update minimap
+  updateMinimapDot(agent, true);
+}
+
+function showNewHireBanner(name, color) {
+  const banner = document.createElement('div');
+  banner.className = 'new-hire-banner';
+  banner.innerHTML = `
+    <div class="nhtext">★ NEW HIRE! ★</div>
+    <div class="nhname" style="color:${color}">${name}</div>
+  `;
+  document.getElementById('office').appendChild(banner);
+  setTimeout(() => banner.remove(), 2600);
+}
+
+function buildWaypoints(roomKey) {
+  const base = ROOMS[roomKey];
+  const pts = [];
+  ROOM_KEYS.forEach(rk => {
+    const r = ROOMS[rk];
+    pts.push({
+      x: r.x * OFFICE_W + (Math.random()-0.5)*80,
+      y: r.y * OFFICE_H + (Math.random()-0.5)*50,
+      wait: 3000 + Math.random() * 6000
+    });
+  });
+  return pts;
+}
+
+// ═══════════════════════════════════════════════════════════
+//  UPDATE ROOM STATES (expansion)
+// ═══════════════════════════════════════════════════════════
+function updateRoomStates() {
+  const count = agents.length;
+
+  // social room unlocks at 4+
+  const socialEl = document.getElementById('social-room');
+  const socialMM = document.getElementById('mm-social');
+  if (count >= 4) {
+    socialEl.classList.remove('locked');
+    socialEl.classList.add('active');
+    socialMM.classList.remove('dim');
+    socialMM.classList.add('active');
+  }
+
+  // break room unlocks at 6+
+  const breakEl = document.getElementById('break-room');
+  const breakMM = document.getElementById('mm-break');
+  if (count >= 6) {
+    breakEl.classList.remove('locked');
+    breakEl.classList.add('active');
+    breakMM.classList.remove('dim');
+    breakMM.classList.add('active');
+  }
+}
+
+// ═══════════════════════════════════════════════════════════
+//  MINIMAP
+// ═══════════════════════════════════════════════════════════
+function updateMinimapDot(agent, isNew) {
+  // Remove old dot for this agent if exists
+  const oldDot = document.querySelector(`.mm-dot[data-agent="${agent.id}"]`);
+  if (oldDot) oldDot.remove();
+
+  // Add dot to appropriate room minimap
+  const roomMM = {
+    CEO:  'mm-ops',
+    DEV:  'mm-lead',
+  };
+  const mmId = roomMM[agent.role] || `mm-${agent.roomKey}`;
+  const mmEl = document.getElementById(mmId);
+  if (!mmEl) return;
+
+  const dot = document.createElement('div');
+  dot.className = 'mm-dot';
+  dot.dataset.agent = agent.id;
+  dot.style.cssText = `
+    left: ${(agent.x / OFFICE_W * 100)}%;
+    top:  ${(agent.y / OFFICE_H * 100)}%;
+    background: ${agent.color};
+    box-shadow: 0 0 4px ${agent.color};
+  `;
+  mmEl.appendChild(dot);
+}
+
+// ═══════════════════════════════════════════════════════════
+//  CLOCK
+// ═══════════════════════════════════════════════════════════
 function updateClock() {
   const now = new Date();
   const h = String(now.getHours()).padStart(2,'0');
@@ -890,306 +988,251 @@ function updateClock() {
 setInterval(updateClock, 1000);
 updateClock();
 
-// ─────────────────────────────────────────────
-//  Activity Log
-// ─────────────────────────────────────────────
-const logMessages = [
-  { t: 'CEO → Inspecting Operations', c: false },
-  { t: 'DEV → Committed push: auth-fix', c: true },
-  { t: 'SOC → Post published: "AI Update #12"', c: false },
-  { t: 'OPS → Lead #4821 qualified', c: false },
-  { t: 'CEO → Pipeline review: 78 active', c: true },
-  { t: 'SOC → Reply received from @user_42', c: false },
-  { t: 'OPS → New lead: tech-startup.io', c: false },
-  { t: 'DEV → PR merged: pipeline-opt v2.1', c: true },
-  { t: 'SOC → Engagement +12% this hour', c: false },
-  { t: 'CEO → Board metrics updated', c: true },
-  { t: 'OPS → Email sequence triggered', c: false },
-  { t: 'DEV → Running system health check', c: false },
-  { t: 'SOC → Scheduling tomorrow\'s posts', c: false },
-  { t: 'OPS → CRM updated: 48 new contacts', c: false },
-  { t: 'CEO → Revenue report generated', c: true },
-  { t: 'DEV → Monitoring error rate: 0.2%', c: false },
-  { t: 'SOC → Twitter thread going viral', c: false },
-  { t: 'OPS → Funnel analysis complete', c: false },
-  { t: 'DEV → Auto-scaling triggered x3', c: true },
-  { t: 'SOC → DMed 5 prospects', c: false },
-  { t: 'CEO → Weekly OKR review complete', c: true },
-  { t: 'OPS → Outreach batch: 120 sent', c: false },
-  { t: 'SOC → LinkedIn post: 340 views', c: false },
-  { t: 'DEV → DB backup successful', c: false },
+// ═══════════════════════════════════════════════════════════
+//  LOG
+// ═══════════════════════════════════════════════════════════
+const LOG_MSGS = [
+  ['CEO → Inspecting Operations', true],
+  ['DEV → Committed: auth-fix', true],
+  ['SOC → Post published: AI Update #12', false],
+  ['OPS → Lead #4821 qualified', false],
+  ['CEO → Pipeline review: 78 active', true],
+  ['SOC → Reply from @user_42', false],
+  ['OPS → New lead: tech-startup.io', false],
+  ['DEV → PR merged: pipeline-opt v2.1', true],
+  ['SOC → Engagement +12% this hour', false],
+  ['CEO → Board metrics updated', true],
+  ['OPS → Email sequence triggered', false],
+  ['DEV → Running health check', false],
+  ['SOC → Scheduling tomorrow posts', false],
+  ['OPS → CRM updated: 48 contacts', false],
+  ['CEO → Revenue report generated', true],
+  ['DEV → Auto-scaling triggered x3', true],
+  ['SOC → Twitter thread viral', false],
+  ['OPS → Funnel analysis complete', false],
+  ['DEV → DB backup successful', false],
+  ['SOC → LinkedIn: 340 views', false],
+  ['CEO → Weekly OKR review', true],
+  ['OPS → Outreach: 120 sent', false],
+  ['SOC → DMed 5 prospects', false],
 ];
+let logMsgIdx = 0;
+let logEl;
 
-let logIdx = 0;
-const logEl = document.getElementById('activity-log');
+function addLog(text, highlight) {
+  if (!logEl) logEl = document.getElementById('activity-log');
+  const entry = document.createElement('div');
+  entry.className = 'log-entry' + (highlight ? ' hi' : '');
+  entry.textContent = text;
+  logEl.appendChild(entry);
 
-function addLogEntry() {
-  const entry = logMessages[logIdx % logMessages.length];
-  logIdx++;
-  const div = document.createElement('div');
-  div.className = 'log-entry' + (entry.c ? ' highlight' : '');
-  const now = new Date();
-  const ts = `${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}`;
-  div.innerHTML = `<span class="ts">${ts}</span> ${entry.t}`;
-  logEl.insertBefore(div, logEl.firstChild);
-  // Keep only 8 entries
-  while (logEl.children.length > 8) logEl.removeChild(logEl.lastChild);
-}
-addLogEntry();
-setInterval(addLogEntry, 4000);
-
-// ─────────────────────────────────────────────
-//  Stats simulation
-// ─────────────────────────────────────────────
-const statEl = {
-  leads: document.getElementById('stat-leads'),
-  pipeline: document.getElementById('stat-pipeline'),
-  hot: document.getElementById('stat-hot'),
-  posts: document.getElementById('stat-posts'),
-};
-setInterval(() => {
-  statEl.leads.textContent = 44 + Math.floor(Math.random() * 12);
-  statEl.pipeline.textContent = 74 + Math.floor(Math.random() * 10);
-  statEl.hot.textContent = 10 + Math.floor(Math.random() * 6);
-  statEl.posts.textContent = 1 + Math.floor(Math.random() * 5);
-}, 8000);
-
-// ─────────────────────────────────────────────
-//  Agent movement AI
-// ─────────────────────────────────────────────
-// Office is 800x520. Each room is 400x260.
-// Positions are in CSS top/left % within the office (transformed isometrically).
-// We define waypoints per agent and animate with requestAnimationFrame.
-
-const OFFICE_W = 800;
-const OFFICE_H = 520;
-
-// Room center positions (percentages)
-const ROOMS = {
-  ops:    { x: 0.25, y: 0.25 },
-  lead:   { x: 0.75, y: 0.25 },
-  social: { x: 0.25, y: 0.75 },
-  break:  { x: 0.75, y: 0.75 },
-};
-
-// Convert normalized pos to px
-function toPx(nx, ny) {
-  return { x: nx * OFFICE_W, y: ny * OFFICE_H };
+  // Keep max 12 entries
+  while (logEl.children.length > 12) logEl.removeChild(logEl.firstChild);
 }
 
-const agents = {
-  ceo: {
-    el: document.getElementById('agent-ceo'),
-    task: document.getElementById('task-ceo'),
-    bar: document.getElementById('bar-ceo'),
-    icon: '📊',
-    waypoints: [
-      { ...ROOMS.ops, wait: 3000 },
-      { ...ROOMS.lead, wait: 2000 },
-      { ...ROOMS.ops, wait: 2500 },
-      { ...ROOMS.social, wait: 2000 },
-      { ...ROOMS.break, wait: 3000 },
-      { ...ROOMS.ops, wait: 4000 },
-    ],
-    tasks: ['Reviewing metrics...', 'Checking pipeline...', 'Inspecting leads...', 'Touring HQ...', 'Team briefing...'],
-    speed: 0.00035,
-    state: 'moving',
-    wpIdx: 0,
-    wpProgress: 0,
-    waitTimer: 0,
-    x: 0, y: 0,
-    targetX: 0, targetY: 0,
-    working: false,
-    workTimer: 0,
-  },
-  dev: {
-    el: document.getElementById('agent-dev'),
-    task: document.getElementById('task-dev'),
-    bar: document.getElementById('bar-dev'),
-    icon: '💻',
-    // Mostly at break room desk, occasional walks
-    waypoints: [
-      { ...ROOMS.break, wait: 8000 },
-      { ...ROOMS.social, wait: 3000 },
-      { ...ROOMS.break, wait: 10000 },
-      { ...ROOMS.lead, wait: 2000 },
-      { ...ROOMS.break, wait: 12000 },
-    ],
-    tasks: ['Writing code...', 'Reviewing PR...', 'Debugging...', 'Deploying...', 'At terminal...'],
-    speed: 0.0003,
-    state: 'moving',
-    wpIdx: 0,
-    wpProgress: 0,
-    waitTimer: 0,
-    x: 0, y: 0,
-    targetX: 0, targetY: 0,
-    working: false,
-    workTimer: 0,
-  },
-  social: {
-    el: document.getElementById('agent-social'),
-    task: document.getElementById('task-social'),
-    bar: document.getElementById('bar-social'),
-    icon: '📱',
-    waypoints: [
-      { ...ROOMS.social, wait: 5000 },
-      { ...ROOMS.break, wait: 4000 },
-      { ...ROOMS.social, wait: 6000 },
-      { ...ROOMS.break, wait: 3000 },
-      { ...ROOMS.social, wait: 4000 },
-    ],
-    tasks: ['Posting update...', 'Replying to comments...', 'Scheduling posts...', 'Analyzing reach...'],
-    speed: 0.0004,
-    state: 'moving',
-    wpIdx: 0,
-    wpProgress: 0,
-    waitTimer: 0,
-    x: 0, y: 0,
-    targetX: 0, targetY: 0,
-    working: false,
-    workTimer: 0,
-  },
-  ops: {
-    el: document.getElementById('agent-ops'),
-    task: document.getElementById('task-ops'),
-    bar: document.getElementById('bar-ops'),
-    icon: '⚙️',
-    waypoints: [
-      { ...ROOMS.lead, wait: 4000 },
-      { ...ROOMS.ops, wait: 3000 },
-      { ...ROOMS.lead, wait: 5000 },
-      { ...ROOMS.ops, wait: 4000 },
-      { ...ROOMS.lead, wait: 3000 },
-    ],
-    tasks: ['Processing leads...', 'Running funnel analysis...', 'Qualifying prospects...', 'Updating CRM...'],
-    speed: 0.00038,
-    state: 'moving',
-    wpIdx: 0,
-    wpProgress: 0,
-    waitTimer: 0,
-    x: 0, y: 0,
-    targetX: 0, targetY: 0,
-    working: false,
-    workTimer: 0,
-  },
-};
+function tickLog() {
+  const [msg] = LOG_MSGS[logMsgIdx % LOG_MSGS.length];
+  logMsgIdx++;
+  addLog(msg, LOG_MSGS[(logMsgIdx-1) % LOG_MSGS.length][1]);
+}
+setInterval(tickLog, 5000);
+tickLog(); // first one immediately
 
-// Init agent positions
-Object.entries(agents).forEach(([key, ag]) => {
-  const wp = ag.waypoints[0];
-  ag.x = wp.x * OFFICE_W;
-  ag.y = wp.y * OFFICE_H;
-  ag.targetX = ag.x;
-  ag.targetY = ag.y;
-  updateAgentPos(ag);
-});
+// ═══════════════════════════════════════════════════════════
+//  STATS SIMULATION
+// ═══════════════════════════════════════════════════════════
+function tickStats() {
+  const r = (min,max) => min + Math.floor(Math.random()*(max-min));
+  document.getElementById('s-leads').textContent    = r(44,62);
+  document.getElementById('s-pipeline').textContent = r(70,90);
+  document.getElementById('s-actions').textContent  = 490 + r(0,20);
+  document.getElementById('s-posts').textContent    = r(1,8);
+  document.getElementById('stat-leads').textContent = r(44,62);
+  document.getElementById('stat-pipeline').textContent = r(70,90);
+  document.getElementById('stat-hot').textContent   = r(10,18);
+  document.getElementById('stat-posts').textContent = r(1,8);
+  document.getElementById('s-conv').textContent    = r(30,40)+'%';
+  document.getElementById('s-score').textContent  = r(70,85);
+}
+setInterval(tickStats, 7000);
+tickStats();
 
-function updateAgentPos(ag) {
-  // Add slight random offset so agents don't stack perfectly
-  const offsetX = (Math.random() - 0.5) * 20;
-  const offsetY = (Math.random() - 0.5) * 10;
-  ag.el.style.left = (ag.x + offsetX) + 'px';
-  ag.el.style.top = (ag.y + offsetY) + 'px';
+// ═══════════════════════════════════════════════════════════
+//  HIRING TIMER
+// ═══════════════════════════════════════════════════════════
+let nextHireCheck = Date.now() + 30000 + Math.random() * 30000;
+
+function tryHire() {
+  if (agents.length >= MAX_AGENTS) return;
+  if (Math.random() < HIRE_CHANCE) {
+    const usedColors = agents.map(a => a.color);
+    const availColors = AGENT_COLORS.filter(c => !usedColors.includes(c));
+    if (availColors.length === 0) return;
+    const color = availColors[Math.floor(Math.random() * availColors.length)];
+    const role  = AGENT_ROLES[agents.length % AGENT_ROLES.length];
+    hireAgent(role, color);
+  }
+  nextHireCheck = Date.now() + 30000 + Math.random() * 30000;
 }
 
-function updateAgentTask(ag) {
-  ag.task.textContent = ag.tasks[Math.floor(Math.random() * ag.tasks.length)];
-}
-
-function updateAgentBar(ag) {
-  ag.bar.style.width = (50 + Math.random() * 50) + '%';
-}
-
-let lastTime = 0;
+// ═══════════════════════════════════════════════════════════
+//  GAME LOOP - SMOOTH MOVEMENT with requestAnimationFrame
+// ═══════════════════════════════════════════════════════════
 function gameLoop(timestamp) {
-  const dt = timestamp - lastTime;
-  lastTime = timestamp;
+  const dt = Math.min(timestamp - lastTimestamp, 50); // cap at 50ms
+  lastTimestamp = timestamp;
 
-  Object.entries(agents).forEach(([key, ag]) => {
-    if (ag.state === 'moving') {
+  // Hiring check
+  if (Date.now() >= nextHireCheck) tryHire();
+
+  agents.forEach(ag => {
+    const el = document.getElementById(ag.id);
+    if (!el) return;
+
+    if (ag.state === 'walking-in') {
+      // Move toward target
       const dx = ag.targetX - ag.x;
       const dy = ag.targetY - ag.y;
-      const dist = Math.sqrt(dx * dx + dy * dy);
-      const step = ag.speed * dt * 1000;
+      const dist = Math.sqrt(dx*dx + dy*dy);
+      const step = ag.speed * dt * 60;
 
       if (dist <= step) {
         ag.x = ag.targetX;
         ag.y = ag.targetY;
-        ag.state = 'waiting';
-        ag.waitTimer = ag.waypoints[ag.wpIdx].wait;
-        ag.working = true;
-        ag.workTimer = ag.waitTimer;
-        ag.el.classList.remove('walking');
-        updateAgentTask(ag);
-        updateAgentBar(ag);
+        ag.state = 'idle';
+        ag.stateTimer = ag.workTime;
+        el.className = 'pixel-agent idle';
       } else {
-        ag.x += (dx / dist) * step;
-        ag.y += (dy / dist) * step;
-        ag.el.classList.add('walking');
+        ag.x += (dx/dist) * step;
+        ag.y += (dy/dist) * step;
+        el.className = 'pixel-agent walking';
       }
-    } else if (ag.state === 'waiting') {
-      ag.waitTimer -= dt;
-      ag.workTimer -= dt;
-      // Show working progress
-      if (ag.working && ag.workTimer < ag.waitTimer * 0.3) {
-        ag.working = false;
-      }
-      if (ag.waitTimer <= 0) {
-        // Advance waypoint
+    }
+    else if (ag.state === 'idle') {
+      ag.stateTimer -= dt;
+      if (ag.stateTimer <= 0) {
+        // Pick next waypoint
         ag.wpIdx = (ag.wpIdx + 1) % ag.waypoints.length;
         const wp = ag.waypoints[ag.wpIdx];
-        ag.targetX = wp.x * OFFICE_W;
-        ag.targetY = wp.y * OFFICE_H;
+        ag.targetX = wp.x;
+        ag.targetY = wp.y;
         ag.state = 'moving';
-        ag.el.classList.add('walking');
+        el.className = 'pixel-agent walking';
+      }
+    }
+    else if (ag.state === 'moving') {
+      const dx = ag.targetX - ag.x;
+      const dy = ag.targetY - ag.y;
+      const dist = Math.sqrt(dx*dx + dy*dy);
+      const step = ag.speed * dt * 60;
+
+      if (dist <= step) {
+        ag.x = ag.targetX;
+        ag.y = ag.targetY;
+        ag.state = 'idle';
+        ag.stateTimer = ag.waypoints[ag.wpIdx].wait;
+        el.className = 'pixel-agent idle';
+      } else {
+        ag.x += (dx/dist) * step;
+        ag.y += (dy/dist) * step;
+        el.className = 'pixel-agent walking';
       }
     }
 
-    updateAgentPos(ag);
+    // Update DOM position
+    el.style.left = ag.x + 'px';
+    el.style.top  = ag.y + 'px';
+
+    // Update minimap dot
+    const dot = document.querySelector(`.mm-dot[data-agent="${ag.id}"]`);
+    if (dot) {
+      dot.style.left = (ag.x / OFFICE_W * 100) + '%';
+      dot.style.top  = (ag.y / OFFICE_H * 100) + '%';
+    }
   });
 
   requestAnimationFrame(gameLoop);
 }
 
-// Update minimap dots
-const mmDots = {
-  ceo: document.getElementById('mm-ops'),
-  ops: document.getElementById('mm-lead'),
-  social: document.getElementById('mm-social'),
-  dev: document.getElementById('mm-break'),
-};
+// ═══════════════════════════════════════════════════════════
+//  INIT - Start with CEO + DEV
+// ═══════════════════════════════════════════════════════════
+function init() {
+  // CEO starts at ops room
+  const ceoRoom = ROOMS.ops;
+  const ceo = {
+    id: 'agent-ceo',
+    name: 'CEO',
+    color: '#00f5ff',
+    role: 'CEO',
+    x: ceoRoom.x * OFFICE_W + 20,
+    y: ceoRoom.y * OFFICE_H + 10,
+    targetX: ceoRoom.x * OFFICE_W + 20,
+    targetY: ceoRoom.y * OFFICE_H + 10,
+    speed: 0.06,
+    state: 'idle',
+    stateTimer: 3000,
+    workTime: 4000,
+    walkTime: 0,
+    waypoints: buildWaypoints('ops'),
+    wpIdx: 0,
+    tasks: AGENT_TASKS.CEO,
+    taskIdx: 0,
+    roomKey: 'ops',
+  };
+  agents.push(ceo);
+  createAgentDOM(ceo);
 
-function updateMinimap() {
-  Object.entries(agents).forEach(([key, ag]) => {
-    const nx = ag.x / OFFICE_W;
-    const ny = ag.y / OFFICE_H;
+  // DEV starts at break room
+  const devRoom = ROOMS.break;
+  const dev = {
+    id: 'agent-dev',
+    name: 'DEV',
+    color: '#aa55ff',
+    role: 'DEV',
+    x: devRoom.x * OFFICE_W + 40,
+    y: devRoom.y * OFFICE_H + 20,
+    targetX: devRoom.x * OFFICE_W + 40,
+    targetY: devRoom.y * OFFICE_H + 20,
+    speed: 0.055,
+    state: 'idle',
+    stateTimer: 5000,
+    workTime: 6000,
+    walkTime: 0,
+    waypoints: buildWaypoints('break'),
+    wpIdx: 0,
+    tasks: AGENT_TASKS.DEV,
+    taskIdx: 0,
+    roomKey: 'break',
+  };
+  agents.push(dev);
+  createAgentDOM(dev);
+
+  document.getElementById('agent-count').textContent = agents.length;
+  document.getElementById('hires-count').textContent = 0;
+
+  // Init minimap dots for CEO & DEV
+  ['mm-ops','mm-lead'].forEach((mmId, i) => {
+    const ag = agents[i];
     const dot = document.createElement('div');
-    dot.style.cssText = `
-      position:absolute;
-      width:5px;height:5px;
-      border-radius:50%;
-      background:var(--${key === 'ceo' ? 'cyan' : key === 'dev' ? 'purple' : key === 'social' ? 'pink' : 'green'});
-      box-shadow:0 0 5px currentColor;
-      left:${nx * 100}%;top:${ny * 100}%;
-      transform:translate(-50%,-50%);
-      transition:left 0.5s,top 0.5s;
-      z-index:5;
-      pointer-events:none;
-    `;
-    // Remove old dot
-    const old = mmDots[key].querySelector('.mm-dot');
-    if (old) old.remove();
-    const wrapper = document.createElement('div');
-    wrapper.style.cssText = 'position:relative;width:100%;height:100%;';
-    mmDots[key].style.position = 'relative';
-    wrapper.appendChild(dot);
     dot.className = 'mm-dot';
-    mmDots[key].appendChild(dot);
+    dot.dataset.agent = ag.id;
+    dot.style.cssText = `
+      left: ${(ag.x/OFFICE_W*100)}%;
+      top:  ${(ag.y/OFFICE_H*100)}%;
+      background: ${ag.color};
+      box-shadow: 0 0 4px ${ag.color};
+    `;
+    document.getElementById(mmId).appendChild(dot);
   });
-}
-setInterval(updateMinimap, 500);
 
-requestAnimationFrame(gameLoop);
+  addLog('HQ INITIALIZED. CEO ONLINE.', true);
+  addLog('DEV AGENT REPORTING FOR DUTY.', true);
+
+  requestAnimationFrame(gameLoop);
+}
+
+init();
 </script>
 </body>
 </html>
