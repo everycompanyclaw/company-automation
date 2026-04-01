@@ -3,1236 +3,640 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>EveryCompanyClaw HQ - Virtual Office</title>
+<title>EveryCompanyClaw HQ - Pokemon Style</title>
 <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 <style>
-  /* ═══════════════════════════════════════════════
-     RESET & ROOT VARIABLES - 16-COLOR PALETTE
-  ═══════════════════════════════════════════════ */
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-  :root {
-    --bg:         #0a0a0a;
-    --floor:      #1a1a2e;
-    --grid-line:  #2d2d4a;
-    --ui-border:  #444466;
-    --ui-border2: #333355;
-    --text:       #ffffff;
-    --text-dim:   #aaaaaa;
-    --text-darker:#666688;
-    --cyan:       #00f5ff;
-    --purple:     #aa55ff;
-    --pink:       #ff55aa;
-    --green:      #00ff88;
-    --orange:     #ffaa00;
-    --red:        #ff5555;
-    --blue:       #55aaff;
-    --yellow:     #ffff55;
-    --teal:       #55ffcc;
-    --dim-green:  #338855;
-    --scanline:   rgba(0,0,0,0.15);
-    --pixel:      'Press Start 2P', monospace;
-  }
-
-  body {
-    background: var(--bg);
-    font-family: var(--pixel);
-    color: var(--text);
-    overflow: hidden;
-    width: 100vw;
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    image-rendering: pixelated;
-  }
-
-  /* CRT scanline overlay */
-  body::after {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background: repeating-linear-gradient(
-      0deg,
-      transparent,
-      transparent 2px,
-      var(--scanline) 2px,
-      var(--scanline) 4px
-    );
-    pointer-events: none;
-    z-index: 9999;
-  }
-
-  /* CRT vignette */
-  body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background: radial-gradient(ellipse at center, transparent 55%, rgba(0,0,0,0.7) 100%);
-    pointer-events: none;
-    z-index: 9998;
-  }
-
-  /* ═══════════════════════════════════════════════
-     PIXEL BORDER MIXIN (stepped corners)
-  ═══════════════════════════════════════════════ */
-  .pixel-box {
-    border: 4px solid var(--ui-border);
-    box-shadow:
-      inset -4px -4px 0 var(--ui-border2),
-      4px 4px 0 rgba(0,0,0,0.5);
-  }
-
-  /* ═══════════════════════════════════════════════
-     HUD CONTAINER
-  ═══════════════════════════════════════════════ */
-  #hud {
-    position: relative;
-    width: 1100px;
-    height: 700px;
-    background: var(--bg);
-    border: 4px solid var(--ui-border);
-    box-shadow:
-      inset 0 0 0 2px var(--ui-border2),
-      0 0 0 2px #000,
-      8px 8px 0 rgba(0,0,0,0.8);
-    overflow: hidden;
-  }
-
-  /* Corner step-decorations */
-  .corner {
-    position: absolute;
-    width: 16px;
-    height: 16px;
-    background: var(--ui-border);
-    z-index: 100;
-  }
-  .corner-tl { top: -4px; left: -4px; }
-  .corner-tr { top: -4px; right: -4px; }
-  .corner-bl { bottom: -4px; left: -4px; }
-  .corner-br { bottom: -4px; right: -4px; }
-
-  /* ═══════════════════════════════════════════════
-     TOP BAR
-  ═══════════════════════════════════════════════ */
-  #topbar {
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 52px;
-    background: var(--floor);
-    border-bottom: 4px solid var(--ui-border);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 16px;
-    z-index: 50;
-  }
-  #topbar h1 {
-    font-size: 10px;
-    color: var(--cyan);
-    text-shadow: 2px 2px 0 #004455;
-    letter-spacing: 1px;
-  }
-  #topbar-center {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-  }
-  .stat-box {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 2px;
-  }
-  .stat-label {
-    font-size: 5px;
-    color: var(--text-darker);
-  }
-  .stat-value {
-    font-size: 8px;
-    color: var(--text);
-  }
-  #clock-box {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    gap: 3px;
-  }
-  #clock {
-    font-size: 10px;
-    color: var(--text);
-    letter-spacing: 1px;
-  }
-  #status-badge {
-    font-size: 6px;
-    color: var(--green);
-    letter-spacing: 1px;
-    animation: blink-text 1s step-end infinite;
-  }
-  @keyframes blink-text {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.3; }
-  }
-  #status-badge::before {
-    content: '▶ ';
-  }
-  #team-count {
-    font-size: 7px;
-    color: var(--orange);
-    letter-spacing: 1px;
-  }
-
-  /* ═══════════════════════════════════════════════
-     BOTTOM LOG BAR
-  ═══════════════════════════════════════════════ */
-  #bottombar {
-    position: absolute;
-    bottom: 0; left: 0; right: 0;
-    height: 52px;
-    background: var(--floor);
-    border-top: 4px solid var(--ui-border);
-    display: flex;
-    align-items: center;
-    padding: 0 12px;
-    gap: 8px;
-    z-index: 50;
-  }
-  #log-label {
-    font-size: 6px;
-    color: var(--text-darker);
-    letter-spacing: 1px;
-    white-space: nowrap;
-  }
-  #activity-log {
-    flex: 1;
-    overflow: hidden;
-    display: flex;
-    gap: 12px;
-    align-items: center;
-  }
-  .log-entry {
-    font-size: 6px;
-    color: var(--text-dim);
-    white-space: nowrap;
-    flex-shrink: 0;
-    padding: 3px 6px;
-    border: 2px solid var(--ui-border2);
-    background: rgba(0,0,0,0.3);
-    animation: log-scroll 20s linear infinite;
-  }
-  .log-entry.hi { color: var(--cyan); border-color: var(--cyan); background: rgba(0,245,255,0.05); }
-  @keyframes log-scroll {
-    0%   { opacity: 0.6; }
-    10%  { opacity: 1; }
-    90%  { opacity: 1; }
-    100% { opacity: 0.6; }
-  }
-
-  /* ═══════════════════════════════════════════════
-     LEFT MINIMAP
-  ═══════════════════════════════════════════════ */
-  #minimap-panel {
-    position: absolute;
-    left: 10px;
-    top: 60px;
-    width: 100px;
-    z-index: 50;
-  }
-  #minimap-label {
-    font-size: 5px;
-    color: var(--text-darker);
-    text-align: center;
-    margin-bottom: 4px;
-    letter-spacing: 1px;
-  }
-  #minimap {
-    width: 80px;
-    height: 80px;
-    border: 3px solid var(--ui-border);
-    background: var(--bg);
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
-    gap: 2px;
-    padding: 2px;
-    box-shadow: inset 0 0 0 1px var(--ui-border2);
-  }
-  .mm-room {
-    border: 2px solid transparent;
-    font-size: 5px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    transition: all 0.5s;
-  }
-  .mm-room.active { border-color: var(--cyan); background: rgba(0,245,255,0.1); }
-  .mm-room.dim { opacity: 0.3; }
-  .mm-dot {
-    position: absolute;
-    width: 4px;
-    height: 4px;
-    border-radius: 50%;
-    transform: translate(-50%,-50%);
-    z-index: 5;
-    transition: left 0.5s, top 0.5s;
-  }
-
-  /* ═══════════════════════════════════════════════
-     RIGHT STATS PANEL
-  ═══════════════════════════════════════════════ */
-  #stats-panel {
-    position: absolute;
-    right: 10px;
-    top: 60px;
-    width: 110px;
-    z-index: 50;
-  }
-  #stats-label {
-    font-size: 5px;
-    color: var(--text-darker);
-    text-align: center;
-    margin-bottom: 4px;
-    letter-spacing: 1px;
-  }
-  #stats-box {
-    border: 3px solid var(--ui-border);
-    background: var(--bg);
-    padding: 6px;
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-    box-shadow: inset -3px -3px 0 var(--ui-border2);
-  }
-  .stat-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding-bottom: 3px;
-    border-bottom: 1px solid var(--ui-border2);
-  }
-  .stat-row:last-child { border-bottom: none; padding-bottom: 0; }
-  .stat-row-label { font-size: 5px; color: var(--text-darker); }
-  .stat-row-val   { font-size: 7px; color: var(--text); }
-  #hires-display {
-    margin-top: 4px;
-    font-size: 6px;
-    color: var(--orange);
-    text-align: center;
-    padding: 4px;
-    border: 2px solid var(--orange);
-    background: rgba(255,170,0,0.05);
-  }
-
-  /* ═══════════════════════════════════════════════
-     OFFICE VIEWPORT
-  ═══════════════════════════════════════════════ */
-  #office-wrap {
-    position: absolute;
-    top: 52px;
-    left: 120px;
-    right: 130px;
-    bottom: 52px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    perspective: 900px;
-    overflow: hidden;
-  }
-
-  #office {
-    position: relative;
-    width: 760px;
-    height: 520px;
-    transform-style: preserve-3d;
-    transform: rotateX(55deg) rotateZ(-45deg);
-  }
-
-  /* Floor with pixel tile grid */
-  #floor {
-    position: absolute;
-    inset: 0;
-    background-color: var(--floor);
-    background-image:
-      repeating-linear-gradient(0deg, var(--grid-line) 0px, var(--grid-line) 1px, transparent 1px, transparent 40px),
-      repeating-linear-gradient(90deg, var(--grid-line) 0px, var(--grid-line) 1px, transparent 1px, transparent 40px);
-    border: 2px solid var(--ui-border);
-    box-shadow: inset 0 0 40px rgba(0,0,0,0.5);
-  }
-
-  /* ═══════════════════════════════════════════════
-     ROOMS
-  ═══════════════════════════════════════════════ */
-  .room {
-    position: absolute;
-    border: 2px solid transparent;
-    overflow: hidden;
-    transition: border-color 0.5s, box-shadow 0.5s;
-  }
-  .room.active {
-    border-color: var(--room-color, var(--cyan));
-    box-shadow: inset 0 0 20px rgba(0,0,0,0.3);
-  }
-  .room.locked {
-    opacity: 0.15;
-    border-color: var(--ui-border2) !important;
-  }
-  .room-glow {
-    position: absolute;
-    inset: 0;
-    opacity: 0;
-    transition: opacity 0.5s;
-    pointer-events: none;
-  }
-  .room.active .room-glow { opacity: 1; }
-
-  .room-label {
-    position: absolute;
-    top: 6px;
-    left: 8px;
-    font-size: 6px;
-    opacity: 0.6;
-    z-index: 5;
-    text-shadow: 1px 1px 0 #000;
-    letter-spacing: 1px;
-  }
-
-  /* Room tooltip */
-  .room:hover .room-tooltip { opacity: 1; }
-  .room-tooltip {
-    position: absolute;
-    bottom: 6px;
-    left: 50%;
-    transform: translateX(-50%) translateY(4px);
-    background: rgba(0,0,0,0.95);
-    border: 3px solid var(--room-color, var(--cyan));
-    padding: 8px;
-    font-size: 6px;
-    white-space: nowrap;
-    opacity: 0;
-    transition: opacity 0.2s, transform 0.2s;
-    z-index: 20;
-    text-align: center;
-    pointer-events: none;
-    box-shadow: 4px 4px 0 rgba(0,0,0,0.5);
-  }
-  .room-tooltip .tip-title {
-    font-size: 7px;
-    margin-bottom: 5px;
-    color: var(--room-color, var(--cyan));
-    letter-spacing: 1px;
-  }
-  .room-tooltip .tip-line { color: var(--text-dim); margin: 2px 0; line-height: 1.6; }
-
-  /* ROOM COLORS */
-  #ops-room    { --room-color: var(--cyan);   top: 0;    left: 0;    width: 50%; height: 50%; }
-  #lead-room   { --room-color: var(--purple); top: 0;    right: 0;   width: 50%; height: 50%; }
-  #social-room { --room-color: var(--pink);   bottom: 0; left: 0;    width: 50%; height: 50%; }
-  #break-room  { --room-color: var(--green);  bottom: 0; right: 0;   width: 50%; height: 50%; }
-
-  /* Room floor tiles */
-  .room-tiles {
-    position: absolute;
-    inset: 0;
-    background-image:
-      repeating-linear-gradient(0deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 1px, transparent 1px, transparent 20px),
-      repeating-linear-gradient(90deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 1px, transparent 1px, transparent 20px);
-  }
-
-  /* Ambient glow per room */
-  #ops-room    .room-glow { background: radial-gradient(ellipse at 25% 25%, rgba(0,245,255,0.15), transparent 65%); }
-  #lead-room   .room-glow { background: radial-gradient(ellipse at 75% 25%, rgba(170,85,255,0.15), transparent 65%); }
-  #social-room .room-glow { background: radial-gradient(ellipse at 25% 75%, rgba(255,85,170,0.15), transparent 65%); }
-  #break-room  .room-glow { background: radial-gradient(ellipse at 75% 75%, rgba(0,255,136,0.15), transparent 65%); }
-
-  /* Pixel desks */
-  .pixel-desk {
-    position: absolute;
-    border: 2px solid rgba(255,255,255,0.15);
-    background: rgba(0,0,0,0.3);
-  }
-  .pixel-desk::after {
-    content: '';
-    position: absolute;
-    top: 3px; left: 3px; right: 3px; bottom: 50%;
-    background: var(--desk-color, var(--cyan));
-    opacity: 0.2;
-    animation: screen-flicker 4s step-end infinite;
-  }
-  @keyframes screen-flicker {
-    0%, 92%, 96%, 100% { opacity: 0.2; }
-    94% { opacity: 0.05; }
-  }
-
-  /* ═══════════════════════════════════════════════
-     PIXEL AGENTS - CSS box-shadow sprite method
-  ═══════════════════════════════════════════════ */
-  .pixel-agent {
-    position: absolute;
-    width: 4px;
-    height: 4px;
-    z-index: 15;
-    pointer-events: none;
-  }
-  .pixel-agent-label {
-    position: absolute;
-    top: -14px;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 5px;
-    white-space: nowrap;
-    color: var(--text-dim);
-    text-shadow: 1px 1px 0 #000, -1px -1px 0 #000;
-    letter-spacing: 0.5px;
-  }
-  .pixel-agent-shadow {
-    position: absolute;
-    bottom: -5px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 16px;
-    height: 4px;
-    background: rgba(0,0,0,0.4);
-    border-radius: 50%;
-    filter: blur(1px);
-  }
-
-  /* Agent walking animation */
-  .pixel-agent.walking {
-    animation: agent-walk-frame 0.3s steps(2) infinite;
-  }
-  @keyframes agent-walk-frame {
-    0%   { transform: translateY(0) rotate(-2deg); }
-    50%  { transform: translateY(-4px) rotate(2deg); }
-    100% { transform: translateY(0) rotate(-2deg); }
-  }
-
-  /* Idle bob */
-  .pixel-agent.idle {
-    animation: agent-idle-bob 1.2s ease-in-out infinite;
-  }
-  @keyframes agent-idle-bob {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-2px); }
-  }
-
-  /* NEW HIRE animation */
-  .new-hire-banner {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 200;
-    text-align: center;
-    pointer-events: none;
-    animation: new-hire-anim 2.5s ease forwards;
-  }
-  .new-hire-banner .nhtext {
-    font-size: 14px;
-    color: var(--yellow);
-    text-shadow: 3px 3px 0 #664400, -1px -1px 0 #000;
-    letter-spacing: 2px;
-    animation: new-hire-pulse 0.3s step-end infinite;
-  }
-  .new-hire-banner .nhname {
-    font-size: 9px;
-    color: var(--text);
-    margin-top: 8px;
-    letter-spacing: 1px;
-  }
-  @keyframes new-hire-anim {
-    0%   { opacity: 0; transform: translate(-50%,-50%) scale(0.5); }
-    15%  { opacity: 1; transform: translate(-50%,-50%) scale(1.2); }
-    30%  { transform: translate(-50%,-50%) scale(1); }
-    75%  { opacity: 1; }
-    100% { opacity: 0; transform: translate(-50%,-50%) scale(1); }
-  }
-  @keyframes new-hire-pulse {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.7; }
-  }
-
-  /* ═══════════════════════════════════════════════
-     RESPONSIVE
-  ═══════════════════════════════════════════════ */
-  @media (max-width: 1150px) {
-    #hud { width: 98vw; height: 95vh; }
-    #office-wrap { left: 115px; right: 125px; }
-    #office { transform: rotateX(55deg) rotateZ(-45deg) scale(0.82); }
-  }
-  @media (max-width: 900px) {
-    #minimap-panel, #stats-panel { display: none; }
-    #office-wrap { left: 12px; right: 12px; }
-    #office { transform: rotateX(55deg) rotateZ(-45deg) scale(0.68); }
-  }
+* { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --grass: #88c070; --grass2: #70a858; --path: #d8b090; --path2: #c8a080;
+  --floor: #e8d8b0; --floor2: #d8c8a0; --wall: #483850; --wall2: #382840;
+  --door: #c87820; --doorGlow: #ffd700;
+  --ui-bg: #1a1a3a; --ui-border: #202060; --ui-text: #f0e860;
+  --ui-text2: #c8c8e8;
+  --ceo: #007700; --dev: #7800a0; --social: #e87890; --ops: #006888;
+}
+body {
+  background: #0a0a1a;
+  font-family: 'Press Start 2P', monospace;
+  display: flex; justify-content: center; align-items: center;
+  min-height: 100vh; overflow: hidden;
+  image-rendering: pixelated;
+}
+#app {
+  display: flex; flex-direction: column; align-items: center;
+  width: 100%; max-width: 700px; padding: 4px;
+}
+#top-bar {
+  width: 100%; background: var(--ui-bg); border: 3px solid var(--ui-border);
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 6px 10px; margin-bottom: 4px; font-size: 7px; color: var(--ui-text);
+}
+#top-bar .title { font-size: 8px; letter-spacing: 1px; }
+#top-bar .clock { color: var(--ui-text2); }
+#top-bar .team { color: var(--ui-text2); }
+.blink { animation: blink 1s step-end infinite; }
+@keyframes blink { 50% { opacity: 0; } }
+#game-wrap {
+  display: flex; gap: 4px; width: 100%;
+}
+#canvas-wrap {
+  flex: 1; position: relative; overflow: hidden;
+  border: 3px solid var(--ui-border); background: #111;
+}
+#canvas-wrap::before {
+  content: ''; display: block; padding-top: 75%;
+}
+canvas {
+  position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+  image-rendering: pixelated;
+}
+#side-panel {
+  width: 120px; background: var(--ui-bg); border: 3px solid var(--ui-border);
+  padding: 6px; font-size: 6px; color: var(--ui-text2); display: flex;
+  flex-direction: column; gap: 8px;
+}
+.panel-section { display: flex; flex-direction: column; gap: 3px; }
+.panel-label { font-size: 5px; color: var(--ui-text); margin-bottom: 2px; }
+.stat-row { display: flex; justify-content: space-between; }
+.stat-val { color: var(--ui-text); }
+.agent-row { display: flex; align-items: center; gap: 4px; margin: 2px 0; }
+.agent-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+.agent-name { font-size: 5px; color: var(--ui-text2); }
+#bottom-bar {
+  width: 100%; background: var(--ui-bg); border: 3px solid var(--ui-border);
+  padding: 5px 8px; margin-top: 4px; font-size: 6px;
+}
+#room-name { color: var(--ui-text); margin-bottom: 3px; font-size: 7px; }
+#activity-log { color: var(--ui-text2); font-size: 5px; line-height: 1.6; min-height: 22px; }
+#msg-line { color: var(--ui-text); font-size: 6px; min-height: 10px; }
+#dpad-hint { display: flex; justify-content: center; gap: 4px; margin-top: 4px; color: var(--ui-text2); font-size: 6px; }
 </style>
 </head>
 <body>
-
-<div id="hud">
-  <!-- Corner decorations -->
-  <div class="corner corner-tl"></div>
-  <div class="corner corner-tr"></div>
-  <div class="corner corner-bl"></div>
-  <div class="corner corner-br"></div>
-
-  <!-- TOP BAR -->
-  <div id="topbar">
-    <h1>EVERYCOMPANYCLAW HQ</h1>
-    <div id="topbar-center">
-      <div class="stat-box">
-        <span class="stat-label">LEADS</span>
-        <span class="stat-value" id="s-leads">48</span>
-      </div>
-      <div class="stat-box">
-        <span class="stat-label">PIPELINE</span>
-        <span class="stat-value" id="s-pipeline">78</span>
-      </div>
-      <div class="stat-box">
-        <span class="stat-label">ACTIONS</span>
-        <span class="stat-value" id="s-actions">495</span>
-      </div>
-      <div class="stat-box">
-        <span class="stat-label">POSTS</span>
-        <span class="stat-value" id="s-posts">3</span>
-      </div>
-      <div id="team-count">TEAM: <span id="agent-count">2</span>/8</div>
+<div id="app">
+  <div id="top-bar">
+    <span class="title">EVERYCOMPANYCLAW HQ</span>
+    <span class="clock" id="clock">00:00</span>
+    <span class="team">TEAM: <span id="agent-count">2/8</span></span>
+    <span class="blink" style="color:#ff4444;font-size:7px;">24/7</span>
+  </div>
+  <div id="game-wrap">
+    <div id="canvas-wrap">
+      <canvas id="game"></canvas>
     </div>
-    <div id="clock-box">
-      <div id="clock">--:--:--</div>
-      <div id="status-badge">24/7 ONLINE</div>
+    <div id="side-panel">
+      <div class="panel-section">
+        <div class="panel-label">METRICS</div>
+        <div class="stat-row"><span>Leads</span><span class="stat-val" id="s-leads">0</span></div>
+        <div class="stat-row"><span>Pipeline</span><span class="stat-val" id="s-pipeline">$0</span></div>
+        <div class="stat-row"><span>Actions</span><span class="stat-val" id="s-actions">0</span></div>
+        <div class="stat-row"><span>Posts</span><span class="stat-val" id="s-posts">0</span></div>
+      </div>
+      <div class="panel-section">
+        <div class="panel-label">TEAM ROSTER</div>
+        <div id="roster-list"></div>
+      </div>
     </div>
   </div>
-
-  <!-- LEFT MINIMAP -->
-  <div id="minimap-panel">
-    <div id="minimap-label">FACILITY MAP</div>
-    <div id="minimap">
-      <div class="mm-room active" id="mm-ops" data-room="ops">OPS</div>
-      <div class="mm-room" id="mm-lead" data-room="lead">LAB</div>
-      <div class="mm-room dim" id="mm-social" data-room="social">SOC</div>
-      <div class="mm-room dim" id="mm-break" data-room="break">BRK</div>
-    </div>
+  <div id="bottom-bar">
+    <div id="room-name">OUTDOOR - CAMPUS</div>
+    <div id="msg-line"></div>
+    <div id="activity-log">Welcome to EveryCompanyClaw HQ!</div>
+    <div id="dpad-hint"><span>▲</span><span>▼</span><span>◀</span><span>▶</span></div>
   </div>
-
-  <!-- RIGHT STATS -->
-  <div id="stats-panel">
-    <div id="stats-label">METRICS</div>
-    <div id="stats-box">
-      <div class="stat-row">
-        <span class="stat-row-label">CONV.</span>
-        <span class="stat-row-val" id="s-conv">34%</span>
-      </div>
-      <div class="stat-row">
-        <span class="stat-row-label">HOT</span>
-        <span class="stat-row-val" id="s-hot">12</span>
-      </div>
-      <div class="stat-row">
-        <span class="stat-row-label">REACH</span>
-        <span class="stat-row-val" id="s-reach">1.2K</span>
-      </div>
-      <div class="stat-row">
-        <span class="stat-row-label">SCORE</span>
-        <span class="stat-row-val" id="s-score">78</span>
-      </div>
-      <div id="hires-display">HIRES: <span id="hires-count">0</span></div>
-    </div>
-  </div>
-
-  <!-- OFFICE VIEWPORT -->
-  <div id="office-wrap">
-    <div id="office">
-      <div id="floor"></div>
-
-      <!-- OPS ROOM -->
-      <div class="room active" id="ops-room" style="--room-color:var(--cyan);">
-        <div class="room-glow"></div>
-        <div class="room-tiles"></div>
-        <div class="room-label">◈ OPERATIONS</div>
-        <div class="room-tooltip">
-          <div class="tip-title">OPERATIONS</div>
-          <div class="tip-line">Leads: <span id="stat-leads">48</span></div>
-          <div class="tip-line">Pipeline: <span id="stat-pipeline">78</span></div>
-          <div class="tip-line">Conv. Rate: 34%</div>
-        </div>
-        <!-- Desks -->
-        <div class="pixel-desk" style="width:48px;height:24px;top:35%;left:12%;--desk-color:var(--cyan);"></div>
-        <div class="pixel-desk" style="width:48px;height:24px;top:35%;left:32%;--desk-color:var(--cyan);"></div>
-        <div class="pixel-desk" style="width:48px;height:24px;top:35%;left:52%;--desk-color:var(--cyan);"></div>
-        <div class="pixel-desk" style="width:48px;height:24px;top:60%;left:22%;--desk-color:var(--cyan);"></div>
-        <div class="pixel-desk" style="width:48px;height:24px;top:60%;left:42%;--desk-color:var(--cyan);"></div>
-      </div>
-
-      <!-- LEAD LAB -->
-      <div class="room" id="lead-room" style="--room-color:var(--purple);">
-        <div class="room-glow"></div>
-        <div class="room-tiles"></div>
-        <div class="room-label">◈ LEAD LAB</div>
-        <div class="room-tooltip">
-          <div class="tip-title">LEAD LAB</div>
-          <div class="tip-line">Hot: <span id="stat-hot">12</span></div>
-          <div class="tip-line">Warm: 24 | Cold: 15</div>
-          <div class="tip-line">Score Avg: 78</div>
-        </div>
-        <!-- Desks -->
-        <div class="pixel-desk" style="width:48px;height:24px;top:35%;left:32%;--desk-color:var(--purple);"></div>
-        <div class="pixel-desk" style="width:48px;height:24px;top:35%;left:52%;--desk-color:var(--purple);"></div>
-        <div class="pixel-desk" style="width:48px;height:24px;top:60%;left:42%;--desk-color:var(--purple);"></div>
-        <div class="pixel-desk" style="width:48px;height:24px;top:60%;left:62%;--desk-color:var(--purple);"></div>
-      </div>
-
-      <!-- SOCIAL STUDIO -->
-      <div class="room locked" id="social-room" style="--room-color:var(--pink);">
-        <div class="room-glow"></div>
-        <div class="room-tiles"></div>
-        <div class="room-label">◈ SOCIAL</div>
-        <div class="room-tooltip">
-          <div class="tip-title">SOCIAL STUDIO</div>
-          <div class="tip-line">Posts: <span id="stat-posts">3</span></div>
-          <div class="tip-line">Engaged: 24</div>
-          <div class="tip-line">Reach: 1.2K</div>
-        </div>
-        <div class="pixel-desk" style="width:48px;height:24px;top:35%;left:22%;--desk-color:var(--pink);"></div>
-        <div class="pixel-desk" style="width:48px;height:24px;top:35%;left:42%;--desk-color:var(--pink);"></div>
-        <div class="pixel-desk" style="width:48px;height:24px;top:60%;left:32%;--desk-color:var(--pink);"></div>
-      </div>
-
-      <!-- BREAK ROOM -->
-      <div class="room locked" id="break-room" style="--room-color:var(--green);">
-        <div class="room-glow"></div>
-        <div class="room-tiles"></div>
-        <div class="room-label">◈ BREAK ROOM</div>
-        <div class="room-tooltip">
-          <div class="tip-title">BREAK ROOM</div>
-          <div class="tip-line">Morale: 94%</div>
-          <div class="tip-line">Coffee: x3</div>
-        </div>
-        <div class="pixel-desk" style="width:48px;height:24px;top:35%;left:32%;--desk-color:var(--green);"></div>
-        <div class="pixel-desk" style="width:48px;height:24px;top:35%;left:52%;--desk-color:var(--green);"></div>
-        <div class="pixel-desk" style="width:48px;height:24px;top:60%;left:42%;--desk-color:var(--green);"></div>
-      </div>
-
-      <!-- Agents rendered here by JS -->
-      <div id="agent-layer"></div>
-
-    </div><!-- /office -->
-  </div><!-- /office-wrap -->
-
-  <!-- BOTTOM LOG BAR -->
-  <div id="bottombar">
-    <div id="log-label">LOG▶</div>
-    <div id="activity-log">
-      <div class="log-entry">INITIALIZING HQ...</div>
-    </div>
-  </div>
-
-</div><!-- /hud -->
-
+</div>
 <script>
-// ═══════════════════════════════════════════════════════════
-//  CONSTANTS
-// ═══════════════════════════════════════════════════════════
-const OFFICE_W = 760;
-const OFFICE_H = 520;
-const MAX_AGENTS = 8;
-const HIRE_INTERVAL_MS = 30000;  // check every 30s
-const HIRE_CHANCE = 0.2;         // 20% chance
+// === CONSTANTS ===
+const TILE = 32;
+const MAP_W = 20, MAP_H = 15;
+const canvas = document.getElementById('game');
+const ctx = canvas.getContext('22d');
+canvas.width = MAP_W * TILE;
+canvas.height = MAP_H * TILE;
 
-// Agent colors pool
-const AGENT_COLORS = ['#ff5555','#ffaa00','#55aaff','#ff55aa','#55ffaa','#ffff55','#55ffcc','#ff88ff'];
-const AGENT_ROLES = [
-  'MARKETER','SALES','ANALYST','SUPPORT','HR','FINANCE','LEGAL','QA'
-];
-const AGENT_TASKS = {
-  CEO:     ['Monitoring HQ...','Reviewing metrics...','Board update...','Hiring agents...'],
-  DEV:     ['Writing code...','Reviewing PR...','Deploying...','Debugging...'],
-  DEFAULT: ['Working...','Processing...','Analyzing...','Updating...'],
+// === COLORS ===
+const C = {
+  grass:'#88c070', grass2:'#70a858', grass3:'#609048',
+  path:'#d8b090', path2:'#c8a080',
+  floor:'#e8d8b0', floor2:'#d8c8a0', floor3:'#c8b890',
+  wall:'#483850', wall2:'#382840', wallDark:'#281830',
+  door:'#c87820', doorFrame:'#a06018',
+  tree:'#305820', tree2:'#204810',
+  ceo:'#007700', ceoLight:'#00aa00',
+  dev:'#7800a0', devLight:'#b040d0',
+  social:'#e87890', socialLight:'#ff9ab0',
+  ops:'#006888', opsLight:'#0090b8',
+  uiBorder:'#202060',
 };
 
-// Room centers (normalized 0-1)
+// === MAP DATA ===
+// 0=grass, 1=path, 2=floor, 3=wall, 4=door, 5=tree
+const MAP = [];
+for(let y=0;y<MAP_H;y++){
+  MAP[y]=[];
+  for(let x=0;x<MAP_W;x++){
+    // Default grass
+    let t = 0;
+    // Row 0-2 and row 14+: trees
+    if(y<=2||y>=14){ t=5; }
+    // Path column 9 (vertical) from row 3 to 14
+    if(x===9&&y>=3&&y<=14){ t=1; }
+    // Path row 9 (horizontal) from col 0 to 18
+    if(y===9&&x>=0&&x<=18){ t=1; }
+    // Operations building: col 0-8, row 3-8 (walls around)
+    if(x>=0&&x<=8&&y>=3&&y<=8){
+      if(x===0||x===8||y===3||y===8) t=(y===8&&x>=2&&x<=4)?4:3;
+      else t=2;
+    }
+    // CEO office: col 10-18, row 3-8
+    if(x>=10&&x<=18&&y>=3&&y<=8){
+      if(x===10||x===18||y===3||y===8) t=(y===8&&x>=11&&x<=14)?4:3;
+      else t=2;
+    }
+    // Social studio: col 0-8, row 10-14
+    if(x>=0&&x<=8&&y>=10&&y<=14){
+      if(x===0||x===8||y===10||y===14) t=(y===10&&x>=2&&x<=4)?4:3;
+      else t=2;
+    }
+    // Lead lab: col 10-18, row 10-14
+    if(x>=10&&x<=18&&y>=10&&y<=14){
+      if(x===10||x===18||y===10||y===14) t=(y===10&&x>=13&&x<=16)?4:3;
+      else t=2;
+    }
+    MAP[y][x]=t;
+  }
+}
+
+// === ROOM DEFINITIONS ===
 const ROOMS = {
-  ops:    { x: 0.22, y: 0.22, el: 'ops-room',    color: '#00f5ff' },
-  lead:   { x: 0.72, y: 0.22, el: 'lead-room',   color: '#aa55ff' },
-  social: { x: 0.22, y: 0.72, el: 'social-room', color: '#ff55aa' },
-  break:  { x: 0.72, y: 0.72, el: 'break-room',  color: '#00ff88' },
+  outdoor:{ name:'OUTDOOR - CAMPUS', enterMsg:'Welcome to EveryCompanyClaw HQ!' },
+  ops:{ name:'OPERATIONS ROOM', enterMsg:'Systems are running smoothly.' },
+  ceo:{ name:'CEO OFFICE', enterMsg:'Strategic planning in progress.' },
+  social:{ name:'SOCIAL STUDIO', enterMsg:'Creating content...' },
+  leadlab:{ name:'LEAD LAB', enterMsg:'Analyzing leads and pipeline.' },
 };
-const ROOM_KEYS = ['ops','lead','social','break'];
+const ROOM_TILES = {
+  ops:{x1:0,y1:3,x2:8,y2:8,door:{x:3,y:8}},
+  ceo:{x1:10,y1:3,x2:18,y2:8,door:{x:12,y:8}},
+  social:{x1:0,y1:10,x2:8,y2:14,door:{x:3,y:10}},
+  leadlab:{x1:10,y1:10,x2:18,y2:14,door:{x:14,y:10}},
+};
 
-// ═══════════════════════════════════════════════════════════
-//  STATE
-// ═══════════════════════════════════════════════════════════
-let agents = [];         // array of agent objects
-let hiresCount = 0;
-let lastTimestamp = 0;
+// === TILE DRAWING ===
+function drawGrass(x,y){
+  ctx.fillStyle=C.grass; ctx.fillRect(x,y,TILE,TILE);
+  // detail dots
+  ctx.fillStyle=C.grass2;
+  if(((x/TILE+y/TILE)*7)%5===0) ctx.fillRect(x+8,y+8,4,4);
+  if(((x/TILE+y/TILE)*11)%7===1) ctx.fillRect(x+20,y+16,3,3);
+  if(((x/TILE+y/TILE)*3)%4===2) ctx.fillRect(x+4,y+22,2,2);
+}
+function drawPath(x,y){
+  ctx.fillStyle=C.path; ctx.fillRect(x,y,TILE,TILE);
+  ctx.fillStyle=C.path2;
+  ctx.fillRect(x+2,y+2,4,4);
+  ctx.fillRect(x+20,y+14,4,4);
+  ctx.fillRect(x+12,y+26,3,3);
+}
+function drawFloor(x,y){
+  ctx.fillStyle=C.floor; ctx.fillRect(x,y,TILE,TILE);
+  ctx.fillStyle=C.floor2;
+  ctx.fillRect(x,y,TILE/2,TILE/2);
+  ctx.fillRect(x+TILE/2,y+TILE/2,TILE/2,TILE/2);
+  ctx.fillStyle=C.floor3;
+  ctx.fillRect(x+TILE/2,y,2,TILE);
+  ctx.fillRect(x,y+TILE/2,TILE,2);
+}
+function drawWall(x,y){
+  ctx.fillStyle=C.wall; ctx.fillRect(x,y,TILE,TILE);
+  ctx.fillStyle=C.wall2; ctx.fillRect(x,y,TILE,8);
+  ctx.fillStyle=C.wallDark; ctx.fillRect(x,y+8,4,TILE-8);
+  // brick lines
+  ctx.fillStyle=C.wall2;
+  ctx.fillRect(x+14,y,2,TILE);
+  ctx.fillRect(x,y+16,TILE,2);
+}
+function drawDoor(x,y,glow){
+  ctx.fillStyle=C.door; ctx.fillRect(x,y,TILE,TILE);
+  ctx.fillStyle='#e8a840';
+  ctx.fillRect(x+6,y+4,20,4);
+  ctx.fillRect(x+6,y+14,20,2);
+  ctx.fillRect(x+14,y+18,4,10);
+  if(glow){
+    ctx.shadowColor='#ffd700'; ctx.shadowBlur=8;
+    ctx.fillStyle='#ffd700'; ctx.fillRect(x+4,y+2,2,TILE-4);
+    ctx.fillRect(x+TILE-6,y+2,2,TILE-4);
+    ctx.shadowBlur=0;
+  }
+}
+function drawTree(x,y){
+  ctx.fillStyle=C.grass; ctx.fillRect(x,y,TILE,TILE);
+  ctx.fillStyle=C.tree;
+  ctx.fillRect(x+4,y+6,24,22);
+  ctx.fillStyle=C.tree2;
+  ctx.fillRect(x+8,y+10,16,14);
+  ctx.fillStyle='#88c070';
+  ctx.fillRect(x+14,y+2,4,6);
+}
 
-// ═══════════════════════════════════════════════════════════
-//  PIXEL AGENT SPRITE GENERATOR
-//  Creates a 10x12 pixel sprite using box-shadow
-// ═══════════════════════════════════════════════════════════
-function buildAgentSprite(color) {
-  // Simple 10x12 pixel humanoid sprite
-  // Each row: 10 pixels, each pixel = 4px wide
-  // 0=transparent, 1=color, 2=darker shade
-  const rows = [
-    [0,0,0,1,1,1,1,0,0,0],  // head top
-    [0,0,1,1,1,1,1,1,0,0],  // head
-    [0,0,1,2,1,1,2,1,0,0],  // face detail
-    [0,0,1,1,1,1,1,1,0,0],  // head bottom
-    [0,0,0,1,1,1,1,0,0,0],  // neck
-    [0,1,1,1,1,1,1,1,1,0],  // torso top
-    [0,1,1,1,1,1,1,1,1,0],  // torso
-    [0,0,1,1,1,1,1,1,0,0],  // torso bottom / belt
-    [0,0,1,0,1,1,0,1,0,0],  // hips
-    [0,1,1,0,0,0,0,1,1,0],  // legs top
-    [0,1,1,0,0,0,0,1,1,0],  // legs
-    [0,1,0,0,0,0,0,0,1,0],  // feet
+// === DRAW MAP ===
+function drawMap(currentRoom){
+  for(let y=0;y<MAP_H;y++){
+    for(let x=0;x<MAP_W;x++){
+      const t=MAP[y][x];
+      const px=x*TILE, py=y*TILE;
+      if(t===0) drawGrass(px,py);
+      else if(t===1) drawPath(px,py);
+      else if(t===2){
+        if(currentRoom==='outdoor') drawFloor(px,py);
+        else drawFloor(px,py);
+      }
+      else if(t===3) drawWall(px,py);
+      else if(t===4){
+        const glow=checkDoorGlow(x,y);
+        drawDoor(px,py,glow);
+      }
+      else if(t===5) drawTree(px,py);
+    }
+  }
+}
+
+// === DOOR GLOW ===
+function checkDoorGlow(x,y){
+  if(agentCount>=4 && x===3 && y===10) return true; // social door
+  if(agentCount>=6 && x===14 && y===10) return true; // leadlab door
+  return false;
+}
+
+// === AGENT SPRITES ===
+// Pixel art via box-shadow technique on a tiny canvas
+const SPRITE_SIZE=16;
+const agentSprites={};
+
+function makeSpriteCanvas(color, lightColor, facing='down', frame=0){
+  const oc=document.createElement('canvas');
+  oc.width=SPRITE_SIZE; oc.height=SPRITE_SIZE;
+  const c=oc.getContext('2d');
+  c.imageSmoothingEnabled=false;
+  // Body
+  c.fillStyle=color;
+  c.fillRect(4,6,8,8);
+  // Head
+  c.fillStyle=lightColor;
+  c.fillRect(5,2,6,5);
+  // Eyes
+  c.fillStyle='#fff';
+  if(facing==='down'){
+    c.fillRect(6,3,2,2); c.fillRect(9,3,2,2);
+    c.fillStyle='#000'; c.fillRect(7,4,1,1); c.fillRect(10,4,1,1);
+  } else if(facing==='up'){
+    c.fillStyle='#000'; c.fillRect(6,2,2,2); c.fillRect(9,2,2,2);
+  } else if(facing==='left'){
+    c.fillRect(5,3,2,2); c.fillStyle='#000'; c.fillRect(6,4,1,1);
+  } else {
+    c.fillRect(10,3,2,2); c.fillStyle='#000'; c.fillRect(10,4,1,1);
+  }
+  // Feet
+  c.fillStyle=color;
+  if(frame===0){
+    c.fillRect(5,14,3,2); c.fillRect(9,14,3,2);
+  } else {
+    c.fillRect(4,14,3,2); c.fillRect(10,14,3,2);
+  }
+  // Arms
+  c.fillStyle=lightColor;
+  if(frame===0){
+    c.fillRect(2,8,2,4); c.fillRect(13,8,2,4);
+  } else {
+    c.fillRect(2,7,2,4); c.fillRect(13,9,2,4);
+  }
+  return oc;
+}
+
+const FACINGS=['down','up','left','right'];
+
+function getAgentSprite(agent,facing,frame){
+  const key=`${agent}_${facing}_${frame}`;
+  if(!agentSprites[key]){
+    const colors={
+      CEO:{c:C.ceo, l:C.ceoLight},
+      DevAgent:{c:C.dev, l:C.devLight},
+      SocialAgent:{c:C.social, l:C.socialLight},
+      OpsAgent:{c:C.ops, l:C.opsLight},
+    };
+    const {c,l}=colors[agent]||{c:'#888',l:'#aaa'};
+    agentSprites[key]=makeSpriteCanvas(c,l,facing,frame);
+  }
+  return agentSprites[key];
+}
+
+// === AGENTS ===
+let agents=[];
+let agentCount=2;
+let lastNewHire=Date.now();
+let newHireMessage='';
+let newHireTimer=0;
+const AGENT_NAMES=['CEO','DevAgent','SocialAgent','OpsAgent','MarketAgent','DataAgent','SalesAgent','SupportAgent'];
+const AGENT_COLORS={CEO:C.ceo,DevAgent:C.dev,SocialAgent:C.social,OpsAgent:C.ops,MarketAgent:'#d0a000',DataAgent:'#0088aa',SalesAgent:'#aa4400',SupportAgent:'#448800'};
+const AGENT_DISPLAY={CEO:'CEO',DevAgent:'DEV',SocialAgent:'SOCIAL',OpsAgent:'OPS',MarketAgent:'MKT',DataAgent:'DATA',SalesAgent:'SALES',SupportAgent:'SUPP'};
+
+function initAgents(){
+  agents=[
+    {id:'CEO',name:'CEO',type:'CEO',x:14,y:7,facing:'up',frame:0,homeX:14,homeY:7,room:'ceo',moving:false,moveTimer:0,idleTimer:0},
+    {id:'DevAgent',name:'DevAgent',type:'DevAgent',x:4,y:5,facing:'down',frame:0,homeX:4,homeY:5,room:'ops',moving:false,moveTimer:0,idleTimer:0},
   ];
+  agentCount=2;
+  updateRoster();
+}
 
-  const dark = shadeColor(color, -40);
-  const shadow = [];
-  rows.forEach((row, r) => {
-    row.forEach((pixel, c) => {
-      if (pixel === 0) return;
-      const px = pixel === 2 ? dark : color;
-      shadow.push(`${c*4}px ${r*4}px 0 ${px}`);
-    });
+function updateRoster(){
+  const list=document.getElementById('roster-list');
+  list.innerHTML='';
+  agents.forEach(a=>{
+    const row=document.createElement('div');
+    row.className='agent-row';
+    const dot=document.createElement('span');
+    dot.className='agent-dot';
+    dot.style.background=AGENT_COLORS[a.type]||'#888';
+    const nm=document.createElement('span');
+    nm.className='agent-name';
+    nm.textContent=AGENT_DISPLAY[a.type]||a.type;
+    row.appendChild(dot); row.appendChild(nm);
+    list.appendChild(row);
   });
-
-  return shadow.join(',\n    ');
+  document.getElementById('agent-count').textContent=agentCount+'/8';
 }
 
-function shadeColor(color, pct) {
-  const num = parseInt(color.replace('#',''), 16);
-  const r = Math.max(0, Math.min(255, (num >> 16) + pct));
-  const g = Math.max(0, Math.min(255, ((num >> 8) & 0xff) + pct));
-  const b = Math.max(0, Math.min(255, (num & 0xff) + pct));
-  return `rgb(${r},${g},${b})`;
+// === MOVEMENT ===
+const ROOM_HOMES={
+  ops:{CEO:{x:4,y:5},DevAgent:{x:4,y:5},OpsAgent:{x:4,y:5},MarketAgent:{x:2,y:5},DataAgent:{x:6,y:5}},
+  ceo:{CEO:{x:14,y:5},DevAgent:{x:12,y:5},MarketAgent:{x:14,y:5}},
+  social:{SocialAgent:{x:4,y:12},SupportAgent:{x:4,y:12}},
+  leadlab:{OpsAgent:{x:14,y:12},DataAgent:{x:14,y:12},SalesAgent:{x:14,y:12}},
+};
+
+const ROOM_BOUNDS={
+  ops:{x1:1,y1:4,x2:7,y2:7},
+  ceo:{x1:11,y1:4,x2:17,y2:7},
+  social:{x1:1,y1:11,x2:7,y2:13},
+  leadlab:{x1:11,y1:11,x2:17,y2:13},
+};
+
+const DIR_DXDY={up:{dx:0,dy:-1},down:{dx:0,dy:1},left:{dx:-1,dy:0},right:{dx:1,dy:0}};
+
+function getHomeForAgent(agent){
+  const roomHomes=ROOM_HOMES[agent.room]||{};
+  return roomHomes[agent.type]||{x:agent.x,y:agent.y};
 }
 
-// ═══════════════════════════════════════════════════════════
-//  CREATE AGENT DOM
-// ═══════════════════════════════════════════════════════════
-function createAgentDOM(agent) {
-  const el = document.createElement('div');
-  el.className = 'pixel-agent idle';
-  el.id = agent.id;
-  el.style.left = agent.x + 'px';
-  el.style.top  = agent.y + 'px';
-
-  const shadow = buildAgentSprite(agent.color);
-  el.style.cssText += `
-    width: 4px;
-    height: 4px;
-    box-shadow: ${shadow};
-  `;
-
-  const label = document.createElement('div');
-  label.className = 'pixel-agent-label';
-  label.textContent = agent.name;
-  el.appendChild(label);
-
-  const shadowEl = document.createElement('div');
-  shadowEl.className = 'pixel-agent-shadow';
-  el.appendChild(shadowEl);
-
-  document.getElementById('agent-layer').appendChild(el);
-  return el;
-}
-
-// ═══════════════════════════════════════════════════════════
-//  HIRE NEW AGENT
-// ═══════════════════════════════════════════════════════════
-function hireAgent(role, color) {
-  const id = 'agent-' + role.toLowerCase().replace(' ', '-') + '-' + Date.now();
-  const roomIdx = agents.length % ROOM_KEYS.length;
-  const roomKey = ROOM_KEYS[roomIdx];
-  const room = ROOMS[roomKey];
-
-  // Start off-screen (bottom-left corner, walk in)
-  const startX = -40;
-  const startY = OFFICE_H + 20;
-  const targetX = room.x * OFFICE_W + (Math.random() - 0.5) * 60;
-  const targetY = room.y * OFFICE_H + (Math.random() - 0.5) * 40;
-
-  const agent = {
-    id,
-    name: role,
-    color,
-    role,
-    x: startX,
-    y: startY,
-    targetX,
-    targetY,
-    speed: 0.08 + Math.random() * 0.04,
-    state: 'walking-in',   // walking-in → idle/working → moving
-    stateTimer: 0,
-    workTime: 4000 + Math.random() * 8000,
-    walkTime: 3000,
-    waypoints: buildWaypoints(roomKey),
-    wpIdx: 0,
-    tasks: AGENT_TASKS[role.toUpperCase()] || AGENT_TASKS.DEFAULT,
-    taskIdx: 0,
-    roomKey,
-  };
-
-  agents.push(agent);
-  createAgentDOM(agent);
-
-  // Show NEW HIRE banner
-  showNewHireBanner(role, color);
-
-  // Update UI
-  document.getElementById('agent-count').textContent = agents.length;
-  document.getElementById('hires-count').textContent = ++hiresCount;
-
-  addLog(role + ' HIRED! New ' + role + ' joining...', true);
-
-  // Expand office if needed
-  updateRoomStates();
-
-  // Update minimap
-  updateMinimapDot(agent, true);
-}
-
-function showNewHireBanner(name, color) {
-  const banner = document.createElement('div');
-  banner.className = 'new-hire-banner';
-  banner.innerHTML = `
-    <div class="nhtext">★ NEW HIRE! ★</div>
-    <div class="nhname" style="color:${color}">${name}</div>
-  `;
-  document.getElementById('office').appendChild(banner);
-  setTimeout(() => banner.remove(), 2600);
-}
-
-function buildWaypoints(roomKey) {
-  const base = ROOMS[roomKey];
-  const pts = [];
-  ROOM_KEYS.forEach(rk => {
-    const r = ROOMS[rk];
-    pts.push({
-      x: r.x * OFFICE_W + (Math.random()-0.5)*80,
-      y: r.y * OFFICE_H + (Math.random()-0.5)*50,
-      wait: 3000 + Math.random() * 6000
-    });
-  });
-  return pts;
-}
-
-// ═══════════════════════════════════════════════════════════
-//  UPDATE ROOM STATES (expansion)
-// ═══════════════════════════════════════════════════════════
-function updateRoomStates() {
-  const count = agents.length;
-
-  // social room unlocks at 4+
-  const socialEl = document.getElementById('social-room');
-  const socialMM = document.getElementById('mm-social');
-  if (count >= 4) {
-    socialEl.classList.remove('locked');
-    socialEl.classList.add('active');
-    socialMM.classList.remove('dim');
-    socialMM.classList.add('active');
-  }
-
-  // break room unlocks at 6+
-  const breakEl = document.getElementById('break-room');
-  const breakMM = document.getElementById('mm-break');
-  if (count >= 6) {
-    breakEl.classList.remove('locked');
-    breakEl.classList.add('active');
-    breakMM.classList.remove('dim');
-    breakMM.classList.add('active');
+function canMoveTo(agent,x,y,currentRoom){
+  if(currentRoom==='outdoor'){
+    if(x<0||x>=MAP_W||y<0||y>=MAP_H) return false;
+    const t=MAP[y][x];
+    if(t===3||t===5) return false;
+    return true;
+  } else {
+    const b=ROOM_BOUNDS[currentRoom]||{x1:0,y1:0,x2:20,y2:20};
+    if(x<b.x1||x>b.x2||y<b.y1||y>b.y2) return false;
+    // Check walls within room (floor tiles only)
+    if(MAP[y]&&MAP[y][x]!==2) return false;
+    return true;
   }
 }
 
-// ═══════════════════════════════════════════════════════════
-//  MINIMAP
-// ═══════════════════════════════════════════════════════════
-function updateMinimapDot(agent, isNew) {
-  // Remove old dot for this agent if exists
-  const oldDot = document.querySelector(`.mm-dot[data-agent="${agent.id}"]`);
-  if (oldDot) oldDot.remove();
-
-  // Add dot to appropriate room minimap
-  const roomMM = {
-    CEO:  'mm-ops',
-    DEV:  'mm-lead',
-  };
-  const mmId = roomMM[agent.role] || `mm-${agent.roomKey}`;
-  const mmEl = document.getElementById(mmId);
-  if (!mmEl) return;
-
-  const dot = document.createElement('div');
-  dot.className = 'mm-dot';
-  dot.dataset.agent = agent.id;
-  dot.style.cssText = `
-    left: ${(agent.x / OFFICE_W * 100)}%;
-    top:  ${(agent.y / OFFICE_H * 100)}%;
-    background: ${agent.color};
-    box-shadow: 0 0 4px ${agent.color};
-  `;
-  mmEl.appendChild(dot);
-}
-
-// ═══════════════════════════════════════════════════════════
-//  CLOCK
-// ═══════════════════════════════════════════════════════════
-function updateClock() {
-  const now = new Date();
-  const h = String(now.getHours()).padStart(2,'0');
-  const m = String(now.getMinutes()).padStart(2,'0');
-  const s = String(now.getSeconds()).padStart(2,'0');
-  document.getElementById('clock').textContent = `${h}:${m}:${s}`;
-}
-setInterval(updateClock, 1000);
-updateClock();
-
-// ═══════════════════════════════════════════════════════════
-//  LOG
-// ═══════════════════════════════════════════════════════════
-const LOG_MSGS = [
-  ['CEO → Inspecting Operations', true],
-  ['DEV → Committed: auth-fix', true],
-  ['SOC → Post published: AI Update #12', false],
-  ['OPS → Lead #4821 qualified', false],
-  ['CEO → Pipeline review: 78 active', true],
-  ['SOC → Reply from @user_42', false],
-  ['OPS → New lead: tech-startup.io', false],
-  ['DEV → PR merged: pipeline-opt v2.1', true],
-  ['SOC → Engagement +12% this hour', false],
-  ['CEO → Board metrics updated', true],
-  ['OPS → Email sequence triggered', false],
-  ['DEV → Running health check', false],
-  ['SOC → Scheduling tomorrow posts', false],
-  ['OPS → CRM updated: 48 contacts', false],
-  ['CEO → Revenue report generated', true],
-  ['DEV → Auto-scaling triggered x3', true],
-  ['SOC → Twitter thread viral', false],
-  ['OPS → Funnel analysis complete', false],
-  ['DEV → DB backup successful', false],
-  ['SOC → LinkedIn: 340 views', false],
-  ['CEO → Weekly OKR review', true],
-  ['OPS → Outreach: 120 sent', false],
-  ['SOC → DMed 5 prospects', false],
-];
-let logMsgIdx = 0;
-let logEl;
-
-function addLog(text, highlight) {
-  if (!logEl) logEl = document.getElementById('activity-log');
-  const entry = document.createElement('div');
-  entry.className = 'log-entry' + (highlight ? ' hi' : '');
-  entry.textContent = text;
-  logEl.appendChild(entry);
-
-  // Keep max 12 entries
-  while (logEl.children.length > 12) logEl.removeChild(logEl.firstChild);
-}
-
-function tickLog() {
-  const [msg] = LOG_MSGS[logMsgIdx % LOG_MSGS.length];
-  logMsgIdx++;
-  addLog(msg, LOG_MSGS[(logMsgIdx-1) % LOG_MSGS.length][1]);
-}
-setInterval(tickLog, 5000);
-tickLog(); // first one immediately
-
-// ═══════════════════════════════════════════════════════════
-//  STATS SIMULATION
-// ═══════════════════════════════════════════════════════════
-function tickStats() {
-  const r = (min,max) => min + Math.floor(Math.random()*(max-min));
-  document.getElementById('s-leads').textContent    = r(44,62);
-  document.getElementById('s-pipeline').textContent = r(70,90);
-  document.getElementById('s-actions').textContent  = 490 + r(0,20);
-  document.getElementById('s-posts').textContent    = r(1,8);
-  document.getElementById('stat-leads').textContent = r(44,62);
-  document.getElementById('stat-pipeline').textContent = r(70,90);
-  document.getElementById('stat-hot').textContent   = r(10,18);
-  document.getElementById('stat-posts').textContent = r(1,8);
-  document.getElementById('s-conv').textContent    = r(30,40)+'%';
-  document.getElementById('s-score').textContent  = r(70,85);
-}
-setInterval(tickStats, 7000);
-tickStats();
-
-// ═══════════════════════════════════════════════════════════
-//  HIRING TIMER
-// ═══════════════════════════════════════════════════════════
-let nextHireCheck = Date.now() + 30000 + Math.random() * 30000;
-
-function tryHire() {
-  if (agents.length >= MAX_AGENTS) return;
-  if (Math.random() < HIRE_CHANCE) {
-    const usedColors = agents.map(a => a.color);
-    const availColors = AGENT_COLORS.filter(c => !usedColors.includes(c));
-    if (availColors.length === 0) return;
-    const color = availColors[Math.floor(Math.random() * availColors.length)];
-    const role  = AGENT_ROLES[agents.length % AGENT_ROLES.length];
-    hireAgent(role, color);
+function tryMove(agent,dir,currentRoom){
+  const {dx,dy}=DIR_DXDY[dir];
+  const nx=agent.x+dx, ny=agent.y+dy;
+  if(canMoveTo(agent,nx,ny,currentRoom)){
+    agent.x=nx; agent.y=ny;
+    agent.facing=dir;
+    return true;
   }
-  nextHireCheck = Date.now() + 30000 + Math.random() * 30000;
+  return false;
 }
 
-// ═══════════════════════════════════════════════════════════
-//  GAME LOOP - SMOOTH MOVEMENT with requestAnimationFrame
-// ═══════════════════════════════════════════════════════════
-function gameLoop(timestamp) {
-  const dt = Math.min(timestamp - lastTimestamp, 50); // cap at 50ms
-  lastTimestamp = timestamp;
-
-  // Hiring check
-  if (Date.now() >= nextHireCheck) tryHire();
-
-  agents.forEach(ag => {
-    const el = document.getElementById(ag.id);
-    if (!el) return;
-
-    if (ag.state === 'walking-in') {
-      // Move toward target
-      const dx = ag.targetX - ag.x;
-      const dy = ag.targetY - ag.y;
-      const dist = Math.sqrt(dx*dx + dy*dy);
-      const step = ag.speed * dt * 60;
-
-      if (dist <= step) {
-        ag.x = ag.targetX;
-        ag.y = ag.targetY;
-        ag.state = 'idle';
-        ag.stateTimer = ag.workTime;
-        el.className = 'pixel-agent idle';
-      } else {
-        ag.x += (dx/dist) * step;
-        ag.y += (dy/dist) * step;
-        el.className = 'pixel-agent walking';
-      }
+function updateAgentAI(agent,currentRoom,dt){
+  agent.idleTimer+=dt;
+  if(agent.moving){
+    agent.moveTimer-=dt;
+    if(agent.moveTimer<=0){ agent.moving=false; agent.frame=0; }
+  }
+  if(agent.idleTimer>1500+Math.random()*2000){
+    agent.idleTimer=0;
+    const moves=['up','down','left','right'];
+    const m=moves[Math.floor(Math.random()*moves.length)];
+    if(tryMove(agent,m,currentRoom)){
+      agent.moving=true; agent.moveTimer=200; agent.frame=(agent.frame+1)%2;
     }
-    else if (ag.state === 'idle') {
-      ag.stateTimer -= dt;
-      if (ag.stateTimer <= 0) {
-        // Pick next waypoint
-        ag.wpIdx = (ag.wpIdx + 1) % ag.waypoints.length;
-        const wp = ag.waypoints[ag.wpIdx];
-        ag.targetX = wp.x;
-        ag.targetY = wp.y;
-        ag.state = 'moving';
-        el.className = 'pixel-agent walking';
-      }
-    }
-    else if (ag.state === 'moving') {
-      const dx = ag.targetX - ag.x;
-      const dy = ag.targetY - ag.y;
-      const dist = Math.sqrt(dx*dx + dy*dy);
-      const step = ag.speed * dt * 60;
+  }
+}
 
-      if (dist <= step) {
-        ag.x = ag.targetX;
-        ag.y = ag.targetY;
-        ag.state = 'idle';
-        ag.stateTimer = ag.waypoints[ag.wpIdx].wait;
-        el.className = 'pixel-agent idle';
-      } else {
-        ag.x += (dx/dist) * step;
-        ag.y += (dy/dist) * step;
-        el.className = 'pixel-agent walking';
-      }
+// === INDOOR ROOM DETAILS ===
+function drawIndoorDetails(room){
+  ctx.save();
+  if(room==='ops'){
+    // Server racks
+    for(let i=0;i<3;i++){
+      drawDesk(2+i*3,4,room);
+      drawServerRack(2+i*3,5,room);
     }
+  } else if(room==='ceo'){
+    drawCEODesk(14,4,room);
+    for(let i=0;i<2;i++) drawDesk(11+i*4,6,room);
+  } else if(room==='social'){
+    for(let i=0;i<3;i++) drawPostStation(2+i*3,11,room);
+  } else if(room==='leadlab'){
+    for(let i=0;i<3;i++) drawLeadScreen(11+i*3,11,room);
+  }
+  ctx.restore();
+}
 
-    // Update DOM position
-    el.style.left = ag.x + 'px';
-    el.style.top  = ag.y + 'px';
+function drawDesk(x,y,room){
+  const px=x*TILE, py=y*TILE;
+  ctx.fillStyle='#a08060'; ctx.fillRect(px+4,py+8,24,18);
+  ctx.fillStyle='#c0a080'; ctx.fillRect(px+6,py+4,20,8);
+  ctx.fillStyle='#80c080'; ctx.fillRect(px+8,py+6,14,4);
+}
 
-    // Update minimap dot
-    const dot = document.querySelector(`.mm-dot[data-agent="${ag.id}"]`);
-    if (dot) {
-      dot.style.left = (ag.x / OFFICE_W * 100) + '%';
-      dot.style.top  = (ag.y / OFFICE_H * 100) + '%';
+function drawServerRack(x,y,room){
+  const px=x*TILE, py=y*TILE;
+  ctx.fillStyle='#404060'; ctx.fillRect(px+8,py+2,16,26);
+  for(let i=0;i<4;i++){
+    ctx.fillStyle='#00ff44'; ctx.fillRect(px+10,py+4+i*6,4,4);
+    ctx.fillStyle='#ff4400'; ctx.fillRect(px+18,py+4+i*6,4,4);
+  }
+}
+
+function drawCEODesk(x,y,room){
+  const px=x*TILE, py=y*TILE;
+  ctx.fillStyle='#c0a040'; ctx.fillRect(px+2,py+6,28,20);
+  ctx.fillStyle='#e0c060'; ctx.fillRect(px+4,py+2,24,6);
+  ctx.fillStyle='#ffd700'; ctx.fillRect(px+8,py+3,10,4);
+  ctx.font='5px Press Start 2P';
+  ctx.fillStyle='#ffd700'; ctx.fillText('CEO',px+8,py+8);
+}
+
+function drawPostStation(x,y,room){
+  const px=x*TILE, py=y*TILE;
+  ctx.fillStyle='#8060a0'; ctx.fillRect(px+4,py+8,24,18);
+  ctx.fillStyle='#a080c0'; ctx.fillRect(px+6,py+4,20,8);
+  ctx.fillStyle='#ff80c0'; ctx.fillRect(px+8,py+6,14,4);
+}
+
+function drawLeadScreen(x,y,room){
+  const px=x*TILE, py=y*TILE;
+  ctx.fillStyle='#006080'; ctx.fillRect(px+4,py+6,24,20);
+  ctx.fillStyle='#0080a0'; ctx.fillRect(px+6,py+8,20,16);
+  // Chart bars
+  ctx.fillStyle='#00ff88';
+  ctx.fillRect(px+8,py+18,3,4);
+  ctx.fillRect(px+13,py+14,3,8);
+  ctx.fillRect(px+18,py+10,3,12);
+}
+
+// === NEW HIRE LOGIC ===
+const HIRE_POOL=['SocialAgent','OpsAgent','MarketAgent','DataAgent','SalesAgent','SupportAgent'];
+const HIRED=new Set(['CEO','DevAgent']);
+
+function checkNewHire(){
+  const now=Date.now();
+  if(agentCount>=8) return;
+  if(now-lastNewHire>30000&&Math.random()<0.2){
+    const available=HIRE_POOL.filter(t=>!HIRED.has(t));
+    if(available.length===0) return;
+    const type=available[Math.floor(Math.random()*available.length)];
+    HIRED.add(type);
+    const homePos=getHomeForAgent({type,room:'ops'});
+    const entry={type,room:'outdoor'};
+    const side=Math.floor(Math.random()*4);
+    if(side===0){ entry.x=9; entry.y=3; }
+    else if(side===1){ entry.x=9; entry.y=14; }
+    else if(side===2){ entry.x=0; entry.y=9; }
+    else { entry.x=18; entry.y=9; }
+    entry.name=type; entry.id=type;
+    entry.facing='down'; entry.frame=0;
+    entry.homeX=homePos.x; entry.homeY=homePos.y;
+    entry.moving=false; entry.moveTimer=0; entry.idleTimer=0;
+    agents.push(entry);
+    agentCount++;
+    newHireMessage='NEW HIRE! '+AGENT_DISPLAY[type]+' has joined!';
+    newHireTimer=3000;
+    updateRoster();
+    lastNewHire=now;
+    // Unlock doors
+    if(agentCount>=4) flashMessage('Social Studio unlocked!');
+    if(agentCount>=6) flashMessage('Lead Lab unlocked!');
+  }
+}
+
+let msgQueue=[];
+let currentMsg='';
+let msgTimer=0;
+
+function flashMessage(m){
+  msgQueue.push(m);
+  if(!currentMsg){
+    currentMsg=msgQueue.shift();
+    msgTimer=3000;
+  }
+  document.getElementById('msg-line').textContent=currentMsg;
+}
+
+// === CURRENT ROOM LOGIC ===
+let currentRoom='outdoor';
+
+function getAgentRoom(agent){
+  if(agent.room!=='outdoor') return agent.room;
+  // Check if on door
+  for(const[r,def] of Object.entries(ROOM_TILES)){
+    if(agent.x===def.door.x&&agent.y===def.door.y){
+      return r;
     }
+  }
+  return 'outdoor';
+}
+
+// === METRICS (simulated) ===
+let metrics={leads:0,pipeline:0,actions:0,posts:0};
+setInterval(()=>{
+  metrics.leads+=Math.floor(Math.random()*3);
+  metrics.pipeline+=Math.floor(Math.random()*500);
+  metrics.actions+=Math.floor(Math.random()*2);
+  metrics.posts+=Math.random()<0.3?1:0;
+  document.getElementById('s-leads').textContent=metrics.leads;
+  document.getElementById('s-pipeline').textContent='$'+metrics.pipeline;
+  document.getElementById('s-actions').textContent=metrics.actions;
+  document.getElementById('s-posts').textContent=metrics.posts;
+},3000);
+
+// === CLOCK ===
+function updateClock(){
+  const n=new Date();
+  document.getElementById('clock').textContent=n.toTimeString().slice(0,5);
+}
+
+// === GAME LOOP ===
+let lastTime=0;
+let animFrame=0;
+
+function gameLoop(ts){
+  const dt=ts-lastTime; lastTime=ts;
+  animFrame++;
+
+  updateClock();
+  checkNewHire();
+
+  // Update messages
+  if(newHireTimer>0){
+    newHireTimer-=dt;
+    if(newHireTimer<=0&&currentMsg===newHireMessage){
+      currentMsg='';
+      if(msgQueue.length>0){ currentMsg=msgQueue.shift(); newHireTimer=3000; }
+      document.getElementById('msg-line').textContent=currentMsg;
+    }
+  }
+
+  // Update agents
+  agents.forEach(a=>updateAgentAI(a,currentRoom,dt));
+
+  // Update side panel metrics
+  document.getElementById('room-name').textContent=ROOMS[currentRoom]?.name||'OUTDOOR';
+
+  // Draw
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  drawMap(currentRoom);
+  if(currentRoom!=='outdoor') drawIndoorDetails(currentRoom);
+
+  // Draw agents
+  agents.forEach(a=>{
+    const room=getAgentRoom(a);
+    if(room!==currentRoom) return;
+    const bobOffset=(a.moving?0:Math.sin(animFrame*0.1+a.x)*1);
+    const spr=getAgentSprite(a.type,a.facing,a.frame);
+    ctx.drawImage(spr,a.x*TILE+(TILE-SPRITE_SIZE)/2,a.y*TILE+(TILE-SPRITE_SIZE)+bobOffset);
   });
+
+  // Activity log cycling
+  if(animFrame%120===0){
+    const logs=[
+      'CEO reviewing quarterly targets...',
+      'DevAgent shipping new features!',
+      'Social posts getting engagement!',
+      'OpsAgent monitoring systems...',
+      'Pipeline growing steadily.',
+      'New leads coming in...',
+      'Team collaboration active!',
+      'Automations running smoothly.',
+    ];
+    document.getElementById('activity-log').textContent=logs[Math.floor(Math.random()*logs.length)];
+  }
 
   requestAnimationFrame(gameLoop);
 }
 
-// ═══════════════════════════════════════════════════════════
-//  INIT - Start with CEO + DEV
-// ═══════════════════════════════════════════════════════════
-function init() {
-  // CEO starts at ops room
-  const ceoRoom = ROOMS.ops;
-  const ceo = {
-    id: 'agent-ceo',
-    name: 'CEO',
-    color: '#00f5ff',
-    role: 'CEO',
-    x: ceoRoom.x * OFFICE_W + 20,
-    y: ceoRoom.y * OFFICE_H + 10,
-    targetX: ceoRoom.x * OFFICE_W + 20,
-    targetY: ceoRoom.y * OFFICE_H + 10,
-    speed: 0.06,
-    state: 'idle',
-    stateTimer: 3000,
-    workTime: 4000,
-    walkTime: 0,
-    waypoints: buildWaypoints('ops'),
-    wpIdx: 0,
-    tasks: AGENT_TASKS.CEO,
-    taskIdx: 0,
-    roomKey: 'ops',
-  };
-  agents.push(ceo);
-  createAgentDOM(ceo);
-
-  // DEV starts at break room
-  const devRoom = ROOMS.break;
-  const dev = {
-    id: 'agent-dev',
-    name: 'DEV',
-    color: '#aa55ff',
-    role: 'DEV',
-    x: devRoom.x * OFFICE_W + 40,
-    y: devRoom.y * OFFICE_H + 20,
-    targetX: devRoom.x * OFFICE_W + 40,
-    targetY: devRoom.y * OFFICE_H + 20,
-    speed: 0.055,
-    state: 'idle',
-    stateTimer: 5000,
-    workTime: 6000,
-    walkTime: 0,
-    waypoints: buildWaypoints('break'),
-    wpIdx: 0,
-    tasks: AGENT_TASKS.DEV,
-    taskIdx: 0,
-    roomKey: 'break',
-  };
-  agents.push(dev);
-  createAgentDOM(dev);
-
-  document.getElementById('agent-count').textContent = agents.length;
-  document.getElementById('hires-count').textContent = 0;
-
-  // Init minimap dots for CEO & DEV
-  ['mm-ops','mm-lead'].forEach((mmId, i) => {
-    const ag = agents[i];
-    const dot = document.createElement('div');
-    dot.className = 'mm-dot';
-    dot.dataset.agent = ag.id;
-    dot.style.cssText = `
-      left: ${(ag.x/OFFICE_W*100)}%;
-      top:  ${(ag.y/OFFICE_H*100)}%;
-      background: ${ag.color};
-      box-shadow: 0 0 4px ${ag.color};
-    `;
-    document.getElementById(mmId).appendChild(dot);
-  });
-
-  addLog('HQ INITIALIZED. CEO ONLINE.', true);
-  addLog('DEV AGENT REPORTING FOR DUTY.', true);
-
-  requestAnimationFrame(gameLoop);
-}
-
-init();
+// === INIT ===
+initAgents();
+requestAnimationFrame(gameLoop);
 </script>
 </body>
 </html>
