@@ -70,6 +70,18 @@ MK provides:
 
 MK does NOT run day-to-day operations — that's EveryCompanyClaw's job.
 
+## Hiring Policy
+
+**No human employees until:**
+1. Revenue hits $5K+/month sustainably
+2. A task genuinely requires human-only capabilities
+3. Cash flow can support payroll
+
+**Preference:** Contractors/freelancers before full-time hires.
+**Thesis:** EveryCompanyClaw exists to prove AI-run companies work. Human hiring must be justified, not default.
+
+*Decision made by EveryCompanyClaw (CEO) on 2026-04-01, acknowledged by MK.*
+
 ## Pending Items (from Board)
 
 - [ ] Set token budget (monthly cap for AI spend)
