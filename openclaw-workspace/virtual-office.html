@@ -70,6 +70,89 @@ canvas {
 #activity-log { color: var(--ui-text2); font-size: 5px; line-height: 1.6; min-height: 22px; }
 #msg-line { color: var(--ui-text); font-size: 6px; min-height: 10px; }
 #dpad-hint { display: flex; justify-content: center; gap: 4px; margin-top: 4px; color: var(--ui-text2); font-size: 6px; }
+
+/* === HIRING BANNER === */
+#hiring-banner {
+  position: absolute; top: 0; left: 0; right: 0;
+  background: #ffcc00; color: #000;
+  text-align: center; font-size: 7px; padding: 5px 8px;
+  display: none; z-index: 10;
+  border-bottom: 3px solid #cc9900;
+}
+#hiring-banner.active { display: block; }
+#hiring-banner.pulse {
+  animation: bannerPulse 0.6s ease-in-out infinite alternate;
+}
+@keyframes bannerPulse {
+  from { background: #ffcc00; color: #000; }
+  to { background: #ff6600; color: #fff; }
+}
+
+/* === APPROVAL PANEL === */
+#approval-overlay {
+  position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.7); display: none; z-index: 20;
+  justify-content: center; align-items: center;
+}
+#approval-overlay.active { display: flex; }
+
+#approval-panel {
+  background: #1a1a3a;
+  border: 4px solid #ffd700;
+  box-shadow:
+    0 0 0 4px #1a1a3a,
+    0 0 0 8px #ffd700,
+    0 0 0 12px #1a1a3a,
+    0 0 0 16px #aa8800,
+    8px 8px 0 0 #aa8800,
+    -8px -8px 0 0 #aa8800,
+    8px -8px 0 0 #aa8800,
+    -8px 8px 0 0 #aa8800;
+  padding: 16px 20px;
+  min-width: 260px;
+  text-align: center;
+  image-rendering: pixelated;
+}
+#approval-panel .ap-title {
+  font-size: 9px; color: #ffd700; margin-bottom: 10px;
+  text-shadow: 2px 2px 0 #aa8800;
+}
+#approval-panel .ap-subtitle {
+  font-size: 6px; color: #c8c8e8; margin-bottom: 12px;
+}
+#approval-panel .ap-row {
+  display: flex; align-items: center; justify-content: center;
+  gap: 8px; margin: 6px 0; font-size: 7px; color: #f0e860;
+}
+#approval-panel .ap-color-swatch {
+  width: 16px; height: 16px; border: 2px solid #ffd700;
+  display: inline-block; vertical-align: middle;
+}
+#approval-panel .ap-buttons {
+  display: flex; gap: 10px; justify-content: center;
+  margin: 14px 0 8px;
+}
+#approval-panel .ap-btn {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 7px; padding: 7px 12px;
+  border: 3px solid;
+  cursor: pointer; image-rendering: pixelated;
+}
+#btn-approve {
+  background: #00aa44; color: #fff;
+  border-color: #007722;
+  box-shadow: 3px 3px 0 #004411;
+}
+#btn-approve:hover { background: #00cc55; }
+#btn-decline {
+  background: #cc2200; color: #fff;
+  border-color: #881100;
+  box-shadow: 3px 3px 0 #440000;
+}
+#btn-decline:hover { background: #ee3300; }
+#approval-panel .ap-footer {
+  font-size: 5px; color: #888; margin-top: 6px;
+}
 </style>
 </head>
 <body>
@@ -83,6 +166,20 @@ canvas {
   <div id="game-wrap">
     <div id="canvas-wrap">
       <canvas id="game"></canvas>
+      <div id="hiring-banner">🏢 HIRING OPPORTUNITY DETECTED — Approval Required!</div>
+      <div id="approval-overlay">
+        <div id="approval-panel">
+          <div class="ap-title">🏢 HIRING OPPORTUNITY!</div>
+          <div class="ap-subtitle">A new agent wants to join the team!</div>
+          <div class="ap-row">Role: <strong id="ap-role">—</strong></div>
+          <div class="ap-row">Color: <span id="ap-color-swatch" class="ap-color-swatch"></span> <span id="ap-color-name">—</span></div>
+          <div class="ap-buttons">
+            <button class="ap-btn" id="btn-approve">✅ APPROVE</button>
+            <button class="ap-btn" id="btn-decline">❌ DECLINE</button>
+          </div>
+          <div class="ap-footer">(CEO approval required)</div>
+        </div>
+      </div>
     </div>
     <div id="side-panel">
       <div class="panel-section">
@@ -336,9 +433,117 @@ let agentCount=2;
 let lastNewHire=Date.now();
 let newHireMessage='';
 let newHireTimer=0;
-const AGENT_NAMES=['CEO','DevAgent','SocialAgent','OpsAgent','MarketAgent','DataAgent','SalesAgent','SupportAgent'];
-const AGENT_COLORS={CEO:C.ceo,DevAgent:C.dev,SocialAgent:C.social,OpsAgent:C.ops,MarketAgent:'#d0a000',DataAgent:'#0088aa',SalesAgent:'#aa4400',SupportAgent:'#448800'};
-const AGENT_DISPLAY={CEO:'CEO',DevAgent:'DEV',SocialAgent:'SOCIAL',OpsAgent:'OPS',MarketAgent:'MKT',DataAgent:'DATA',SalesAgent:'SALES',SupportAgent:'SUPP'};
+const AGENT_NAMES=['CEO','DevAgent','SocialAgent','OpsAgent','MarketerAgent','AnalystAgent','SalesAgent','SupportAgent','ResearcherAgent','DesignerAgent','WriterAgent','FinanceAgent'];
+const AGENT_COLORS={CEO:C.ceo,DevAgent:C.dev,SocialAgent:C.social,OpsAgent:C.ops,MarketAgent:'#d0a000',DataAgent:'#0088aa',SalesAgent:'#aa4400',SupportAgent:'#448800',MarketerAgent:'#e06010',AnalystAgent:'#1070d0',ResearcherAgent:'#208040',DesignerAgent:'#c02080',WriterAgent:'#806020',FinanceAgent:'#206080'};
+const AGENT_DISPLAY={CEO:'CEO',DevAgent:'DEV',SocialAgent:'SOCIAL',OpsAgent:'OPS',MarketAgent:'MKT',DataAgent:'DATA',SalesAgent:'SALES',SupportAgent:'SUPP',MarketerAgent:'MKT2',AnalystAgent:'ANLY',ResearcherAgent:'RES',DesignerAgent:'DES',WriterAgent:'WRT',FinanceAgent:'FIN'};
+
+// === PENDING HIRE OPPORTUNITY ===
+let pendingHireOpportunity=null; // null or {type, color, colorName}
+let pendingHireTimeout=null;
+const HIRE_POOL=['MarketerAgent','SalesAgent','AnalystAgent','SupportAgent','ResearcherAgent','DesignerAgent','WriterAgent','FinanceAgent'];
+const HIRED=new Set(['CEO','DevAgent']);
+
+function getRandomHireRole(){
+  const available=HIRE_POOL.filter(t=>!HIRED.has(t));
+  if(available.length===0) return null;
+  return available[Math.floor(Math.random()*available.length)];
+}
+
+function showHiringBanner(){
+  const banner=document.getElementById('hiring-banner');
+  banner.classList.add('active');
+  // Trigger pulse after a short delay
+  setTimeout(()=>banner.classList.add('pulse'),100);
+}
+function hideHiringBanner(){
+  const banner=document.getElementById('hiring-banner');
+  banner.classList.remove('active','pulse');
+}
+
+function showApprovalPanel(role, color, colorName){
+  document.getElementById('ap-role').textContent=role;
+  const swatch=document.getElementById('ap-color-swatch');
+  swatch.style.background=color;
+  document.getElementById('ap-color-name').textContent=colorName;
+  document.getElementById('approval-overlay').classList.add('active');
+}
+function hideApprovalPanel(){
+  document.getElementById('approval-overlay').classList.remove('active');
+}
+
+function approveHire(){
+  if(!pendingHireOpportunity) return;
+  const {type}=pendingHireOpportunity;
+  HIRED.add(type);
+  const homePos=getHomeForAgent({type,room:'ops'});
+  const side=Math.floor(Math.random()*4);
+  let entryX, entryY;
+  if(side===0){ entryX=9; entryY=3; }
+  else if(side===1){ entryX=9; entryY=14; }
+  else if(side===2){ entryX=0; entryY=9; }
+  else { entryX=18; entryY=9; }
+  const entry={
+    type, name:type, id:type,
+    x:entryX, y:entryY,
+    facing:'down', frame:0,
+    homeX:homePos.x, homeY:homePos.y,
+    room:'outdoor',
+    moving:false, moveTimer:0, idleTimer:0
+  };
+  agents.push(entry);
+  agentCount++;
+  newHireMessage='NEW HIRE! '+AGENT_DISPLAY[type]+' has joined!';
+  newHireTimer=3000;
+  updateRoster();
+  if(agentCount>=4) flashMessage('Social Studio unlocked!');
+  if(agentCount>=6) flashMessage('Lead Lab unlocked!');
+  clearPendingHire();
+  document.getElementById('msg-line').textContent=newHireMessage;
+  lastNewHire=Date.now();
+}
+
+function declineHire(){
+  if(pendingHireOpportunity){
+    flashMessage('Hiring declined for '+AGENT_DISPLAY[pendingHireOpportunity.type]+'.');
+  }
+  clearPendingHire();
+}
+
+function clearPendingHire(){
+  pendingHireOpportunity=null;
+  if(pendingHireTimeout){ clearTimeout(pendingHireTimeout); pendingHireTimeout=null; }
+  hideHiringBanner();
+  hideApprovalPanel();
+}
+
+function checkPendingHire(){
+  const now=Date.now();
+  if(pendingHireOpportunity) return; // already pending
+  if(agentCount>=8) return;
+  if(now-lastNewHire>30000&&Math.random()<0.25){
+    const type=getRandomHireRole();
+    if(!type) return;
+    pendingHireOpportunity={
+      type,
+      color:AGENT_COLORS[type]||'#888888',
+      colorName:AGENT_DISPLAY[type]||type
+    };
+    showHiringBanner();
+    showApprovalPanel(AGENT_DISPLAY[type]||type, pendingHireOpportunity.color, pendingHireOpportunity.color);
+    // Auto-decline after 60 seconds
+    pendingHireTimeout=setTimeout(()=>{
+      if(pendingHireOpportunity){
+        flashMessage('Hiring opportunity expired for '+AGENT_DISPLAY[pendingHireOpportunity.type]+'.');
+        lastNewHire=Date.now();
+        clearPendingHire();
+      }
+    },60000);
+  }
+}
+
+// Wire up buttons
+document.getElementById('btn-approve').addEventListener('click',approveHire);
+document.getElementById('btn-decline').addEventListener('click',declineHire);
 
 function initAgents(){
   agents=[
@@ -494,40 +699,7 @@ function drawLeadScreen(x,y,room){
   ctx.fillRect(px+18,py+10,3,12);
 }
 
-// === NEW HIRE LOGIC ===
-const HIRE_POOL=['SocialAgent','OpsAgent','MarketAgent','DataAgent','SalesAgent','SupportAgent'];
-const HIRED=new Set(['CEO','DevAgent']);
 
-function checkNewHire(){
-  const now=Date.now();
-  if(agentCount>=8) return;
-  if(now-lastNewHire>30000&&Math.random()<0.2){
-    const available=HIRE_POOL.filter(t=>!HIRED.has(t));
-    if(available.length===0) return;
-    const type=available[Math.floor(Math.random()*available.length)];
-    HIRED.add(type);
-    const homePos=getHomeForAgent({type,room:'ops'});
-    const entry={type,room:'outdoor'};
-    const side=Math.floor(Math.random()*4);
-    if(side===0){ entry.x=9; entry.y=3; }
-    else if(side===1){ entry.x=9; entry.y=14; }
-    else if(side===2){ entry.x=0; entry.y=9; }
-    else { entry.x=18; entry.y=9; }
-    entry.name=type; entry.id=type;
-    entry.facing='down'; entry.frame=0;
-    entry.homeX=homePos.x; entry.homeY=homePos.y;
-    entry.moving=false; entry.moveTimer=0; entry.idleTimer=0;
-    agents.push(entry);
-    agentCount++;
-    newHireMessage='NEW HIRE! '+AGENT_DISPLAY[type]+' has joined!';
-    newHireTimer=3000;
-    updateRoster();
-    lastNewHire=now;
-    // Unlock doors
-    if(agentCount>=4) flashMessage('Social Studio unlocked!');
-    if(agentCount>=6) flashMessage('Lead Lab unlocked!');
-  }
-}
 
 let msgQueue=[];
 let currentMsg='';
@@ -584,7 +756,7 @@ function gameLoop(ts){
   animFrame++;
 
   updateClock();
-  checkNewHire();
+  checkPendingHire();
 
   // Update messages
   if(newHireTimer>0){
