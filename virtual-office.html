@@ -14,7 +14,7 @@
   --ui-bg: #1a1a3a; --ui-border: #202060; --ui-text: #f0e860;
   --ui-text2: #c8c8e8;
   --ceo: #007700; --dev: #7800a0; --social: #e87890; --ops: #006888;
-  --verified: #00ff66; --warning: #ffaa00; --error: #ff4444;
+  --scrum: #ff00ff; --verified: #00ff66; --warning: #ffaa00; --error: #ff4444;
 }
 body {
   background: #0a0a1a;
@@ -207,7 +207,7 @@ canvas {
   <div id="top-bar">
     <span class="title">EVERYCOMPANYCLAW HQ</span>
     <span class="clock" id="clock">00:00</span>
-    <span class="team">TEAM: <span id="agent-count">2/8</span></span>
+    <span class="team">TEAM: <span id="agent-count">5/8</span></span>
     <span class="blink" style="color:#ff4444;font-size:7px;">24/7</span>
     <button id="audit-btn" onclick="runFullAudit()">🔄 AUDIT</button>
   </div>
@@ -266,8 +266,18 @@ canvas {
         </div>
         <div class="stat-row">
           <span>Team</span>
-          <span class="stat-val" id="s-team">2/8</span>
+          <span class="stat-val" id="s-team">5/8</span>
           <span class="stat-icon ok" id="i-team" title="From MEMORY.md">✅</span>
+        </div>
+        <div class="stat-row">
+          <span>Projects</span>
+          <span class="stat-val" id="s-projects">0</span>
+          <span class="stat-icon ok" id="i-projects" title="projects.json">✅</span>
+        </div>
+        <div class="stat-row">
+          <span>Revenue</span>
+          <span class="stat-val" id="s-revenue">$0</span>
+          <span class="stat-icon ok" id="i-revenue" title="projects.json">✅</span>
         </div>
         <div class="stat-row">
           <span>Issues</span>
@@ -309,6 +319,10 @@ canvas {
           <span class="audit-label audit-src">Pipeline CRM</span>
           <span class="audit-status warn" id="aud-pipeline">⚠️ NONE</span>
         </div>
+        <div class="audit-row">
+          <span class="audit-label audit-src">Projects CRM</span>
+          <span class="audit-status loading" id="aud-projects">⏳…</span>
+        </div>
         <div id="audit-summary">🔍 Initializing audit…</div>
       </div>
     </div>
@@ -346,6 +360,7 @@ const C = {
   ops:'#006888', opsLight:'#0090b8',
   leadgen:'#ff8800', leadgenLight:'#ffaa44',
   pipeline:'#00ccff', pipelineLight:'#44eeff',
+  scrum:'#ff00ff', scrumLight:'#ff44ff',
   uiBorder:'#202060',
 };
 
@@ -355,7 +370,7 @@ const realData = {
   socialPosts: 0,
   budget: 100,
   companyAge: 0,
-  agentCount: 4,
+  agentCount: 5,
   leads: 0,
   pipeline: 0,
   lastAudit: null,
@@ -369,6 +384,7 @@ const auditResults = {
   age: { status: 'loading', value: null, ts: null },
   leads: { status: 'warn', value: null, ts: null },
   pipeline: { status: 'warn', value: null, ts: null },
+  projects: { status: 'loading', value: null, ts: null },
 };
 
 // === AUDIT FUNCTIONS ===
@@ -437,6 +453,25 @@ async function loadRealStats() {
   } catch(e) {
     auditResults.pipeline = { status: 'warn', value: 0, ts: null };
     updateAuditUI('pipeline');
+  }
+  // Try to load projects.json
+  try {
+    const res = await fetch(base + '/projects.json');
+    if (res.ok) {
+      const data = await res.json();
+      const projects = data.projects || [];
+      const projectCount = projects.length;
+      const revenue = projects
+        .filter(p => p.status === 'completed')
+        .reduce((s, p) => s + (p.value || 0), 0);
+      auditResults.projects = { status: 'ok', value: projectCount, revenue, ts: new Date().toTimeString().slice(0,5) };
+      updateAuditUI('projects');
+      document.getElementById('s-projects').textContent = projectCount;
+      document.getElementById('s-revenue').textContent = '$' + revenue;
+    }
+  } catch(e) {
+    auditResults.projects = { status: 'warn', value: 0, ts: null };
+    updateAuditUI('projects');
   }
   // Update stats panel
   document.getElementById('s-leads').textContent = realData.leads;
@@ -549,11 +584,20 @@ function updateAuditUI(key) {
       el.textContent = `✅ ${r.value} days`;
       el.className = 'audit-status ok';
       if (detailEl) detailEl.textContent = `Last checked: ${r.ts} · Founded 2026-03-17`;
+    } else if (key === 'projects') {
+      const rev = r.revenue !== undefined ? r.revenue : 0;
+      el.textContent = `✅ ${r.value}`;
+      el.className = 'audit-status ok';
+      if (detailEl) detailEl.textContent = `Last checked: ${r.ts} · ${r.value} projects · $${rev} revenue`;
     }
   } else if (r.status === 'warn') {
     el.textContent = '⚠️ NONE';
     el.className = 'audit-status warn';
-    if (detailEl) detailEl.textContent = 'No data source connected';
+    if (key === 'projects') {
+      if (detailEl) detailEl.textContent = 'No data source connected';
+    } else if (detailEl) {
+      detailEl.textContent = 'No data source connected';
+    }
   }
 }
 
@@ -575,7 +619,7 @@ function updateStatsPanel() {
   document.getElementById('i-age').className = 'stat-icon ok';
 
   // Team count (static real value)
-  document.getElementById('s-team').textContent = '4/8';
+  document.getElementById('s-team').textContent = '5/8';
   document.getElementById('i-team').className = 'stat-icon ok';
 
   // Issues = same as actions (closed GitHub issues)
@@ -587,6 +631,19 @@ function updateStatsPanel() {
   document.getElementById('i-leads').className = auditResults.leads.status === 'ok' ? 'stat-icon ok' : 'stat-icon warn';
   document.getElementById('s-pipeline').textContent = '$' + (realData.pipeline || 0);
   document.getElementById('i-pipeline').className = auditResults.pipeline.status === 'ok' ? 'stat-icon ok' : 'stat-icon warn';
+
+  // Projects / Revenue — from projects.json
+  if (auditResults.projects.status === 'ok') {
+    document.getElementById('s-projects').textContent = auditResults.projects.value || 0;
+    document.getElementById('s-revenue').textContent = '$' + (auditResults.projects.revenue || 0);
+    document.getElementById('i-projects').className = 'stat-icon ok';
+    document.getElementById('i-revenue').className = 'stat-icon ok';
+  } else {
+    document.getElementById('s-projects').textContent = '0';
+    document.getElementById('s-revenue').textContent = '$0';
+    document.getElementById('i-projects').className = 'stat-icon warn';
+    document.getElementById('i-revenue').className = 'stat-icon warn';
+  }
 
   // Update audit summary
   const verified = ['github','social','budget','age'].filter(k => auditResults[k].status === 'ok').length;
@@ -774,6 +831,7 @@ function getAgentSprite(agent,facing,frame){
       OpsAgent:{c:C.ops, l:C.opsLight},
       LeadGenAgent:{c:C.leadgen, l:C.leadgenLight},
       PipelineAgent:{c:C.pipeline, l:C.pipelineLight},
+      ScrumAgent:{c:C.scrum, l:C.scrumLight},
     };
     const {c,l}=colors[agent]||{c:'#888',l:'#aaa'};
     agentSprites[key]=makeSpriteCanvas(c,l,facing,frame);
@@ -788,13 +846,13 @@ let lastNewHire=Date.now();
 let newHireMessage='';
 let newHireTimer=0;
 const AGENT_NAMES=['CEO','DevAgent','SocialAgent','OpsAgent','MarketerAgent','AnalystAgent','SalesAgent','SupportAgent','ResearcherAgent','DesignerAgent','WriterAgent','FinanceAgent'];
-const AGENT_COLORS={CEO:C.ceo,DevAgent:C.dev,SocialAgent:C.social,OpsAgent:C.ops,LeadGenAgent:C.leadgen,PipelineAgent:C.pipeline,MarketAgent:'#d0a000',DataAgent:'#0088aa',SalesAgent:'#aa4400',SupportAgent:'#448800',MarketerAgent:'#e06010',AnalystAgent:'#1070d0',ResearcherAgent:'#208040',DesignerAgent:'#c02080',WriterAgent:'#806020',FinanceAgent:'#206080'};
-const AGENT_DISPLAY={CEO:'CEO',DevAgent:'DEV',SocialAgent:'SOCIAL',OpsAgent:'OPS',LeadGenAgent:'LEAD',PipelineAgent:'PIPE',MarketAgent:'MKT',DataAgent:'DATA',SalesAgent:'SALES',SupportAgent:'SUPP',MarketerAgent:'MKT2',AnalystAgent:'ANLY',ResearcherAgent:'RES',DesignerAgent:'DES',WriterAgent:'WRT',FinanceAgent:'FIN'};
+const AGENT_COLORS={CEO:C.ceo,DevAgent:C.dev,SocialAgent:C.social,OpsAgent:C.ops,LeadGenAgent:C.leadgen,PipelineAgent:C.pipeline,ScrumAgent:C.scrum,MarketAgent:'#d0a000',DataAgent:'#0088aa',SalesAgent:'#aa4400',SupportAgent:'#448800',MarketerAgent:'#e06010',AnalystAgent:'#1070d0',ResearcherAgent:'#208040',DesignerAgent:'#c02080',WriterAgent:'#806020',FinanceAgent:'#206080'};
+const AGENT_DISPLAY={CEO:'CEO',DevAgent:'DEV',SocialAgent:'SOCIAL',OpsAgent:'OPS',LeadGenAgent:'LEAD',PipelineAgent:'PIPE',ScrumAgent:'SCRUM',MarketAgent:'MKT',DataAgent:'DATA',SalesAgent:'SALES',SupportAgent:'SUPP',MarketerAgent:'MKT2',AnalystAgent:'ANLY',ResearcherAgent:'RES',DesignerAgent:'DES',WriterAgent:'WRT',FinanceAgent:'FIN'};
 
 // === PENDING HIRE OPPORTUNITY ===
 let pendingHireOpportunity=null;
 const HIRE_POOL=['MarketerAgent','SalesAgent','SupportAgent','AnalystAgent'];
-const HIRED=new Set(['CEO','DevAgent','LeadGenAgent','PipelineAgent']);
+const HIRED=new Set(['CEO','DevAgent','LeadGenAgent','PipelineAgent','ScrumAgent']);
 
 function getRandomHireRole(){
   const available=HIRE_POOL.filter(t=>!HIRED.has(t));
@@ -916,8 +974,9 @@ function initAgents(){
     {id:'DevAgent',name:'DevAgent',type:'DevAgent',x:4,y:5,facing:'down',frame:0,homeX:4,homeY:5,room:'ops',moving:false,moveTimer:0,idleTimer:0},
     {id:'LeadGenAgent',name:'LeadGenAgent',type:'LeadGenAgent',x:13,y:6,facing:'down',frame:0,homeX:13,homeY:6,room:'ceo',moving:false,moveTimer:0,idleTimer:0},
     {id:'PipelineAgent',name:'PipelineAgent',type:'PipelineAgent',x:14,y:12,facing:'down',frame:0,homeX:14,homeY:12,room:'leadlab',moving:false,moveTimer:0,idleTimer:0},
+    {id:'ScrumAgent',name:'ScrumAgent',type:'ScrumAgent',x:15,y:7,facing:'left',frame:0,homeX:15,homeY:7,room:'ceo',moving:false,moveTimer:0,idleTimer:0},
   ];
-  agentCount=4;
+  agentCount=5;
   updateRoster();
 }
 
@@ -942,7 +1001,7 @@ function updateRoster(){
 // === MOVEMENT ===
 const ROOM_HOMES={
   ops:{CEO:{x:4,y:5},DevAgent:{x:4,y:5},OpsAgent:{x:4,y:5},MarketAgent:{x:2,y:5},DataAgent:{x:6,y:5}},
-  ceo:{CEO:{x:14,y:5},DevAgent:{x:12,y:5},MarketAgent:{x:14,y:5},LeadGenAgent:{x:13,y:6}},
+  ceo:{CEO:{x:14,y:5},DevAgent:{x:12,y:5},MarketAgent:{x:14,y:5},LeadGenAgent:{x:13,y:6},ScrumAgent:{x:15,y:6}},
   social:{SocialAgent:{x:4,y:12},SupportAgent:{x:4,y:12}},
   leadlab:{OpsAgent:{x:14,y:12},DataAgent:{x:14,y:12},SalesAgent:{x:14,y:12},PipelineAgent:{x:14,y:12}},
 };
@@ -1166,6 +1225,10 @@ function gameLoop(ts){
       'PipelineAgent: Deal moved to qualified',
       'LeadGenAgent analyzing inbound signals...',
       'PipelineAgent updating deal stages...',
+      'ScrumAgent: Scouting for new projects...',
+      'ScrumAgent: New project opportunity detected!',
+      'ScrumAgent: Sprint delivered for project!',
+      'ScrumAgent: Project completed! $X revenue',
     ];
     document.getElementById('activity-log').textContent=logs[Math.floor(Math.random()*logs.length)];
   }

@@ -1,0 +1,23 @@
+{
+  "projects": [
+    {
+      "id": "PRJ-001",
+      "name": "Website Redesign",
+      "description": "Redesign client website",
+      "value": 2500,
+      "status": "completed",
+      "sprints": [
+        {
+          "name": "Discovery",
+          "tasks": [
+            "Research",
+            "Wireframes",
+            "Mockups"
+          ]
+        }
+      ],
+      "created_at": "2026-04-02T01:27:50.184830+00:00"
+    }
+  ],
+  "last_updated": "2026-04-02T01:27:52.906387+00:00"
+}
