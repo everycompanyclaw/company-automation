@@ -1,0 +1,11 @@
+{
+  "deals": [
+    {
+      "company": "Acme Corp",
+      "value": 5000.0,
+      "stage": "prospecting",
+      "created": "2026-04-02T01:23:24.454371Z"
+    }
+  ],
+  "last_updated": "2026-04-02T01:23:24.454497Z"
+}

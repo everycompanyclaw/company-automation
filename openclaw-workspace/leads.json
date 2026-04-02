@@ -1,0 +1,11 @@
+{
+  "leads": [
+    {
+      "email": "test@example.com",
+      "source": "github",
+      "created": "2026-04-02T01:23:24.392570Z",
+      "status": "new"
+    }
+  ],
+  "last_updated": "2026-04-02T01:23:24.392851Z"
+}
