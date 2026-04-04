@@ -3,18 +3,20 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>EveryCompanyClaw HQ - Pokemon Style</title>
+<title>EveryCompanyClaw HQ — Office Floor Plan</title>
 <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
 :root {
-  --grass: #88c070; --grass2: #70a858; --path: #d8b090; --path2: #c8a080;
-  --floor: #e8d8b0; --floor2: #d8c8a0; --wall: #483850; --wall2: #382840;
-  --door: #c87820; --doorGlow: #ffd700;
+  --carpet: #3a5a8a; --carpet2: #2d4a7a; --corridor: #e8e0d0; --corridor2: #d8d0c0;
+  --wall: #f5f5f5; --wall2: #e0e0e0; --wallDark: #c0c0c0;
+  --door: #8b6914; --doorFrame: #6b4914; --doorAccent: #c8a860;
+  --glass: rgba(200,230,255,0.3); --glassFrame: #a0a0a0;
   --ui-bg: #1a1a3a; --ui-border: #202060; --ui-text: #f0e860;
   --ui-text2: #c8c8e8;
-  --ceo: #007700; --dev: #7800a0; --social: #e87890; --ops: #006888;
+  --ceo: #004080; --dev: #7800a0; --social: #e87890; --ops: #0088aa;
   --scrum: #ff00ff; --verified: #00ff66; --warning: #ffaa00; --error: #ff4444;
+  --desk: #8b7355; --deskLight: #a08060; --chair: #404040; --plant: #2d6b2d;
 }
 body {
   background: #0a0a1a;
@@ -328,10 +330,10 @@ canvas {
     </div>
   </div>
   <div id="bottom-bar">
-    <div id="room-name">OUTDOOR - CAMPUS</div>
+    
     <div id="msg-line"></div>
     <div id="activity-log">Welcome to EveryCompanyClaw HQ!</div>
-    <div id="dpad-hint"><span>▲</span><span>▼</span><span>◀</span><span>▶</span></div>
+    
     <div id="last-updated">Last updated: --:--</div>
   </div>
 </div>
@@ -344,13 +346,7 @@ const ctx = canvas.getContext('2d');
 canvas.width = MAP_W * TILE;
 canvas.height = MAP_H * TILE;
 
-// Keyboard: 1-5 to switch rooms, 0 for outdoor
-document.addEventListener('keydown', (e) => {
-  const rooms = { '1':'ops', '2':'ceo', '3':'social', '4':'leadlab', '0':'outdoor' };
-  if (rooms[e.key]) currentRoom = rooms[e.key];
-});
-
-// Click to change room
+// Click on a DOOR to zoom into that room
 canvas.addEventListener('click', (e) => {
   const rect = canvas.getBoundingClientRect();
   const scaleX = canvas.width / rect.width;
@@ -358,48 +354,35 @@ canvas.addEventListener('click', (e) => {
   const clickX = Math.floor((e.clientX - rect.left) * scaleX / TILE);
   const clickY = Math.floor((e.clientY - rect.top) * scaleY / TILE);
   
-  // Check if clicked on a door
-  const rooms = { ops:{x:3,y:8}, ceo:{x:12,y:8}, social:{x:3,y:10}, leadlab:{x:14,y:10} };
-  for (const [room, door] of Object.entries(rooms)) {
-    if (clickX === door.x && clickY === door.y) {
-      currentRoom = room;
-      return;
-    }
+  // Check if clicked on a door -> zoom into that room
+  const doorMap = { '4,6':'lobby', '4,10':'workspace', '15,6':'ceo', '15,10':'meeting' };
+  const key = clickX + ',' + clickY;
+  if (doorMap[key]) {
+    currentRoom = doorMap[key];
+    showBackToMapButton();
+    return;
   }
-  // Also allow clicking inside any room to enter it
-  const insideRooms = [
-    { name:'ops', x1:0,y1:3,x2:8,y2:8 },
-    { name:'ceo', x1:10,y1:3,x2:18,y2:8 },
-    { name:'social', x1:0,y1:10,x2:8,y2:14 },
-    { name:'leadlab', x1:10,y1:10,x2:18,y2:14 }
-  ];
-  for (const r of insideRooms) {
-    if (clickX >= r.x1 && clickX <= r.x2 && clickY >= r.y1 && clickY <= r.y2) {
-      currentRoom = r.name;
-      return;
-    }
-  }
-  // Click outdoor/grass area goes to outdoor
-  currentRoom = 'outdoor';
 });
 const FOUNDED_DATE = new Date('2026-03-17');
 const GITHUB_REPO = 'everycompanyclaw/company-automation';
 
 // === COLORS ===
 const C = {
-  grass:'#88c070', grass2:'#70a858', grass3:'#609048',
-  path:'#d8b090', path2:'#c8a080',
-  floor:'#e8d8b0', floor2:'#d8c8a0', floor3:'#c8b890',
-  wall:'#483850', wall2:'#382840', wallDark:'#281830',
-  door:'#c87820', doorFrame:'#a06018',
-  tree:'#305820', tree2:'#204810',
-  ceo:'#007700', ceoLight:'#00aa00',
-  dev:'#7800a0', devLight:'#b040d0',
+  carpet:'#3a5a8a', carpet2:'#2d4a7a', carpet3:'#1d3a6a',
+  corridor:'#e8e0d0', corridor2:'#d8d0c0', corridor3:'#c8c0b0',
+  wall:'#f5f5f5', wall2:'#e8e8e8', wallDark:'#d0d0d0',
+  door:'#8b6914', doorFrame:'#6b4914', doorAccent:'#c8a860',
+  glass:'rgba(200,230,255,0.4)', glassFrame:'#a0a0a0',
+  ceo:'#004080', ceoLight:'#0060a0',
+  dev:'#7800a0', devLight:'#a040c0',
   social:'#e87890', socialLight:'#ff9ab0',
-  ops:'#006888', opsLight:'#0090b8',
+  ops:'#0088aa', opsLight:'#00a0cc',
   leadgen:'#ff8800', leadgenLight:'#ffaa44',
   pipeline:'#00ccff', pipelineLight:'#44eeff',
   scrum:'#ff00ff', scrumLight:'#ff44ff',
+  desk:'#8b7355', deskLight:'#a08060',
+  chair:'#505050', chairLight:'#707070',
+  plant:'#2d6b2d', plantLight:'#3d8b3d',
   uiBorder:'#202060',
 };
 
@@ -691,113 +674,179 @@ function updateStatsPanel() {
     `🔍 ${verified} ✅ verified · ${missing} ⚠️ missing · ${realData.lastAudit || '—'}`;
 }
 
-// === MAP DATA ===
+// === MAP DATA - Office Floor Plan ===
 const MAP = [];
 for(let y=0;y<MAP_H;y++){
   MAP[y]=[];
   for(let x=0;x<MAP_W;x++){
     let t = 0;
-    if(y<=2||y>=14){ t=5; }
-    if(x===9&&y>=3&&y<=14){ t=1; }
-    if(y===9&&x>=0&&x<=18){ t=1; }
-    if(x>=0&&x<=8&&y>=3&&y<=8){
-      t=(y===8&&x>=2&&x<=4)?4:3;
-      if(!(y===8&&x>=2&&x<=4) && !(x===0||x===8||y===3||y===8)) t=2;
+    // Outer border = wall
+    if(y<=1||y>=MAP_H-2||x<=1||x>=MAP_W-2){ t=3; }
+    // Central corridor (H-shape layout)
+    if(x>=2&&x<=MAP_W-3&&y>=7&&y<=9){ t=1; }  // horizontal corridor
+    if(y>=2&&y<=MAP_H-3&&x>=8&&x<=11){ t=1; }  // vertical corridor
+    // RECEPTION (top-left, x:2-7, y:2-6)
+    if(x>=2&&x<=7&&y>=2&&y<=6){
+      if((y===6&&x>=3&&x<=5)) t=4;  // door
+      else if(!(x===2||x===7||y===2||y===6)) t=0;
+      else t=3;
     }
-    if(x>=10&&x<=18&&y>=3&&y<=8){
-      t=(y===8&&x>=11&&x<=14)?4:3;
-      if(!(y===8&&x>=11&&x<=14) && !(x===10||x===18||y===3||y===8)) t=2;
+    // CEO OFFICE (top-right, x:12-18, y:2-6)
+    if(x>=12&&x<=18&&y>=2&&y<=6){
+      if((y===6&&x>=14&&x<=16)) t=4;  // door
+      else if(!(x===12||x===18||y===2||y===6)) t=0;
+      else t=3;
     }
-    if(x>=0&&x<=8&&y>=10&&y<=14){
-      t=(y===10&&x>=2&&x<=4)?4:3;
-      if(!(y===10&&x>=2&&x<=4) && !(x===0||x===8||y===10||y===14)) t=2;
+    // OPEN WORKSPACE / DEV (bottom-left, x:2-7, y:10-14)
+    if(x>=2&&x<=7&&y>=10&&y<=14){
+      if((y===10&&x>=3&&x<=5)) t=4;  // door
+      else if(!(x===2||x===7||y===10||y===14)) t=0;
+      else t=3;
     }
-    if(x>=10&&x<=18&&y>=10&&y<=14){
-      t=(y===10&&x>=13&&x<=16)?4:3;
-      if(!(y===10&&x>=13&&x<=16) && !(x===10||x===18||y===10||y===14)) t=2;
+    // MEETING ROOM (bottom-right, x:12-18, y:10-14)
+    if(x>=12&&x<=18&&y>=10&&y<=14){
+      if((y===10&&x>=14&&x<=16)) t=4;  // door
+      else if(!(x===12||x===18||y===10||y===14)) t=0;
+      else t=3;
     }
+    // Kitchen area (middle-right, x:12-15, y:6-9) - part of corridor
+    if(x>=12&&x<=15&&y>=6&&y<=9){
+      if(!(x===12||x===15||y===6||y===9)) t=0;
+      else if(x!==12&&x!==15&&y!==6&&y!==9){}  // interior
+      else t=3;
+    }
+    // Add desks in workspace
+    if(x===3&&y===11) t=5;  // desk
+    if(x===5&&y===12) t=5;  // desk
+    if(x===3&&y===13) t=6;  // plant
+    // Add meeting table in meeting room
+    if(x>=14&&x<=16&&y>=11&&y<=13) t=0;  // floor (table area)
+    if(x===15&&y===12) t=7;  // chair at head
     MAP[y][x]=t;
   }
 }
 
 // === ROOM DEFINITIONS ===
 const ROOMS = {
-  outdoor:{ name:'OUTDOOR - CAMPUS', enterMsg:'Welcome to EveryCompanyClaw HQ!' },
-  ops:{ name:'OPERATIONS ROOM', enterMsg:'Systems are running smoothly.' },
+  lobby:{ name:'LOBBY / RECEPTION', enterMsg:'Welcome to EveryCompanyClaw HQ!' },
+  workspace:{ name:'OPEN WORKSPACE', enterMsg:'Where the magic happens - coding, creating, shipping.' },
   ceo:{ name:'CEO OFFICE', enterMsg:'Strategic planning in progress.' },
-  social:{ name:'SOCIAL STUDIO', enterMsg:'Creating content...' },
-  leadlab:{ name:'LEAD LAB', enterMsg:'Analyzing leads and pipeline.' },
+  meeting:{ name:'MEETING ROOM', enterMsg:'Brainstorming sessions and client calls.' },
+  kitchen:{ name:'KITCHEN / BREAK AREA', enterMsg:'Coffee break zone.' },
 };
 const ROOM_TILES = {
-  ops:{x1:0,y1:3,x2:8,y2:8,door:{x:3,y:8}},
-  ceo:{x1:10,y1:3,x2:18,y2:8,door:{x:12,y:8}},
-  social:{x1:0,y1:10,x2:8,y2:14,door:{x:3,y:10}},
-  leadlab:{x1:10,y1:10,x2:18,y2:14,door:{x:14,y:10}},
+  lobby:{x1:2,y1:2,x2:7,y2:6,door:{x:4,y:6}},
+  workspace:{x1:2,y1:10,x2:7,y2:14,door:{x:4,y:10}},
+  ceo:{x1:12,y1:2,x2:18,y2:6,door:{x:15,y:6}},
+  meeting:{x1:12,y1:10,x2:18,y2:14,door:{x:15,y:10}},
+};
+const insideRooms = [
+  { name:'lobby', x1:2,y1:2,x2:7,y2:6 },
+  { name:'workspace', x1:2,y1:10,x2:7,y2:14 },
+  { name:'ceo', x1:12,y1:2,x2:18,y2:6 },
+  { name:'meeting', x1:12,y1:10,x2:18,y2:14 },
+];
+const ROOM_LABELS = {
+  lobby:'RECEPTION',
+  workspace:'OPEN WORKSPACE',
+  ceo:'CEO OFFICE',
+  meeting:'MEETING ROOM',
 };
 
 // === TILE DRAWING ===
-function drawGrass(x,y){
-  ctx.fillStyle=C.grass; ctx.fillRect(x,y,TILE,TILE);
-  ctx.fillStyle=C.grass2;
-  if(((x/TILE+y/TILE)*7)%5===0) ctx.fillRect(x+8,y+8,4,4);
-  if(((x/TILE+y/TILE)*11)%7===1) ctx.fillRect(x+20,y+16,3,3);
-  if(((x/TILE+y/TILE)*3)%4===2) ctx.fillRect(x+4,y+22,2,2);
+function drawCarpet(x,y){
+  ctx.fillStyle=C.carpet; ctx.fillRect(x,y,TILE,TILE);
+  ctx.fillStyle=C.carpet2;
+  ctx.fillRect(x+2,y+2,10,10);
+  ctx.fillRect(x+18,y+18,8,8);
+  ctx.fillStyle=C.carpet3;
+  ctx.fillRect(x+14,y+4,4,4);
 }
-function drawPath(x,y){
-  ctx.fillStyle=C.path; ctx.fillRect(x,y,TILE,TILE);
-  ctx.fillStyle=C.path2;
-  ctx.fillRect(x+2,y+2,4,4);
-  ctx.fillRect(x+20,y+14,4,4);
-  ctx.fillRect(x+12,y+26,3,3);
+function drawCorridor(x,y){
+  ctx.fillStyle=C.corridor; ctx.fillRect(x,y,TILE,TILE);
+  ctx.fillStyle=C.corridor2;
+  ctx.fillRect(x,y,TILE,2);
+  ctx.fillRect(x,y,2,TILE);
+  ctx.fillStyle=C.corridor3;
+  ctx.fillRect(x+20,y+20,6,6);
 }
 function drawFloor(x,y){
-  ctx.fillStyle=C.floor; ctx.fillRect(x,y,TILE,TILE);
-  ctx.fillStyle=C.floor2;
-  ctx.fillRect(x,y,TILE/2,TILE/2);
-  ctx.fillRect(x+TILE/2,y+TILE/2,TILE/2,TILE/2);
-  ctx.fillStyle=C.floor3;
-  ctx.fillRect(x+TILE/2,y,2,TILE);
-  ctx.fillRect(x,y+TILE/2,TILE,2);
+  ctx.fillStyle=C.wall; ctx.fillRect(x,y,TILE,TILE);
+  ctx.fillStyle=C.wall2;
+  ctx.fillRect(x+2,y+2,12,12);
+  ctx.fillRect(x+18,y+18,8,8);
+  ctx.fillStyle=C.wallDark;
+  ctx.fillRect(x+16,y+4,4,4);
+  ctx.fillRect(x+4,y+16,4,4);
 }
 function drawWall(x,y){
   ctx.fillStyle=C.wall; ctx.fillRect(x,y,TILE,TILE);
-  ctx.fillStyle=C.wall2; ctx.fillRect(x,y,TILE,8);
-  ctx.fillStyle=C.wallDark; ctx.fillRect(x,y+8,4,TILE-8);
+  ctx.fillStyle=C.wallDark;
+  ctx.fillRect(x,y,4,TILE);
+  ctx.fillRect(x,y,TILE,4);
   ctx.fillStyle=C.wall2;
-  ctx.fillRect(x+14,y,2,TILE);
-  ctx.fillRect(x,y+16,TILE,2);
+  ctx.fillRect(x+4,y+4,TILE-4,4);
+  ctx.fillRect(x+4,y+4,4,TILE-4);
 }
 function drawDoor(x,y,glow){
-  ctx.fillStyle=C.door; ctx.fillRect(x,y,TILE,TILE);
-  ctx.fillStyle='#e8a840';
-  ctx.fillRect(x+6,y+4,20,4);
-  ctx.fillRect(x+6,y+14,20,2);
-  ctx.fillRect(x+14,y+18,4,10);
+  // Door frame
+  ctx.fillStyle=C.doorFrame; ctx.fillRect(x,y,TILE,TILE);
+  // Door panel
+  ctx.fillStyle=C.door; ctx.fillRect(x+2,y+2,TILE-4,TILE-2);
+  // Door handle
+  ctx.fillStyle=C.doorAccent; ctx.fillRect(x+18,y+14,6,4);
+  // Glass panel
+  ctx.fillStyle=C.glass; ctx.fillRect(x+6,y+4,TILE-12,10);
+  ctx.strokeStyle=C.glassFrame; ctx.lineWidth=1;
+  ctx.strokeRect(x+6,y+4,TILE-12,10);
   if(glow){
     ctx.shadowColor='#ffd700'; ctx.shadowBlur=8;
-    ctx.fillStyle='#ffd700'; ctx.fillRect(x+4,y+2,2,TILE-4);
-    ctx.fillRect(x+TILE-6,y+2,2,TILE-4);
+    ctx.fillStyle='rgba(255,215,0,0.3)'; ctx.fillRect(x,y,TILE,TILE);
     ctx.shadowBlur=0;
   }
 }
-function drawTree(x,y){
-  ctx.fillStyle=C.grass; ctx.fillRect(x,y,TILE,TILE);
-  ctx.fillStyle=C.tree;
-  ctx.fillRect(x+4,y+6,24,22);
-  ctx.fillStyle=C.tree2;
-  ctx.fillRect(x+8,y+10,16,14);
-  ctx.fillStyle='#88c070';
-  ctx.fillRect(x+14,y+2,4,6);
+function drawDesk(x,y){
+  // Desk surface
+  ctx.fillStyle=C.desk; ctx.fillRect(x+2,y+8,TILE-4,16);
+  ctx.fillStyle=C.deskLight; ctx.fillRect(x+4,y+10,TILE-8,4);
+  // Desk legs
+  ctx.fillStyle=C.chair; ctx.fillRect(x+4,y+24,4,8);
+  ctx.fillRect(x+TILE-8,y+24,4,8);
+  // Monitor
+  ctx.fillStyle='#333'; ctx.fillRect(x+10,y+2,16,12);
+  ctx.fillStyle='#5588cc'; ctx.fillRect(x+12,y+4,12,8);
+}
+function drawPlant(x,y){
+  // Pot
+  ctx.fillStyle='#8b4513'; ctx.fillRect(x+8,y+20,16,12);
+  ctx.fillStyle='#6b3510'; ctx.fillRect(x+6,y+18,20,4);
+  // Leaves
+  ctx.fillStyle=C.plant;
+  ctx.fillRect(x+10,y+6,6,14);
+  ctx.fillRect(x+16,y+8,6,12);
+  ctx.fillRect(x+22,y+10,4,10);
+  ctx.fillStyle=C.plantLight;
+  ctx.fillRect(x+12,y+4,4,6);
+  ctx.fillRect(x+18,y+6,4,6);
+}
+function drawChair(x,y){
+  // Chair seat
+  ctx.fillStyle=C.chair; ctx.fillRect(x+6,y+12,20,10);
+  // Chair back
+  ctx.fillStyle=C.chairLight; ctx.fillRect(x+8,y+2,16,12);
+  // Chair legs
+  ctx.fillStyle='#333'; ctx.fillRect(x+8,y+22,4,6);
+  ctx.fillRect(x+TILE-12,y+22,4,6);
 }
 
 // === DRAW MAP ===
-function drawMap(currentRoom){
+function drawMap(){
   for(let y=0;y<MAP_H;y++){
     for(let x=0;x<MAP_W;x++){
       const t=MAP[y][x];
       const px=x*TILE, py=y*TILE;
-      if(t===0) drawGrass(px,py);
-      else if(t===1) drawPath(px,py);
+      if(t===0) drawCarpet(px,py);
+      else if(t===1) drawCorridor(px,py);
       else if(t===2) drawFloor(px,py);
       else if(t===3) drawWall(px,py);
       else if(t===4){
@@ -810,14 +859,16 @@ function drawMap(currentRoom){
 }
 
 // === DOOR GLOW ===
-// Doors glow when their specific specialized agent is hired/unlocked
+// Doors glow based on active agents in the office
 function checkDoorGlow(x,y){
-  // Social Studio door (x=3,y=10) — glows when SocialAgent is hired
-  const socialHired = agents.some(a => a.type === 'SocialAgent');
-  if (socialHired && x===3 && y===10) return true;
-  // Lead Lab door (x=14,y=10) — glows when PipelineAgent is hired (always present)
-  const pipelineHired = agents.some(a => a.type === 'PipelineAgent');
-  if (pipelineHired && x===14 && y===10) return true;
+  // CEO Office door glows when CEO is active
+  const ceoActive = agents.some(a => a.type === 'CEO');
+  if (ceoActive && x===15 && y===6) return true;
+  // Workspace door glows when DevAgent is active
+  const devActive = agents.some(a => a.type === 'DevAgent');
+  if (devActive && x===4 && y===10) return true;
+  // Meeting room door glows when any agent is present
+  if (agents.length > 0 && x===15 && y===10) return true;
   return false;
 }
 
@@ -953,19 +1004,20 @@ function approveHire(){
   if(!pendingHireOpportunity) return;
   const {type}=pendingHireOpportunity;
   HIRED.add(type);
-  const homePos=getHomeForAgent({type,room:'ops'});
+  const homePos=getHomeForAgent({type,room:'corridor'});
   const side=Math.floor(Math.random()*4);
+  // Spawn agents in corridor area
   let entryX, entryY;
-  if(side===0){ entryX=9; entryY=3; }
-  else if(side===1){ entryX=9; entryY=14; }
-  else if(side===2){ entryX=0; entryY=9; }
-  else { entryX=18; entryY=9; }
+  if(side===0){ entryX=9; entryY=8; }  // center of corridor
+  else if(side===1){ entryX=10; entryY=8; }
+  else if(side===2){ entryX=9; entryY=7; }
+  else { entryX=10; entryY=9; }
   const entry={
     type, name:type, id:type,
     x:entryX, y:entryY,
     facing:'down', frame:0,
     homeX:homePos.x, homeY:homePos.y,
-    room:'outdoor',
+    room:'corridor',
     moving:false, moveTimer:0, idleTimer:0
   };
   agents.push(entry);
@@ -1038,17 +1090,21 @@ function updateRoster(){
 
 // === MOVEMENT ===
 const ROOM_HOMES={
-  ops:{CEO:{x:4,y:5},DevAgent:{x:4,y:5},OpsAgent:{x:4,y:5},MarketAgent:{x:2,y:5},DataAgent:{x:6,y:5}},
-  ceo:{CEO:{x:14,y:5},DevAgent:{x:12,y:5},MarketAgent:{x:14,y:5},LeadGenAgent:{x:13,y:6},ScrumAgent:{x:15,y:6}},
-  social:{SocialAgent:{x:4,y:12},SupportAgent:{x:4,y:12}},
-  leadlab:{OpsAgent:{x:14,y:12},DataAgent:{x:14,y:12},SalesAgent:{x:14,y:12},PipelineAgent:{x:14,y:12}},
+  lobby:{CEO:{x:5,y:4},DevAgent:{x:4,y:4},SocialAgent:{x:3,y:4}},
+  workspace:{CEO:{x:5,y:12},DevAgent:{x:4,y:12},SocialAgent:{x:3,y:13}},
+  ceo:{CEO:{x:15,y:4},DevAgent:{x:14,y:4}},
+  meeting:{CEO:{x:15,y:12},DevAgent:{x:14,y:12}},
+  kitchen:{CEO:{x:13,y:7},DevAgent:{x:14,y:7}},
+  corridor:{CEO:{x:9,y:8},DevAgent:{x:10,y:8}},
 };
 
 const ROOM_BOUNDS={
-  ops:{x1:1,y1:4,x2:7,y2:7},
-  ceo:{x1:11,y1:4,x2:17,y2:7},
-  social:{x1:1,y1:11,x2:7,y2:13},
-  leadlab:{x1:11,y1:11,x2:17,y2:13},
+  lobby:{x1:2,y1:2,x2:7,y2:6},
+  workspace:{x1:2,y1:10,x2:7,y2:14},
+  ceo:{x1:12,y1:2,x2:18,y2:6},
+  meeting:{x1:12,y1:10,x2:18,y2:14},
+  kitchen:{x1:12,y1:6,x2:15,y2:9},
+  corridor:{x1:8,y1:2,x2:11,y2:14},
 };
 
 const DIR_DXDY={up:{dx:0,dy:-1},down:{dx:0,dy:1},left:{dx:-1,dy:0},right:{dx:1,dy:0}};
@@ -1059,17 +1115,13 @@ function getHomeForAgent(agent){
 }
 
 function canMoveTo(agent,x,y,currentRoom){
-  if(currentRoom==='outdoor'){
-    if(x<0||x>=MAP_W||y<0||y>=MAP_H) return false;
-    const t=MAP[y][x];
-    if(t===3||t===5) return false;
-    return true;
-  } else {
-    const b=ROOM_BOUNDS[currentRoom]||{x1:0,y1:0,x2:20,y2:20};
-    if(x<b.x1||x>b.x2||y<b.y1||y>b.y2) return false;
-    if(MAP[y]&&MAP[y][x]!==2) return false;
-    return true;
-  }
+  // Check bounds
+  if(x<0||x>=MAP_W||y<0||y>=MAP_H) return false;
+  const t=MAP[y][x];
+  // Walls and furniture are not walkable
+  if(t===3||t===5||t===6||t===7) return false;
+  // Carpet, corridor, floor, door are walkable
+  return true;
 }
 
 function tryMove(agent,dir,currentRoom){
@@ -1102,63 +1154,51 @@ function updateAgentAI(agent,currentRoom,dt){
 // === INDOOR ROOM DETAILS ===
 function drawIndoorDetails(room){
   ctx.save();
-  if(room==='ops'){
-    for(let i=0;i<3;i++){
-      drawDesk(2+i*3,4,room);
-      drawServerRack(2+i*3,5,room);
-    }
+  if(room==='lobby'){
+    // Reception desk
+    drawCounter(3,3);
+    // Plants
+    drawPlant(2,4);
+    drawPlant(6,4);
+    // Chairs for waiting
+    drawChair(3,5);
+    drawChair(5,5);
+  } else if(room==='workspace'){
+    // Desks for dev team
+    drawDesk(3,11);
+    drawDesk(5,12);
+    drawChair(4,13);
+    drawPlant(2,13);
   } else if(room==='ceo'){
-    drawCEODesk(14,4,room);
-    for(let i=0;i<2;i++) drawDesk(11+i*4,6,room);
-  } else if(room==='social'){
-    for(let i=0;i<3;i++) drawPostStation(2+i*3,11,room);
-  } else if(room==='leadlab'){
-    for(let i=0;i<3;i++) drawLeadScreen(11+i*3,11,room);
+    // Executive desk
+    drawExecDesk(14,4);
+    drawChair(15,6);
+    // Plant
+    drawPlant(17,3);
+  } else if(room==='meeting'){
+    // Meeting table
+    drawMeetingTable(14,11);
+    // Chairs around table
+    drawChair(14,10);
+    drawChair(16,10);
+    drawChair(14,14);
+    drawChair(16,14);
+    drawChair(13,12);
+    drawChair(17,12);
+    // Plant
+    drawPlant(17,11);
+  } else if(room==='kitchen'){
+    // Kitchen counter
+    drawCounter(13,6);
+    // Table
+    drawKitchenTable(13,7);
+    drawChair(13,8);
+    drawChair(15,8);
   }
   ctx.restore();
 }
 
-function drawDesk(x,y,room){
-  const px=x*TILE, py=y*TILE;
-  ctx.fillStyle='#a08060'; ctx.fillRect(px+4,py+8,24,18);
-  ctx.fillStyle='#c0a080'; ctx.fillRect(px+6,py+4,20,8);
-  ctx.fillStyle='#80c080'; ctx.fillRect(px+8,py+6,14,4);
-}
 
-function drawServerRack(x,y,room){
-  const px=x*TILE, py=y*TILE;
-  ctx.fillStyle='#404060'; ctx.fillRect(px+8,py+2,16,26);
-  for(let i=0;i<4;i++){
-    ctx.fillStyle='#00ff44'; ctx.fillRect(px+10,py+4+i*6,4,4);
-    ctx.fillStyle='#ff4400'; ctx.fillRect(px+18,py+4+i*6,4,4);
-  }
-}
-
-function drawCEODesk(x,y,room){
-  const px=x*TILE, py=y*TILE;
-  ctx.fillStyle='#c0a040'; ctx.fillRect(px+2,py+6,28,20);
-  ctx.fillStyle='#e0c060'; ctx.fillRect(px+4,py+2,24,6);
-  ctx.fillStyle='#ffd700'; ctx.fillRect(px+8,py+3,10,4);
-  ctx.font='5px Press Start 2P';
-  ctx.fillStyle='#ffd700'; ctx.fillText('CEO',px+8,py+8);
-}
-
-function drawPostStation(x,y,room){
-  const px=x*TILE, py=y*TILE;
-  ctx.fillStyle='#8060a0'; ctx.fillRect(px+4,py+8,24,18);
-  ctx.fillStyle='#a080c0'; ctx.fillRect(px+6,py+4,20,8);
-  ctx.fillStyle='#ff80c0'; ctx.fillRect(px+8,py+6,14,4);
-}
-
-function drawLeadScreen(x,y,room){
-  const px=x*TILE, py=y*TILE;
-  ctx.fillStyle='#006080'; ctx.fillRect(px+4,py+6,24,20);
-  ctx.fillStyle='#0080a0'; ctx.fillRect(px+6,py+8,20,16);
-  ctx.fillStyle='#00ff88';
-  ctx.fillRect(px+8,py+18,3,4);
-  ctx.fillRect(px+13,py+14,3,8);
-  ctx.fillRect(px+18,py+10,3,12);
-}
 
 // === MESSAGES ===
 let msgQueue=[];
@@ -1174,18 +1214,48 @@ function flashMessage(m){
   document.getElementById('msg-line').textContent=currentMsg;
 }
 
-// === CURRENT ROOM LOGIC ===
-let currentRoom='ceo';
+// === VIEW MODE ===
+// 'full' = always full map; 'room' = zoomed into a room
+let viewMode = 'full'; // always start on full map
+
+// Keep currentRoom for zoomed room view (null = full map)
+let currentRoom = null;
+
+function showBackToMapButton() {
+  const existing = document.getElementById('back-to-map-btn');
+  if (existing) return;
+  const btn = document.createElement('button');
+  btn.id = 'back-to-map-btn';
+  btn.textContent = '⬅ BACK TO MAP';
+  btn.style.cssText = 'position:absolute;top:8px;left:50%;transform:translateX(-50%);background:#202060;border:2px solid #f0e860;color:#f0e860;font-family:"Press Start 2P",monospace;font-size:6px;padding:4px 8px;cursor:pointer;z-index:15;';
+  btn.addEventListener('click', () => {
+    currentRoom = null;
+    viewMode = 'full';
+    btn.remove();
+  });
+  document.getElementById('canvas-wrap').appendChild(btn);
+}
+
+// ESC to return to full map
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && currentRoom !== null) {
+    currentRoom = null;
+    viewMode = 'full';
+    const btn = document.getElementById('back-to-map-btn');
+    if (btn) btn.remove();
+  }
+});
 
 function getAgentRoom(agent){
-  if(agent.room!=='outdoor') return agent.room;
+  // Agents can be anywhere in the office
+  // Determine which room the agent is currently in based on position
   for(const[r,def] of Object.entries(ROOM_TILES)){
-    if(agent.x===def.door.x&&agent.y===def.door.y){
+    if(agent.x>=def.x1&&agent.x<=def.x2&&agent.y>=def.y1&&agent.y<=def.y2){
       return r;
     }
   }
-  // Show agents in outdoor when currentRoom is outdoor
-  return 'outdoor';
+  // In corridor
+  return 'corridor';
 }
 
 // === CLOCK ===
@@ -1230,46 +1300,41 @@ function gameLoop(ts){
   // Update agents
   agents.forEach(a=>updateAgentAI(a,currentRoom,dt));
 
-  // Update side panel metrics
-  document.getElementById('room-name').textContent=ROOMS[currentRoom]?.name||'OUTDOOR';
 
-  // Draw
+
+  // Draw — always draw full map
   ctx.clearRect(0,0,canvas.width,canvas.height);
-  drawMap(currentRoom);
-  if(currentRoom!=='outdoor') drawIndoorDetails(currentRoom);
+  drawMap();
+  // When zoomed into a room, draw indoor details
+  if (currentRoom) {
+    drawIndoorDetails(currentRoom);
+  }
 
-  // Draw agents
+  // Draw agents — show ALL agents on full map, or only those in current room when zoomed
   agents.forEach(a=>{
-    const room=getAgentRoom(a);
-    // When outdoors, show agents that are on door tiles (entering rooms)
-    if(room!==currentRoom && !(currentRoom==='outdoor' && room===a.room)) return;
-    // When in a room, show agents assigned to that room
+    const isZoomed = currentRoom !== null;
+    let inView = true;
+    if (isZoomed) {
+      inView = (
+        (currentRoom === 'lobby' && a.x >= 2 && a.x <= 7 && a.y >= 2 && a.y <= 7) ||
+        (currentRoom === 'workspace' && a.x >= 2 && a.x <= 7 && a.y >= 10 && a.y <= 14) ||
+        (currentRoom === 'ceo' && a.x >= 12 && a.x <= 18 && a.y >= 2 && a.y <= 6) ||
+        (currentRoom === 'meeting' && a.x >= 12 && a.x <= 18 && a.y >= 10 && a.y <= 14)
+      );
+    }
+    if(!inView) return;
     const bobOffset=(a.moving?0:Math.sin(animFrame*0.1+a.x)*1);
     const spr=getAgentSprite(a.type,a.facing,a.frame);
     ctx.drawImage(spr,a.x*TILE+(TILE-SPRITE_SIZE)/2,a.y*TILE+(TILE-SPRITE_SIZE)+bobOffset);
   });
 
-  // Activity log cycling (every ~2 seconds at 60fps)
+  // Activity log cycling (every ~2 seconds at 60fps) — CEO + DevAgent only
   if(animFrame%120===0){
     const logs=[
-      'CEO reviewing quarterly targets...',
-      'DevAgent shipping new features!',
-      'Social posts getting engagement!',
-      'OpsAgent monitoring systems...',
-      'Pipeline growing steadily.',
-      'New leads coming in...',
-      'Team collaboration active!',
-      'Automations running smoothly.',
-      'LeadGenAgent: Scanning for new opportunities...',
-      'PipelineAgent: Processing deal flow...',
-      'LeadGenAgent: Lead captured from GitHub',
-      'PipelineAgent: Deal moved to qualified',
-      'LeadGenAgent analyzing inbound signals...',
-      'PipelineAgent updating deal stages...',
-      'ScrumAgent: Scouting for new projects...',
-      'ScrumAgent: New project opportunity detected!',
-      'ScrumAgent: Sprint delivered for project!',
-      'ScrumAgent: Project completed! $X revenue',
+      'CEO: Reviewing operations...',
+      'DevAgent: Ready to build...',
+      'Systems running smoothly.',
+      'Monitoring company health.',
     ];
     document.getElementById('activity-log').textContent=logs[Math.floor(Math.random()*logs.length)];
   }
