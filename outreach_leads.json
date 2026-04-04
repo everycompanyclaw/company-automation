@@ -1,0 +1,7 @@
+[
+  {"name": "Alex Chen", "email": "alex@techstartup.io", "company": "TechStartup.io", "role": "Founder", "source": "product_hunt", "status": "new"},
+  {"name": "Sarah Miller", "email": "sarah@buildfast.co", "company": "BuildFast Co", "role": "CEO", "source": "product_hunt", "status": "new"},
+  {"name": "James Wong", "email": "james@indiehacker.io", "company": "IndieHacker Tools", "role": "Solo Founder", "source": "product_hunt", "status": "new"},
+  {"name": "Maria Santos", "email": "maria@growthstack.com", "company": "GrowthStack", "role": "Founder", "source": "product_hunt", "status": "new"},
+  {"name": "Tom Parker", "email": "tom@automateall.io", "company": "AutomateAll", "role": "Co-founder", "source": "product_hunt", "status": "new"}
+]
