@@ -209,7 +209,7 @@ canvas {
   <div id="top-bar">
     <span class="title">EVERYCOMPANYCLAW HQ</span>
     <span class="clock" id="clock">00:00</span>
-    <span class="team">TEAM: <span id="agent-count">5/8</span></span>
+    <span class="team">TEAM: <span id="agent-count">2/8</span></span>
     <span class="blink" style="color:#ff4444;font-size:7px;">24/7</span>
     <button id="audit-btn" onclick="runFullAudit()">🔄 AUDIT</button>
   </div>
@@ -268,7 +268,7 @@ canvas {
         </div>
         <div class="stat-row">
           <span>Team</span>
-          <span class="stat-val" id="s-team">5/8</span>
+          <span class="stat-val" id="s-team">2/8</span>
           <span class="stat-icon ok" id="i-team" title="From MEMORY.md">✅</span>
         </div>
         <div class="stat-row">
@@ -641,7 +641,7 @@ function updateStatsPanel() {
   document.getElementById('i-age').className = 'stat-icon ok';
 
   // Team count (static real value)
-  document.getElementById('s-team').textContent = '5/8';
+  document.getElementById('s-team').textContent = agentCount + '/8';
   document.getElementById('i-team').className = 'stat-icon ok';
 
   // Issues = same as actions (closed GitHub issues)
