@@ -246,12 +246,12 @@ canvas {
         </div>
         <div class="stat-row">
           <span>Posts</span>
-          <span class="stat-val" id="s-posts">0</span>
+          <span class="stat-val" id="s-posts">—</span>
           <span class="stat-icon ok" id="i-posts" title="Real data">✅</span>
         </div>
         <div class="stat-row">
           <span>Actions</span>
-          <span class="stat-val" id="s-actions">0</span>
+          <span class="stat-val" id="s-actions">—</span>
           <span class="stat-icon ok" id="i-actions" title="GitHub closed issues">✅</span>
         </div>
         <div class="stat-row">
@@ -405,13 +405,13 @@ const C = {
 
 // === REAL DATA STATE ===
 const realData = {
-  closedIssues: 0,
-  socialPosts: 0,
+  closedIssues: null,
+  socialPosts: null,
   budget: 100,
   companyAge: 0,
   agentCount: 5,
-  leads: 0,
-  pipeline: 0,
+  leads: null,
+  pipeline: null,
   lastAudit: null,
 };
 
@@ -459,8 +459,8 @@ async function fetchSocialStats() {
       // Fall back to known count
     }
   } catch(e) {}
-  // Known from memory: 3 post template categories
-  return { postTemplates: 3 };
+  // Known from social_scheduler/latest_diversified_posts.json: 5 post templates
+  return { postTemplates: 5 };
 }
 
 // === LOAD REAL LEADS & PIPELINE DATA ===
@@ -513,9 +513,9 @@ async function loadRealStats() {
     updateAuditUI('projects');
   }
   // Update stats panel
-  document.getElementById('s-leads').textContent = realData.leads;
+  document.getElementById('s-leads').textContent = realData.leads ?? '—';
   document.getElementById('i-leads').className = auditResults.leads.status === 'ok' ? 'stat-icon ok' : 'stat-icon warn';
-  document.getElementById('s-pipeline').textContent = '$' + realData.pipeline;
+  document.getElementById('s-pipeline').textContent = realData.pipeline !== null ? '$' + realData.pipeline : '—';
   document.getElementById('i-pipeline').className = auditResults.pipeline.status === 'ok' ? 'stat-icon ok' : 'stat-icon warn';
 }
 
@@ -642,11 +642,11 @@ function updateAuditUI(key) {
 
 function updateStatsPanel() {
   // Actions = closed GitHub issues
-  document.getElementById('s-actions').textContent = realData.closedIssues;
+  document.getElementById('s-actions').textContent = realData.closedIssues ?? '—';
   document.getElementById('i-actions').className = 'stat-icon ok';
 
   // Posts = social post templates
-  document.getElementById('s-posts').textContent = realData.socialPosts;
+  document.getElementById('s-posts').textContent = realData.socialPosts ?? '—';
   document.getElementById('i-posts').className = 'stat-icon ok';
 
   // Budget
