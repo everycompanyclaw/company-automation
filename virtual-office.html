@@ -343,6 +343,45 @@ const canvas = document.getElementById('game');
 const ctx = canvas.getContext('2d');
 canvas.width = MAP_W * TILE;
 canvas.height = MAP_H * TILE;
+
+// Keyboard: 1-5 to switch rooms, 0 for outdoor
+document.addEventListener('keydown', (e) => {
+  const rooms = { '1':'ops', '2':'ceo', '3':'social', '4':'leadlab', '0':'outdoor' };
+  if (rooms[e.key]) currentRoom = rooms[e.key];
+});
+
+// Click to change room
+canvas.addEventListener('click', (e) => {
+  const rect = canvas.getBoundingClientRect();
+  const scaleX = canvas.width / rect.width;
+  const scaleY = canvas.height / rect.height;
+  const clickX = Math.floor((e.clientX - rect.left) * scaleX / TILE);
+  const clickY = Math.floor((e.clientY - rect.top) * scaleY / TILE);
+  
+  // Check if clicked on a door
+  const rooms = { ops:{x:3,y:8}, ceo:{x:12,y:8}, social:{x:3,y:10}, leadlab:{x:14,y:10} };
+  for (const [room, door] of Object.entries(rooms)) {
+    if (clickX === door.x && clickY === door.y) {
+      currentRoom = room;
+      return;
+    }
+  }
+  // Also allow clicking inside any room to enter it
+  const insideRooms = [
+    { name:'ops', x1:0,y1:3,x2:8,y2:8 },
+    { name:'ceo', x1:10,y1:3,x2:18,y2:8 },
+    { name:'social', x1:0,y1:10,x2:8,y2:14 },
+    { name:'leadlab', x1:10,y1:10,x2:18,y2:14 }
+  ];
+  for (const r of insideRooms) {
+    if (clickX >= r.x1 && clickX <= r.x2 && clickY >= r.y1 && clickY <= r.y2) {
+      currentRoom = r.name;
+      return;
+    }
+  }
+  // Click outdoor/grass area goes to outdoor
+  currentRoom = 'outdoor';
+});
 const FOUNDED_DATE = new Date('2026-03-17');
 const GITHUB_REPO = 'everycompanyclaw/company-automation';
 
@@ -1137,7 +1176,7 @@ function flashMessage(m){
 }
 
 // === CURRENT ROOM LOGIC ===
-let currentRoom='outdoor';
+let currentRoom='ceo';
 
 function getAgentRoom(agent){
   if(agent.room!=='outdoor') return agent.room;
@@ -1146,6 +1185,7 @@ function getAgentRoom(agent){
       return r;
     }
   }
+  // Show agents in outdoor when currentRoom is outdoor
   return 'outdoor';
 }
 
@@ -1202,7 +1242,9 @@ function gameLoop(ts){
   // Draw agents
   agents.forEach(a=>{
     const room=getAgentRoom(a);
-    if(room!==currentRoom) return;
+    // When outdoors, show agents that are on door tiles (entering rooms)
+    if(room!==currentRoom && !(currentRoom==='outdoor' && room===a.room)) return;
+    // When in a room, show agents assigned to that room
     const bobOffset=(a.moving?0:Math.sin(animFrame*0.1+a.x)*1);
     const spr=getAgentSprite(a.type,a.facing,a.frame);
     ctx.drawImage(spr,a.x*TILE+(TILE-SPRITE_SIZE)/2,a.y*TILE+(TILE-SPRITE_SIZE)+bobOffset);
