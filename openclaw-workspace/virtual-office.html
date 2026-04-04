@@ -891,7 +891,7 @@ const AGENT_DISPLAY={CEO:'CEO',DevAgent:'DEV',SocialAgent:'SOCIAL',OpsAgent:'OPS
 // === PENDING HIRE OPPORTUNITY ===
 let pendingHireOpportunity=null;
 const HIRE_POOL=['MarketerAgent','SalesAgent','SupportAgent','AnalystAgent'];
-const HIRED=new Set(['CEO','DevAgent','LeadGenAgent','PipelineAgent','ScrumAgent']);
+const HIRED=new Set(['CEO','DevAgent']);
 
 function getRandomHireRole(){
   const available=HIRE_POOL.filter(t=>!HIRED.has(t));
@@ -975,6 +975,8 @@ function approveHire(){
   updateRoster();
   if(agentCount>=4) flashMessage('Social Studio unlocked!');
   if(agentCount>=6) flashMessage('Lead Lab unlocked!');
+  document.getElementById('agent-count').textContent=agentCount+'/8';
+  // Keep unlock messages but they won't trigger with only CEO+DevAgent
   clearPendingHire();
   document.getElementById('msg-line').textContent=newHireMessage;
   lastNewHire=Date.now();
@@ -1011,11 +1013,8 @@ function initAgents(){
   agents=[
     {id:'CEO',name:'CEO',type:'CEO',x:14,y:7,facing:'up',frame:0,homeX:14,homeY:7,room:'ceo',moving:false,moveTimer:0,idleTimer:0},
     {id:'DevAgent',name:'DevAgent',type:'DevAgent',x:4,y:5,facing:'down',frame:0,homeX:4,homeY:5,room:'ops',moving:false,moveTimer:0,idleTimer:0},
-    {id:'LeadGenAgent',name:'LeadGenAgent',type:'LeadGenAgent',x:13,y:6,facing:'down',frame:0,homeX:13,homeY:6,room:'ceo',moving:false,moveTimer:0,idleTimer:0},
-    {id:'PipelineAgent',name:'PipelineAgent',type:'PipelineAgent',x:14,y:12,facing:'down',frame:0,homeX:14,homeY:12,room:'leadlab',moving:false,moveTimer:0,idleTimer:0},
-    {id:'ScrumAgent',name:'ScrumAgent',type:'ScrumAgent',x:15,y:7,facing:'left',frame:0,homeX:15,homeY:7,room:'ceo',moving:false,moveTimer:0,idleTimer:0},
   ];
-  agentCount=5;
+  agentCount=2;
   updateRoster();
 }
 
