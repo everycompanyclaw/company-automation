@@ -1,72 +1,71 @@
-# 🚀 Python Automation Scripts Bundle
+# Python Scripts Bundle — $79
 
-**20 Ready-to-Use Scripts to Automate Your Business**
+**Version:** 1.0.0 | **Updated:** 2026-04-07
+
+A collection of production-ready Python scripts for business automation. Each script is self-contained, documented, and designed to run on a schedule or on-demand.
 
 ---
 
 ## What's Included
 
-| # | Script | Use Case |
-|---|--------|----------|
-| 1 | Email Extractor | Extract emails from any text |
-| 2 | CSV to JSON | Convert spreadsheet data |
-| 3 | Screenshot Taker | Automated screenshots |
-| 4 | Google Sheets Download | Export sheets as CSV |
-| 5 | File Organizer | Auto-organize downloads |
-| 6 | URL Status Checker | Monitor website health |
-| 7 | Image Resizer | Batch resize images |
-| 8 | PDF Page Extractor | Extract PDF pages |
-| 9 | Word Counter | Analyze text content |
-| 10 | Date Range Generator | Generate date sequences |
-| 11 | Duplicate Finder | Find duplicate files |
-| 12 | JSON to CSV | Convert JSON data |
-| 13 | Metadata Scraper | Extract website info |
-| 14 | Timer Decorator | Profile code performance |
-| 15 | Retry Decorator | Auto-retry failed calls |
-| 16 | Text to Speech | Convert text to audio |
-| 17 | URL Shortener | Shorten links |
-| 18 | Invoice Generator | Create PDF invoices |
-| 19 | Weather Checker | Get current weather |
-| 20 | Backup Script | Timestamped backups |
+### 🔌 API & Integrations (3 scripts)
+- `stripe_webhook_handler.py` — Parse and process Stripe webhook events
+- `gumroad_license_checker.py` — Verify Gumroad license keys programmatically
+- `slack_channel_reporter.py` — Post formatted reports to Slack channels
+
+### 📊 Data Processing (3 scripts)
+- `csv_enricher.py` — Enrich CSV data with additional columns via API lookups
+- `spreadsheet_sync.py` — Bi-directional sync between Google Sheets and CSV
+- `invoice_generator.py` — Generate PDF invoices from JSON order data
+
+### 📧 Outreach & Communication (3 scripts)
+- `cold_email_sender.py` — Send personalized cold emails via SMTP/SendGrid
+- `linkedin_message_sender.py` — Automate LinkedIn connection requests via API
+- `newsletter_summarizer.py` — Summarize top articles and send as newsletter
+
+### 🔧 Utilities (3 scripts)
+- `backup_to_s3.py` — Backup files and databases to AWS S3
+- `cron_scheduler.py` — Lightweight cron-like scheduler for Python scripts
+- `log_analyzer.py` — Parse and summarize application logs
+
+---
+
+## Getting Started
+
+1. Ensure Python 3.9+ is installed: `python3 --version`
+2. Install dependencies: `pip install -r requirements.txt`
+3. Copy `config.example.py` to `config.py` and fill in your API keys
+4. Run a script: `python scripts/script_name.py`
+5. Schedule with cron or use the included `cron_scheduler.py`
 
 ---
 
 ## Requirements
 
+- Python 3.9 or higher
+- pip (Python package manager)
+- API keys for services used (Stripe, Slack, SendGrid, etc.)
+- AWS credentials for S3 backup scripts (optional)
+
+---
+
+## Configuration
+
+Each script reads from `config.py`. Never commit this file — it's in `.gitignore`.
+
+Environment variables are also supported:
 ```bash
-pip install requests pillow PyPDF2 beautifulsoup4 gTTS reportlab openpyxl gspread oauth2client
+export STRIPE_API_KEY="sk_live_..."
+export SENDGRID_API_KEY="SG.xxx"
 ```
 
 ---
 
-## Quick Start
+## Support
 
-```python
-from bundle import extract_emails
-
-# Extract emails from text
-emails = extract_emails("Contact john@email.com or jane@company.org")
-print(emails)  # ['john@email.com', 'jane@company.org']
-```
+For questions about these scripts, open an issue at:
+github.com/everycompanyclaw/company-automation/issues
 
 ---
 
-## Use Cases
-
-- **Freelancers** - Add to your service offerings
-- **Entrepreneurs** - Automate repetitive tasks
-- **Developers** - Speed up workflow
-- **Marketing** - Data processing & outreach
-- **Operations** - File management & backups
-
----
-
-## Price: $79
-
-**Instant Download after Purchase**
-
----
-
-## Contact
-
-Questions? Email: everycompanyclaw@gmail.com
+**License:** Personal use only. Do not redistribute.

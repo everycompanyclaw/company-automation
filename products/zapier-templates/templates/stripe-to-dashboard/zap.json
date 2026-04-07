@@ -1,0 +1,62 @@
+{
+  "name": "Stripe to Dashboard",
+  "description": "Sync Stripe payments to Google Sheets for revenue tracking",
+  "trigger": {
+    "app": "Stripe",
+    "event": "New Payment",
+    "settings": {
+      "status": "succeeded"
+    }
+  },
+  "steps": [
+    {
+      "step": 1,
+      "app": "Formatter",
+      "event": "Numbers - Currency",
+      "settings": {
+        "number": "{{trigger.amount}}",
+        "from": " cents",
+        "to": " dollars"
+      }
+    },
+    {
+      "step": 2,
+      "app": "Formatter",
+      "event": "Date/Time - Format",
+      "settings": {
+        "date": "{{trigger.created}}",
+        "to_format": "YYYY-MM-DD HH:mm:ss"
+      }
+    },
+    {
+      "step": 3,
+      "app": "Google Sheets",
+      "event": "Create Spreadsheet Row",
+      "settings": {
+        "spreadsheet_id": "YOUR_SPREADSHEET_ID",
+        "sheet": "Payments",
+        "values": {
+          "A": "{{step_2}}",
+          "B": "{{trigger.customer_email}}",
+          "C": "{{step_1}}",
+          "D": "{{trigger.currency}}",
+          "E": "{{trigger.invoice_id}}",
+          "F": "{{trigger.id}}"
+        }
+      }
+    },
+    {
+      "step": 4,
+      "app": "Google Sheets",
+      "event": "Lookup Spreadsheet Row",
+      "settings": {
+        "spreadsheet_id": "YOUR_SPREADSHEET_ID",
+        "sheet": "Customers",
+        "column": "Email",
+        "value": "{{trigger.customer_email}}"
+      }
+    }
+  ],
+  "version": "1.0.0",
+  "created": "2026-04-07"
+}

@@ -1,0 +1,47 @@
+{
+  "name": "Lead Capture to CRM",
+  "description": "Capture Typeform submissions and create HubSpot contacts automatically",
+  "trigger": {
+    "app": "Typeform",
+    "event": "New Entry",
+    "settings": {
+      "form_id": "YOUR_TYPEFORM_FORM_ID"
+    }
+  },
+  "steps": [
+    {
+      "step": 1,
+      "app": "Formatter",
+      "event": "Text - Split",
+      "settings": {
+        "input": "{{trigger.name}}",
+        "separator": " ",
+        "segment_index": 0
+      }
+    },
+    {
+      "step": 2,
+      "app": "HubSpot",
+      "event": "Create Contact",
+      "settings": {
+        "email": "{{trigger.email}}",
+        "firstname": "{{step_1}}",
+        "lastname": "{{step_1_remainder}}",
+        "company": "{{trigger.company}}",
+        "phone": "{{trigger.phone}}",
+        "lifecyclestage": "lead"
+      }
+    },
+    {
+      "step": 3,
+      "app": "Slack",
+      "event": "Send Channel Message",
+      "settings": {
+        "channel": "#new-leads",
+        "message": "New lead: {{trigger.name}} ({{trigger.email}}) from {{trigger.company}}"
+      }
+    }
+  ],
+  "version": "1.0.0",
+  "created": "2026-04-07"
+}

@@ -1,0 +1,64 @@
+{
+  "name": "Weekly Metrics Report",
+  "description": "Compile and send weekly metrics digest from GA4, Stripe, and HubSpot",
+  "trigger": {
+    "app": "Schedule",
+    "event": "Every Week",
+    "settings": {
+      "day": "Monday",
+      "time": "08:00",
+      "timezone": "Asia/Hong_Kong"
+    }
+  },
+  "steps": [
+    {
+      "step": 1,
+      "app": "Google Analytics",
+      "event": "Get Report",
+      "settings": {
+        "property_id": "YOUR_GA4_PROPERTY_ID",
+        "metrics": "sessions,users,newUsers,bounceRate,pageViews",
+        "date_range": "last_7_days"
+      }
+    },
+    {
+      "step": 2,
+      "app": "Stripe",
+      "event": "List Charges",
+      "settings": {
+        "limit": 100,
+        "created_after": "date_minus_7_days"
+      }
+    },
+    {
+      "step": 3,
+      "app": "HubSpot",
+      "event": "Search Contacts",
+      "settings": {
+        "filter": "createdate",
+        "operator": "BETWEEN",
+        "value": "date_minus_7_days"
+      }
+    },
+    {
+      "step": 4,
+      "app": "Formatter",
+      "event": "Numbers - Sum",
+      "settings": {
+        "numbers": "{{step_2.data.*.amount}}"
+      }
+    },
+    {
+      "step": 5,
+      "app": "Gmail",
+      "event": "Send Email",
+      "settings": {
+        "to": "team@yourcompany.com",
+        "subject": "📊 Weekly Metrics Report — Week of {{date}}",
+        "body": "Weekly Metrics Digest\n\n📈 Website (GA4)\n- Sessions: {{step_1.sessions}}\n- Users: {{step_1.users}}\n- New Users: {{step_1.newUsers}}\n- Bounce Rate: {{step_1.bounceRate}}\n\n💰 Revenue (Stripe)\n- Total: ${{step_4}} {{currency}}\n\n👥 New Leads (HubSpot)\n- Contacts: {{step_3.total}}\n\nGenerated automatically by EveryCompanyClaw."
+      }
+    }
+  ],
+  "version": "1.0.0",
+  "created": "2026-04-07"
+}

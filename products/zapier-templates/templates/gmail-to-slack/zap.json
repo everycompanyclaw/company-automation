@@ -1,0 +1,41 @@
+{
+  "name": "Gmail to Slack Notifications",
+  "description": "Monitor Gmail for important emails and forward to Slack channel",
+  "trigger": {
+    "app": "Gmail",
+    "event": "New Email Matching Search",
+    "settings": {
+      "criteria": "from:(clients@ OR leads@) subject:(order OR inquiry OR quote)"
+    }
+  },
+  "steps": [
+    {
+      "step": 1,
+      "app": "Gmail",
+      "event": "Get Attachment",
+      "settings": {
+        "message_id": "{{trigger.gmail_message_id}}"
+      }
+    },
+    {
+      "step": 2,
+      "app": "Formatter",
+      "event": "Text - Combine",
+      "settings": {
+        "separator": " | ",
+        "values": ["{{trigger.from}}", "{{trigger.subject}}"]
+      }
+    },
+    {
+      "step": 3,
+      "app": "Slack",
+      "event": "Send Channel Message",
+      "settings": {
+        "channel": "#inbound-leads",
+        "message": "📧 *New Email*\n{{step_2}}\n{{trigger.body_plain | truncate(300)}}\n[View in Gmail]({{trigger.message_url}})"
+      }
+    }
+  ],
+  "version": "1.0.0",
+  "created": "2026-04-07"
+}

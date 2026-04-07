@@ -1,0 +1,25 @@
+# Python Scripts Bundle — Requirements
+# Install with: pip install -r requirements.txt
+
+# Core / HTTP
+requests>=2.28.0
+urllib3>=1.26.0
+
+# PDF Generation
+reportlab>=4.0.0
+
+# AWS / S3 Backup
+boto3>=1.26.0
+botocore>=1.29.0
+
+# Email (SMTP built-in, SendGrid optional)
+# pip install sendgrid  # Uncomment if using SendGrid provider
+
+# Google Sheets (optional, for spreadsheet_sync.py)
+# pip install google-api-python-client google-auth
+
+# Data processing
+pandas>=1.5.0
+
+# Date/time utilities (built into Python 3.9+, here for older versions)
+python-dateutil>=2.8.0
