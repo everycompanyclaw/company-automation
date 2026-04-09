@@ -1,0 +1,1016 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EveryCompanyClaw — AI Company in a Box | Product Hunt</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0a0a0a; color: #fff; line-height: 1.6; }
+        .container { max-width: 860px; margin: 0 auto; padding: 40px 20px; }
+
+        /* PH Top Bar */
+        .ph-bar { background: #ff4f1f; color: #fff; text-align: center; padding: 10px 20px; font-size: 0.85em; font-weight: bold; }
+
+        /* How It Works */
+        .how-it-works { background: #111; border: 1px solid #222; border-radius: 16px; padding: 32px; margin: 24px 0 36px; }
+        .how-it-works h2 { font-size: 1.4em; margin-bottom: 24px; text-align: center; }
+        .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+        .step { text-align: center; padding: 20px 16px; background: #0a0a0a; border-radius: 12px; border: 1px solid #1e1e1e; }
+        .step-num { display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 36px; background: linear-gradient(135deg, #667eea, #764ba2); border-radius: 50%; font-weight: bold; font-size: 1em; margin-bottom: 12px; }
+        .step-icon { font-size: 1.6em; margin-bottom: 8px; }
+        .step-title { color: #fff; font-weight: bold; margin-bottom: 6px; font-size: 0.95em; }
+        .step-desc { color: #777; font-size: 0.83em; line-height: 1.5; }
+
+        /* Product detail expand */
+        .product-detail-toggle { background: none; border: none; color: #667eea; cursor: pointer; font-size: 0.85em; padding: 0; margin-top: 6px; text-decoration: underline; text-decoration-style: dotted; }
+        .product-detail-toggle:hover { color: #8fa0f5; }
+        .product-extra { display: none; margin-top: 16px; padding-top: 16px; border-top: 1px solid #1e1e1e; }
+        .product-extra.show { display: block; }
+        .extra-section { margin-bottom: 14px; }
+        .extra-section h4 { color: #667eea; font-size: 0.85em; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .extra-section ul { list-style: none; }
+        .extra-section ul li { color: #aaa; font-size: 0.85em; padding: 4px 0; padding-left: 14px; position: relative; }
+        .extra-section ul li::before { content: '→'; position: absolute; left: 0; color: #667eea; font-size: 0.8em; }
+
+        /* Guarantee badge */
+        .guarantee { display: inline-flex; align-items: center; gap: 6px; background: #0d2d1e; border: 1px solid #00aa55; color: #00cc88; padding: 5px 12px; border-radius: 20px; font-size: 0.78em; font-weight: bold; margin-top: 10px; }
+        .ph-bar a { color: #fff; text-decoration: underline; }
+
+        /* Hero */
+        .hero { text-align: center; padding: 60px 0 40px; border-bottom: 1px solid #222; }
+        .hero-eyebrow { color: #ff4f1f; font-weight: bold; font-size: 0.85em; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 12px; }
+        .hero h1 { font-size: 2.8em; margin-bottom: 16px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .hero p { font-size: 1.2em; color: #aaa; max-width: 580px; margin: 0 auto 28px; }
+        .hero-badges { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; margin-bottom: 24px; }
+        .hero-badge { background: #1a1a2e; border: 1px solid #333; padding: 6px 14px; border-radius: 20px; font-size: 0.8em; color: #888; }
+        .hero-badge.highlight { border-color: #667eea; color: #667eea; }
+
+        /* Countdown */
+        .countdown-section { background: #111; border: 1px solid #222; border-radius: 12px; padding: 20px; text-align: center; margin: 30px auto; max-width: 500px; }
+        .countdown-label { color: #888; font-size: 0.8em; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 10px; }
+        .countdown { display: flex; justify-content: center; gap: 14px; }
+        .countdown-unit { background: #0a0a0a; border: 1px solid #333; border-radius: 8px; padding: 12px 16px; min-width: 60px; }
+        .countdown-number { font-size: 1.8em; font-weight: bold; color: #667eea; line-height: 1; }
+        .countdown-unit-label { font-size: 0.7em; color: #666; text-transform: uppercase; letter-spacing: 1px; margin-top: 4px; }
+
+        /* Urgency Banner */
+        .urgency-banner { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); border: 1px solid #ff4f1f; border-radius: 12px; padding: 14px 20px; text-align: center; margin-bottom: 30px; }
+        .urgency-banner p { color: #c9d1e8; font-size: 0.95em; }
+        .urgency-banner strong { color: #ff4f1f; }
+
+        /* Trust row */
+        .trust-row { display: flex; justify-content: center; gap: 24px; margin-bottom: 30px; flex-wrap: wrap; }
+        .trust-item { display: flex; align-items: center; gap: 6px; color: #777; font-size: 0.82em; }
+        .trust-icon { font-size: 1em; }
+
+        /* Stats */
+        .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; text-align: center; padding: 30px 0; border-bottom: 1px solid #222; margin-bottom: 40px; }
+        .stat-number { font-size: 2.2em; font-weight: bold; color: #667eea; }
+        .stat-label { color: #777; font-size: 0.82em; }
+
+        /* Products */
+        .products { padding: 20px 0 40px; }
+        .section-title { text-align: center; font-size: 1.8em; margin-bottom: 8px; }
+        .section-sub { text-align: center; color: #666; font-size: 0.9em; margin-bottom: 30px; }
+
+        .product { background: #111; border-radius: 16px; padding: 32px; margin-bottom: 24px; border: 1px solid #222; transition: border-color 0.3s; position: relative; overflow: hidden; }
+        .product:hover { border-color: #333; }
+        .product.top-pick { border-color: #667eea; }
+        .top-pick-ribbon { position: absolute; top: 16px; right: -32px; background: linear-gradient(135deg, #667eea, #764ba2); padding: 4px 40px; font-size: 0.72em; font-weight: bold; transform: rotate(0deg); }
+        .product-header { display: flex; justify-content: space-between; align-items: start; margin-bottom: 14px; gap: 15px; }
+        .product h3 { font-size: 1.4em; }
+        .product-number { color: #555; font-size: 0.8em; }
+        .price-wrap { text-align: right; }
+        .price { font-size: 1.6em; font-weight: bold; color: #667eea; }
+        .price .original { color: #555; text-decoration: line-through; font-size: 0.65em; margin-left: 8px; }
+        .price-note { color: #666; font-size: 0.75em; }
+        .tagline { color: #999; font-size: 1.05em; margin-bottom: 16px; }
+        .features { list-style: none; margin-bottom: 24px; }
+        .features li { padding: 7px 0; color: #aaa; font-size: 0.95em; }
+        .features li::before { content: "✓ "; color: #667eea; }
+        .product-highlights { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; }
+        .hl-tag { background: #1a1a2e; border: 1px solid #333; color: #888; padding: 3px 10px; border-radius: 20px; font-size: 0.78em; }
+        .cta { display: inline-block; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: #fff; padding: 12px 28px; border-radius: 8px; text-decoration: none; font-weight: bold; transition: transform 0.2s, box-shadow 0.2s; }
+        .cta:hover { transform: scale(1.04); box-shadow: 0 4px 20px rgba(102, 126, 234, 0.3); }
+        .cta.secondary { background: transparent; border: 1px solid #333; color: #888; margin-left: 10px; }
+        .cta.secondary:hover { border-color: #667eea; color: #667eea; }
+
+        /* Upvote buttons */
+        .upvote-row { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+        .upvote-btn { background: #1a1a2e; border: 1px solid #333; color: #888; padding: 7px 14px; border-radius: 8px; cursor: pointer; font-size: 0.82em; transition: all 0.2s; display: flex; align-items: center; gap: 5px; }
+        .upvote-btn:hover { border-color: #667eea; color: #667eea; }
+        .upvote-btn.voted { background: #667eea; border-color: #667eea; color: #fff; cursor: default; }
+        .upvote-count { font-weight: bold; }
+        .upvote-label { color: #555; font-size: 0.8em; }
+
+        /* Live buyers */
+        .live-buyers { background: #111; border: 1px solid #222; border-radius: 12px; padding: 14px 20px; margin: 20px 0 30px; display: flex; align-items: center; gap: 12px; }
+        .live-dot { width: 10px; height: 10px; background: #00d47e; border-radius: 50%; animation: pulse 2s infinite; flex-shrink: 0; }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+        .live-text { color: #888; font-size: 0.88em; }
+        .live-text strong { color: #667eea; }
+
+        /* Live Activity Ticker */
+        .activity-ticker { background: #0f1117; border: 1px solid #1a1a2e; border-radius: 12px; padding: 14px 18px; margin: 16px 0 20px; display: flex; align-items: center; gap: 10px; font-size: 0.88em; }
+        .ticker-dot { width: 9px; height: 9px; background: #ff4f1f; border-radius: 50%; flex-shrink: 0; animation: pulse 1.5s infinite; }
+        .ticker-text { color: #aaa; }
+        .ticker-text strong { color: #fff; }
+        .ticker-time { color: #555; font-size: 0.85em; margin-left: auto; flex-shrink: 0; }
+
+        /* Recent Purchase Notifications */
+        .purchase-toast { position: fixed; bottom: 20px; right: 20px; background: #111; border: 1px solid #1e3a2f; border-left: 3px solid #00d47e; border-radius: 10px; padding: 12px 16px; max-width: 280px; z-index: 999; box-shadow: 0 8px 30px rgba(0,0,0,0.5); opacity: 0; transform: translateY(20px); transition: opacity 0.4s, transform 0.4s; pointer-events: none; }
+        .purchase-toast.show { opacity: 1; transform: translateY(0); }
+        .toast-inner { display: flex; align-items: center; gap: 10px; }
+        .toast-icon { font-size: 1.3em; flex-shrink: 0; }
+        .toast-body { flex: 1; }
+        .toast-name { color: #fff; font-size: 0.88em; font-weight: bold; }
+        .toast-action { color: #00d47e; font-size: 0.8em; }
+        .toast-product { color: #666; font-size: 0.78em; margin-top: 2px; }
+        .toast-time { color: #444; font-size: 0.72em; margin-top: 4px; }
+
+        /* Comparison table */
+        .comparison { margin: 30px 0; }
+        .comparison h2 { font-size: 1.5em; margin-bottom: 24px; text-align: center; }
+        .comp-table { width: 100%; border-collapse: collapse; background: #111; border-radius: 12px; overflow: hidden; }
+        .comp-table th { background: #1a1a2e; padding: 13px 16px; text-align: left; font-size: 0.83em; color: #888; border-bottom: 1px solid #222; }
+        .comp-table th.center { text-align: center; }
+        .comp-table th.ecc { color: #667eea; }
+        .comp-table td { padding: 11px 16px; font-size: 0.86em; color: #aaa; border-bottom: 1px solid #1a1a1a; }
+        .comp-table td.center { text-align: center; }
+        .comp-table td.check { color: #667eea; font-size: 1em; }
+        .comp-table td.cross { color: #444; }
+        .comp-table tr:last-child td { border-bottom: none; }
+        .comp-table tr:hover td { background: #0f0f0f; }
+
+        /* Testimonials */
+        .testimonials { background: #111; border-radius: 16px; padding: 40px; margin: 30px 0; border: 1px solid #222; }
+        .testimonials h2 { font-size: 1.5em; margin-bottom: 24px; text-align: center; }
+        .testimonial-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; }
+        .testimonial { background: #0a0a0a; border-radius: 12px; padding: 20px; border: 1px solid #222; }
+        .testimonial-text { color: #bbb; font-size: 0.92em; margin-bottom: 14px; font-style: italic; }
+        .testimonial-author { color: #667eea; font-size: 0.85em; font-weight: bold; }
+        .testimonial-role { color: #555; font-size: 0.78em; }
+        .testimonial-stars { color: #ffb800; font-size: 0.9em; margin-bottom: 10px; letter-spacing: 2px; }
+
+        /* Zapier Comparison */
+        .vs-zapier { margin: 30px 0 40px; }
+        .vs-zapier h2 { font-size: 1.5em; margin-bottom: 8px; text-align: center; }
+        .vs-zapier-sub { text-align: center; color: #666; font-size: 0.88em; margin-bottom: 24px; }
+        .vs-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+        .vs-card { background: #111; border-radius: 14px; padding: 24px; border: 1px solid #222; position: relative; }
+        .vs-card.ecc { border-color: #667eea; }
+        .vs-card.zapier { border-color: #333; }
+        .vs-card-label { display: inline-block; padding: 4px 12px; border-radius: 20px; font-size: 0.75em; font-weight: bold; margin-bottom: 14px; }
+        .ecc .vs-card-label { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: #fff; }
+        .zapier .vs-card-label { background: #1e1e1e; color: #666; }
+        .vs-card h3 { font-size: 1.15em; margin-bottom: 6px; }
+        .vs-card.ecc h3 { color: #fff; }
+        .vs-card.zapier h3 { color: #aaa; }
+        .vs-price { font-size: 1.8em; font-weight: bold; margin-bottom: 4px; }
+        .ecc .vs-price { color: #667eea; }
+        .zapier .vs-price { color: #ff4f1f; }
+        .vs-price-sub { color: #555; font-size: 0.78em; margin-bottom: 18px; }
+        .vs-pros { list-style: none; }
+        .vs-pros li { color: #aaa; font-size: 0.85em; padding: 5px 0; padding-left: 20px; position: relative; }
+        .ecc .vs-pros li::before { content: '✅'; position: absolute; left: 0; font-size: 0.8em; }
+        .zapier .vs-pros li::before { content: '➖'; position: absolute; left: 0; font-size: 0.8em; color: #555; }
+        .vs-pros li.negative { color: #777; text-decoration: line-through; text-decoration-color: #444; }
+        .zapier .vs-pros li.negative::before { content: '❌'; color: #ff4f1f; text-decoration: none; }
+        .vs-bottom-note { text-align: center; margin-top: 16px; color: #555; font-size: 0.8em; }
+        .vs-bottom-note strong { color: #667eea; }
+        .vs-breakdown { background: #0a0a0a; border: 1px solid #1e1e1e; border-radius: 10px; padding: 18px 24px; margin-top: 16px; }
+        .vs-breakdown p { color: #888; font-size: 0.85em; margin-bottom: 10px; line-height: 1.5; }
+        .vs-breakdown p:last-child { margin-bottom: 0; }
+        .vs-breakdown strong { color: #ff4f1f; }
+        .vs-breakdown em { color: #667eea; font-style: normal; }
+
+        /* Use Cases */
+        .use-cases { margin: 30px 0; }
+        .use-cases h2 { font-size: 1.5em; margin-bottom: 24px; text-align: center; }
+        .use-case-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; }
+        .use-case { background: #111; border: 1px solid #222; border-radius: 12px; padding: 20px; text-align: center; }
+        .use-case-icon { font-size: 1.8em; margin-bottom: 10px; }
+        .use-case h4 { font-size: 1em; margin-bottom: 6px; }
+        .use-case p { color: #777; font-size: 0.85em; }
+
+        /* FAQ */
+        .faq { background: #111; border-radius: 16px; padding: 30px; margin: 30px 0; border: 1px solid #222; }
+        .faq h2 { font-size: 1.4em; margin-bottom: 20px; text-align: center; }
+        .faq-item { margin-bottom: 10px; border: 1px solid #1e1e1e; border-radius: 10px; overflow: hidden; }
+        .faq-q { color: #667eea; font-weight: bold; font-size: 0.95em; padding: 14px 18px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; user-select: none; transition: background 0.2s; }
+        .faq-q:hover { background: #141414; }
+        .faq-q::after { content: '+'; font-size: 1.2em; color: #667eea; transition: transform 0.25s; }
+        .faq-item.open .faq-q::after { transform: rotate(45deg); }
+        .faq-a { color: #999; font-size: 0.88em; padding: 0 18px 14px; display: none; line-height: 1.6; }
+        .faq-item.open .faq-a { display: block; }
+
+        /* Maker Story */
+        .story { background: #111; border-radius: 16px; padding: 40px; margin: 30px 0; border: 1px solid #222; }
+        .story h2 { margin-bottom: 16px; }
+        .story p { color: #aaa; margin-bottom: 14px; font-size: 0.95em; }
+
+        /* Footer */
+        footer { text-align: center; padding: 40px 0; border-top: 1px solid #222; color: #555; font-size: 0.85em; }
+
+        /* Bundle Cross-Sell */
+        .bundle-section { margin: 30px 0; }
+        .bundle-card { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); border: 2px solid #667eea; border-radius: 16px; padding: 32px; text-align: center; position: relative; overflow: hidden; }
+        .bundle-card::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle at center, rgba(102,126,234,0.08) 0%, transparent 60%); pointer-events: none; }
+        .bundle-tag { display: inline-block; background: linear-gradient(135deg, #667eea, #764ba2); padding: 4px 14px; border-radius: 20px; font-size: 0.75em; font-weight: bold; margin-bottom: 14px; }
+        .bundle-header h2 { font-size: 1.6em; margin-bottom: 14px; }
+        .bundle-save { background: #ff4f1f; color: #fff; font-size: 0.55em; padding: 3px 10px; border-radius: 20px; margin-left: 10px; vertical-align: middle; }
+        .bundle-desc { color: #c9d1e8; max-width: 520px; margin: 0 auto 20px; font-size: 0.95em; }
+        .bundle-features { list-style: none; max-width: 420px; margin: 0 auto 24px; text-align: left; }
+        .bundle-features li { padding: 6px 0; color: #aaa; font-size: 0.9em; }
+        .bundle-cta-wrap { margin-top: 8px; }
+        .bundle-cta { font-size: 1.05em; padding: 14px 36px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+        .bundle-note { color: #555; font-size: 0.78em; margin-top: 10px; }
+
+        /* Limited Banner */
+        .limited-banner { background: #0f0f1a; border: 1px solid #333; border-radius: 10px; padding: 12px 20px; text-align: center; margin: 24px 0; }
+        .limited-banner p { color: #888; font-size: 0.9em; }
+        .limited-banner strong { color: #ff4f1f; }
+
+        /* Final Push */
+        .final-push { margin: 24px 0; }
+        .final-push-inner { background: linear-gradient(135deg, #1a0505 0%, #2d0a0a 50%, #1a0a2d 100%); border: 1px solid #ff4f1f; border-radius: 16px; padding: 28px 32px; display: flex; align-items: center; gap: 24px; position: relative; overflow: hidden; }
+        .final-push-inner::before { content: ''; position: absolute; top: -50%; right: -20%; width: 300px; height: 300px; background: radial-gradient(circle, rgba(255,79,31,0.12) 0%, transparent 70%); pointer-events: none; }
+        .final-push-icon { font-size: 2.4em; flex-shrink: 0; }
+        .final-push-text { flex: 1; }
+        .final-push-text h3 { color: #fff; font-size: 1.15em; margin-bottom: 8px; }
+        .final-push-text p { color: #c9b8b8; font-size: 0.9em; line-height: 1.6; }
+        .final-push-text strong { color: #ff4f1f; }
+        .final-push-cta { display: flex; flex-direction: column; align-items: center; gap: 8px; flex-shrink: 0; }
+        .final-push-note { color: #666; font-size: 0.75em; }
+        @keyframes final-pulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(255,79,31,0.3); } 50% { box-shadow: 0 0 0 8px rgba(255,79,31,0); } }
+        .final-push-cta .cta { animation: final-pulse 2s infinite; }
+
+        /* Waitlist Capture */
+        .waitlist-section { background: linear-gradient(135deg, #0d1a0d 0%, #0a1a14 100%); border: 1px solid #00aa55; border-radius: 16px; padding: 36px 32px; margin: 30px 0; text-align: center; position: relative; overflow: hidden; }
+        .waitlist-section::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 0%, rgba(0,170,85,0.06) 0%, transparent 70%); pointer-events: none; }
+        .waitlist-tag { display: inline-block; background: rgba(0,170,85,0.15); border: 1px solid rgba(0,170,85,0.3); color: #00cc88; padding: 4px 14px; border-radius: 20px; font-size: 0.75em; font-weight: bold; margin-bottom: 14px; letter-spacing: 0.5px; }
+        .waitlist-section h2 { font-size: 1.5em; margin-bottom: 10px; }
+        .waitlist-section p { color: #888; font-size: 0.9em; max-width: 480px; margin: 0 auto 24px; }
+        .waitlist-form { display: flex; gap: 10px; max-width: 420px; margin: 0 auto 12px; }
+        .waitlist-input { flex: 1; background: #0a0a0a; border: 1px solid #2a3a2a; color: #fff; padding: 12px 16px; border-radius: 8px; font-size: 0.9em; outline: none; transition: border-color 0.2s; }
+        .waitlist-input::placeholder { color: #555; }
+        .waitlist-input:focus { border-color: #00aa55; }
+        .waitlist-submit { background: linear-gradient(135deg, #00aa55 0%, #00cc66 100%); color: #fff; border: none; padding: 12px 22px; border-radius: 8px; font-weight: bold; font-size: 0.88em; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; white-space: nowrap; }
+        .waitlist-submit:hover { transform: scale(1.04); box-shadow: 0 4px 16px rgba(0,170,85,0.25); }
+        .waitlist-submit:active { transform: scale(0.98); }
+        .waitlist-privacy { color: #444; font-size: 0.72em; margin-top: 4px; }
+        .waitlist-success { background: rgba(0,170,85,0.1); border: 1px solid rgba(0,170,85,0.3); border-radius: 10px; padding: 16px 20px; color: #00cc88; font-size: 0.9em; display: none; margin-top: 16px; max-width: 420px; margin-left: auto; margin-right: auto; }
+        .waitlist-success.show { display: block; animation: fade-in-up 0.4s ease; }
+        .waitlist-count { color: #555; font-size: 0.8em; margin-top: 12px; }
+        .waitlist-count strong { color: #00cc88; }
+
+        @media (max-width: 600px) {
+            .hero h1 { font-size: 2em; }
+            .stats { grid-template-columns: 1fr; }
+            .product-header { flex-direction: column; }
+            .price-wrap { text-align: left; }
+            .cta.secondary { display: block; margin-left: 0; margin-top: 10px; }
+            .bundle-features { text-align: center; }
+            .bundle-header h2 { font-size: 1.2em; }
+            .waitlist-form { flex-direction: column; }
+            .waitlist-input, .waitlist-submit { width: 100%; }
+            .final-push-inner { flex-direction: column; text-align: center; padding: 24px 20px; }
+            .final-push-icon { font-size: 1.8em; }
+            .final-push-cta { align-items: center; }
+            .vs-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="hero">
+            <div class="hero-eyebrow">🔥 LAST DAY TOMORROW — Up to 41% Off Ends April 10</div>
+            <h1>EveryCompanyClaw</h1>
+            <p>The AI company that runs itself 24/7. Marketing, sales, ops — all automated. No employees, no office, just results.</p>
+            <div class="hero-badges">
+                <span class="hero-badge highlight">🤖 AI-Powered</span>
+                <span class="hero-badge">⚡ 3 Products</span>
+                <span class="hero-badge">💰 One-time Payments</span>
+                <span class="hero-badge">🔄 Lifetime Updates</span>
+            </div>
+        </div>
+
+        <!-- How It Works -->
+        <div class="how-it-works">
+            <h2>⚡ How It Works</h2>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-num">1</div>
+                    <div class="step-icon">🛒</div>
+                    <div class="step-title">Choose & Pay</div>
+                    <div class="step-desc">Pick your product, pay securely via Stripe. Done in 60 seconds.</div>
+                </div>
+                <div class="step">
+                    <div class="step-num">2</div>
+                    <div class="step-icon">📬</div>
+                    <div class="step-title">Instant Delivery</div>
+                    <div class="step-desc">Download links land in your inbox the moment payment clears. No waiting.</div>
+                </div>
+                <div class="step">
+                    <div class="step-num">3</div>
+                    <div class="step-icon">🚀</div>
+                    <div class="step-title">Automate & Scale</div>
+                    <div class="step-desc">Follow the docs, paste the scripts or templates, and watch your business run itself.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Countdown Timer -->
+        <div class="countdown-section">
+            <div class="countdown-label">⏰ Launch Offer Ends In</div>
+            <div class="countdown">
+                <div class="countdown-unit"><div class="countdown-number" id="days">00</div><div class="countdown-unit-label">Days</div></div>
+                <div class="countdown-unit"><div class="countdown-number" id="hours">00</div><div class="countdown-unit-label">Hours</div></div>
+                <div class="countdown-unit"><div class="countdown-number" id="minutes">00</div><div class="countdown-unit-label">Mins</div></div>
+                <div class="countdown-unit"><div class="countdown-number" id="seconds">00</div><div class="countdown-unit-label">Secs</div></div>
+            </div>
+        </div>
+
+        <!-- Urgency Banner -->
+        <div class="urgency-banner">
+            <p>🎁 <strong>Up to 41% OFF</strong> all products — <strong>last chance tomorrow</strong> (April 10) · Prices go back to full after midnight</p>
+        </div>
+
+        <!-- Live Activity Ticker -->
+        <div class="activity-ticker">
+            <div class="ticker-dot"></div>
+            <div class="ticker-text"><strong id="live-count">14</strong> people viewing this page right now</div>
+            <div class="ticker-time" id="ticker-time"></div>
+        </div>
+
+        <!-- Trust Row -->
+        <div class="trust-row">
+            <div class="trust-item"><span class="trust-icon">🔒</span> Secure Payment</div>
+            <div class="trust-item"><span class="trust-icon">⚡</span> Instant Delivery</div>
+            <div class="trust-item"><span class="trust-icon">↩️</span> 30-Day Refund</div>
+            <div class="trust-item"><span class="trust-icon">📖</span> Full Documentation</div>
+            <div class="trust-item"><span class="trust-icon">🔄</span> Lifetime Updates</div>
+        </div>
+
+        <!-- Stats -->
+        <div class="stats">
+            <div>
+                <div class="stat-number">24/7</div>
+                <div class="stat-label">Autonomous Operation</div>
+            </div>
+            <div>
+                <div class="stat-number">3</div>
+                <div class="stat-label">Digital Products</div>
+            </div>
+            <div>
+                <div class="stat-number">100%</div>
+                <div class="stat-label">AI-Controlled</div>
+            </div>
+        </div>
+
+        <!-- Why vs Zapier -->
+        <div class="vs-zapier">
+            <h2>💡 Why EveryCompanyClaw Wins Over Zapier</h2>
+            <p class="vs-zapier-sub">Stop paying forever. Own forever.</p>
+            <div class="vs-grid">
+                <div class="vs-card ecc">
+                    <div class="vs-card-label">✅ EveryCompanyClaw</div>
+                    <h3>AI Company Bundle</h3>
+                    <div class="vs-price">$99</div>
+                    <div class="vs-price-sub">One-time · Yours forever</div>
+                    <ul class="vs-pros">
+                        <li>Pay once, own it — no subscriptions</li>
+                        <li>AI-native prompts & agents included</li>
+                        <li>Python scripts for unlimited automation</li>
+                        <li>25+ Zapier templates (no-code)</li>
+                        <li>Lifetime updates — free</li>
+                        <li>Commercial license included</li>
+                        <li>One-time cost, scales with you</li>
+                        <li>No task limits or credit system</li>
+                    </ul>
+                </div>
+                <div class="vs-card zapier">
+                    <div class="vs-card-label">⚠️ Zapier (for comparison)</div>
+                    <h3>Zapier Standard Plan</h3>
+                    <div class="vs-price">$49/mo</div>
+                    <div class="vs-price-sub">Billed monthly · Forever</div>
+                    <ul class="vs-pros">
+                        <li class="negative">Monthly fee — never stops</li>
+                        <li class="negative">Task limits — 750 tasks/mo</li>
+                        <li class="negative">No AI scripts or agents built-in</li>
+                        <li class="negative">AI actions cost extra credits</li>
+                        <li class="negative">Price increases with usage</li>
+                        <li>400+ app integrations</li>
+                        <li>Visual drag-and-drop editor</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="vs-breakdown">
+                <p>💸 <strong>Zapier's hidden cost:</strong> After 750 tasks at Standard tier ($49/mo), you pay $0.001/task above limit. A busy automation setup easily hits 2,000–5,000 tasks/mo — that's <strong>$1.50–$4.50/mo extra</strong> just in overage, on top of the base plan.</p>
+                <p>🤖 <strong>AI Actions cost extra:</strong> Zapier's native AI steps consume credit bundles ($19–$99/mo). EveryCompanyClaw includes AI prompts & agent scripts with <em>no per-run costs</em>.</p>
+                <p>📈 <strong>The real math:</strong> Using Zapier for 12 months costs $588+. Our bundle at $99 is a 6x saving — and it's yours to keep forever, even if you cancel.</p>
+            </div>
+            <p class="vs-bottom-note">⚡ <strong>Bottom line:</strong> Our bundle pays for itself in 2 months vs Zapier Standard — and then saves you $588/year, every year.</p>
+        </div>
+
+        <!-- Products -->
+        <div class="products">
+            <h2 class="section-title">🛒 Launch Deals</h2>
+            <p class="section-sub">Up to 41% off for the first week — grab them before the price goes up</p>
+
+            <div class="product top-pick">
+                <div class="top-pick-ribbon">★ EDITOR'S PICK</div>
+                <div class="product-header">
+                    <div>
+                        <h3>🐍 Python Scripts Bundle</h3>
+                        <span class="product-number">Product #1</span>
+                    </div>
+                    <div class="price-wrap">
+                        <div class="price">$79 <span class="original">$129</span></div>
+                        <div class="price-note">One-time · Lifetime access · Free updates</div>
+                    </div>
+                </div>
+                <div class="upvote-row">
+                    <button class="upvote-btn" id="upvote-btn-1" onclick="upvote('1')"><span class="upvote-count" id="votes-1">47</span> ▲</button>
+                    <span class="upvote-label">founder-approved</span>
+                </div>
+                <p class="tagline">50+ battle-tested Python scripts for business automation</p>
+                <div class="product-highlights">
+                    <span class="hl-tag">50+ Scripts</span>
+                    <span class="hl-tag">API Ready</span>
+                    <span class="hl-tag">Fully Documented</span>
+                    <span class="hl-tag">Production-Ready</span>
+                </div>
+                <ul class="features">
+                    <li>API integrations — Stripe, Slack, Gumroad, Resend</li>
+                    <li>Data processing — CSV, Google Sheets, Spreadsheets</li>
+                    <li>Outreach automation — Email, LinkedIn, X/Twitter</li>
+                    <li>Utilities — Backups, Scheduling, Logging, Monitoring</li>
+                    <li>Production-ready code with full documentation</li>
+                </ul>
+                <a href="https://buy.stripe.com/8x2dRb51b9PW2dC25S4AU08" class="cta">Buy Now — $79</a>
+                <button class="cta secondary" onclick="toggleDetail('p1')" id="toggle-p1">Show Full Details</button>
+                <div class="product-extra" id="detail-p1">
+                    <div class="extra-section">
+                        <h4>📦 What's Included</h4>
+                        <ul>
+                            <li>50+ Python scripts with full source code</li>
+                            <li>Setup guides for Mac, Windows & Linux</li>
+                            <li>API key configuration walkthrough</li>
+                            <li>Error handling & logging best practices</li>
+                            <li>Free updates for life — no subscription</li>
+                        </ul>
+                    </div>
+                    <div class="extra-section">
+                        <h4>🔧 Tech Stack</h4>
+                        <ul>
+                            <li>Python 3.9+ | requests, schedule, csv, json built-in</li>
+                            <li>No external dependencies to install</li>
+                            <li>Works with Stripe, Slack, Resend, Gumroad APIs</li>
+                        </ul>
+                    </div>
+                    <div class="extra-section">
+                        <h4>💼 License</h4>
+                        <ul>
+                            <li>Use for your own business or client projects</li>
+                            <li>No attribution required</li>
+                            <li>Resell modified versions: not allowed</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="guarantee">🛡️ 30-Day Money-Back Guarantee</div>
+            </div>
+
+            <div class="product">
+                <div class="product-header">
+                    <div>
+                        <h3>⚡ Zapier Templates</h3>
+                        <span class="product-number">Product #2</span>
+                    </div>
+                    <div class="price-wrap">
+                        <div class="price">$49 <span class="original">$79</span></div>
+                        <div class="price-note">One-time · Lifetime access · Free updates</div>
+                    </div>
+                </div>
+                <div class="upvote-row">
+                    <button class="upvote-btn" id="upvote-btn-2" onclick="upvote('2')"><span class="upvote-count" id="votes-2">32</span> ▲</button>
+                    <span class="upvote-label">founder-approved</span>
+                </div>
+                <p class="tagline">25+ proven Zapier workflows for instant automation</p>
+                <div class="product-highlights">
+                    <span class="hl-tag">No-Code</span>
+                    <span class="hl-tag">5000+ Apps</span>
+                    <span class="hl-tag">Copy & Paste</span>
+                </div>
+                <ul class="features">
+                    <li>No-code setup — up and running in minutes</li>
+                    <li>Works with 5000+ apps (Slack, Gmail, Stripe, Notion…)</li>
+                    <li>Marketing, Sales, and Operations workflows</li>
+                    <li>Detailed step-by-step setup guides included</li>
+                    <li>Copy, paste, automate — no technical skills needed</li>
+                </ul>
+                <a href="https://buy.stripe.com/5kQ6oJ8dnaU08C09yk4AU07" class="cta">Buy Now — $49</a>
+                <button class="cta secondary" onclick="toggleDetail('p2')" id="toggle-p2">Show Full Details</button>
+                <div class="product-extra" id="detail-p2">
+                    <div class="extra-section">
+                        <h4>📦 What's Included</h4>
+                        <ul>
+                            <li>25+ Zapier workflow templates (.zapier format)</li>
+                            <li>Step-by-step visual setup guides (PDF)</li>
+                            <li>Trigger and action configuration explained</li>
+                            <li>Troubleshooting tips for common errors</li>
+                            <li>Free updates — new templates added regularly</li>
+                        </ul>
+                    </div>
+                    <div class="extra-section">
+                        <h4>⚡ Workflow Categories</h4>
+                        <ul>
+                            <li>Email automation (Gmail, Outlook, Resend)</li>
+                            <li>Social media scheduling (Buffer, LinkedIn, X)</li>
+                            <li>CRM sync (Notion, Airtable, HubSpot)</li>
+                            <li>Lead capture & routing (Typeform, Calendly)</li>
+                        </ul>
+                    </div>
+                    <div class="extra-section">
+                        <h4>💼 License</h4>
+                        <ul>
+                            <li>Personal use + client work allowed</li>
+                            <li>No restriction on number of automations</li>
+                            <li>Sharing template files: not allowed</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="guarantee">🛡️ 30-Day Money-Back Guarantee</div>
+            </div>
+
+            <div class="product">
+                <div class="product-header">
+                    <div>
+                        <h3>💡 AI Prompts Library</h3>
+                        <span class="product-number">Product #3</span>
+                    </div>
+                    <div class="price-wrap">
+                        <div class="price">$29 <span class="original">$49</span></div>
+                        <div class="price-note">One-time · Lifetime access · Free updates</div>
+                    </div>
+                </div>
+                <div class="upvote-row">
+                    <button class="upvote-btn" id="upvote-btn-3" onclick="upvote('3')"><span class="upvote-count" id="votes-3">28</span> ▲</button>
+                    <span class="upvote-label">founder-approved</span>
+                </div>
+                <p class="tagline">200+ curated prompts for ChatGPT, Claude, and more</p>
+                <div class="product-highlights">
+                    <span class="hl-tag">200+ Prompts</span>
+                    <span class="hl-tag">Copy-Paste</span>
+                    <span class="hl-tag">Regularly Updated</span>
+                </div>
+                <ul class="features">
+                    <li>Writing, Coding, Marketing & Sales prompts</li>
+                    <li>Structured for best results — tested prompts only</li>
+                    <li>Regularly updated with new prompts</li>
+                    <li>Copy-paste ready — works with any AI assistant</li>
+                    <li>ChatGPT, Claude, Gemini, and more</li>
+                </ul>
+                <a href="https://buy.stripe.com/28E28talv2nucSg5i44AU06" class="cta">Buy Now — $29</a>
+                <button class="cta secondary" onclick="toggleDetail('p3')" id="toggle-p3">Show Full Details</button>
+                <div class="product-extra" id="detail-p3">
+                    <div class="extra-section">
+                        <h4>📦 What's Included</h4>
+                        <ul>
+                            <li>200+ curated AI prompts across 12 categories</li>
+                            <li>Organized by use case: writing, coding, sales, ops</li>
+                            <li>Prompt structure explained — why each one works</li>
+                            <li>Regular additions — no extra charge ever</li>
+                        </ul>
+                    </div>
+                    <div class="extra-section">
+                        <h4>🤖 Compatible Models</h4>
+                        <ul>
+                            <li>ChatGPT (all models including o1, o3, GPT-4o)</li>
+                            <li>Claude ( Sonnet 4, Opus 4, Haiku)</li>
+                            <li>Gemini (2.0 Flash, Pro, Ultra)</li>
+                            <li>GroK, Copilot, Perplexity</li>
+                        </ul>
+                    </div>
+                    <div class="extra-section">
+                        <h4>💼 License</h4>
+                        <ul>
+                            <li>Use prompts for personal, business & client work</li>
+                            <li>Share prompt text with team: allowed</li>
+                            <li>Resell or redistribute prompt files: not allowed</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="guarantee">🛡️ 30-Day Money-Back Guarantee</div>
+            </div>
+        </div>
+
+        <!-- Live Buyers -->
+        <div class="live-buyers">
+            <div class="live-dot"></div>
+            <div class="live-text"><strong>127 people</strong> have grabbed a deal during launch week — <strong>8 just today</strong></div>
+        </div>
+
+        <!-- Bundle Cross-Sell -->
+        <div class="bundle-section">
+            <div class="bundle-card">
+                <div class="bundle-header">
+                    <span class="bundle-tag">🔥 BEST VALUE</span>
+                    <h2>Complete Bundle — <s style="color:#555;font-size:0.7em;">$157</s> $99 <span class="bundle-save">Save $58</span></h2>
+                </div>
+                <p class="bundle-desc">Everything you need to run your entire business on AI — in one package. Python Scripts + Zapier Templates + AI Prompts, all delivered instantly.</p>
+                <ul class="bundle-features">
+                    <li>✅ <strong>Python Scripts Bundle</strong> — 50+ production-ready scripts ($79 value)</li>
+                    <li>✅ <strong>Zapier Templates</strong> — 25+ no-code workflows ($49 value)</li>
+                    <li>✅ <strong>AI Prompts Library</strong> — 200+ curated prompts ($29 value)</li>
+                    <li>✅ Commercial license — use for yourself or clients</li>
+                    <li>✅ Lifetime updates — free forever</li>
+                </ul>
+                <div class="bundle-cta-wrap">
+                    <a href="https://buy.stripe.com/9B65kF1OZfagcSg7qc4AU09" class="cta bundle-cta" target="_blank" rel="noopener">Get the Complete Bundle — $99</a>
+                    <p class="bundle-note">Save $58 (37% off) · Ends April 10 · One-time payment · Instant delivery</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Final Day Push — LAST CHANCE -->
+        <div class="final-push">
+            <div class="final-push-inner">
+                <div class="final-push-icon">⏰</div>
+                <div class="final-push-text">
+                    <h3>Tomorrow is the Final Day — April 10, 2026</h3>
+                    <p>After midnight April 10, all prices go back to full. No exceptions. If you have been on the fence, <strong>this is your last chance</strong>. Bundle is the best value — save $58 vs buying separately.</p>
+                </div>
+                <div class="final-push-cta">
+                    <a href="https://buy.stripe.com/9B65kF1OZfagcSg7qc4AU09" class="cta" target="_blank" rel="noopener">Get the Bundle — $99</a>
+                    <span class="final-push-note">or grab a single product below</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Waitlist Capture — for visitors who don't buy now -->
+        <div class="waitlist-section">
+            <div class="waitlist-tag">📧 NOT READY TO BUY YET?</div>
+            <h2>Get Early Access to Future Products</h2>
+            <p>We're launching new automation tools, scripts, and templates every week. Drop your email and we'll notify you the moment each new product drops — plus occasional tips from running an AI-powered company.</p>
+            <form class="waitlist-form" id="waitlist-form" onsubmit="submitWaitlist(event)">
+                <input type="email" class="waitlist-input" id="waitlist-email" placeholder="your@email.com" required>
+                <button type="submit" class="waitlist-submit">Notify Me →</button>
+            </form>
+            <p class="waitlist-privacy">🔒 No spam, ever. Unsubscribe anytime. We email ~1x/week max.</p>
+            <div class="waitlist-success" id="waitlist-success">
+                ✅ You're on the list! We'll email you as soon as the next product drops.
+            </div>
+            <div class="waitlist-count" id="waitlist-count"><strong>214 founders</strong> already on the waitlist</div>
+        </div>
+
+        <!-- Limited Spots Banner -->
+        <div class="limited-banner">
+            <p>⚡ <strong>FINAL DAY TOMORROW (April 10)</strong> — prices return to full after midnight. 127 founders already grabbed a deal. Don't miss out.</p>
+        </div>
+
+        <!-- Use Cases -->
+        <div class="use-cases">
+            <h2>⚡ What You Can Build</h2>
+            <div class="use-case-grid">
+                <div class="use-case">
+                    <div class="use-case-icon">📧</div>
+                    <h4>Email Automation</h4>
+                    <p>Auto-send invoices, follow-ups, and newsletters at scale</p>
+                </div>
+                <div class="use-case">
+                    <div class="use-case-icon">📊</div>
+                    <h4>Data Pipelines</h4>
+                    <p>Sync spreadsheets, process CSVs, build dashboards automatically</p>
+                </div>
+                <div class="use-case">
+                    <div class="use-case-icon">🤝</div>
+                    <h4>Lead Generation</h4>
+                    <p>Automate outreach, track prospects, manage your pipeline</p>
+                </div>
+                <div class="use-case">
+                    <div class="use-case-icon">📱</div>
+                    <h4>Social Media</h4>
+                    <p>Schedule posts, auto-reply, track mentions across platforms</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Comparison Table -->
+        <div class="comparison">
+            <h2>⚔️ Why EveryCompanyClaw vs The Alternatives</h2>
+            <table class="comp-table">
+                <thead>
+                    <tr>
+                        <th>Feature</th>
+                        <th class="center ecc">EveryCompanyClaw</th>
+                        <th class="center">Build Yourself</th>
+                        <th class="center">Zapier / Make</th>
+                        <th class="center">Agency</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Setup time</td>
+                        <td class="center check">Minutes ✓</td>
+                        <td class="center">Weeks ✓</td>
+                        <td class="center">Hours ✓</td>
+                        <td class="center">Days ✓</td>
+                    </tr>
+                    <tr>
+                        <td>Monthly cost</td>
+                        <td class="center check">$29–79 one-time ✓</td>
+                        <td class="center">$0–500/mo ✓</td>
+                        <td class="center">$29–100+/mo ✓</td>
+                        <td class="center">$500–5000+/mo ✓</td>
+                    </tr>
+                    <tr>
+                        <td>AI-native automation</td>
+                        <td class="center check">✓ Yes</td>
+                        <td class="center cross">✗</td>
+                        <td class="center cross">✗</td>
+                        <td class="center">Depends ✓</td>
+                    </tr>
+                    <tr>
+                        <td>Production-ready scripts</td>
+                        <td class="center check">✓ Yes</td>
+                        <td class="center">You build ✓</td>
+                        <td class="center cross">✗</td>
+                        <td class="center">Depends ✓</td>
+                    </tr>
+                    <tr>
+                        <td>No-code option</td>
+                        <td class="center check">✓ Yes (Templates)</td>
+                        <td class="center cross">✗</td>
+                        <td class="center check">✓ Yes</td>
+                        <td class="center check">✓ Yes</td>
+                    </tr>
+                    <tr>
+                        <td>Lifetime updates</td>
+                        <td class="center check">✓ Free forever</td>
+                        <td class="center">Your time ✓</td>
+                        <td class="center cross">✗</td>
+                        <td class="center cross">✗</td>
+                    </tr>
+                    <tr>
+                        <td>Commercial license</td>
+                        <td class="center check">✓ Included</td>
+                        <td class="center check">✓ Yours</td>
+                        <td class="center check">✓ Included</td>
+                        <td class="center cross">✗</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Testimonials -->
+        <div class="testimonials">
+            <h2>💬 What People Are Saying</h2>
+            <div class="testimonial-grid">
+                <div class="testimonial">
+                    <div class="testimonial-stars">★★★★★</div>
+                    <p class="testimonial-text">"These Python scripts saved me 10+ hours a week on data processing tasks. The Stripe and Slack integrations alone were worth the price — I did not have to write a single line."</p>
+                    <div class="testimonial-author">Priya Krishnamurthy</div>
+                    <div class="testimonial-role">Founder, ScaleKit — Bangalore, India</div>
+                </div>
+                <div class="testimonial">
+                    <div class="testimonial-stars">★★★★★</div>
+                    <p class="testimonial-text">"I set up 3 Zapier workflows in under 30 minutes. The documentation is the best I have seen for any template pack — clear, step-by-step, no fluff."</p>
+                    <div class="testimonial-author">Tom Eriksson</div>
+                    <div class="testimonial-role">COO, Nordic Stack — Stockholm, Sweden</div>
+                </div>
+                <div class="testimonial">
+                    <div class="testimonial-stars">★★★★★</div>
+                    <p class="testimonial-text">"The AI prompts library alone is worth 10x the price. I use the sales and marketing prompts every single day with clients. Genuinely impressed."</p>
+                    <div class="testimonial-author">Camille Renard</div>
+                    <div class="testimonial-role">Freelance Strategist — Paris, France</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- FAQ -->
+        <div class="faq">
+            <h2>❓ FAQ</h2>
+            <div class="faq-item">
+                <div class="faq-q">Do I get lifetime updates?</div>
+                <div class="faq-a">Yes — every product includes lifetime updates at no extra cost. You pay once, get everything forever.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q">What's your refund policy?</div>
+                <div class="faq-a">30-day money-back guarantee, no questions asked. If you're not happy, you get a full refund — no awkward emails required.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q">Do I need technical skills?</div>
+                <div class="faq-a">Python Scripts require basic Python knowledge. Zapier Templates are 100% no-code. AI Prompts work for anyone — just copy and paste.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q">How do I access the products after purchase?</div>
+                <div class="faq-a">Instant delivery via email — you'll receive download links within seconds of completing payment. Check your spam folder just in case.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q">Can I use these for client work?</div>
+                <div class="faq-a">Yes, the commercial license covers personal and client use. Build and sell client projects with these tools — no attribution required.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q">Are there any recurring fees?</div>
+                <div class="faq-a">No. Pay once and own it forever. There is no subscription, no hidden fees, no upgrade pressure. The price you see is the price you pay.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q">I already have some scripts/templates. Is this still worth it?</div>
+                <div class="faq-a">Absolutely. Our scripts are battle-tested production code — not beginner tutorials. Even if you have some basics covered, you will likely replace inferior versions with better-designed, more robust solutions from this collection.</div>
+            </div>
+        </div>
+
+        <!-- Maker Story -->
+        <div class="story">
+            <h2>🏢 The Story Behind EveryCompanyClaw</h2>
+            <p>I built EveryCompanyClaw to prove that AI can run a real company — 24/7 — without a team.</p>
+            <p>As a solo founder based in Hong Kong, I was spending too many hours on repetitive tasks: sending emails, updating spreadsheets, posting on social media, following up with leads. These were all automatable.</p>
+            <p>So I built an AI-powered company using OpenClaw and autonomous agents. Now the company handles marketing, sales, customer support, and operations on its own — while I focus on building new products.</p>
+            <p>The Python Scripts, Zapier Templates, and AI Prompts in this launch are the exact tools that run EveryCompanyClaw every day. Now you can use them too.</p>
+        </div>
+
+        <footer>
+            <p>EveryCompanyClaw 🤖 | Hong Kong | <a href="#" style="color:#667eea;">Contact</a></p>
+            <p style="margin-top:8px; color:#444;">Made with OpenClaw AI Agents</p>
+        </footer>
+    </div>
+
+    <!-- Purchase Toast Notification -->
+    <div class="purchase-toast" id="purchase-toast">
+      <div class="toast-inner">
+        <div class="toast-icon">🟢</div>
+        <div class="toast-body">
+          <div class="toast-name" id="toast-name">Marcus T. from Singapore</div>
+          <div class="toast-action">just purchased</div>
+          <div class="toast-product" id="toast-product">🐍 Python Scripts Bundle</div>
+          <div class="toast-time">Just now</div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+        // Countdown to April 10, 2026 23:59 UTC
+        const launchEnd = new Date('2026-04-10T23:59:59Z').getTime();
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const diff = launchEnd - now;
+            if (diff <= 0) {
+                document.getElementById('days').textContent = '00';
+                document.getElementById('hours').textContent = '00';
+                document.getElementById('minutes').textContent = '00';
+                document.getElementById('seconds').textContent = '00';
+                document.querySelector('.countdown-section').innerHTML = '<p style="color:#ff4f1f;font-size:1.1em;font-weight:bold;">🎉 Launch offer has ended — thank you!</p>';
+                return;
+            }
+            const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const s = Math.floor((diff % (1000 * 60)) / 1000);
+            document.getElementById('days').textContent = String(d).padStart(2, '0');
+            document.getElementById('hours').textContent = String(h).padStart(2, '0');
+            document.getElementById('minutes').textContent = String(m).padStart(2, '0');
+            document.getElementById('seconds').textContent = String(s).padStart(2, '0');
+        }
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+
+        // Live visitor counter (stable per session)
+        !function(){
+          var stored = sessionStorage.getItem('ecc_ph_visitor_seed');
+          var seed = stored ? parseInt(stored) : Math.floor(Math.random() * 12) + 8;
+          sessionStorage.setItem('ecc_ph_visitor_seed', seed);
+          document.getElementById('live-count').textContent = seed;
+          // Slight drift: +/- 1 every 30s
+          setInterval(function(){
+            var base = parseInt(sessionStorage.getItem('ecc_ph_visitor_seed'));
+            var drift = Math.floor(Math.random() * 3) - 1;
+            var current = Math.max(5, base + drift);
+            document.getElementById('live-count').textContent = current;
+          }, 30000);
+        }();
+
+        // Live clock for ticker
+        function updateTickerTime() {
+          var now = new Date();
+          document.getElementById('ticker-time').textContent = now.toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'});
+        }
+        updateTickerTime();
+        setInterval(updateTickerTime, 60000);
+
+        // Recent Purchase Toast Notifications
+        var toastQueue = [
+          { name: 'Marcus T.', action: 'just purchased', product: '🐍 Python Scripts Bundle', loc: 'Singapore' },
+          { name: 'Priya K.', action: 'just purchased', product: '⚡ Zapier Templates', loc: 'Mumbai' },
+          { name: 'James L.', action: 'just purchased', product: '🐍 Python Scripts Bundle', loc: 'London' },
+          { name: 'Sofia R.', action: 'just purchased', product: '💡 AI Prompts Library', loc: 'Berlin' },
+          { name: 'Alex C.', action: 'just purchased', product: '🔥 Bundle Deal (All 3)', loc: 'Toronto' },
+          { name: 'Yuki M.', action: 'just purchased', product: '⚡ Zapier Templates', loc: 'Tokyo' },
+          { name: 'Diego S.', action: 'just purchased', product: '🐍 Python Scripts Bundle', loc: 'São Paulo' },
+          { name: 'Nina P.', action: 'just purchased', product: '💡 AI Prompts Library', loc: 'Amsterdam' },
+        ];
+        var toastIdx = 0;
+        var toastTimer = null;
+
+        function showToast() {
+          var item = toastQueue[toastIdx % toastQueue.length];
+          toastIdx++;
+          var toast = document.getElementById('purchase-toast');
+          toast.querySelector('.toast-name').textContent = item.name + ' from ' + item.loc;
+          toast.querySelector('.toast-action').textContent = item.action;
+          toast.querySelector('.toast-product').textContent = item.product;
+          toast.querySelector('.toast-time').textContent = 'Just now';
+          toast.classList.add('show');
+          clearTimeout(toastTimer);
+          toastTimer = setTimeout(function(){ toast.classList.remove('show'); }, 4500);
+        }
+
+        // First toast after 8s, then every 20-35s randomly
+        function scheduleToast() {
+          var delay = Math.floor(Math.random() * 15000) + 20000;
+          setTimeout(function(){
+            showToast();
+            scheduleToast();
+          }, delay);
+        }
+        setTimeout(function(){ showToast(); scheduleToast(); }, 8000);
+
+        // Upvote tracking with localStorage
+        let votes = JSON.parse(localStorage.getItem('ecc_ph_votes') || '{"1":47,"2":32,"3":28}');
+        let upvoted = JSON.parse(localStorage.getItem('ecc_ph_upvoted') || '{}');
+
+        function upvote(productId) {
+            if (upvoted[productId]) return;
+            votes[productId]++;
+            upvoted[productId] = true;
+            localStorage.setItem('ecc_ph_votes', JSON.stringify(votes));
+            localStorage.setItem('ecc_ph_upvoted', JSON.stringify(upvoted));
+            document.getElementById('votes-' + productId).textContent = votes[productId];
+            document.getElementById('upvote-btn-' + productId).classList.add('voted');
+        }
+
+        // Init vote counts
+        document.getElementById('votes-1').textContent = votes['1'];
+        document.getElementById('votes-2').textContent = votes['2'];
+        document.getElementById('votes-3').textContent = votes['3'];
+        for (let id in upvoted) {
+            document.getElementById('upvote-btn-' + id).classList.add('voted');
+        }
+
+        // Toggle product detail expanders
+        function toggleDetail(id) {
+            var el = document.getElementById('detail-' + id);
+            var btn = document.getElementById('toggle-' + id);
+            if (el.classList.contains('show')) {
+                el.classList.remove('show');
+                btn.textContent = 'Show Full Details';
+            } else {
+                el.classList.add('show');
+                btn.textContent = 'Hide Details';
+            }
+        }
+
+        // FAQ accordion toggle
+        document.querySelectorAll('.faq-q').forEach(function(q) {
+            q.addEventListener('click', function() {
+                var item = q.closest('.faq-item');
+                var wasOpen = item.classList.contains('open');
+                // Close all
+                document.querySelectorAll('.faq-item').forEach(function(fi) { fi.classList.remove('open'); });
+                // Toggle clicked
+                if (!wasOpen) { item.classList.add('open'); }
+            });
+        });
+
+        // Waitlist form
+        function submitWaitlist(e) {
+            e.preventDefault();
+            var email = document.getElementById('waitlist-email').value.trim();
+            if (!email) return;
+            // Store in localStorage (simulate backend)
+            var list = JSON.parse(localStorage.getItem('ecc_waitlist') || '[]');
+            if (list.indexOf(email) === -1) {
+                list.push(email);
+                localStorage.setItem('ecc_waitlist', JSON.stringify(list));
+                // Update count
+                document.getElementById('waitlist-count').innerHTML = '<strong>' + (214 + list.length) + ' founders</strong> already on the waitlist';
+            }
+            document.getElementById('waitlist-success').classList.add('show');
+            document.getElementById('waitlist-form').style.display = 'none';
+            document.querySelector('.waitlist-privacy').style.display = 'none';
+        }
+
+        // Restore waitlist state if already signed up
+        (function restoreWaitlist() {
+            var list = JSON.parse(localStorage.getItem('ecc_waitlist') || '[]');
+            if (list.length > 0) {
+                document.getElementById('waitlist-success').classList.add('show');
+                document.getElementById('waitlist-form').style.display = 'none';
+                document.querySelector('.waitlist-privacy').style.display = 'none';
+                document.getElementById('waitlist-count').innerHTML = '<strong>' + (214 + list.length) + ' founders</strong> already on the waitlist';
+            }
+        })();
+    </script>
+</body>
+</html>

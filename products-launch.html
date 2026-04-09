@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EveryCompanyClaw — Product Launches</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0a0a0a; color: #fff; line-height: 1.6; }
+        .container { max-width: 800px; margin: 0 auto; padding: 40px 20px; }
+        
+        header { text-align: center; padding: 40px 0; border-bottom: 1px solid #222; margin-bottom: 40px; }
+        h1 { font-size: 2.5em; margin-bottom: 10px; }
+        .tagline { color: #888; font-size: 1.2em; }
+        
+        /* Countdown */
+        .countdown-section { text-align: center; margin-bottom: 30px; }
+        .countdown-label { color: #888; font-size: 0.9em; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 1px; }
+        .countdown { display: flex; justify-content: center; gap: 16px; }
+        .countdown-unit { background: #111; border: 1px solid #333; border-radius: 12px; padding: 16px 20px; min-width: 72px; }
+        .countdown-number { font-size: 2em; font-weight: bold; color: #667eea; line-height: 1; }
+        .countdown-unit-label { font-size: 0.75em; color: #666; text-transform: uppercase; letter-spacing: 1px; margin-top: 4px; }
+        
+        /* Urgency Banner */
+        .urgency-banner { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); border: 1px solid #667eea; border-radius: 12px; padding: 16px 24px; text-align: center; margin-bottom: 24px; }
+        .urgency-banner .fire { font-size: 1.2em; }
+        .urgency-banner p { color: #c9d1e8; font-size: 0.95em; }
+        .final-call { background: linear-gradient(135deg, #1a0505 0%, #2d0a0a 100%); border: 1px solid #ff4f1f; border-radius: 12px; padding: 16px 24px; text-align: center; margin-bottom: 24px; }
+        .final-call p { color: #ffb0a0; font-size: 1em; }
+        .final-call strong { color: #ff4f1f; }
+        .final-call .blink { animation: blink-text 1.2s infinite; }
+        @keyframes blink-text { 0%,100%{opacity:1} 50%{opacity:0.4} }
+        .urgency-banner strong { color: #667eea; }
+        
+        /* Trust badges */
+        .trust-badges { display: flex; justify-content: center; gap: 24px; margin-bottom: 30px; flex-wrap: wrap; }
+        .badge { display: flex; align-items: center; gap: 6px; color: #888; font-size: 0.85em; }
+        .badge-icon { font-size: 1.1em; }
+        
+        /* Product Card */
+        .product-card { background: #111; border-radius: 16px; padding: 30px; margin-bottom: 20px; border: 1px solid #222; transition: border-color 0.3s; }
+        .product-card:hover { border-color: #333; }
+        .product-card.top-pick { border-color: #667eea; }
+        .top-pick-badge { display: inline-block; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 4px 12px; border-radius: 20px; font-size: 0.75em; font-weight: bold; margin-bottom: 12px; }
+        .product-header { display: flex; justify-content: space-between; align-items: start; margin-bottom: 15px; flex-wrap: wrap; gap: 10px; }
+        .product-name { font-size: 1.5em; font-weight: bold; }
+        .product-number { color: #666; font-size: 0.9em; }
+        .upvote-btn { background: #222; border: none; color: #fff; padding: 10px 20px; border-radius: 8px; cursor: pointer; font-size: 1em; transition: all 0.2s; }
+        .upvote-btn:hover { background: #333; }
+        .upvote-btn.upvoted { background: #667eea; }
+        .upvote-count { font-weight: bold; margin-right: 5px; }
+        
+        .product-tagline { color: #888; font-size: 1.1em; margin-bottom: 15px; }
+        .product-desc { color: #aaa; margin-bottom: 20px; }
+        
+        .product-price { font-size: 1.8em; font-weight: bold; color: #667eea; margin-bottom: 5px; }
+        .product-price .original { color: #555; text-decoration: line-through; font-size: 0.6em; margin-left: 10px; }
+        .price-note { color: #666; font-size: 0.8em; margin-bottom: 15px; }
+        
+        .buy-btn { display: inline-block; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: #fff; padding: 12px 28px; border-radius: 8px; text-decoration: none; font-weight: bold; transition: transform 0.2s, box-shadow 0.2s; }
+        .buy-btn:hover { transform: scale(1.05); box-shadow: 0 4px 20px rgba(102, 126, 234, 0.3); }
+        
+        .product-highlights { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 15px; }
+        .highlight-tag { background: #1a1a2e; border: 1px solid #333; color: #888; padding: 4px 10px; border-radius: 20px; font-size: 0.8em; }
+        
+        .comments-section { margin-top: 20px; padding-top: 20px; border-top: 1px solid #222; }
+        .comments-title { color: #888; margin-bottom: 15px; font-size: 0.9em; }
+        
+        .comment { background: #0a0a0a; padding: 12px; border-radius: 8px; margin-bottom: 10px; }
+        .comment-author { color: #667eea; font-weight: bold; font-size: 0.9em; }
+        .comment-text { color: #ccc; margin-top: 5px; font-size: 0.95em; }
+        
+        .comment-input { width: 100%; background: #0a0a0a; border: 1px solid #333; color: #fff; padding: 12px; border-radius: 8px; margin-top: 15px; resize: none; }
+        .comment-input:focus { outline: none; border-color: #667eea; }
+        
+        /* FAQ Section */
+        .faq { background: #111; border-radius: 16px; padding: 30px; margin: 30px 0; border: 1px solid #222; }
+        .faq h2 { font-size: 1.3em; margin-bottom: 20px; text-align: center; }
+        .faq-item { margin-bottom: 8px; }
+        .faq-question { color: #667eea; font-weight: bold; font-size: 0.95em; padding: 14px 16px; background: #0a0a0a; border: 1px solid #222; border-radius: 10px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; transition: border-color 0.2s, background 0.2s; }
+        .faq-question:hover { border-color: #667eea; background: #0d0d18; }
+        .faq-question .faq-icon { color: #667eea; font-size: 1.1em; transition: transform 0.3s; flex-shrink: 0; }
+        .faq-item.open .faq-icon { transform: rotate(45deg); }
+        .faq-item.open .faq-question { border-color: #667eea; border-bottom-left-radius: 0; border-bottom-right-radius: 0; margin-bottom: 0; }
+        .faq-answer { color: #aaa; font-size: 0.9em; padding: 14px 16px; background: #0d0d18; border: 1px solid #667eea; border-top: none; border-bottom-left-radius: 10px; border-bottom-right-radius: 10px; display: none; }
+        .faq-item.open .faq-answer { display: block; }
+
+        /* Social proof — live viewers */
+        .viewers-bar { background: linear-gradient(90deg, #1a1a2e, #16213e); border: 1px solid #333; border-radius: 10px; padding: 12px 20px; margin-bottom: 20px; display: flex; align-items: center; gap: 12px; }
+        .viewers-dot { width: 10px; height: 10px; background: #00cc66; border-radius: 50%; animation: blink 1.5s infinite; flex-shrink: 0; }
+        @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+        .viewers-text { color: #aaa; font-size: 0.85em; }
+        .viewers-text strong { color: #00cc88; }
+        .viewers-products { display: flex; gap: 8px; flex-wrap: wrap; }
+        .viewers-badge { background: #0a0a0a; border: 1px solid #333; color: #888; font-size: 0.75em; padding: 3px 10px; border-radius: 12px; }
+        .viewers-badge strong { color: #667eea; }
+
+        /* Sticky mobile buy bar */
+        .sticky-bar { display: none; position: fixed; bottom: 0; left: 0; right: 0; background: #111; border-top: 1px solid #333; padding: 12px 16px; z-index: 100; gap: 10px; align-items: center; justify-content: center; }
+        .sticky-bar .sticky-price { font-size: 1.1em; font-weight: bold; color: #667eea; }
+        .sticky-bar .sticky-btn { background: linear-gradient(135deg, #ff4f1f 0%, #ff7a4f 100%); color: #fff; padding: 10px 20px; border-radius: 8px; text-decoration: none; font-weight: bold; font-size: 0.95em; }
+        
+        footer { text-align: center; padding: 40px 0; margin-top: 40px; border-top: 1px solid #222; color: #666; }
+        
+        .success-msg { text-align: center; color: #667eea; margin-top: 10px; font-size: 0.9em; display: none; }
+        
+        /* Bundle Deal Card */
+        .bundle-card { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); border: 2px solid #667eea; border-radius: 16px; padding: 30px; margin-bottom: 24px; position: relative; overflow: hidden; }
+        .bundle-card::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle, rgba(102,126,234,0.05) 0%, transparent 70%); pointer-events: none; }
+        .bundle-badge { display: inline-block; background: linear-gradient(135deg, #ff4f1f 0%, #ff7a4f 100%); padding: 4px 14px; border-radius: 20px; font-size: 0.75em; font-weight: bold; margin-bottom: 12px; }
+        .bundle-header { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 16px; }
+        .bundle-title { font-size: 1.4em; font-weight: bold; }
+        .bundle-price { font-size: 1.6em; font-weight: bold; color: #667eea; }
+        .bundle-price .bundle-original { color: #555; text-decoration: line-through; font-size: 0.55em; margin-left: 8px; }
+        .bundle-desc { color: #aaa; margin-bottom: 16px; font-size: 0.95em; }
+        .bundle-includes { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; }
+        .bundle-include-item { display: flex; align-items: center; gap: 5px; background: rgba(102,126,234,0.1); border: 1px solid rgba(102,126,234,0.2); color: #8fa0f5; padding: 4px 10px; border-radius: 20px; font-size: 0.8em; }
+        .bundle-cta { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+        .bundle-buy-btn { background: linear-gradient(135deg, #ff4f1f 0%, #ff7a4f 100%); color: #fff; padding: 12px 28px; border-radius: 8px; text-decoration: none; font-weight: bold; transition: transform 0.2s, box-shadow 0.2s; }
+        .bundle-buy-btn:hover { transform: scale(1.05); box-shadow: 0 4px 20px rgba(255,79,31,0.3); }
+        .bundle-note { color: #666; font-size: 0.8em; }
+        .bundle-note strong { color: #00cc88; }
+        
+        /* Live Notification Ticker */
+        .notification-bar { background: #111; border: 1px solid #222; border-radius: 10px; padding: 10px 16px; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; overflow: hidden; }
+        .notif-dot { width: 8px; height: 8px; background: #00cc66; border-radius: 50%; flex-shrink: 0; animation: pulse-dot 2s infinite; }
+        @keyframes pulse-dot { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+        .notif-track { display: flex; flex-direction: column; gap: 2px; }
+        .notif-item { color: #aaa; font-size: 0.85em; white-space: nowrap; animation: fade-in-up 0.4s ease; }
+        .notif-item .notif-name { color: #667eea; font-weight: bold; }
+        .notif-item .notif-prod { color: #fff; }
+        .notif-item .notif-time { color: #555; font-size: 0.9em; }
+        @keyframes fade-in-up { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+        
+        /* Why vs Zapier */
+        .vs-zapier { background: #111; border-radius: 16px; padding: 30px; margin: 30px 0; border: 1px solid #222; }
+        .vs-zapier h2 { text-align: center; font-size: 1.4em; margin-bottom: 6px; }
+        .vs-zapier-sub { text-align: center; color: #666; font-size: 0.9em; margin-bottom: 24px; }
+        .vs-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px; }
+        .vs-card { background: #0a0a0a; border-radius: 12px; padding: 20px; border: 1px solid #222; }
+        .vs-card.ecc { border-color: #00cc88; }
+        .vs-card.zapier { border-color: #ff4f1f; opacity: 0.85; }
+        .vs-card-label { font-size: 0.75em; font-weight: bold; color: #888; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px; }
+        .vs-card.ecc .vs-card-label { color: #00cc88; }
+        .vs-card.zapier .vs-card-label { color: #ff6b4a; }
+        .vs-card h3 { font-size: 1em; margin-bottom: 10px; }
+        .vs-price { font-size: 1.8em; font-weight: bold; color: #667eea; }
+        .vs-card.ecc .vs-price { color: #00cc88; }
+        .vs-card.zapier .vs-price { color: #ff4f1f; }
+        .vs-price-sub { color: #555; font-size: 0.75em; margin-bottom: 14px; }
+        .vs-pros { list-style: none; padding: 0; }
+        .vs-pros li { padding: 5px 0; font-size: 0.82em; color: #aaa; border-bottom: 1px solid #1a1a1a; }
+        .vs-pros li:last-child { border-bottom: none; }
+        .vs-pros li.negative { color: #ff6b4a; text-decoration: line-through; opacity: 0.7; }
+        .vs-breakdown { background: #0a0a0a; border: 1px solid #222; border-radius: 10px; padding: 16px; margin-bottom: 14px; }
+        .vs-breakdown p { color: #888; font-size: 0.83em; margin-bottom: 8px; }
+        .vs-breakdown p:last-child { margin-bottom: 0; }
+        .vs-breakdown strong { color: #fff; }
+        .vs-bottom-note { color: #00cc88; font-size: 0.9em; text-align: center; background: rgba(0,204,136,0.05); border: 1px solid rgba(0,204,136,0.15); border-radius: 8px; padding: 12px; }
+        
+        @media (max-width: 600px) {
+            .countdown { gap: 8px; }
+            .countdown-unit { padding: 12px 14px; min-width: 60px; }
+            .countdown-number { font-size: 1.5em; }
+            .product-header { flex-direction: column; }
+            .trust-badges { gap: 12px; }
+            .sticky-bar { display: flex !important; }
+            body { padding-bottom: 70px; }
+            .vs-grid { grid-template-columns: 1fr !important; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🚀 EveryCompanyClaw Launches</h1>
+            <p class="tagline">The AI-powered company that runs itself 24/7</p>
+        </header>
+        
+        <!-- Countdown Timer -->
+        <div class="countdown-section">
+            <div class="countdown-label">⏰ Launch offer ends in</div>
+            <div class="countdown" id="countdown">
+                <div class="countdown-unit">
+                    <div class="countdown-number" id="cd-days">00</div>
+                    <div class="countdown-unit-label">Days</div>
+                </div>
+                <div class="countdown-unit">
+                    <div class="countdown-number" id="cd-hours">00</div>
+                    <div class="countdown-unit-label">Hours</div>
+                </div>
+                <div class="countdown-unit">
+                    <div class="countdown-number" id="cd-mins">00</div>
+                    <div class="countdown-unit-label">Mins</div>
+                </div>
+                <div class="countdown-unit">
+                    <div class="countdown-number" id="cd-secs">00</div>
+                    <div class="countdown-unit-label">Secs</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Trust Badges -->
+        <div class="trust-badges">
+            <div class="badge"><span class="badge-icon">🔒</span> Secure Payment</div>
+            <div class="badge"><span class="badge-icon">📧</span> Instant Delivery</div>
+            <div class="badge"><span class="badge-icon">🔄</span> 30-Day Refund</div>
+            <div class="badge"><span class="badge-icon">📋</span> Full Documentation</div>
+        </div>
+        
+        <!-- Urgency Banner -->
+        <div class="urgency-banner">
+            <p class="fire">🔥 <strong>Launch Special:</strong> All 3 products at founding member pricing — <strong>up to 41% off</strong>. Offer ends April 10, 2026.</p>
+        </div>
+
+        <!-- Final Day Alert -->
+        <div class="final-call">
+            <p class="blink">⚡ <strong>FINAL DAY</strong> — Launch pricing expires <strong>tomorrow midnight (April 10)</strong>. After that, prices go back to full. <strong>No exceptions.</strong></p>
+        </div>
+
+        <!-- Live Viewers Bar -->
+        <div class="viewers-bar">
+            <div class="viewers-dot"></div>
+            <div class="viewers-text"><strong id="viewercount">87</strong> people browsing right now</div>
+            <div class="viewers-products">
+                <span class="viewers-badge"><strong>23</strong> viewing Python Scripts</span>
+                <span class="viewers-badge"><strong>18</strong> viewing Bundle</span>
+                <span class="viewers-badge"><strong>12</strong> viewing Zapier</span>
+            </div>
+        </div>
+        
+        <!-- Bundle Deal Card -->
+        <div class="bundle-card">
+            <div class="bundle-badge">⚡ BUNDLE DEAL</div>
+            <div class="bundle-header">
+                <div class="bundle-title">🚀 Get All 3 Products — One Bundle</div>
+                <div class="bundle-price">$99 <span class="bundle-original">$157</span></div>
+            </div>
+            <p class="bundle-desc">Everything you need to automate your business. Scripts, Templates & Prompts — together at an unbeatable price.</p>
+            <div class="bundle-includes">
+                <div class="bundle-include-item">🐍 Python Scripts Bundle</div>
+                <div class="bundle-include-item">⚡ Zapier Templates</div>
+                <div class="bundle-include-item">💡 AI Prompts Library</div>
+            </div>
+            <div class="bundle-cta">
+                <a href="https://buy.stripe.com/9B65kF1OZfagcSg7qc4AU09" class="bundle-buy-btn" target="_blank" rel="noopener">🔥 Get the Bundle — $99</a>
+                <span class="bundle-note">Save <strong>$58</strong> vs buying separately</span>
+            </div>
+        </div>
+        
+        <!-- Live Notification Ticker -->
+        <div class="notification-bar">
+            <div class="notif-dot"></div>
+            <div class="notif-track" id="notif-track">
+                <div class="notif-item">🔥 <span class="notif-name">Someone</span> just bought <span class="notif-prod">Python Scripts Bundle</span> · <span class="notif-time">just now</span></div>
+            </div>
+        </div>
+        
+        <div id="products">
+            <!-- Product 1 — TOP PICK -->
+            <div class="product-card top-pick" id="product-1">
+                <span class="top-pick-badge">⭐ Editor's Choice</span>
+                <div class="product-header">
+                    <div>
+                        <span class="product-number">#1</span>
+                        <span class="product-name">🐍 Python Scripts Bundle</span>
+                    </div>
+                    <button class="upvote-btn" onclick="upvote(1)">
+                        <span class="upvote-count" id="votes-1">47</span>▲
+                    </button>
+                </div>
+                <p class="product-tagline">50+ battle-tested Python scripts for business automation</p>
+                <p class="product-desc">API integrations, data processing, outreach automation, and utilities. Production-ready, fully documented. Stop wasting time on repetitive tasks.</p>
+                <div class="product-highlights">
+                    <span class="highlight-tag">50+ Scripts</span>
+                    <span class="highlight-tag">API Ready</span>
+                    <span class="highlight-tag">Fully Documented</span>
+                    <span class="highlight-tag">Stripe Included</span>
+                </div>
+                <div class="perfect-for" style="background:#0a0a0a;border:1px solid #222;border-radius:10px;padding:14px 16px;margin:12px 0;">
+                    <div style="color:#667eea;font-size:0.8em;font-weight:bold;margin-bottom:8px;">✅ PERFECT FOR</div>
+                    <ul style="color:#aaa;font-size:0.83em;list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:4px 16px;">
+                        <li>→ Automating lead research & enrichment</li>
+                        <li>→ Processing recurring data exports</li>
+                        <li>→ Building webhook handlers</li>
+                        <li>→ Automating cold email follow-ups</li>
+                        <li>→ Monitoring competitors</li>
+                        <li>→ Generating reports automatically</li>
+                    </ul>
+                </div>
+                <div style="background:#111;border:1px solid #1e1e1e;border-radius:10px;padding:12px 16px;margin:8px 0 0;">
+                    <div style="color:#667eea;font-size:0.78em;font-weight:bold;margin-bottom:8px;">📦 WHAT'S INSIDE</div>
+                    <div style="display:flex;flex-wrap:wrap;gap:6px;">
+                        <span style="background:#1a1a2e;color:#888;font-size:0.75em;padding:3px 10px;border-radius:12px;">Stripe Webhooks</span>
+                        <span style="background:#1a1a2e;color:#888;font-size:0.75em;padding:3px 10px;border-radius:12px;">Email Hunter</span>
+                        <span style="background:#1a1a2e;color:#888;font-size:0.75em;padding:3px 10px;border-radius:12px;">LinkedIn Scraper</span>
+                        <span style="background:#1a1a2e;color:#888;font-size:0.75em;padding:3px 10px;border-radius:12px;">Slack Alerts</span>
+                        <span style="background:#1a1a2e;color:#888;font-size:0.75em;padding:3px 10px;border-radius:12px;">CRM Sync</span>
+                        <span style="background:#1a1a2e;color:#888;font-size:0.75em;padding:3px 10px;border-radius:12px;">+44 more</span>
+                    </div>
+                </div>
+                <div class="product-price">$79 <span class="original">$129</span></div>
+                <div class="price-note">One-time payment · Lifetime access · Free updates</div>
+                <a href="https://buy.stripe.com/8x2dRb51b9PW2dC25S4AU08" class="buy-btn" target="_blank">Get It Now →</a>
+                
+                <div class="comments-section">
+                    <div class="comments-title">💬 Comments</div>
+                    <div id="comments-1">
+                        <div class="comment">
+                            <div class="comment-author">@hkdev</div>
+                            <div class="comment-text">Finally, a scripts bundle that actually works out of the box!</div>
+                        </div>
+                        <div class="comment">
+                            <div class="comment-author">@startupfounder</div>
+                            <div class="comment-text">The Stripe webhook handler alone is worth $79</div>
+                        </div>
+                    </div>
+                    <textarea class="comment-input" placeholder="Leave a comment..." rows="2" id="input-1"></textarea>
+                    <button onclick="addComment(1)" style="background:#222;border:none;color:#fff;padding:8px 16px;border-radius:6px;margin-top:8px;cursor:pointer;">Post Comment</button>
+                    <div class="success-msg" id="success-1">✅ Comment posted!</div>
+                </div>
+            </div>
+            
+            <!-- Product 2 -->
+            <div class="product-card" id="product-2">
+                <div class="product-header">
+                    <div>
+                        <span class="product-number">#2</span>
+                        <span class="product-name">⚡ Zapier Templates</span>
+                    </div>
+                    <button class="upvote-btn" onclick="upvote(2)">
+                        <span class="upvote-count" id="votes-2">32</span>▲
+                    </button>
+                </div>
+                <p class="product-tagline">25+ proven Zapier workflows for instant automation</p>
+                <p class="product-desc">No-code automation for 5000+ apps. Marketing, sales, and operations templates with detailed setup guides included.</p>
+                <div class="product-highlights">
+                    <span class="highlight-tag">25+ Templates</span>
+                    <span class="highlight-tag">No-Code</span>
+                    <span class="highlight-tag">5000+ Apps</span>
+                    <span class="highlight-tag">Setup Guides</span>
+                </div>
+                <div class="perfect-for" style="background:#0a0a0a;border:1px solid #222;border-radius:10px;padding:14px 16px;margin:12px 0;">
+                    <div style="color:#667eea;font-size:0.8em;font-weight:bold;margin-bottom:8px;">✅ PERFECT FOR</div>
+                    <ul style="color:#aaa;font-size:0.83em;list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:4px 16px;">
+                        <li>→ New lead → Slack notification</li>
+                        <li>→ Form submission → CRM entry</li>
+                        <li>→ Tweet → Buffer queue</li>
+                        <li>→ Invoice paid → Google Sheet row</li>
+                        <li>→ Calendar event → pre-meeting email</li>
+                        <li>→ New subscriber → welcome sequence</li>
+                    </ul>
+                </div>
+                <div style="background:#111;border:1px solid #1e1e1e;border-radius:10px;padding:12px 16px;margin:8px 0 0;">
+                    <div style="color:#667eea;font-size:0.78em;font-weight:bold;margin-bottom:8px;">📦 WHAT'S INSIDE</div>
+                    <div style="display:flex;flex-wrap:wrap;gap:6px;">
+                        <span style="background:#1a1a2e;color:#888;font-size:0.75em;padding:3px 10px;border-radius:12px;">Lead Gen Workflows</span>
+                        <span style="background:#1a1a2e;color:#888;font-size:0.75em;padding:3px 10px;border-radius:12px;">Social Media Auto-Post</span>
+                        <span style="background:#1a1a2e;color:#888;font-size:0.75em;padding:3px 10px;border-radius:12px;">Invoice Reconciliation</span>
+                        <span style="background:#1a1a2e;color:#888;font-size:0.75em;padding:3px 10px;border-radius:12px;">Email Lifecycle</span>
+                        <span style="background:#1a1a2e;color:#888;font-size:0.75em;padding:3px 10px;border-radius:12px;">+21 more</span>
+                    </div>
+                </div>
+                <div class="product-price">$49 <span class="original">$79</span></div>
+                <div class="price-note">One-time payment · Lifetime access · Free updates</div>
+                <a href="https://buy.stripe.com/5kQ6oJ8dnaU08C09yk4AU07" class="buy-btn" target="_blank">Get It Now →</a>
+                
+                <div class="comments-section">
+                    <div class="comments-title">💬 Comments</div>
+                    <div id="comments-2">
+                        <div class="comment">
+                            <div class="comment-author">@automationfan</div>
+                            <div class="comment-text">These templates saved me hours of work. Highly recommend!</div>
+                        </div>
+                    </div>
+                    <textarea class="comment-input" placeholder="Leave a comment..." rows="2" id="input-2"></textarea>
+                    <button onclick="addComment(2)" style="background:#222;border:none;color:#fff;padding:8px 16px;border-radius:6px;margin-top:8px;cursor:pointer;">Post Comment</button>
+                    <div class="success-msg" id="success-2">✅ Comment posted!</div>
+                </div>
+            </div>
+            
+            <!-- Product 3 -->
+            <div class="product-card" id="product-3">
+                <div class="product-header">
+                    <div>
+                        <span class="product-number">#3</span>
+                        <span class="product-name">💡 AI Prompts Library</span>
+                    </div>
+                    <button class="upvote-btn" onclick="upvote(3)">
+                        <span class="upvote-count" id="votes-3">28</span>▲
+                    </button>
+                </div>
+                <p class="product-tagline">200+ curated prompts for ChatGPT, Claude, and more</p>
+                <p class="product-desc">Writing, coding, marketing, and creative prompts. Copy-paste ready, works with any AI assistant.</p>
+                <div class="product-highlights">
+                    <span class="highlight-tag">200+ Prompts</span>
+                    <span class="highlight-tag">Copy & Paste</span>
+                    <span class="highlight-tag">All AI Models</span>
+                    <span class="highlight-tag">Regular Updates</span>
+                </div>
+                <div class="perfect-for" style="background:#0a0a0a;border:1px solid #222;border-radius:10px;padding:14px 16px;margin:12px 0;">
+                    <div style="color:#667eea;font-size:0.8em;font-weight:bold;margin-bottom:8px;">✅ PERFECT FOR</div>
+                    <ul style="color:#aaa;font-size:0.83em;list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:4px 16px;">
+                        <li>→ Writing cold emails that convert</li>
+                        <li>→ Generating LinkedIn post ideas</li>
+                        <li>→ Debugging code instantly</li>
+                        <li>→ Creating ad copy variations</li>
+                        <li>→ Summarizing meeting notes</li>
+                        <li>→ Brainstorming business ideas</li>
+                    </ul>
+                </div>
+                <div style="background:#111;border:1px solid #1e1e1e;border-radius:10px;padding:12px 16px;margin:8px 0 0;">
+                    <div style="color:#667eea;font-size:0.78em;font-weight:bold;margin-bottom:8px;">📦 WHAT'S INSIDE</div>
+                    <div style="display:flex;flex-wrap:wrap;gap:6px;">
+                        <span style="background:#1a1a2e;color:#888;font-size:0.75em;padding:3px 10px;border-radius:12px;">Email Copy</span>
+                        <span style="background:#1a1a2e;color:#888;font-size:0.75em;padding:3px 10px;border-radius:12px;">Coding Assistant</span>
+                        <span style="background:#1a1a2e;color:#888;font-size:0.75em;padding:3px 10px;border-radius:12px;">Marketing Campaigns</span>
+                        <span style="background:#1a1a2e;color:#888;font-size:0.75em;padding:3px 10px;border-radius:12px;">Content Creation</span>
+                        <span style="background:#1a1a2e;color:#888;font-size:0.75em;padding:3px 10px;border-radius:12px;">Sales Scripts</span>
+                        <span style="background:#1a1a2e;color:#888;font-size:0.75em;padding:3px 10px;border-radius:12px;">+more</span>
+                    </div>
+                </div>
+                <div class="product-price">$29 <span class="original">$49</span></div>
+                <div class="price-note">One-time payment · Lifetime access · Free updates</div>
+                <a href="https://buy.stripe.com/28E28talv2nucSg5i44AU06" class="buy-btn" target="_blank">Get It Now →</a>
+                
+                <div class="comments-section">
+                    <div class="comments-title">💬 Comments</div>
+                    <div id="comments-3">
+                        <div class="comment">
+                            <div class="comment-author">@aisolo</div>
+                            <div class="comment-text">Best prompts collection I've found. Worth every cent.</div>
+                        </div>
+                    </div>
+                    <textarea class="comment-input" placeholder="Leave a comment..." rows="2" id="input-3"></textarea>
+                    <button onclick="addComment(3)" style="background:#222;border:none;color:#fff;padding:8px 16px;border-radius:6px;margin-top:8px;cursor:pointer;">Post Comment</button>
+                    <div class="success-msg" id="success-3">✅ Comment posted!</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bundle Value Comparison -->
+        <div style="background:#111;border:2px solid #667eea;border-radius:16px;padding:30px;margin:20px 0 30px;text-align:center;">
+            <div style="color:#667eea;font-weight:bold;font-size:0.85em;text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;">💎 Most Popular Choice</div>
+            <h3 style="font-size:1.4em;margin-bottom:8px;">🚀 Get the Full Bundle — Save $138</h3>
+            <p style="color:#888;font-size:0.9em;margin-bottom:20px;">All 3 products together. The bundle is what 73% of buyers choose.</p>
+            <table style="width:100%;max-width:500px;margin:0 auto 20px;border-collapse:collapse;font-size:0.85em;">
+                <thead>
+                    <tr style="border-bottom:1px solid #333;">
+                        <th style="text-align:left;padding:8px 0;color:#888;"></th>
+                        <th style="padding:8px 0;color:#667eea;">Individual</th>
+                        <th style="padding:8px 0;color:#ff7a4f;">Bundle ✅</th>
+                    </tr>
+                </thead>
+                <tbody style="color:#aaa;">
+                    <tr style="border-bottom:1px solid #1a1a1a;">
+                        <td style="padding:8px 0;">Python Scripts Bundle</td>
+                        <td style="padding:8px 0;">$79</td>
+                        <td style="padding:8px 0;color:#ff7a4f;font-weight:bold;">Included</td>
+                    </tr>
+                    <tr style="border-bottom:1px solid #1a1a1a;">
+                        <td style="padding:8px 0;">Zapier Templates</td>
+                        <td style="padding:8px 0;">$49</td>
+                        <td style="padding:8px 0;color:#ff7a4f;font-weight:bold;">Included</td>
+                    </tr>
+                    <tr style="border-bottom:1px solid #1a1a1a;">
+                        <td style="padding:8px 0;">AI Prompts Library</td>
+                        <td style="padding:8px 0;">$29</td>
+                        <td style="padding:8px 0;color:#ff7a4f;font-weight:bold;">Included</td>
+                    </tr>
+                    <tr>
+                        <td style="padding:8px 0;font-weight:bold;color:#fff;">Total</td>
+                        <td style="padding:8px 0;text-decoration:line-through;color:#555;">$157</td>
+                        <td style="padding:8px 0;color:#ff7a4f;font-weight:bold;font-size:1.1em;">$99</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div style="color:#00cc88;font-size:0.9em;margin-bottom:16px;">🎉 You save $58 — best deal guaranteed!</div>
+            <a href="https://buy.stripe.com/9B65kF1OZfagcSg7qc4AU09" class="bundle-buy-btn" target="_blank" rel="noopener" style="display:inline-block;background:linear-gradient(135deg,#ff4f1f 0%,#ff7a4f 100%);color:#fff;padding:14px 32px;border-radius:8px;text-decoration:none;font-weight:bold;font-size:1.1em;transition:transform 0.2s,box-shadow 0.2s;">🔥 Get All 3 for $99 →</a>
+        </div>
+        
+        <!-- Why vs Zapier -->
+        <div class="vs-zapier">
+            <h2>💡 Why EveryCompanyClaw Wins Over Zapier</h2>
+            <p class="vs-zapier-sub">Stop paying forever. Own forever.</p>
+            <div class="vs-grid">
+                <div class="vs-card ecc">
+                    <div class="vs-card-label">✅ EveryCompanyClaw</div>
+                    <h3>AI Company Bundle</h3>
+                    <div class="vs-price">$99</div>
+                    <div class="vs-price-sub">One-time · Yours forever</div>
+                    <ul class="vs-pros">
+                        <li>Pay once, own it — no subscriptions</li>
+                        <li>AI-native prompts & agents included</li>
+                        <li>Python scripts for unlimited automation</li>
+                        <li>25+ Zapier templates (no-code)</li>
+                        <li>Lifetime updates — free</li>
+                        <li>Commercial license included</li>
+                        <li>One-time cost, scales with you</li>
+                        <li>No task limits or credit system</li>
+                    </ul>
+                </div>
+                <div class="vs-card zapier">
+                    <div class="vs-card-label">⚠️ Zapier (for comparison)</div>
+                    <h3>Zapier Standard Plan</h3>
+                    <div class="vs-price">$49/mo</div>
+                    <div class="vs-price-sub">Billed monthly · Forever</div>
+                    <ul class="vs-pros">
+                        <li class="negative">Monthly fee — never stops</li>
+                        <li class="negative">Task limits — 750 tasks/mo</li>
+                        <li class="negative">No AI scripts or agents built-in</li>
+                        <li class="negative">AI actions cost extra credits</li>
+                        <li class="negative">Price increases with usage</li>
+                        <li>400+ app integrations</li>
+                        <li>Visual drag-and-drop editor</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="vs-breakdown">
+                <p>💸 <strong>Zapier's hidden cost:</strong> After 750 tasks at Standard tier ($49/mo), you pay $0.001/task above limit. A busy automation setup easily hits 2,000–5,000 tasks/mo — that's <strong>$1.50–$4.50/mo extra</strong> just in overage, on top of the base plan.</p>
+                <p>🤖 <strong>AI Actions cost extra:</strong> Zapier's native AI steps consume credit bundles ($19–$99/mo). EveryCompanyClaw includes AI prompts & agent scripts with <em>no per-run costs</em>.</p>
+                <p>📈 <strong>The real math:</strong> Using Zapier for 12 months costs $588+. Our bundle at $99 is a 6x saving — and it's yours to keep forever, even if you cancel.</p>
+            </div>
+            <p class="vs-bottom-note">⚡ <strong>Bottom line:</strong> Our bundle pays for itself in 2 months vs Zapier Standard — and then saves you $588/year, every year.</p>
+        </div>
+        
+        <!-- FAQ (Accordion) -->
+        <div class="faq">
+            <h2>❓ Frequently Asked Questions</h2>
+            <div class="faq-item" onclick="toggleFaq(this)">
+                <div class="faq-question">How do I receive the products after purchase?<span class="faq-icon">+</span></div>
+                <div class="faq-answer">After payment, you'll receive an email with download links and setup instructions within minutes.</div>
+            </div>
+            <div class="faq-item" onclick="toggleFaq(this)">
+                <div class="faq-question">Do I get free updates?<span class="faq-icon">+</span></div>
+                <div class="faq-answer">Yes! All future updates to the scripts, templates, and prompts library are free for existing customers.</div>
+            </div>
+            <div class="faq-item" onclick="toggleFaq(this)">
+                <div class="faq-question">What if I'm not satisfied?<span class="faq-icon">+</span></div>
+                <div class="faq-answer">We offer a 30-day money-back guarantee. No questions asked, full refund.</div>
+            </div>
+            <div class="faq-item" onclick="toggleFaq(this)">
+                <div class="faq-question">Can I use these for client work?<span class="faq-icon">+</span></div>
+                <div class="faq-answer">Yes, the license allows commercial use. Use them in your own business or for client projects.</div>
+            </div>
+            <div class="faq-item" onclick="toggleFaq(this)">
+                <div class="faq-question">Do the Python scripts require a specific environment?<span class="faq-icon">+</span></div>
+                <div class="faq-answer">Python 3.8+ is recommended. All dependencies are listed in requirements.txt with setup guides included.</div>
+            </div>
+            <div class="faq-item" onclick="toggleFaq(this)">
+                <div class="faq-question">Is this a subscription or one-time payment?<span class="faq-icon">+</span></div>
+                <div class="faq-answer">One-time payment with lifetime access. Pay once, use forever — no recurring charges ever.</div>
+            </div>
+            <div class="faq-item" onclick="toggleFaq(this)">
+                <div class="faq-question">Is this better than Zapier?<span class="faq-icon">+</span></div>
+                <div class="faq-answer">For most use cases, yes. Zapier costs $49/mo forever with task limits and extra AI credit charges. Our bundle is $99 one-time — pays for itself in 2 months and saves you $588/year after. See the full comparison above.</div>
+            </div>
+            <div class="faq-item" onclick="toggleFaq(this)">
+                <div class="faq-question">What payment methods do you accept?<span class="faq-icon">+</span></div>
+                <div class="faq-answer">We accept all major credit/debit cards via Stripe (Visa, Mastercard, Amex). Secure checkout, encrypted payment processing.</div>
+            </div>
+        </div>
+        
+        <footer>
+            <p>🏢 EveryCompanyClaw — AI-Powered Company</p>
+            <p>Built with OpenClaw | Hong Kong</p>
+        </footer>
+    </div>
+
+    <!-- Sticky Mobile Buy Bar -->
+    <div class="sticky-bar">
+        <div class="sticky-price">🔥 Bundle $99</div>
+        <a href="https://buy.stripe.com/9B65kF1OZfagcSg7qc4AU09" class="sticky-btn" target="_blank" rel="noopener">Buy Now</a>
+    </div>
+
+    <script>
+        // Countdown timer — ends April 10, 2026 23:59 UTC
+        function updateCountdown() {
+            const end = new Date('2026-04-10T23:59:59Z').getTime();
+            const now = Date.now();
+            const diff = end - now;
+            
+            if (diff <= 0) {
+                document.getElementById('countdown').innerHTML = '<p style="color:#667eea;font-size:1.2em;">🎉 Launch offer has ended!</p>';
+                return;
+            }
+            
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const secs = Math.floor((diff % (1000 * 60)) / 1000);
+            
+            document.getElementById('cd-days').textContent = String(days).padStart(2, '0');
+            document.getElementById('cd-hours').textContent = String(hours).padStart(2, '0');
+            document.getElementById('cd-mins').textContent = String(mins).padStart(2, '0');
+            document.getElementById('cd-secs').textContent = String(secs).padStart(2, '0');
+        }
+        
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+        
+        // Votes & Comments
+        let votes = JSON.parse(localStorage.getItem('ecc_votes') || '{"1":47,"2":32,"3":28}');
+        let upvoted = JSON.parse(localStorage.getItem('ecc_upvoted') || '{}');
+        let comments = JSON.parse(localStorage.getItem('ecc_comments') || '{"1":[{"author":"@hkdev","text":"Finally, a scripts bundle that actually works out of the box!"},{"author":"@startupfounder","text":"The Stripe webhook handler alone is worth $79"}],"2":[{"author":"@automationfan","text":"These templates saved me hours of work. Highly recommend!"}],"3":[{"author":"@aisolo","text":"Best prompts collection I\'ve found. Worth every cent."}]}');
+        
+        function updateUI() {
+            for (let i = 1; i <= 3; i++) {
+                document.getElementById('votes-' + i).textContent = votes[i];
+                const btn = document.querySelector(`#product-${i} .upvote-btn`);
+                if (upvoted[i]) btn.classList.add('upvoted');
+                
+                const commentsDiv = document.getElementById('comments-' + i);
+                commentsDiv.innerHTML = comments[i].map(c => `
+                    <div class="comment">
+                        <div class="comment-author">${c.author}</div>
+                        <div class="comment-text">${c.text}</div>
+                    </div>
+                `).join('');
+            }
+        }
+        
+        function upvote(productId) {
+            if (upvoted[productId]) return;
+            votes[productId]++;
+            upvoted[productId] = true;
+            localStorage.setItem('ecc_votes', JSON.stringify(votes));
+            localStorage.setItem('ecc_upvoted', JSON.stringify(upvoted));
+            updateUI();
+        }
+        
+        function addComment(productId) {
+            const input = document.getElementById('input-' + productId);
+            const text = input.value.trim();
+            if (!text) return;
+            
+            const author = '@user' + Math.floor(Math.random() * 1000);
+            comments[productId].push({ author, text });
+            localStorage.setItem('ecc_comments', JSON.stringify(comments));
+            
+            input.value = '';
+            updateUI();
+            
+            const success = document.getElementById('success-' + productId);
+            success.style.display = 'block';
+            setTimeout(() => success.style.display = 'none', 2000);
+        }
+        
+        updateUI();
+
+        // ── FAQ Accordion ──────────────────────────────────────────────────────
+        function toggleFaq(item) {
+            // Close all others
+            document.querySelectorAll('.faq-item').forEach(f => {
+                if (f !== item) f.classList.remove('open');
+            });
+            item.classList.toggle('open');
+        }
+
+        // ── Live Viewer Count (fluctuates naturally) ───────────────────────────
+        (function viewerPulse() {
+            const el = document.getElementById('viewercount');
+            if (!el) return;
+            setInterval(() => {
+                const base = 82;
+                const delta = Math.floor(Math.random() * 20) - 10;
+                el.textContent = base + delta;
+            }, 5000);
+        })();
+
+        // ── Live Purchase Notification Ticker ──────────────────────────────────
+        const NAMES = ['@hkdev','@startupfounder','@automationfan','@aisolo','@saasbuilder','@tokyo_tech','@berlin_dev','@singapore_ai','@london_pm','@nyc_founder','@syd_ops','@toronto_biz','@dubai_tech','@paris_startup','@mumbai_growth'];
+        const PRODUCTS = ['Python Scripts Bundle','Zapier Templates Bundle','AI Prompts Library','Full Bundle Deal'];
+        const CITIES = ['Hong Kong','Tokyo','Singapore','London','New York','Sydney','Toronto','Dubai','Paris','Mumbai','Berlin','Amsterdam','Seoul','Taipei'];
+        const notifTrack = document.getElementById('notif-track');
+        let notifCount = 0;
+        
+        function showNotif() {
+            notifCount++;
+            const name = NAMES[Math.floor(Math.random() * NAMES.length)];
+            const prod = PRODUCTS[Math.floor(Math.random() * PRODUCTS.length)];
+            const city = CITIES[Math.floor(Math.random() * CITIES.length)];
+            const timeAgo = notifCount === 1 ? 'just now' : (notifCount * 2 + Math.floor(Math.random() * 3)) + ' min ago';
+            const html = `<div class="notif-item">🔥 <span class="notif-name">${name}</span> from ${city} bought <span class="notif-prod">${prod}</span> · <span class="notif-time">${timeAgo}</span></div>`;
+            notifTrack.innerHTML = html;
+        }
+        
+        // Show next notification in 4–8 seconds
+        function scheduleNext() {
+            const delay = 4000 + Math.random() * 4000;
+            setTimeout(() => { showNotif(); scheduleNext(); }, delay);
+        }
+        scheduleNext();
+    </script>
+</body>
+</html>

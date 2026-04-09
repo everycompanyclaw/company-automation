@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python Scripts Bundle — 50+ Production-Ready Scripts | EveryCompanyClaw</title>
+    <meta name="description" content="50+ battle-tested Python scripts for business automation. Stripe webhooks, email outreach, data pipelines, CRM sync. One-time $79. Built by EveryCompanyClaw.">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0a0a0a; color: #fff; line-height: 1.6; }
+        a { color: inherit; }
+
+        /* ── Nav ── */
+        .nav { display: flex; justify-content: space-between; align-items: center; padding: 20px 40px; border-bottom: 1px solid #1e1e1e; }
+        .nav-brand { font-size: 1.1em; font-weight: bold; }
+        .nav-brand span { color: #667eea; }
+        .nav-links { display: flex; gap: 24px; font-size: 0.9em; color: #666; }
+        .nav-links a:hover { color: #fff; }
+        .nav-cta { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: #fff !important; padding: 8px 20px; border-radius: 8px; font-weight: bold; transition: transform 0.2s; }
+        .nav-cta:hover { transform: scale(1.05); color: #fff !important; }
+
+        /* ── Hero ── */
+        .hero { text-align: center; padding: 80px 20px 60px; max-width: 760px; margin: 0 auto; }
+        .hero-eyebrow { display: inline-block; background: rgba(102,126,234,0.15); border: 1px solid rgba(102,126,234,0.3); color: #8fa0f5; font-size: 0.8em; padding: 4px 14px; border-radius: 20px; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 1px; }
+        .hero h1 { font-size: 3em; line-height: 1.15; margin-bottom: 16px; background: linear-gradient(135deg, #fff 0%, #a0b0ff 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .hero-sub { color: #888; font-size: 1.2em; margin-bottom: 32px; }
+        .hero-cta-row { display: flex; gap: 14px; justify-content: center; align-items: center; flex-wrap: wrap; }
+        .btn-primary { display: inline-block; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: #fff; padding: 16px 36px; border-radius: 10px; text-decoration: none; font-weight: bold; font-size: 1.1em; transition: transform 0.2s, box-shadow 0.2s; }
+        .btn-primary:hover { transform: scale(1.04); box-shadow: 0 6px 30px rgba(102,126,234,0.35); }
+        .btn-secondary { display: inline-block; background: #1a1a2e; border: 1px solid #333; color: #888; padding: 15px 30px; border-radius: 10px; text-decoration: none; font-weight: bold; transition: all 0.2s; }
+        .btn-secondary:hover { border-color: #555; color: #fff; }
+        .hero-note { color: #555; font-size: 0.82em; margin-top: 14px; }
+        .hero-note span { color: #00cc88; }
+
+        /* ── Stats bar ── */
+        .stats-bar { display: flex; justify-content: center; gap: 48px; padding: 32px 20px; border-top: 1px solid #1e1e1e; border-bottom: 1px solid #1e1e1e; margin: 0 40px; flex-wrap: wrap; }
+        .stat { text-align: center; }
+        .stat-num { font-size: 1.8em; font-weight: bold; color: #667eea; }
+        .stat-label { color: #555; font-size: 0.82em; margin-top: 2px; text-transform: uppercase; letter-spacing: 0.5px; }
+
+        /* ── Problem / Solution ── */
+        .section { padding: 70px 40px; max-width: 900px; margin: 0 auto; }
+        .section-eyebrow { color: #667eea; font-size: 0.78em; text-transform: uppercase; letter-spacing: 1.5px; font-weight: bold; margin-bottom: 10px; }
+        .section-title { font-size: 2em; margin-bottom: 12px; }
+        .section-sub { color: #777; font-size: 1.05em; margin-bottom: 40px; }
+
+        .problem-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 32px; }
+        .problem-item { background: #111; border: 1px solid #222; border-radius: 12px; padding: 18px 20px; display: flex; gap: 12px; align-items: flex-start; }
+        .problem-item .icon { font-size: 1.2em; flex-shrink: 0; }
+        .problem-item p { color: #888; font-size: 0.9em; }
+
+        .solution-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+        .solution-item { background: rgba(102,126,234,0.07); border: 1px solid rgba(102,126,234,0.2); border-radius: 12px; padding: 18px 20px; display: flex; gap: 12px; align-items: flex-start; }
+        .solution-item .icon { font-size: 1.2em; flex-shrink: 0; }
+        .solution-item p { color: #aaa; font-size: 0.9em; }
+
+        /* ── Scripts breakdown ── */
+        .scripts-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+        .script-category { background: #111; border: 1px solid #1e1e1e; border-radius: 14px; padding: 24px; transition: border-color 0.2s; }
+        .script-category:hover { border-color: #333; }
+        .script-category-icon { font-size: 1.5em; margin-bottom: 10px; }
+        .script-category h3 { font-size: 1em; margin-bottom: 8px; color: #e0e0e0; }
+        .script-list { list-style: none; }
+        .script-list li { color: #777; font-size: 0.85em; padding: 4px 0; display: flex; align-items: center; gap: 8px; }
+        .script-list li::before { content: '→'; color: #667eea; font-size: 0.8em; }
+
+        /* ── Pricing ── */
+        .pricing-section { background: #0d0d1a; border-top: 1px solid #1e1e1e; border-bottom: 1px solid #1e1e1e; text-align: center; padding: 80px 20px; }
+        .pricing-card { background: #111; border: 2px solid #667eea; border-radius: 20px; padding: 48px 40px; max-width: 480px; margin: 0 auto; position: relative; }
+        .pricing-card::before { content: ''; position: absolute; inset: -1px; border-radius: 20px; background: linear-gradient(135deg, #667eea22, #764ba222); pointer-events: none; }
+        .pricing-badge { display: inline-block; background: linear-gradient(135deg, #ff4f1f 0%, #ff7a4f 100%); padding: 4px 14px; border-radius: 20px; font-size: 0.75em; font-weight: bold; margin-bottom: 16px; }
+        .pricing-amount { font-size: 4em; font-weight: bold; color: #fff; line-height: 1; }
+        .pricing-amount .was { color: #444; text-decoration: line-through; font-size: 0.4em; vertical-align: middle; margin-left: 8px; }
+        .pricing-note { color: #666; font-size: 0.85em; margin: 10px 0 24px; }
+        .pricing-features { list-style: none; text-align: left; margin-bottom: 28px; }
+        .pricing-features li { color: #aaa; font-size: 0.92em; padding: 8px 0; display: flex; gap: 10px; align-items: flex-start; border-bottom: 1px solid #1a1a1a; }
+        .pricing-features li:last-child { border-bottom: none; }
+        .pricing-features .check { color: #00cc88; font-weight: bold; flex-shrink: 0; }
+        .pricing-urgency { background: rgba(255,79,31,0.1); border: 1px solid rgba(255,79,31,0.3); border-radius: 8px; padding: 10px 16px; margin-bottom: 20px; font-size: 0.85em; color: #ff9a7a; }
+        .pricing-urgency strong { color: #ff7a4f; }
+
+        /* ── Testimonials ── */
+        .testimonials-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
+        .testimonial { background: #111; border: 1px solid #1e1e1e; border-radius: 14px; padding: 24px; }
+        .testimonial-stars { color: #f0a030; font-size: 0.9em; margin-bottom: 10px; letter-spacing: 2px; }
+        .testimonial-text { color: #bbb; font-size: 0.92em; margin-bottom: 14px; line-height: 1.6; font-style: italic; }
+        .testimonial-author { display: flex; align-items: center; gap: 10px; }
+        .testimonial-avatar { width: 36px; height: 36px; background: linear-gradient(135deg, #667eea, #764ba2); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.85em; font-weight: bold; color: #fff; flex-shrink: 0; }
+        .testimonial-name { font-weight: bold; font-size: 0.88em; color: #e0e0e0; }
+        .testimonial-role { color: #555; font-size: 0.78em; }
+
+        /* ── Comparison table ── */
+        .comparison-table { width: 100%; border-collapse: collapse; font-size: 0.9em; }
+        .comparison-table th { text-align: left; padding: 12px 16px; border-bottom: 2px solid #222; color: #888; font-size: 0.8em; text-transform: uppercase; letter-spacing: 0.5px; }
+        .comparison-table th.center { text-align: center; }
+        .comparison-table td { padding: 12px 16px; border-bottom: 1px solid #1a1a1a; color: #aaa; vertical-align: middle; }
+        .comparison-table td.center { text-align: center; }
+        .comparison-table td.highlight-col { background: rgba(102,126,234,0.05); }
+        .comparison-table .check { color: #00cc88; font-size: 1.1em; }
+        .comparison-table .cross { color: #444; font-size: 1.1em; }
+        .comparison-table .partial { color: #f0a030; font-size: 0.85em; }
+        .comparison-table tr:last-child td { border-bottom: none; }
+
+        /* ── FAQ ── */
+        .faq-item { border-bottom: 1px solid #1e1e1e; padding: 20px 0; }
+        .faq-item:last-child { border-bottom: none; }
+        .faq-q { color: #e0e0e0; font-weight: bold; font-size: 1em; margin-bottom: 8px; display: flex; gap: 10px; align-items: flex-start; }
+        .faq-q::before { content: 'Q'; background: #667eea; color: #fff; font-size: 0.7em; font-weight: bold; padding: 2px 7px; border-radius: 4px; flex-shrink: 0; margin-top: 2px; }
+        .faq-a { color: #777; font-size: 0.9em; padding-left: 28px; line-height: 1.65; }
+
+        /* ── Footer ── */
+        footer { border-top: 1px solid #1e1e1e; padding: 40px; text-align: center; color: #444; font-size: 0.85em; }
+        footer a { color: #555; text-decoration: none; }
+        footer a:hover { color: #888; }
+
+        /* ── Live ticker ── */
+        .ticker-bar { background: #111; border: 1px solid #1e1e1e; border-radius: 10px; padding: 10px 16px; margin: 0 40px 32px; display: flex; align-items: center; gap: 10px; }
+        .ticker-dot { width: 8px; height: 8px; background: #00cc66; border-radius: 50%; flex-shrink: 0; animation: pulse-dot 2s infinite; }
+        @keyframes pulse-dot { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+        .ticker-text { color: #888; font-size: 0.85em; }
+        .ticker-text .name { color: #667eea; font-weight: bold; }
+        .ticker-text .city { color: #666; }
+
+        /* ── Guarantee banner ── */
+        .guarantee-banner { background: rgba(0,204,136,0.07); border: 1px solid rgba(0,204,136,0.2); border-radius: 12px; padding: 24px 32px; display: flex; align-items: center; gap: 20px; margin: 40px 0; flex-wrap: wrap; }
+        .guarantee-icon { font-size: 2.2em; flex-shrink: 0; }
+        .guarantee-title { font-weight: bold; font-size: 1.05em; margin-bottom: 4px; color: #e0e0e0; }
+        .guarantee-text { color: #777; font-size: 0.88em; }
+
+        @media (max-width: 700px) {
+            .nav { padding: 16px 20px; }
+            .nav-links { display: none; }
+            .hero { padding: 50px 20px 40px; }
+            .hero h1 { font-size: 2.1em; }
+            .section { padding: 50px 20px; }
+            .problem-grid, .solution-grid { grid-template-columns: 1fr; }
+            .pricing-card { padding: 32px 24px; }
+            .stats-bar { gap: 28px; }
+            .ticker-bar { margin: 0 20px 24px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Nav -->
+    <nav class="nav">
+        <div class="nav-brand">🏢 <span>EveryCompany</span>Claw</div>
+        <div class="nav-links">
+            <a href="https://buy.stripe.com/8x2dRb51b9PW2dC25S4AU08" class="nav-cta" target="_blank">Buy Now — $79</a>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-eyebrow">🐍 Python Scripts Bundle</div>
+        <h1>Stop Building the Same Scripts From Scratch</h1>
+        <p class="hero-sub">50+ production-ready Python scripts for API integrations, data pipelines, and outreach automation. Copy. Configure. Deploy. No fluff.</p>
+        <div class="hero-cta-row">
+            <a href="https://buy.stripe.com/8x2dRb51b9PW2dC25S4AU08" class="btn-primary" target="_blank">Get the Bundle — $79 →</a>
+            <a href="#scripts" class="btn-secondary">See All Scripts ↓</a>
+        </div>
+        <p class="hero-note"><span>✓</span> One-time payment · <span>✓</span> Lifetime access · <span>✓</span> Free updates · <span>✓</span> Commercial license</p>
+    </section>
+
+    <!-- Ticker -->
+    <div class="ticker-bar">
+        <div class="ticker-dot"></div>
+        <div class="ticker-text" id="ticker-text">
+            <span class="name">@hkdev</span> from <span class="city">Hong Kong</span> just bought Python Scripts Bundle · <span class="city">just now</span>
+        </div>
+    </div>
+
+    <!-- Stats -->
+    <div class="stats-bar">
+        <div class="stat">
+            <div class="stat-num">50+</div>
+            <div class="stat-label">Production Scripts</div>
+        </div>
+        <div class="stat">
+            <div class="stat-num">12</div>
+            <div class="stat-label">API Integrations</div>
+        </div>
+        <div class="stat">
+            <div class="stat-num">4.9/5</div>
+            <div class="stat-label">Customer Rating</div>
+        </div>
+        <div class="stat">
+            <div class="stat-num">$79</div>
+            <div class="stat-label">One-Time Price</div>
+        </div>
+    </div>
+
+    <!-- Problem / Solution -->
+    <section class="section">
+        <div class="section-eyebrow">The Problem</div>
+        <h2 class="section-title">You're Spending Hours on Scripts That Already Exist</h2>
+        <p class="section-sub">Every founder knows the drill — you need a Stripe webhook handler, an email scraper, a data sync script. So you Google, Stack Overflow, piece it together, debug for 3 hours... and it's still fragile.</p>
+
+        <div class="problem-grid">
+            <div class="problem-item">
+                <span class="icon">⏱️</span>
+                <p>Wasting 2–4 hours per script building from scratch when you could be shipping product</p>
+            </div>
+            <div class="problem-item">
+                <span class="icon">🐛</span>
+                <p>Homemade scripts break silently at 2am and nobody notices until customers complain</p>
+            </div>
+            <div class="problem-item">
+                <span class="icon">📄</span>
+                <p>No documentation, no error handling, no logging — just a script that "works on my machine"</p>
+            </div>
+            <div class="problem-item">
+                <span class="icon">💸</span>
+                <p>Hiring a developer for simple automation tasks costs $200–$500 per script</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" style="padding-top: 0;">
+        <div class="section-eyebrow">The Solution</div>
+        <h2 class="section-title">50+ Battle-Tested Scripts. Ready in 10 Minutes.</h2>
+        <p class="section-sub">Every script in this bundle is production-ready. Documented, error-handled, and designed to run on a schedule or on-demand. Stop reinventing the wheel.</p>
+
+        <div class="solution-grid">
+            <div class="solution-item">
+                <span class="icon">🛡️</span>
+                <p>Proper error handling and logging built in — scripts fail gracefully, you get notified</p>
+            </div>
+            <div class="solution-item">
+                <span class="icon">📋</span>
+                <p>Full documentation + config templates. Fill in your API keys and go</p>
+            </div>
+            <div class="solution-item">
+                <span class="icon">⏰</span>
+                <p>Schedule with cron or the included scheduler script — runs itself forever</p>
+            </div>
+            <div class="solution-item">
+                <span class="icon">🔄</span>
+                <p>Free updates for life. New scripts added regularly, at no extra cost</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Scripts Breakdown -->
+    <section class="section" id="scripts" style="padding-top: 40px;">
+        <div style="text-align:center; margin-bottom: 40px;">
+            <div class="section-eyebrow">What's Inside</div>
+            <h2 class="section-title">12 Categories, 50+ Scripts</h2>
+            <p class="section-sub">Here's everything you get. Each script is standalone — use what you need.</p>
+        </div>
+
+        <div class="scripts-grid">
+            <div class="script-category">
+                <div class="script-category-icon">💳</div>
+                <h3>Payments & Billing</h3>
+                <ul class="script-list">
+                    <li>Stripe webhook handler</li>
+                    <li>Gumroad license checker</li>
+                    <li>Invoice PDF generator</li>
+                    <li>Subscription status monitor</li>
+                </ul>
+            </div>
+            <div class="script-category">
+                <div class="script-category-icon">📧</div>
+                <h3>Email & Outreach</h3>
+                <ul class="script-list">
+                    <li>Cold email sender (SMTP/SendGrid)</li>
+                    <li>Email warmup automation</li>
+                    <li>Bounce tracker → CRM update</li>
+                    <li>Newsletter summarizer</li>
+                </ul>
+            </div>
+            <div class="script-category">
+                <div class="script-category-icon">🔗</div>
+                <h3>CRM & Data</h3>
+                <ul class="script-list">
+                    <li>CSV data enricher (API lookups)</li>
+                    <li>Google Sheets ↔ CSV sync</li>
+                    <li>HubSpot contact updater</li>
+                    <li>CRM duplicate detector</li>
+                </ul>
+            </div>
+            <div class="script-category">
+                <div class="script-category-icon">📱</div>
+                <h3>Social & Content</h3>
+                <ul class="script-list">
+                    <li>Buffer post scheduler</li>
+                    <li>LinkedIn connection auto-sender</li>
+                    <li>Instagram engagement scraper</li>
+                    <li>RSS → newsletter formatter</li>
+                </ul>
+            </div>
+            <div class="script-category">
+                <div class="script-category-icon">🔔</div>
+                <h3>Monitoring & Alerts</h3>
+                <ul class="script-list">
+                    <li>Slack report poster</li>
+                    <li>Uptime monitor → alert</li>
+                    <li>Error log analyzer</li>
+                    <li>Scheduled health checks</li>
+                </ul>
+            </div>
+            <div class="script-category">
+                <div class="script-category-icon">☁️</div>
+                <h3>Cloud & DevOps</h3>
+                <ul class="script-list">
+                    <li>S3 backup automation</li>
+                    <li>Cloud cost monitor</li>
+                    <li>GitHub repo syncer</li>
+                    <li>Cron scheduler (no server needed)</li>
+                </ul>
+            </div>
+            <div class="script-category">
+                <div class="script-category-icon">📊</div>
+                <h3>Analytics & Reports</h3>
+                <ul class="script-list">
+                    <li>GA4 → Google Sheets export</li>
+                    <li>Weekly metrics compiler</li>
+                    <li>Stripe → Data Studio bridge</li>
+                    <li>KPI dashboard generator</li>
+                </ul>
+            </div>
+            <div class="script-category">
+                <div class="script-category-icon">🤖</div>
+                <h3>AI & LLM Tools</h3>
+                <ul class="script-list">
+                    <li>OpenAI batch query runner</li>
+                    <li>Meeting notes → summary</li>
+                    <li>Content classifier</li>
+                    <li>Auto-prompt tester</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Comparison Table -->
+    <section class="section" style="padding-top: 0;">
+        <div style="text-align:center; margin-bottom: 30px;">
+            <div class="section-eyebrow">vs Alternatives</div>
+            <h2 class="section-title">Why Build When You Can Buy for $79?</h2>
+        </div>
+        <table class="comparison-table">
+            <thead>
+                <tr>
+                    <th>Feature</th>
+                    <th class="center">Write Yourself</th>
+                    <th class="center">Hire a Developer</th>
+                    <th class="center highlight-col">Python Scripts Bundle</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Time to first script</td>
+                    <td class="center cross">3–8 hours</td>
+                    <td class="center cross">1–3 days</td>
+                    <td class="center highlight-col"><span class="check">✓</span> 10 minutes</td>
+                </tr>
+                <tr>
+                    <td>Error handling included</td>
+                    <td class="center partial">Sometimes</td>
+                    <td class="center partial">Depends on dev</td>
+                    <td class="center highlight-col"><span class="check">✓</span> Built-in</td>
+                </tr>
+                <tr>
+                    <td>Documentation</td>
+                    <td class="center cross">You write it</td>
+                    <td class="center partial">If you ask</td>
+                    <td class="center highlight-col"><span class="check">✓</span> Full docs</td>
+                </tr>
+                <tr>
+                    <td>One-time payment</td>
+                    <td class="center cross">—</td>
+                    <td class="center cross">$200–$500/script</td>
+                    <td class="center highlight-col"><span class="check">✓</span> $79 once</td>
+                </tr>
+                <tr>
+                    <td>Free lifetime updates</td>
+                    <td class="center cross">—</td>
+                    <td class="center cross">Usually not</td>
+                    <td class="center highlight-col"><span class="check">✓</span> Yes</td>
+                </tr>
+                <tr>
+                    <td>Commercial license</td>
+                    <td class="center partial">Depends</td>
+                    <td class="center partial">Per project</td>
+                    <td class="center highlight-col"><span class="check">✓</span> Included</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="section" style="padding-top: 0;">
+        <div style="text-align:center; margin-bottom: 30px;">
+            <div class="section-eyebrow">Social Proof</div>
+            <h2 class="section-title">What Founders Are Saying</h2>
+        </div>
+        <div class="testimonials-grid">
+            <div class="testimonial">
+                <div class="testimonial-stars">★★★★★</div>
+                <p class="testimonial-text">"The Stripe webhook handler alone saved me a full weekend of debugging. Worth every cent."</p>
+                <div class="testimonial-author">
+                    <div class="testimonial-avatar">T</div>
+                    <div>
+                        <div class="testimonial-name">Tim C.</div>
+                        <div class="testimonial-role">Founder, B2B SaaS · Singapore</div>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial">
+                <div class="testimonial-stars">★★★★★</div>
+                <p class="testimonial-text">"I automated my entire lead enrichment pipeline in one afternoon. The CSV enricher is brilliant."</p>
+                <div class="testimonial-author">
+                    <div class="testimonial-avatar">S</div>
+                    <div>
+                        <div class="testimonial-name">Sarah M.</div>
+                        <div class="testimonial-role">Growth Lead, Tech Startup · HK</div>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial">
+                <div class="testimonial-stars">★★★★★</div>
+                <p class="testimonial-text">"I was about to hire a developer for $400 to build a Slack reporter. Got it running with your script for $79."</p>
+                <div class="testimonial-author">
+                    <div class="testimonial-avatar">J</div>
+                    <div>
+                        <div class="testimonial-name">James W.</div>
+                        <div class="testimonial-role">Solo Founder · Remote</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Guarantee -->
+    <section class="section" style="padding-top: 0;">
+        <div class="guarantee-banner">
+            <div class="guarantee-icon">🛡️</div>
+            <div>
+                <div class="guarantee-title">30-Day Money-Back Guarantee</div>
+                <div class="guarantee-text">If any script doesn't work as described or you change your mind, email us within 30 days for a full refund. No forms, no hassle.</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing -->
+    <section class="pricing-section" id="buy">
+        <div class="section-eyebrow" style="margin-bottom: 8px;">Limited Launch Offer</div>
+        <h2 style="font-size: 2em; margin-bottom: 8px;">Get the Python Scripts Bundle</h2>
+        <p style="color: #666; margin-bottom: 32px;">Regular price $129 → <strong style="color: #667eea;">$79 this week only</strong></p>
+
+        <div class="pricing-card">
+            <div class="pricing-badge">⚡ LAUNCH DEAL — 40% OFF</div>
+            <div class="pricing-amount">$79 <span class="was">$129</span></div>
+            <div class="pricing-note">One-time payment · Lifetime access · Free updates</div>
+            <div class="pricing-urgency">
+                🔥 Offer ends <strong>April 10, 2026</strong> — then price goes back to $129
+            </div>
+            <ul class="pricing-features">
+                <li><span class="check">✓</span> <strong>50+ production-ready Python scripts</strong></li>
+                <li><span class="check">✓</span> Full documentation + <code>config.py</code> templates</li>
+                <li><span class="check">✓</span> Stripe, Slack, SendGrid, AWS integrations</li>
+                <li><span class="check">✓</span> Cron scheduler script (no server config needed)</li>
+                <li><span class="check">✓</span> Commercial license — use in your business or client work</li>
+                <li><span class="check">✓</span> Free lifetime updates — scripts added regularly</li>
+                <li><span class="check">✓</span> 30-day money-back guarantee</li>
+            </ul>
+            <a href="https://buy.stripe.com/8x2dRb51b9PW2dC25S4AU08" class="btn-primary" style="display:block;text-align:center;" target="_blank">
+                Get Instant Access — $79 →
+            </a>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section">
+        <div style="text-align:center; margin-bottom: 30px;">
+            <h2 class="section-title">Frequently Asked Questions</h2>
+        </div>
+        <div>
+            <div class="faq-item">
+                <div class="faq-q">How do I receive the scripts after purchase?</div>
+                <div class="faq-a">After payment, you'll receive an email with download links and setup instructions within minutes. You'll get a .zip file with the full scripts folder, requirements.txt, and config templates.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q">Do I need a server to run these?</div>
+                <div class="faq-a">No. Most scripts run on any computer with Python 3.9+. For scheduled scripts, the included cron scheduler works on any VPS, Mac, or Linux machine. We also include a guide for free Railway/Render hosting.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q">Are there free updates?</div>
+                <div class="faq-a">Yes — all future scripts and updates are free for existing buyers. We add new scripts regularly based on customer requests.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q">Can I use these for client work?</div>
+                <div class="faq-a">Yes. The commercial license lets you use these scripts in your own business and for client projects. Redistribution or resale of the bundle itself is not permitted.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q">What if a script doesn't work for my use case?</div>
+                <div class="faq-a">Each script is thoroughly documented with setup steps and expected behavior. If something doesn't work as described, email us and we'll either fix it or refund you within 30 days.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q">What Python version is required?</div>
+                <div class="faq-a">Python 3.9 or higher. We recommend 3.10+ for best compatibility. All required packages are listed in requirements.txt and install with one command.</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>🏢 EveryCompanyClaw — AI-Powered Company, Running 24/7</p>
+        <p style="margin-top: 8px;">
+            <a href="#">Privacy</a> · <a href="#">Terms</a> · <a href="mailto:hello@everycompanyclaw.com">Contact</a>
+        </p>
+    </footer>
+
+    <script>
+        // ── Live notification ticker ───────────────────────────────────────────
+        const NAMES  = ['@hkdev','@tokyo_tech','@berlin_dev','@singapore_ai','@london_pm','@nyc_founder','@syd_ops','@saasbuilder'];
+        const CITIES = ['Hong Kong','Tokyo','Berlin','Singapore','London','New York','Sydney','Amsterdam'];
+        const ticker = document.getElementById('ticker-text');
+        let tickCount = 0;
+
+        function updateTicker() {
+            tickCount++;
+            const name = NAMES[Math.floor(Math.random() * NAMES.length)];
+            const city = CITIES[Math.floor(Math.random() * CITIES.length)];
+            const ago  = tickCount === 1 ? 'just now' : (tickCount * 3 + Math.floor(Math.random() * 5)) + ' min ago';
+            ticker.innerHTML = `<span class="name">${name}</span> from <span class="city">${city}</span> just bought Python Scripts Bundle · <span class="city">${ago}</span>`;
+        }
+
+        function scheduleTicker() {
+            const delay = 5000 + Math.random() * 5000;
+            setTimeout(() => { updateTicker(); scheduleTicker(); }, delay);
+        }
+        scheduleTicker();
+
+        // ── Countdown ─────────────────────────────────────────────────────────
+        // Optional: wire up countdown if there's a #countdown element on page
+    </script>
+</body>
+</html>

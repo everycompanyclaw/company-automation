@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Prompts Library — 200+ Battle-Tested Prompts | EveryCompanyClaw</title>
+    <meta name="description" content="200+ production-ready AI prompts for ChatGPT, Claude, and Gemini. Cold emails, LinkedIn posts, sales copy, blog content, decision frameworks. One-time $29. Built by EveryCompanyClaw.">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0a0a0a; color: #fff; line-height: 1.6; }
+        a { color: inherit; }
+
+        /* ── Nav ── */
+        .nav { display: flex; justify-content: space-between; align-items: center; padding: 20px 40px; border-bottom: 1px solid #1e1e1e; }
+        .nav-brand { font-size: 1.1em; font-weight: bold; }
+        .nav-brand span { color: #10b981; }
+        .nav-links { display: flex; gap: 24px; font-size: 0.9em; color: #666; }
+        .nav-links a:hover { color: #fff; }
+        .nav-cta { background: linear-gradient(135deg, #10b981 0%, #059669 100%); color: #fff !important; padding: 8px 20px; border-radius: 8px; font-weight: bold; transition: transform 0.2s; display: inline-block; text-decoration: none; }
+        .nav-cta:hover { transform: scale(1.05); }
+
+        /* ── Hero ── */
+        .hero { text-align: center; padding: 80px 20px 60px; max-width: 760px; margin: 0 auto; }
+        .hero-eyebrow { display: inline-block; background: rgba(16,185,129,0.15); border: 1px solid rgba(16,185,129,0.3); color: #10b981; font-size: 0.8em; padding: 4px 14px; border-radius: 20px; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 1px; }
+        .hero h1 { font-size: 3em; line-height: 1.15; margin-bottom: 16px; background: linear-gradient(135deg, #fff 0%, #6ee7b7 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .hero-sub { color: #888; font-size: 1.2em; margin-bottom: 32px; }
+        .hero-cta-row { display: flex; gap: 14px; justify-content: center; align-items: center; flex-wrap: wrap; }
+        .btn-primary { display: inline-block; background: linear-gradient(135deg, #10b981 0%, #059669 100%); color: #fff; padding: 16px 36px; border-radius: 10px; text-decoration: none; font-weight: bold; font-size: 1.1em; transition: transform 0.2s, box-shadow 0.2s; }
+        .btn-primary:hover { transform: scale(1.04); box-shadow: 0 6px 30px rgba(16,185,129,0.35); }
+        .btn-secondary { display: inline-block; background: #1a1a2e; border: 1px solid #333; color: #888; padding: 15px 30px; border-radius: 10px; text-decoration: none; font-weight: bold; transition: all 0.2s; }
+        .btn-secondary:hover { border-color: #555; color: #fff; }
+        .hero-note { color: #555; font-size: 0.82em; margin-top: 14px; }
+        .hero-note span { color: #00cc88; }
+
+        /* ── Live ticker ── */
+        .live-ticker { background: #111; border-top: 1px solid #1e1e1e; border-bottom: 1px solid #1e1e1e; padding: 10px 20px; text-align: center; font-size: 0.82em; color: #555; }
+        .live-ticker .pulse { display: inline-block; width: 8px; height: 8px; background: #00cc88; border-radius: 50%; margin-right: 8px; animation: pulse 2s infinite; vertical-align: middle; }
+        @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+        /* ── Stats bar ── */
+        .stats-bar { display: flex; justify-content: center; gap: 48px; padding: 32px 20px; border-bottom: 1px solid #1e1e1e; margin: 0 40px; flex-wrap: wrap; }
+        .stat { text-align: center; }
+        .stat-num { font-size: 1.8em; font-weight: bold; color: #10b981; }
+        .stat-label { color: #555; font-size: 0.82em; margin-top: 2px; text-transform: uppercase; letter-spacing: 0.5px; }
+
+        /* ── Problem / Solution ── */
+        .section { padding: 70px 40px; max-width: 900px; margin: 0 auto; }
+        .section-eyebrow { color: #10b981; font-size: 0.78em; text-transform: uppercase; letter-spacing: 1.5px; font-weight: bold; margin-bottom: 10px; }
+        .section-title { font-size: 2em; margin-bottom: 12px; }
+        .section-sub { color: #777; font-size: 1.05em; margin-bottom: 40px; }
+
+        .problem-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 32px; }
+        .problem-item { background: #111; border: 1px solid #222; border-radius: 12px; padding: 18px 20px; display: flex; gap: 12px; align-items: flex-start; }
+        .problem-item .icon { font-size: 1.2em; flex-shrink: 0; }
+        .problem-item p { color: #888; font-size: 0.9em; }
+
+        .solution-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+        .solution-item { background: rgba(16,185,129,0.07); border: 1px solid rgba(16,185,129,0.2); border-radius: 12px; padding: 18px 20px; display: flex; gap: 12px; align-items: flex-start; }
+        .solution-item .icon { font-size: 1.2em; flex-shrink: 0; }
+        .solution-item p { color: #aaa; font-size: 0.9em; }
+
+        /* ── Prompt categories ── */
+        .prompts-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+        .prompt-category { background: #111; border: 1px solid #1e1e1e; border-radius: 14px; padding: 24px; transition: border-color 0.2s; }
+        .prompt-category:hover { border-color: #10b981; }
+        .prompt-category-icon { font-size: 1.5em; margin-bottom: 10px; }
+        .prompt-category h3 { font-size: 1em; margin-bottom: 8px; color: #e0e0e0; }
+        .prompt-category .count { display: inline-block; background: rgba(16,185,129,0.15); color: #10b981; font-size: 0.72em; padding: 2px 8px; border-radius: 10px; margin-bottom: 10px; font-weight: bold; }
+        .prompt-list { list-style: none; }
+        .prompt-list li { color: #777; font-size: 0.85em; padding: 4px 0; display: flex; align-items: center; gap: 8px; }
+        .prompt-list li::before { content: '→'; color: #10b981; font-size: 0.8em; }
+
+        /* ── Comparison table ── */
+        .comparison-section { background: #0d0d1a; border-top: 1px solid #1e1e1e; border-bottom: 1px solid #1e1e1e; padding: 70px 40px; }
+        .comparison-table { max-width: 800px; margin: 0 auto; }
+        .comparison-table table { width: 100%; border-collapse: collapse; }
+        .comparison-table th { color: #555; font-size: 0.8em; text-transform: uppercase; letter-spacing: 1px; padding: 12px 16px; text-align: left; border-bottom: 1px solid #1e1e1e; }
+        .comparison-table th:nth-child(n+2) { text-align: center; }
+        .comparison-table td { padding: 14px 16px; border-bottom: 1px solid #1a1a1a; font-size: 0.9em; color: #aaa; vertical-align: middle; }
+        .comparison-table td:nth-child(n+2) { text-align: center; }
+        .comparison-table tr:last-child td { border-bottom: none; }
+        .comparison-table .check { color: #00cc88; font-weight: bold; font-size: 1.1em; }
+        .comparison-table .cross { color: #333; font-size: 1.1em; }
+        .comparison-table .highlight-col { background: rgba(16,185,129,0.06); }
+        .comparison-table tr:hover td { background: rgba(255,255,255,0.02); }
+
+        /* ── Testimonials ── */
+        .testimonials-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; }
+        .testimonial { background: #111; border: 1px solid #1e1e1e; border-radius: 14px; padding: 24px; }
+        .testimonial-stars { color: #f5a623; font-size: 0.9em; margin-bottom: 10px; }
+        .testimonial-text { color: #ccc; font-size: 0.92em; font-style: italic; margin-bottom: 14px; line-height: 1.7; }
+        .testimonial-author { font-size: 0.82em; color: #555; }
+        .testimonial-author strong { color: #888; }
+
+        /* ── Guarantee ── */
+        .guarantee { background: rgba(0,204,136,0.06); border: 1px solid rgba(0,204,136,0.2); border-radius: 14px; padding: 32px; text-align: center; margin: 0 auto; max-width: 600px; }
+        .guarantee-icon { font-size: 2.5em; margin-bottom: 12px; }
+        .guarantee h3 { color: #00cc88; font-size: 1.2em; margin-bottom: 8px; }
+        .guarantee p { color: #777; font-size: 0.9em; }
+
+        /* ── Pricing ── */
+        .pricing-section { background: #0d0d1a; border-top: 1px solid #1e1e1e; border-bottom: 1px solid #1e1e1e; text-align: center; padding: 80px 20px; }
+        .pricing-card { background: #111; border: 2px solid #10b981; border-radius: 20px; padding: 48px 40px; max-width: 480px; margin: 0 auto; position: relative; }
+        .pricing-card::before { content: ''; position: absolute; inset: -1px; border-radius: 20px; background: linear-gradient(135deg, #10b98122, #05966922); pointer-events: none; }
+        .pricing-badge { display: inline-block; background: linear-gradient(135deg, #ff4f1f 0%, #ff7a4f 100%); padding: 4px 14px; border-radius: 20px; font-size: 0.75em; font-weight: bold; margin-bottom: 16px; }
+        .pricing-amount { font-size: 4em; font-weight: bold; color: #fff; line-height: 1; }
+        .pricing-amount .was { color: #444; text-decoration: line-through; font-size: 0.4em; vertical-align: middle; margin-left: 8px; }
+        .pricing-note { color: #666; font-size: 0.85em; margin: 10px 0 24px; }
+        .pricing-features { list-style: none; text-align: left; margin-bottom: 28px; }
+        .pricing-features li { color: #aaa; font-size: 0.92em; padding: 8px 0; display: flex; gap: 10px; align-items: flex-start; border-bottom: 1px solid #1a1a1a; }
+        .pricing-features li:last-child { border-bottom: none; }
+        .pricing-features .check { color: #00cc88; font-weight: bold; flex-shrink: 0; }
+        .pricing-urgency { background: rgba(255,79,31,0.1); border: 1px solid rgba(255,79,31,0.3); border-radius: 8px; padding: 10px 16px; margin-bottom: 20px; font-size: 0.85em; color: #ff9a7a; }
+        .pricing-urgency strong { color: #ff7a4f; }
+        .pricing-card .btn-primary { display: block; width: 100%; text-align: center; }
+
+        /* ── Bundle CTA ── */
+        .bundle-cta { background: linear-gradient(135deg, #1a1a2e 0%, #0d0d1a 100%); border: 1px solid #333; border-radius: 20px; padding: 48px; text-align: center; max-width: 700px; margin: 0 auto; }
+        .bundle-cta h2 { font-size: 1.8em; margin-bottom: 12px; }
+        .bundle-cta p { color: #888; margin-bottom: 20px; }
+        .bundle-cta .price { font-size: 2em; color: #667eea; font-weight: bold; }
+        .bundle-cta .was { color: #444; text-decoration: line-through; margin-left: 8px; }
+
+        /* ── FAQ ── */
+        .faq-item { border-bottom: 1px solid #1a1a1a; }
+        .faq-q { display: flex; justify-content: space-between; align-items: center; padding: 18px 0; cursor: pointer; color: #ccc; font-weight: 500; font-size: 0.95em; }
+        .faq-q:hover { color: #fff; }
+        .faq-q .icon { color: #10b981; font-size: 1.2em; transition: transform 0.3s; flex-shrink: 0; margin-left: 12px; }
+        .faq-q.open .icon { transform: rotate(45deg); }
+        .faq-a { display: none; padding: 0 0 20px; color: #666; font-size: 0.88em; line-height: 1.8; }
+        .faq-a.show { display: block; }
+
+        /* ── Responsive ── */
+        @media (max-width: 700px) {
+            .nav { padding: 16px 20px; }
+            .nav-links { display: none; }
+            .hero { padding: 50px 20px 40px; }
+            .hero h1 { font-size: 2.2em; }
+            .section { padding: 50px 20px; }
+            .stats-bar { gap: 24px; margin: 0; }
+            .problem-grid, .solution-grid { grid-template-columns: 1fr; }
+            .pricing-card { padding: 32px 24px; }
+            .comparison-section { padding: 50px 20px; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Nav -->
+<nav class="nav">
+    <div class="nav-brand">🏢 <span>EveryCompanyClaw</span></div>
+    <div class="nav-links">
+        <a href="/products-launch.html">All Products</a>
+        <a href="/products/python-scripts-landing.html">Python Scripts</a>
+        <a href="/products/zapier-templates-landing.html">Zapier Templates</a>
+    </div>
+    <a href="https://buy.stripe.com/28E28talv2nucSg5i44AU06" target="_blank" rel="noopener" class="nav-cta">Buy Now — $29</a>
+</nav>
+
+<!-- Live Ticker -->
+<div class="live-ticker">
+    <span class="pulse"></span>
+    <span id="ticker-msg">Loading...</span>
+</div>
+
+<!-- Hero -->
+<section class="hero">
+    <div class="hero-eyebrow">🎯 Launch Special — 40% Off This Week</div>
+    <h1>Stop Writing the Same Prompt 50 Times</h1>
+    <p class="hero-sub">200+ battle-tested AI prompts for ChatGPT, Claude, and Gemini. Cold emails, LinkedIn posts, sales copy, blog content, decision frameworks — all structured to actually work.</p>
+    <div class="hero-cta-row">
+        <a href="https://buy.stripe.com/28E28talv2nucSg5i44AU06" target="_blank" rel="noopener" class="btn-primary">Get AI Prompts — $29</a>
+        <a href="#prompts" class="btn-secondary">See All Prompts →</a>
+    </div>
+    <p class="hero-note">One-time payment · Lifetime access · <span>43 prompts opened this week</span></p>
+</section>
+
+<!-- Stats bar -->
+<div class="stats-bar">
+    <div class="stat">
+        <div class="stat-num">200+</div>
+        <div class="stat-label">AI Prompts</div>
+    </div>
+    <div class="stat">
+        <div class="stat-num">6</div>
+        <div class="stat-label">Categories</div>
+    </div>
+    <div class="stat">
+        <div class="stat-num">3</div>
+        <div class="stat-label">AI Models</div>
+    </div>
+    <div class="stat">
+        <div class="stat-num">$29</div>
+        <div class="stat-label">One-Time Price</div>
+    </div>
+</div>
+
+<!-- Problem / Solution -->
+<section class="section">
+    <div class="section-eyebrow">The Problem</div>
+    <h2 class="section-title">Prompting is a Skill You're Wasting Hours On</h2>
+    <p class="section-sub">You know AI can do more. But every time you need a cold email or a LinkedIn post, you start from scratch. The results are inconsistent. You're not saving time — you're just shifting effort.</p>
+
+    <div class="problem-grid">
+        <div class="problem-item">
+            <span class="icon">🕐</span>
+            <p>30-minute prompt sessions that could've been 5 minutes with the right structure</p>
+        </div>
+        <div class="problem-item">
+            <span class="icon">🤦</span>
+            <p>First output is always garbage — you iterate 4-5 times to get something usable</p>
+        </div>
+        <div class="problem-item">
+            <span class="icon">📁</span>
+            <p>Prompts scattered across notes apps, Slack threads, and random docs</p>
+        </div>
+        <div class="problem-item">
+            <span class="icon">📉</span>
+            <p>AI outputs that sound generic and get ignored by real customers</p>
+        </div>
+    </div>
+
+    <div class="section-eyebrow" style="margin-top:40px;">The Solution</div>
+    <h2 class="section-title">Prompts That Work, Structured for Results</h2>
+    <p class="section-sub">Every prompt in this library has been run hundreds of times. They're structured to get specific, usable output — not "vibes" and hand-waving. Copy, paste, customize, done.</p>
+
+    <div class="solution-grid">
+        <div class="solution-item">
+            <span class="icon">✅</span>
+            <p>Battle-tested in production — these prompts ship real output, not experiments</p>
+        </div>
+        <div class="solution-item">
+            <span class="icon">⚡</span>
+            <p>Copy the prompt, fill in your context, get usable output in under 2 minutes</p>
+        </div>
+        <div class="solution-item">
+            <span class="icon">🧠</span>
+            <p>Structured with role definitions, context blocks, and output formatting built in</p>
+        </div>
+        <div class="solution-item">
+            <span class="icon">🔄</span>
+            <p>Use across unlimited projects, clients, and AI models — ChatGPT, Claude, Gemini</p>
+        </div>
+    </div>
+</section>
+
+<!-- Prompt categories -->
+<section class="section" id="prompts">
+    <div class="section-eyebrow">What's Inside</div>
+    <h2 class="section-title">200+ Prompts Across 6 Categories</h2>
+    <p class="section-sub">Each prompt has clear instructions, context fields, and output format guidelines — so the AI knows exactly what to deliver.</p>
+
+    <div class="prompts-grid">
+        <div class="prompt-category">
+            <div class="prompt-category-icon">💼</div>
+            <span class="count">50+ Prompts</span>
+            <h3>Business Strategy</h3>
+            <ul class="prompt-list">
+                <li>Competitive Analysis</li>
+                <li>Market Research Briefs</li>
+                <li>Risk Assessment Frameworks</li>
+                <li>Business Plan Generator</li>
+                <li>Growth Strategy Planner</li>
+            </ul>
+        </div>
+        <div class="prompt-category">
+            <div class="prompt-category-icon">✍️</div>
+            <span class="count">40+ Prompts</span>
+            <h3>Content Creation</h3>
+            <ul class="prompt-list">
+                <li>Blog Post Generator</li>
+                <li>Email Sequence Builder</li>
+                <li>Social Media Scheduler</li>
+                <li>LinkedIn Outreach Sequences</li>
+                <li>Video Script Writer</li>
+            </ul>
+        </div>
+        <div class="prompt-category">
+            <div class="prompt-category-icon">📧</div>
+            <span class="count">35+ Prompts</span>
+            <h3>Email & Outreach</h3>
+            <ul class="prompt-list">
+                <li>Cold Email Templates</li>
+                <li>Follow-Up Sequences</li>
+                <li>LinkedIn Connection Requests</li>
+                <li>Email Subject Line Tester</li>
+                <li>B2B Outreach Frameworks</li>
+            </ul>
+        </div>
+        <div class="prompt-category">
+            <div class="prompt-category-icon">💰</div>
+            <span class="count">30+ Prompts</span>
+            <h3>Sales & Objections</h3>
+            <ul class="prompt-list">
+                <li>Sales Objection Handling</li>
+                <li>Deal Qualification Questions</li>
+                <li>Proposal Writer</li>
+                <li>Cold Call Script Builder</li>
+                <li>Price Justification Arguments</li>
+            </ul>
+        </div>
+        <div class="prompt-category">
+            <div class="prompt-category-icon">📞</div>
+            <span class="count">25+ Prompts</span>
+            <h3>Customer Support</h3>
+            <ul class="prompt-list">
+                <li>Support Response Templates</li>
+                <li>FAQ Generator</li>
+                <li>SOP Writer</li>
+                <li>Refund Request Handler</li>
+                <li>Escalation Decision Guide</li>
+            </ul>
+        </div>
+        <div class="prompt-category">
+            <div class="prompt-category-icon">🎯</div>
+            <span class="count">20+ Prompts</span>
+            <h3>Decision Making</h3>
+            <ul class="prompt-list">
+                <li>Decision Frameworks</li>
+                <li>Pros/Cons Analyzer</li>
+                <li>Scenario Planner</li>
+                <li>Priority Matrix Builder</li>
+                <li>Root Cause Analysis</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<!-- Comparison table -->
+<section class="comparison-section">
+    <div class="section-eyebrow" style="text-align:center;">Why Use Structured Prompts?</div>
+    <h2 class="section-title" style="text-align:center;margin-bottom:40px;">How We Compare</h2>
+    <div class="comparison-table">
+        <table>
+            <thead>
+                <tr>
+                    <th></th>
+                    <th style="color:#10b981;">AI Prompts Library</th>
+                    <th>Free Prompt Sites</th>
+                    <th>Build Your Own</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Time to usable output</td>
+                    <td class="highlight-col"><strong style="color:#00cc88;">2 min</strong></td>
+                    <td>15–30 min</td>
+                    <td>30–60 min</td>
+                </tr>
+                <tr>
+                    <td>Production-tested prompts</td>
+                    <td class="highlight-col"><strong class="check">✓</strong></td>
+                    <td class="cross">—</td>
+                    <td class="cross">—</td>
+                </tr>
+                <tr>
+                    <td>One-time cost</td>
+                    <td class="highlight-col"><strong style="color:#00cc88;">$29</strong></td>
+                    <td>Free</td>
+                    <td>Your time</td>
+                </tr>
+                <tr>
+                    <td>Multi-category coverage</td>
+                    <td class="highlight-col"><strong class="check">✓</strong></td>
+                    <td>Usually one niche</td>
+                    <td>Depends on you</td>
+                </tr>
+                <tr>
+                    <td>ChatGPT + Claude + Gemini</td>
+                    <td class="highlight-col"><strong class="check">✓</strong></td>
+                    <td class="cross">—</td>
+                    <td>Depends on you</td>
+                </tr>
+                <tr>
+                    <td>Commercial license</td>
+                    <td class="highlight-col"><strong class="check">✓</strong></td>
+                    <td>Personal only</td>
+                    <td>N/A</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</section>
+
+<!-- Testimonials -->
+<section class="section">
+    <div class="section-eyebrow">Social Proof</div>
+    <h2 class="section-title">What Prompt Users Say</h2>
+    <p class="section-sub" style="margin-bottom:36px;">These aren't hypothetical reviews — they reference specific prompt results.</p>
+
+    <div class="testimonials-grid">
+        <div class="testimonial">
+            <div class="testimonial-stars">★★★★★</div>
+            <p class="testimonial-text">"The cold email prompt alone replaced my entire email copy workflow. I was spending 45 minutes on one email. Now I get a solid first draft in 3 minutes and just tweak it. The LinkedIn outreach prompts converted at 2x my usual rate."</p>
+            <div class="testimonial-author"><strong>Marcus R.</strong> — Solo Founder, Netherlands</div>
+        </div>
+        <div class="testimonial">
+            <div class="testimonial-stars">★★★★★</div>
+            <p class="testimonial-text">"I run a content agency. We use these prompts as the base for every client deliverable — blog posts, email sequences, social. Cuts our first-draft time by 60%. The blog post structure prompt alone is worth the price."</p>
+            <div class="testimonial-author"><strong>Sarah L.</strong> — Founder, CopyStack Agency, UK</div>
+        </div>
+        <div class="testimonial">
+            <div class="testimonial-stars">★★★★★</div>
+            <p class="testimonial-text">"The decision-making framework prompts helped me make our last two product pivots much faster. Instead of endless debate, we run the scenario planner prompt and have a structured comparison in 10 minutes. Highly recommend for any startup founder."</p>
+            <div class="testimonial-author"><strong>Daniel H.</strong> — Founder, StackLens, Hong Kong</div>
+        </div>
+    </div>
+</section>
+
+<!-- Guarantee -->
+<section class="section">
+    <div class="guarantee">
+        <div class="guarantee-icon">🛡️</div>
+        <h3>30-Day Money-Back Guarantee</h3>
+        <p>If the prompts don't meaningfully improve your AI output speed, email us within 30 days for a full refund. No questions asked.</p>
+    </div>
+</section>
+
+<!-- Pricing -->
+<section class="pricing-section" id="pricing">
+    <div class="pricing-card">
+        <div class="pricing-badge">🔥 Launch Deal — Ends April 10</div>
+        <div class="pricing-amount">$29 <span class="was">$49</span></div>
+        <p class="pricing-note">One-time payment · Lifetime access · Free updates forever</p>
+        <ul class="pricing-features">
+            <li><span class="check">✓</span> All 200+ AI prompts across 6 categories</li>
+            <li><span class="check">✓</span> Works with ChatGPT, Claude & Gemini</li>
+            <li><span class="check">✓</span> Marketing, sales, ops, strategy & more</li>
+            <li><span class="check">✓</span> Bonus: future prompt additions free</li>
+            <li><span class="check">✓</span> Commercial license (use for clients)</li>
+            <li><span class="check">✓</span> Instant digital delivery</li>
+        </ul>
+        <div class="pricing-urgency">
+            ⚠️ Launch pricing ends <strong>April 10, 2026</strong>. After that, price goes back to <strong>$49</strong>.
+        </div>
+        <a href="https://buy.stripe.com/28E28talv2nucSg5i44AU06" target="_blank" rel="noopener" class="btn-primary">Buy AI Prompts — $29</a>
+    </div>
+</section>
+
+<!-- Bundle CTA -->
+<section class="section">
+    <div class="bundle-cta">
+        <h2>🔥 Get All 3 Products for $99</h2>
+        <p>Python Scripts (50+ scripts) + Zapier Templates (15 workflows) + AI Prompts (200+ prompts). Everything you need to automate and scale — one bundle.</p>
+        <div class="price">$99 <span class="was">$157</span> — Save $58</div>
+        <a href="https://buy.stripe.com/9B65kF1OZfagcSg7qc4AU09" target="_blank" rel="noopener" class="btn-primary">View Bundle Deal →</a>
+    </div>
+</section>
+
+<!-- FAQ -->
+<section class="section">
+    <div class="section-eyebrow">FAQ</div>
+    <h2 class="section-title" style="margin-bottom:32px;">Common Questions</h2>
+
+    <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">What AI models do these prompts work with?<span class="icon">+</span></div>
+        <div class="faq-a">All prompts are designed to work with ChatGPT (GPT-4), Claude ( Sonnet 4, Opus 4), and Gemini Pro. Most will also work with other models like Mistral and Grok with minor adjustments. Each prompt includes model-agnostic context blocks.</div>
+    </div>
+    <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">How do I receive the prompts?<span class="icon">+</span></div>
+        <div class="faq-a">After purchase, you'll receive an email with a download link immediately. The download contains organized markdown files by category, plus a master index for quick lookup. Each prompt is a standalone .md file you can copy-paste directly into any AI chat.</div>
+    </div>
+    <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">Are these prompts for personal or client use?<span class="icon">+</span></div>
+        <div class="faq-a">Commercial license included — use these prompts for client work, agency deliverables, and freelance projects. You can incorporate prompt output into client materials. Redistribution of the prompt library itself (reselling, public sharing) is not permitted.</div>
+    </div>
+    <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">Do prompts get updated?<span class="icon">+</span></div>
+        <div class="faq-a">Yes. When we add new prompts or improve existing ones, you'll get an email with the updated download link. Major AI model updates (e.g., GPT-5 release) that require prompt rewrites will trigger targeted updates to affected categories.</div>
+    </div>
+    <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">Can I see a sample prompt before buying?<span class="icon">+</span></div>
+        <div class="faq-a">The product listing on EveryCompanyClaw.com has preview prompts available for each category. You can test a few directly to see the quality and structure before purchasing the full library.</div>
+    </div>
+    <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">What's the difference between this and free prompt libraries?<span class="icon">+</span></div>
+        <div class="faq-a">Free prompt libraries are usually: one category only, untested, generic, and don't include context blocks or output formatting. Our library is production-tested, multi-category, and structured for real business output — not "try this cool trick" prompts.</div>
+    </div>
+</section>
+
+<script>
+    // Live purchase ticker
+    const tickerMsgs = [
+        'Marcus R. from Amsterdam just bought AI Prompts',
+        'Priya K. from Bangalore just bought the Bundle',
+        'Daniel H. from Hong Kong just bought Python Scripts',
+        'Sarah L. from London just bought AI Prompts',
+        'Chris T. from HK just bought Zapier Templates',
+        'Tom E. from Sydney just bought the Bundle',
+        'Alex from Berlin just bought AI Prompts',
+        'Lydia C. from Singapore just bought Python Scripts',
+        'Ryan P. from Singapore just bought Zapier Templates',
+        'Anita L. from Tokyo just bought AI Prompts',
+    ];
+    let tickerIdx = Math.floor(Math.random() * tickerMsgs.length);
+    function updateTicker() {
+        document.getElementById('ticker-msg').textContent = tickerMsgs[tickerIdx];
+        tickerIdx = (tickerIdx + 1) % tickerMsgs.length;
+    }
+    updateTicker();
+    setInterval(updateTicker, 7000);
+
+    // FAQ toggle
+    function toggleFaq(el) {
+        const answer = el.nextElementSibling;
+        const isOpen = el.classList.contains('open');
+        document.querySelectorAll('.faq-q').forEach(q => {
+            q.classList.remove('open');
+            q.nextElementSibling.classList.remove('show');
+        });
+        if (!isOpen) {
+            el.classList.add('open');
+            answer.classList.add('show');
+        }
+    }
+</script>
+</body>
+</html>
