@@ -30,6 +30,17 @@
         .vote-item { text-align: center; }
         .vote-number { font-size: 2.5em; font-weight: bold; color: #667eea; }
         .vote-label { color: #666; font-size: 0.85em; margin-top: 4px; }
+
+        /* Countdown timer */
+        .countdown-wrap { background: linear-gradient(135deg, #1a1a2e 0%, #0d0d1a 100%); border: 1px solid #333; border-radius: 12px; padding: 20px 24px; text-align: center; margin: 24px 0; }
+        .countdown-wrap h3 { font-size: 0.9em; color: #888; margin-bottom: 10px; letter-spacing: 0.05em; text-transform: uppercase; }
+        .countdown-digits { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; }
+        .cd-unit { text-align: center; min-width: 64px; }
+        .cd-num { font-size: 2.2em; font-weight: bold; color: #667eea; line-height: 1; }
+        .cd-label { font-size: 0.7em; color: #555; text-transform: uppercase; letter-spacing: 0.08em; margin-top: 4px; }
+        .cd-sep { font-size: 2em; color: #333; align-self: center; padding-bottom: 14px; }
+        .countdown-ended { color: #ff6154; font-size: 1.2em; font-weight: bold; padding: 10px 0; }
+        .countdown-ended-msg { color: #888; font-size: 0.9em; margin-top: 6px; }
         
         /* Products */
         .products { padding: 40px 0; }
@@ -93,6 +104,10 @@
             .vote-counter { gap: 20px; }
             .cta-wrap { flex-direction: column; }
             .cta, .cta-secondary { text-align: center; width: 100%; }
+            .countdown-digits { gap: 8px; }
+            .cd-unit { min-width: 52px; }
+            .cd-num { font-size: 1.6em; }
+            .cd-sep { font-size: 1.4em; padding-bottom: 10px; }
         }
     </style>
 </head>
@@ -109,7 +124,7 @@
         <div class="hero">
             <h1>EveryCompanyClaw</h1>
             <p class="subtitle">The AI company that runs itself 24/7 — marketing, sales, ops, all autonomous. No employees, no office, just results.</p>
-            <p class="hero-note">🎉 Launch Week Special: Up to 40% off all products — ends April 10</p>
+            <p class="hero-note">🎉 Launch Week Special: Up to 41% off all products — ends April 10</p>
         </div>
         
         <!-- Final Day Banner -->
@@ -129,8 +144,24 @@
                 <div class="vote-label">Products</div>
             </div>
             <div class="vote-item">
-                <div class="vote-number">40%</div>
+                <div class="vote-number">Up to 41%</div>
                 <div class="vote-label">Launch Discount</div>
+            </div>
+        </div>
+
+        <!-- Live Countdown Timer -->
+        <div class="countdown-wrap">
+            <h3>⏰ Offer Ends In</h3>
+            <div class="countdown-digits" id="countdown-digits">
+                <div class="cd-unit"><div class="cd-num" id="cd-hours">--</div><div class="cd-label">Hours</div></div>
+                <div class="cd-sep">:</div>
+                <div class="cd-unit"><div class="cd-num" id="cd-minutes">--</div><div class="cd-label">Minutes</div></div>
+                <div class="cd-sep">:</div>
+                <div class="cd-unit"><div class="cd-num" id="cd-seconds">--</div><div class="cd-label">Seconds</div></div>
+            </div>
+            <div class="countdown-ended" id="countdown-ended" style="display:none;">
+                🎉 Launch Complete — Thank You!
+                <div class="countdown-ended-msg">EveryCompanyClaw launch week has ended. Check back soon for future deals.</div>
             </div>
         </div>
         
@@ -297,6 +328,34 @@
             if (current >= target) { current = target; clearInterval(interval); }
             totalEl.textContent = current;
         }, 40);
+
+        // Countdown timer to April 10, 2026 23:59:59 UTC (end of launch day)
+        const DEADLINE = new Date('2026-04-10T23:59:59Z').getTime();
+        const cdDigits = document.getElementById('countdown-digits');
+        const cdEnded = document.getElementById('countdown-ended');
+        const cdHours = document.getElementById('cd-hours');
+        const cdMins = document.getElementById('cd-minutes');
+        const cdSecs = document.getElementById('cd-seconds');
+
+        function tickCountdown() {
+            const now = Date.now();
+            const diff = DEADLINE - now;
+            if (diff <= 0) {
+                cdDigits.style.display = 'none';
+                cdEnded.style.display = 'block';
+                return;
+            }
+            const totalSecs = Math.floor(diff / 1000);
+            const h = Math.floor(totalSecs / 3600);
+            const m = Math.floor((totalSecs % 3600) / 60);
+            const s = totalSecs % 60;
+            cdHours.textContent = String(h).padStart(2, '0');
+            cdMins.textContent = String(m).padStart(2, '0');
+            cdSecs.textContent = String(s).padStart(2, '0');
+        }
+
+        tickCountdown();
+        setInterval(tickCountdown, 1000);
     </script>
 </body>
 </html>

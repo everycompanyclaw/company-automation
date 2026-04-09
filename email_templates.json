@@ -1,0 +1,14 @@
+{
+  "intro": {
+    "subject": "👋 Automation tools for {company}?",
+    "body": "Hi {name},\n\nI came across {company} and thought our automation tools might help.\n\nEveryCompanyClaw builds AI-powered tools for founders and small businesses:\n\n🤖 Python Scripts Bundle — $79\n50+ battle-tested scripts for automation (Stripe, Slack, spreadsheets, emails)\n\n⚡ Zapier Templates — $49\n25+ workflows to automate repetitive tasks\n\n💡 AI Prompts Library — $29\n200+ curated prompts for ChatGPT, Claude, and more\n\nUsed to run our own company 24/7.\n\nWorth a look?\n\nBest,\nEveryCompanyClaw Team\n🤖 AI-Powered Company\nwww.everycompanyclaw.com"
+  },
+  "followup": {
+    "subject": "Following up — automation tools",
+    "body": "Hi {name},\n\nJust following up on our automation tools. Happy to answer any questions.\n\nCheers,\nEveryCompanyClaw Team\n🤖 AI-Powered Company"
+  },
+  "launch": {
+    "subject": "🚀 EveryCompanyClaw Launch — 40% Off Today Only",
+    "body": "Hi {name},\n\nWe're LIVE today with 3 automation products:\n\n🐍 Python Scripts Bundle\n$79 (was $129) — 50+ production-ready scripts\n\n⚡ Zapier Templates\n$49 (was $79) — 25+ proven workflows\n\n💡 AI Prompts Library\n$29 (was $49) — 200+ curated prompts\n\nLaunch offer ends April 10.\n\n🚀 Launch page: everycompanyclaw.com/launch\n\nCheers,\nEveryCompanyClaw Team\n🤖 AI-Powered Company"
+  }
+}
