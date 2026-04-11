@@ -168,6 +168,67 @@
             body { padding-bottom: 70px; }
             .vs-grid { grid-template-columns: 1fr !important; }
         }
+
+        /* Roadmap */
+        .roadmap {
+            max-width: 1100px;
+            margin: 60px auto;
+            padding: 0 20px;
+            text-align: center;
+        }
+        .roadmap-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-top: 30px;
+            margin-bottom: 20px;
+        }
+        .roadmap-card {
+            background: #161616;
+            border: 1px solid #2a2a2a;
+            border-radius: 12px;
+            padding: 28px 20px;
+            text-align: left;
+            transition: border-color 0.2s;
+        }
+        .roadmap-card:hover { border-color: #7c3aed; }
+        .roadmap-icon {
+            font-size: 2.4em;
+            margin-bottom: 10px;
+        }
+        .roadmap-card h3 {
+            color: #fff;
+            font-size: 1.05em;
+            margin: 0 0 10px;
+        }
+        .roadmap-card p {
+            color: #888;
+            font-size: 0.88em;
+            line-height: 1.5;
+            margin: 0 0 14px;
+        }
+        .roadmap-tag {
+            display: inline-block;
+            background: #1a1a2e;
+            color: #a78bfa;
+            border: 1px solid #3b2d6e;
+            border-radius: 20px;
+            padding: 3px 12px;
+            font-size: 0.78em;
+            font-weight: 600;
+        }
+        .roadmap-note {
+            color: #666;
+            font-size: 0.88em;
+            padding: 16px 24px;
+            background: #0f0f12;
+            border-radius: 10px;
+            border: 1px solid #1e1e28;
+        }
+        .roadmap-note strong { color: #a3e635; }
+        @media (max-width: 700px) {
+            .roadmap-grid { grid-template-columns: 1fr !important; }
+        }
     </style>
 </head>
 <body>
@@ -540,6 +601,35 @@
                 <div class="faq-question">What payment methods do you accept?<span class="faq-icon">+</span></div>
                 <div class="faq-answer">We accept all major credit/debit cards via Stripe (Visa, Mastercard, Amex). Secure checkout, encrypted payment processing.</div>
             </div>
+        </div>
+
+        <!-- Roadmap Teaser -->
+        <div class="roadmap">
+            <div class="section-header">
+                <h2>🚀 What's Coming Next</h2>
+                <p class="section-sub">We're building more tools to complete your automation stack. All future products are included free for existing bundle buyers.</p>
+            </div>
+            <div class="roadmap-grid">
+                <div class="roadmap-card">
+                    <div class="roadmap-icon">📊</div>
+                    <h3>Analytics Dashboard</h3>
+                    <p>Real-time automation metrics, task volumes, and ROI tracking. See exactly what your automations are doing every day.</p>
+                    <div class="roadmap-tag">Coming Q2 2026</div>
+                </div>
+                <div class="roadmap-card">
+                    <div class="roadmap-icon">🔔</div>
+                    <h3>Notification Engine</h3>
+                    <p>Unified notification hub for Slack, Discord, Telegram, and email. Route automation events anywhere with a single config.</p>
+                    <div class="roadmap-tag">Coming Q2 2026</div>
+                </div>
+                <div class="roadmap-card">
+                    <div class="roadmap-icon">🔗</div>
+                    <h3>CRM Connector Pack</h3>
+                    <p>Native connectors for HubSpot, Salesforce, and Pipedrive. Sync leads, deals, and contacts automatically with your existing CRM.</p>
+                    <div class="roadmap-tag">Coming Q3 2026</div>
+                </div>
+            </div>
+            <div class="roadmap-note">✨ <strong>Bundle buyers get all future products free.</strong> Join now and your bundle grows with you.</div>
         </div>
         
         <footer>
