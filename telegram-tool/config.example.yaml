@@ -1,0 +1,100 @@
+# EveryCompanyClaw Telegram Scraper — Configuration
+#
+# Copy this file to config.yaml and fill in your credentials.
+# Get your API credentials at: https://my.telegram.org/apps
+#
+# WARNING: Keep this file private. Never commit it to version control.
+
+telegram:
+  api_id: "YOUR_API_ID"          # Integer from my.telegram.org
+  api_hash: "YOUR_API_HASH"        # String from my.telegram.org
+  phone: "+1234567890"            # Phone number with country code
+  session_name: "telegram_scraper"
+
+scraper:
+  # Maximum messages to fetch per channel (0 = unlimited)
+  max_messages: 10000
+
+  # Delay between requests in seconds (avoid rate limits)
+  request_delay: 1.0
+
+  # Date range filter (ISO format)
+  # start_date: "2024-01-01"
+  # end_date: "2024-12-31"
+
+monitoring:
+  # Enable keyword monitoring mode
+  enabled: false
+
+  # Keywords to watch for (case-insensitive)
+  keywords:
+    - "bitcoin"
+    - "launch"
+    - "airdrop"
+    - "update"
+
+  # Alert threshold: minimum matches before alerting
+  alert_threshold: 3
+
+  # Check interval in seconds (for continuous monitoring)
+  check_interval: 300
+
+output:
+  # Default output format: json, csv, or both
+  default_format: "json"
+
+  # Output directory
+  output_dir: "./output"
+
+  # Include media file IDs in output (not the files themselves)
+  include_media: false
+
+analysis:
+  # Enable trending topic detection
+  detect_trends: true
+
+  # Number of top trending keywords to show
+  top_trends: 20
+
+  # Enable basic sentiment analysis
+  sentiment_analysis: true
+
+  # Minimum word length for trend analysis
+  min_word_length: 4
+
+  # Words to exclude from trend analysis (stopwords)
+  stopwords:
+    - "the"
+    - "and"
+    - "is"
+    - "are"
+    - "for"
+    - "that"
+    - "this"
+    - "with"
+    - "you"
+    - "your"
+    - "from"
+    - "have"
+    - "has"
+    - "was"
+    - "were"
+    - "been"
+    - "but"
+    - "not"
+    - "they"
+    - "their"
+    - "what"
+    - "which"
+    - "who"
+    - "when"
+    - "where"
+    - "how"
+    - "all"
+    - "can"
+    - "will"
+    - "just"
+    - "about"
+    - "would"
+    - "could"
+    - "should"

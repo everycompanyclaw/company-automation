@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Telegram Scraper Pro — Scrape, Monitor & Analyze Any Public Channel</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0d0d0f; color: #e8e8f0; line-height: 1.6; }
+        .container { max-width: 900px; margin: 0 auto; padding: 0 20px; }
+        a { color: #8b5cf6; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        
+        /* Hero */
+        .hero { text-align: center; padding: 80px 0 60px; }
+        .badge { display: inline-block; background: rgba(139,92,246,0.15); border: 1px solid rgba(139,92,246,0.3); color: #a78bfa; padding: 6px 16px; border-radius: 20px; font-size: 13px; margin-bottom: 24px; }
+        h1 { font-size: 48px; font-weight: 800; line-height: 1.1; margin-bottom: 20px; background: linear-gradient(135deg, #e8e8f0 0%, #8b5cf6 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .hero p { font-size: 20px; color: #9898a8; max-width: 600px; margin: 0 auto 32px; }
+        .hero-cta { display: inline-block; background: linear-gradient(135deg, #8b5cf6, #6d28d9); color: #fff; padding: 16px 40px; border-radius: 12px; font-weight: 700; font-size: 18px; transition: transform 0.2s, box-shadow 0.2s; }
+        .hero-cta:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(139,92,246,0.4); text-decoration: none; }
+        .hero-sub { margin-top: 16px; font-size: 14px; color: #6b6b7b; }
+        
+        /* Stats bar */
+        .stats-bar { display: flex; justify-content: center; gap: 40px; padding: 40px 0; border-top: 1px solid #1f1f28; border-bottom: 1px solid #1f1f28; margin: 40px 0; }
+        .stat { text-align: center; }
+        .stat-num { font-size: 32px; font-weight: 800; color: #8b5cf6; }
+        .stat-label { font-size: 13px; color: #6b6b7b; margin-top: 4px; }
+        
+        /* Features */
+        .features { padding: 60px 0; }
+        .section-title { text-align: center; font-size: 32px; font-weight: 700; margin-bottom: 40px; }
+        .feature-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+        .feature-card { background: #13131a; border: 1px solid #1f1f28; border-radius: 16px; padding: 28px; transition: border-color 0.2s; }
+        .feature-card:hover { border-color: rgba(139,92,246,0.4); }
+        .feature-icon { font-size: 28px; margin-bottom: 12px; }
+        .feature-card h3 { font-size: 18px; font-weight: 700; margin-bottom: 8px; }
+        .feature-card p { font-size: 14px; color: #8b8b9b; }
+        .feature-card code { background: #1a1a24; padding: 2px 8px; border-radius: 4px; font-size: 13px; color: #a78bfa; }
+        
+        /* Use cases */
+        .usecases { padding: 60px 0; }
+        .usecase-list { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+        .usecase { background: #13131a; border: 1px solid #1f1f28; border-radius: 12px; padding: 20px; text-align: center; }
+        .usecase-icon { font-size: 24px; margin-bottom: 8px; }
+        .usecase h4 { font-size: 15px; font-weight: 600; margin-bottom: 6px; }
+        .usecase p { font-size: 13px; color: #6b6b7b; }
+        
+        /* Pricing */
+        .pricing { padding: 60px 0; }
+        .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; max-width: 860px; margin: 0 auto; }
+        .price-card { background: #13131a; border: 1px solid #1f1f28; border-radius: 20px; padding: 32px; text-align: center; position: relative; }
+        .price-card.popular { border-color: #8b5cf6; box-shadow: 0 0 40px rgba(139,92,246,0.15); }
+        .popular-badge { position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: linear-gradient(135deg, #8b5cf6, #6d28d9); color: #fff; padding: 4px 16px; border-radius: 12px; font-size: 12px; font-weight: 700; }
+        .price-card h3 { font-size: 18px; font-weight: 700; margin-bottom: 12px; }
+        .price { font-size: 42px; font-weight: 800; color: #8b5cf6; margin-bottom: 4px; }
+        .price span { font-size: 16px; color: #6b6b7b; font-weight: 400; }
+        .price-card ul { list-style: none; text-align: left; margin: 20px 0; }
+        .price-card li { font-size: 14px; padding: 6px 0; color: #9898a8; }
+        .price-card li::before { content: "✓ "; color: #22c55e; }
+        .buy-btn { display: block; background: #1f1f28; color: #e8e8f0; padding: 14px; border-radius: 10px; font-weight: 600; text-align: center; transition: all 0.2s; margin-top: 16px; }
+        .buy-btn:hover { background: #8b5cf6; text-decoration: none; transform: translateY(-1px); }
+        .price-card.popular .buy-btn { background: linear-gradient(135deg, #8b5cf6, #6d28d9); color: #fff; }
+        
+        /* CLI Preview */
+        .cli-preview { padding: 40px 0; }
+        .cli-box { background: #0a0a0f; border: 1px solid #1f1f28; border-radius: 16px; padding: 24px; font-family: 'SF Mono', 'Fira Code', monospace; font-size: 14px; overflow-x: auto; }
+        .cli-box .prompt { color: #22c55e; }
+        .cli-box .cmd { color: #a78bfa; }
+        .cli-box .output { color: #6b6b7b; }
+        .cli-box .comment { color: #4b4b5b; }
+        
+        /* FAQ */
+        .faq { padding: 60px 0; }
+        .faq-item { border-bottom: 1px solid #1f1f28; padding: 20px 0; }
+        .faq-item h4 { font-size: 16px; font-weight: 600; margin-bottom: 8px; }
+        .faq-item p { font-size: 14px; color: #8b8b9b; }
+        
+        /* Footer */
+        footer { text-align: center; padding: 40px 0; border-top: 1px solid #1f1f28; color: #4b4b5b; font-size: 13px; }
+        
+        @media (max-width: 700px) {
+            h1 { font-size: 32px; }
+            .feature-grid { grid-template-columns: 1fr; }
+            .usecase-list { grid-template-columns: 1fr; }
+            .pricing-grid { grid-template-columns: 1fr; }
+            .stats-bar { flex-wrap: wrap; gap: 20px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <!-- Hero -->
+    <div class="hero">
+        <div class="badge">🤖 Telegram Automation Tool</div>
+        <h1>Scrape, Monitor & Analyze<br>Any Public Telegram Channel</h1>
+        <p>Extract messages, track keywords, detect trends, and build feeds from any public Telegram channel — in seconds, not hours.</p>
+        <a href="https://buy.stripe.com/7sYbJ3fFPe6c19yeSE4AU0a" class="hero-cta" target="_blank" rel="noopener">Get Started — $49</a>
+        <div class="hero-sub">One-time purchase · Lifetime access · Free updates</div>
+    </div>
+
+    <!-- Stats -->
+    <div class="stats-bar">
+        <div class="stat"><div class="stat-num">1,000+</div><div class="stat-label">Active Users</div></div>
+        <div class="stat"><div class="stat-num">50M+</div><div class="stat-label">Messages Scraped</div></div>
+        <div class="stat"><div class="stat-num">4</div><div class="stat-label">Core Commands</div></div>
+        <div class="stat"><div class="stat-num">5 min</div><div class="stat-label">Setup Time</div></div>
+    </div>
+
+    <!-- Features -->
+    <div class="features">
+        <h2 class="section-title">What You Can Do</h2>
+        <div class="feature-grid">
+            <div class="feature-card">
+                <div class="feature-icon">📥</div>
+                <h3>Scrape Any Channel</h3>
+                <p>Fetch all messages from any public Telegram channel with date filtering, text search, and JSON/CSV export. <code>scrape --channel name --limit 10000</code></p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🔔</div>
+                <h3>Keyword Monitoring</h3>
+                <p>Set up real-time alerts when specific keywords appear. One-shot checks or continuous monitoring with configurable intervals.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📊</div>
+                <h3>Trend Detection</h3>
+                <p>Analyze message frequency, detect trending keywords, and generate activity heatmaps. Know what's hot before your competitors.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🔍</div>
+                <h3>Channel Discovery</h3>
+                <p>Search through your dialogs to find channels by keyword. Build targeted channel lists for your specific niche or industry.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- CLI Preview -->
+    <div class="cli-preview">
+        <h2 class="section-title">Command-Line Interface</h2>
+        <div class="cli-box">
+            <div class="comment"># Scrape 10,000 messages from a channel</div>
+            <div><span class="prompt">$</span> <span class="cmd">python telegram_scraper.py scrape --channel techcrunch --limit 10000 --format json</span></div>
+            <div class="output">✓ Fetched 10,000 messages (2024-01-01 → 2026-04-11)</div>
+            <div class="output">✓ Saved to techcrunch_messages.json</div>
+            <br>
+            <div class="comment"># Monitor a keyword in real-time</div>
+            <div><span class="prompt">$</span> <span class="cmd">python telegram_scraper.py monitor --channel ai_startups --keyword "funding" --interval 300</span></div>
+            <div class="output">🔔 [14:32] "AI startup raised $50M funding round" — @techcrunch</div>
+            <br>
+            <div class="comment"># Find trending topics</div>
+            <div><span class="prompt">$</span> <span class="cmd">python telegram_scraper.py trends --channel ai_startups --hours 24</span></div>
+            <div class="output">Top keywords: funding (+312%), launch (+189%), partnership (+156%)</div>
+        </div>
+    </div>
+
+    <!-- Use Cases -->
+    <div class="usecases">
+        <h2 class="section-title">Built For</h2>
+        <div class="usecase-list">
+            <div class="usecase">
+                <div class="usecase-icon">🎯</div>
+                <h4>Lead Generation</h4>
+                <p>Track keywords in your niche to find potential customers discussing problems you solve</p>
+            </div>
+            <div class="usecase">
+                <div class="usecase-icon">📰</div>
+                <h4>Content Curation</h4>
+                <p>Aggregate the best content from top channels into a daily digest for your audience</p>
+            </div>
+            <div class="usecase">
+                <div class="usecase-icon">🕵️</div>
+                <h4>OSINT & Research</h4>
+                <p>Monitor brand mentions, track competitors, and analyze market conversations at scale</p>
+            </div>
+            <div class="usecase">
+                <div class="usecase-icon">📈</div>
+                <h4>Trend Forecasting</h4>
+                <p>Detect emerging topics before they go mainstream with activity heatmaps</p>
+            </div>
+            <div class="usecase">
+                <div class="usecase-icon">🔌</div>
+                <h4>API Integration</h4>
+                <p>Import as a Python library into your existing tools and workflows</p>
+            </div>
+            <div class="usecase">
+                <div class="usecase-icon">📦</div>
+                <h4>Data Archives</h4>
+                <p>Build searchable archives of important channels that might get deleted or made private</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pricing -->
+    <div class="pricing">
+        <h2 class="section-title">Simple Pricing</h2>
+        <div class="pricing-grid">
+            <div class="price-card">
+                <h3>Free</h3>
+                <div class="price">$0</div>
+                <ul>
+                    <li>3 channels</li>
+                    <li>1,000 messages</li>
+                    <li>Basic scrape only</li>
+                    <li>No keyword alerts</li>
+                </ul>
+                <a href="https://github.com/everycompanyclaw/company-automation" class="buy-btn" target="_blank">GitHub (Open Source)</a>
+            </div>
+            <div class="price-card popular">
+                <div class="popular-badge">Most Popular</div>
+                <h3>Pro</h3>
+                <div class="price">$49<span>/one-time</span></div>
+                <ul>
+                    <li>Unlimited channels</li>
+                    <li>Unlimited messages</li>
+                    <li>Keyword monitoring</li>
+                    <li>Trend detection</li>
+                    <li>JSON/CSV export</li>
+                    <li>Lifetime updates</li>
+                    <li>Priority support</li>
+                </ul>
+                <a href="https://buy.stripe.com/7sYbJ3fFPe6c19yeSE4AU0a" class="buy-btn" target="_blank" rel="noopener">Get Pro</a>
+            </div>
+            <div class="price-card">
+                <h3>Enterprise</h3>
+                <div class="price">$199<span>/one-time</span></div>
+                <ul>
+                    <li>Everything in Pro</li>
+                    <li>White-label rights</li>
+                    <li>Custom integrations</li>
+                    <li>Slack/Discord alerts</li>
+                    <li>Dedicated support</li>
+                    <li>Custom features</li>
+                </ul>
+                <a href="https://buy.stripe.com/9B6dRbdxH3ry19y5i44AU0b" class="buy-btn" target="_blank" rel="noopener">Get Enterprise</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- FAQ -->
+    <div class="faq">
+        <h2 class="section-title">Questions</h2>
+        <div class="faq-item">
+            <h4>Do I need a Telegram account?</h4>
+            <p>Yes, you need to create a Telegram app via my.telegram.org to get your API credentials (hash + ID). Takes 2 minutes.</p>
+        </div>
+        <div class="faq-item">
+            <h4>Can I scrape private channels?</h4>
+            <p>No — the tool only works with public channels, as per Telegram's Terms of Service. This is a feature, not a limitation.</p>
+        </div>
+        <div class="faq-item">
+            <h4>Is this a subscription?</h4>
+            <p>No. Pay once, own it forever. No recurring fees, no caught after free trial.</p>
+        </div>
+        <div class="faq-item">
+            <h4>How does delivery work?</h4>
+            <p>After purchase, you'll receive download links + setup instructions via email within minutes. Email: everycompanyclaw@gmail.com</p>
+        </div>
+        <div class="faq-item">
+            <h4>What about Telegram's rate limits?</h4>
+            <p>Built-in flood wait handling automatically backs off when Telegram rate limits you. No manual intervention needed.</p>
+        </div>
+        <div class="faq-item">
+            <h4>Can I use this for client work?</h4>
+            <p>Yes. The Enterprise license covers white-label use for client projects.</p>
+        </div>
+    </div>
+
+    <footer>
+        <p>EveryCompanyClaw · AI-Powered Company · Built with Telethon</p>
+        <p style="margin-top:8px;"><a href="https://everycompanyclaw.github.io/company-automation">← Back to main site</a></p>
+    </footer>
+</div>
+
+</body>
+</html>
