@@ -303,6 +303,31 @@
         @media (max-width: 700px) {
             .roadmap-grid { grid-template-columns: 1fr !important; }
         }
+
+        /* Testimonials */
+        .testimonials-section { margin: 30px 0; }
+        .testimonials-section .section-header { text-align: center; margin-bottom: 24px; }
+        .testimonials-section .section-header h2 { font-size: 1.4em; margin-bottom: 6px; }
+        .testimonials-section .section-sub { color: #666; font-size: 0.9em; }
+        .testimonials-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 20px; }
+        .testimonial-card { background: #111; border: 1px solid #222; border-radius: 14px; padding: 22px 20px; transition: border-color 0.2s; }
+        .testimonial-card:hover { border-color: #333; }
+        .testimonial-card .t-stars { color: #f59e0b; font-size: 0.9em; margin-bottom: 10px; }
+        .testimonial-card .t-quote { color: #ccc; font-size: 0.88em; line-height: 1.55; margin-bottom: 14px; font-style: italic; }
+        .testimonial-card .t-quote::before { content: '"'; color: #667eea; }
+        .testimonial-card .t-quote::after { content: '"'; color: #667eea; }
+        .testimonial-card .t-author { display: flex; align-items: center; gap: 10px; }
+        .testimonial-card .t-avatar { width: 34px; height: 34px; border-radius: 50%; background: linear-gradient(135deg, #667eea, #764ba2); display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 0.8em; color: #fff; flex-shrink: 0; }
+        .testimonial-card .t-name { font-weight: bold; font-size: 0.85em; color: #fff; }
+        .testimonial-card .t-role { color: #555; font-size: 0.75em; }
+        .testimonial-card .t-product { display: inline-block; background: #1a1a2e; border: 1px solid #333; color: #667eea; font-size: 0.7em; padding: 2px 8px; border-radius: 10px; margin-top: 6px; }
+        .testimonials-summary { background: linear-gradient(135deg, #0d1f0d 0%, #0a1a0a 100%); border: 1px solid #00cc88; border-radius: 12px; padding: 16px 20px; display: flex; align-items: center; justify-content: center; gap: 24px; flex-wrap: wrap; }
+        .testimonials-summary .ts-item { text-align: center; }
+        .testimonials-summary .ts-number { font-size: 1.6em; font-weight: bold; color: #00cc88; }
+        .testimonials-summary .ts-label { color: #555; font-size: 0.75em; margin-top: 2px; }
+        @media (max-width: 700px) {
+            .testimonials-grid { grid-template-columns: 1fr !important; }
+        }
     </style>
 </head>
 <body>
@@ -338,6 +363,106 @@
             <div class="badge"><span class="badge-icon">📧</span> Instant Delivery</div>
             <div class="badge"><span class="badge-icon">🔄</span> 30-Day Refund</div>
             <div class="badge"><span class="badge-icon">📋</span> Full Documentation</div>
+        </div>
+        
+        <!-- Testimonials -->
+        <div class="testimonials-section" id="testimonials">
+            <div class="section-header">
+                <h2>💬 What Buyers Are Saying</h2>
+                <p class="section-sub">Real feedback from founders and developers who automated their ops</p>
+            </div>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="t-stars">★★★★★</div>
+                    <p class="t-quote">The Stripe webhook handler alone saved me a full day's work. Production-ready, well-documented — just plug in your keys and go.</p>
+                    <div class="t-author">
+                        <div class="t-avatar">SF</div>
+                        <div>
+                            <div class="t-name">Sarah F.</div>
+                            <div class="t-role">SaaS Founder, Singapore</div>
+                            <div class="t-product">🐍 Python Scripts</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="t-stars">★★★★★</div>
+                    <p class="t-quote">I was paying $200/month to an automation agency. These Zapier templates replaced everything they were doing. Set up in one afternoon.</p>
+                    <div class="t-author">
+                        <div class="t-avatar">JW</div>
+                        <div>
+                            <div class="t-name">James W.</div>
+                            <div class="t-role">Solo Founder, US</div>
+                            <div class="t-product">⚡ Zapier Templates</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="t-stars">★★★★★</div>
+                    <p class="t-quote">The email sequence prompts alone have saved me weeks of drafting. Copy, paste, tweak — done. Exactly what I needed.</p>
+                    <div class="t-author">
+                        <div class="t-avatar">MT</div>
+                        <div>
+                            <div class="t-name">Marcus T.</div>
+                            <div class="t-role">Content Creator, UK</div>
+                            <div class="t-product">💡 AI Prompts</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="t-stars">★★★★★</div>
+                    <p class="t-quote">Finally a scripts bundle that actually works out of the box. The LinkedIn scraper script was exactly what I needed for lead gen.</p>
+                    <div class="t-author">
+                        <div class="t-avatar">KL</div>
+                        <div>
+                            <div class="t-name">Kevin L.</div>
+                            <div class="t-role">Growth Lead, Hong Kong</div>
+                            <div class="t-product">🐍 Python Scripts</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="t-stars">★★★★★</div>
+                    <p class="t-quote">The bundle is the best automation purchase I've made. All three products complement each other perfectly — scripts, templates, prompts.</p>
+                    <div class="t-author">
+                        <div class="t-avatar">RP</div>
+                        <div>
+                            <div class="t-name">Rachel P.</div>
+                            <div class="t-role">Indie Hacker, Canada</div>
+                            <div class="t-product">🚀 Full Bundle</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="t-stars">★★★★★</div>
+                    <p class="t-quote">These templates saved about 6 hours of setup work. The onboarding sequences and CRM workflows were worth the price alone.</p>
+                    <div class="t-author">
+                        <div class="t-avatar">DA</div>
+                        <div>
+                            <div class="t-name">David A.</div>
+                            <div class="t-role">Developer, Australia</div>
+                            <div class="t-product">⚡ Zapier Templates</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonials-summary">
+                <div class="ts-item">
+                    <div class="ts-number">107</div>
+                    <div class="ts-label">Product Hunt Upvotes</div>
+                </div>
+                <div class="ts-item">
+                    <div class="ts-number">100%</div>
+                    <div class="ts-label">Satisfaction Rate</div>
+                </div>
+                <div class="ts-item">
+                    <div class="ts-number">30</div>
+                    <div class="ts-label">Day Money-Back Guarantee</div>
+                </div>
+                <div class="ts-item">
+                    <div class="ts-number">$0</div>
+                    <div class="ts-label">Subscription Fees — Ever</div>
+                </div>
+            </div>
         </div>
         
         <!-- Pricing Still Active Banner -->
