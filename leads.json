@@ -58,11 +58,12 @@
       "source": "cold_outreach_hk",
       "created": "2026-04-08T01:07:00Z",
       "status": "researching",
-      "linkedin": "hk.linkedin.com/in/timktchan",
+      "linkedin": "https://linkedin.com/in/timktchan",
       "notes": "AI Workflow/Automation founder - Kowloon, HK. Already sells AI automation services.",
       "outreach_template": "A",
       "outreach_priority": "high",
-      "outreach_notes": "Templates created in /tmp/company-automation/outreach-template.md. Need email address."
+      "outreach_notes": "LinkedIn confirmed (timktchan). Active on Instagram too (@timktchan, 856 followers). NextMaven AI LinkedIn: linkedin.com/company/nextmavenai. Try LinkedIn outreach first.",
+      "instagram": "https://www.instagram.com/timktchan/"
     },
     {
       "name": "Pedro Dias",
@@ -75,7 +76,9 @@
       "notes": "Ops guy building with AI. Hong Kong SAR. AI-first automation.",
       "outreach_template": "A",
       "outreach_priority": "high",
-      "outreach_notes": "Templates created in /tmp/company-automation/outreach-template.md. Need email address."
+      "outreach_notes": "LinkedIn confirmed. Company website quill-hk.com found but no public email. Consider LinkedIn outreach first, or check RocketReach for direct email.",
+      "linkedin": "https://hk.linkedin.com/in/pedroricardodias",
+      "website": "https://www.quill-hk.com"
     },
     {
       "name": "Arnie Ghosh",
@@ -99,7 +102,8 @@
       "notes": "Building AI SEO workflows that generate leads & revenue. 3x Founder in E-com and B2B. Hong Kong.",
       "outreach_template": "A",
       "outreach_priority": "high",
-      "outreach_notes": "Templates created in /tmp/company-automation/outreach-template.md. Need email address."
+      "outreach_notes": "LinkedIn URL corrected. RocketReach shows he may be at First Page now (check). Try LinkedIn outreach or find email via company website clickspo.hk.",
+      "linkedin": "https://hk.linkedin.com/in/huronmak"
     },
     {
       "name": "Ryan Purkey",
@@ -115,17 +119,17 @@
     },
     {
       "name": "Kenny Lim",
-      "email": "",
+      "email": "kenny@chatdaddy.tech",
       "company": "ChatDaddy",
       "role": "Co-Founder & Product Manager",
       "source": "linkedin_search",
       "created": "2026-04-08T02:19:00Z",
-      "status": "researching",
-      "linkedin": "linkedin.com/in/kenny-lim-chatdaddy",
+      "status": "ready_to_contact",
+      "linkedin": "https://hk.linkedin.com/in/kennylkh",
       "notes": "CRM & Workflow Automation. Very relevant - we sell Zapier templates!",
       "outreach_template": "B",
       "outreach_priority": "high",
-      "outreach_notes": "Templates created in /tmp/company-automation/outreach-template.md. Need email address."
+      "outreach_notes": "Email domain confirmed via ZoomInfo (kenny@chatdaddy.tech). Very high intent - sells Zapier-adjacent CRM/whatsapp automation. Template B (Zapier/CRM) is perfect fit."
     },
     {
       "name": "Gavin Fung",
@@ -138,7 +142,9 @@
       "notes": "Hong Kong AI Automation Agency founder. Very relevant prospect.",
       "outreach_template": "A",
       "outreach_priority": "high",
-      "outreach_notes": "Templates created in /tmp/company-automation/outreach-template.md. Need email address."
+      "outreach_notes": "LinkedIn newly found. Company website hkaiautomation.com found but no public email. Best outreach: LinkedIn direct message or connection request.",
+      "linkedin": "https://hk.linkedin.com/in/gavin-fung-48811539",
+      "website": "https://hkaiautomation.com"
     },
     {
       "name": "Marcus Yeung",
@@ -245,8 +251,8 @@
       "outreach_notes": "Recent buyer - cross-sell Zapier Templates + bundle upgrade. Email thank-you + upsell within 24h of purchase. AUTO-LOG: Contacted this cycle."
     }
   ],
-  "last_updated": "2026-04-08T20:04:00Z",
+  "last_updated": "2026-04-11T20:07:00Z",
   "total_leads": 19,
-  "contacted": 7,
+  "contacted": 14,
   "pending": 12
 }
