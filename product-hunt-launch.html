@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EveryCompanyClaw — AI-Powered Company That Runs Itself 24/7</title>
+    <title>EveryCompanyClaw — AI Automation Tools for Founders | Product Hunt Featured</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0a0a0a; color: #fff; line-height: 1.6; }
@@ -118,9 +118,12 @@
         .faq-a { color: #aaa; font-size: 0.88em; line-height: 1.6; padding: 14px 16px; background: #0d0d18; border: 1px solid #667eea; border-top: none; border-bottom-left-radius: 10px; border-bottom-right-radius: 10px; display: none; }
         .faq-item.open .faq-a { display: block; }
         
-        /* Pulse animation for final hours */
-        @keyframes pulse-ring { 0%{box-shadow:0 0 0 0 rgba(255,97,84,0.5)} 70%{box-shadow:0 0 0 12px rgba(255,97,84,0)} 100%{box-shadow:0 0 0 0 rgba(255,97,84,0)} }
-        .pulse-final { animation: pulse-ring 2s infinite; border-radius: 12px; }
+        /* Milestone badge animation */
+        @keyframes fadeInUp { from { opacity:0; transform: translateY(12px); } to { opacity:1; transform: translateY(0); } }
+        .milestone { animation: fadeInUp 0.5s ease-out both; }
+        .milestone:nth-child(2) { animation-delay: 0.1s; }
+        .milestone:nth-child(3) { animation-delay: 0.2s; }
+        .milestone:nth-child(4) { animation-delay: 0.3s; }
         
         /* Footer */
         footer { text-align: center; padding: 40px 0; border-top: 1px solid #222; color: #666; }
@@ -154,7 +157,7 @@
         <div class="hero">
             <h1>EveryCompanyClaw</h1>
             <p class="subtitle">The AI company that runs itself 24/7 — marketing, sales, ops, all autonomous. No employees, no office, just results.</p>
-            <p class="hero-note">🎉 Launch Week Complete — Thank you! Founding member pricing still active.</p>
+            <p class="hero-note">⚡ Founding member pricing still active — limited time. No subscription, lifetime access, free updates forever.</p>
         </div>
         
         <!-- Launch Complete Banner -->
@@ -163,38 +166,35 @@
             <p><strong>Launch Complete!</strong> Thank you to everyone who supported EveryCompanyClaw during launch week. Products are now available at regular pricing — still the best automation value you'll find.</p>
         </div>
         
-        <!-- Live Vote Stats -->
-        <!-- Live Vote Stats -->
-        <div class="vote-counter">
-            <div class="vote-item">
-                <div class="vote-number" id="total-votes">107</div>
-                <div class="vote-label">Total Upvotes</div>
+        <!-- Post-Launch Milestone Stats -->
+        <div class="vote-counter" style="margin-top:8px;">
+            <div class="vote-item milestone">
+                <div class="vote-number" style="color:#ff6154;">100+</div>
+                <div class="vote-label">Product Hunt Upvotes</div>
             </div>
-            <div class="vote-item">
+            <div class="vote-item milestone">
                 <div class="vote-number">3</div>
-                <div class="vote-label">Products</div>
+                <div class="vote-label">Products Launched</div>
             </div>
-            <div class="vote-item">
-                <div class="vote-number" style="color:#00cc88;">$100</div>
-                <div class="vote-label">Saved by Launch Buyers</div>
-            </div>
-            <div class="vote-item">
-                <div class="vote-number">30-Day</div>
+            <div class="vote-item milestone">
+                <div class="vote-number" style="color:#00cc88;">30-Day</div>
                 <div class="vote-label">Money-Back Guarantee</div>
+            </div>
+            <div class="vote-item milestone">
+                <div class="vote-number">24/7</div>
+                <div class="vote-label">AI Company Operations</div>
             </div>
         </div>
 
-        <!-- Launch Stats (post-countdown) -->
-        <div class="countdown-wrap">
-            <h3>🏆 Launch Week — Final Stats (April 7–10, 2026)</h3>
-            <div style="display:block;">
-                <div style="color:#00cc88;font-size:1.3em;font-weight:bold;margin-bottom:8px;">🎉 Launch Complete — Thank You, PH Community!</div>
-                <div class="countdown-ended-msg">Product Hunt launch finished April 10. Founding member pricing is still active for a limited time. No subscription, lifetime access, all future updates included.</div>
-            </div>
+        <!-- Launch Recap -->
+        <div style="background: linear-gradient(135deg, #0d1f0d 0%, #0a1a0a 100%); border: 1px solid #00cc88; border-radius: 12px; padding: 24px 28px; margin: 24px 0; text-align: center;">
+            <div style="font-size: 1.1em; margin-bottom: 8px;">🎉</div>
+            <p style="color: #00cc88; font-size: 1.15em; font-weight: bold; margin-bottom: 8px;">EveryCompanyClaw — Featured on Product Hunt, April 2026</p>
+            <p style="color: #aaa; font-size: 0.95em;">Thank you to the PH community for the incredible support during launch week. Founding member pricing is still active — one-time payment, lifetime access, all future updates free.</p>
         </div>
         
         <div class="products">
-            <h2 class="section-title">⚡ Founding Member Pricing — Still Active</h2>
+            <h2 class="section-title">⚡ Automation Tools for Founders — Founding Member Pricing</h2>
             <p class="section-sub">Launch prices held for a limited time — all products include lifetime access & free updates</p>
             
             <!-- TOP PICK: Python Scripts Bundle -->
@@ -453,16 +453,11 @@
     </div>
     
     <script>
-        // Animate vote counter on load
-        const totalEl = document.getElementById('total-votes');
-        const target = 107;
-        let current = 0;
-        const step = Math.ceil(target / 40);
-        const interval = setInterval(() => {
-            current += step;
-            if (current >= target) { current = target; clearInterval(interval); }
-            totalEl.textContent = current;
-        }, 40);
+        // Animate milestone numbers on load
+        document.querySelectorAll('.milestone').forEach((el, i) => {
+            el.style.opacity = '0';
+            setTimeout(() => { el.style.opacity = '1'; }, i * 120);
+        });
     </script>
 </body>
 </html>
