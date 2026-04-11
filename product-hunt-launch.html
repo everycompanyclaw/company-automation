@@ -154,7 +154,7 @@
         <div class="hero">
             <h1>EveryCompanyClaw</h1>
             <p class="subtitle">The AI company that runs itself 24/7 — marketing, sales, ops, all autonomous. No employees, no office, just results.</p>
-            <p class="hero-note">🎉 Launch Week Complete — Thank you! Products available at regular pricing below.</p>
+            <p class="hero-note">🎉 Launch Week Complete — Thank you! Founding member pricing still active.</p>
         </div>
         
         <!-- Launch Complete Banner -->
@@ -186,16 +186,16 @@
 
         <!-- Launch Stats (post-countdown) -->
         <div class="countdown-wrap">
-            <h3>🏆 Launch Week — Final Stats</h3>
-            <div id="countdown-ended" style="display:block;">
-                <div style="color:#00cc88;font-size:1.3em;font-weight:bold;margin-bottom:8px;">🎉 Launch Week Complete — Thank You!</div>
-                <div class="countdown-ended-msg">EveryCompanyClaw's Product Hunt launch ran April 7–10, 2026. Products remain available at regular pricing — no subscription, lifetime access, all future updates included.</div>
+            <h3>🏆 Launch Week — Final Stats (April 7–10, 2026)</h3>
+            <div style="display:block;">
+                <div style="color:#00cc88;font-size:1.3em;font-weight:bold;margin-bottom:8px;">🎉 Launch Complete — Thank You, PH Community!</div>
+                <div class="countdown-ended-msg">Product Hunt launch finished April 10. Founding member pricing is still active for a limited time. No subscription, lifetime access, all future updates included.</div>
             </div>
         </div>
         
         <div class="products">
-            <h2 class="section-title">⚡ Launch Week Products</h2>
-            <p class="section-sub">All products include lifetime access & free updates</p>
+            <h2 class="section-title">⚡ Founding Member Pricing — Still Active</h2>
+            <p class="section-sub">Launch prices held for a limited time — all products include lifetime access & free updates</p>
             
             <!-- TOP PICK: Python Scripts Bundle -->
             <div class="product top-pick">
@@ -304,15 +304,10 @@
             </div>
         </div>
         
-        <!-- Post-Launch Pricing Note -->
-        <div class="savings-box" style="border-color:#667eea; background: linear-gradient(135deg, #1a1a2e 0%, #0d0d1a 100%);">
-            <h3 style="color:#667eea;">💎 One-Time Pricing — No Subscription Ever</h3>
-            <div class="savings-row">
-                <div class="saving-item">Python Scripts: <strong>$129</strong> (one-time)</div>
-                <div class="saving-item">Zapier Templates: <strong>$79</strong> (one-time)</div>
-                <div class="saving-item">AI Prompts: <strong>$49</strong> (one-time)</div>
-            </div>
-            <div class="savings-total">All products: <strong>Pay once, own forever</strong> — no monthly fees, no task limits, lifetime updates included</div>
+        <!-- Post-Launch CTA -->
+        <div class="final-day-banner pulse-final" style="border-color:#667eea; background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);">
+            <div class="fire">🚀</div>
+            <p><strong>Ready to automate your business?</strong> EveryCompanyClaw products are available now — one-time payment, lifetime access, all future updates free. No subscription, no catch.</p>
         </div>
         
         <!-- What Makes This Different -->
@@ -398,10 +393,10 @@
             <p>💬 <em>If you have questions, feedback, or want to chat about automation — reach out anytime via GitHub.</em></p>
         </div>
         
-        <!-- Post-launch CTA -->
-        <div class="final-day-banner pulse-final" style="border-color:#667eea; background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);">
-            <div class="fire">🚀</div>
-            <p><strong>Ready to automate your business?</strong> EveryCompanyClaw products are available now — one-time payment, lifetime access, all future updates free. No subscription, no catch.</p>
+        <!-- Post-Launch CTA -->
+        <div style="border:1px solid #667eea; background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); border-radius:12px; padding:20px 24px; text-align:center; margin:24px 0;">
+            <div style="font-size:1.4em;">🚀</div>
+            <p style="color:#c9d1e8; font-size:1.05em; margin-top:8px;"><strong>Ready to automate your business?</strong> EveryCompanyClaw products are available now — one-time payment, lifetime access, all future updates free. No subscription, no catch.</p>
         </div>
         
         <footer>
@@ -422,34 +417,6 @@
             if (current >= target) { current = target; clearInterval(interval); }
             totalEl.textContent = current;
         }, 40);
-
-        // Countdown timer to April 10, 2026 23:59:59 UTC (end of launch day)
-        const DEADLINE = new Date('2026-04-10T23:59:59Z').getTime();
-        const cdDigits = document.getElementById('countdown-digits');
-        const cdEnded = document.getElementById('countdown-ended');
-        const cdHours = document.getElementById('cd-hours');
-        const cdMins = document.getElementById('cd-minutes');
-        const cdSecs = document.getElementById('cd-seconds');
-
-        function tickCountdown() {
-            const now = Date.now();
-            const diff = DEADLINE - now;
-            if (diff <= 0) {
-                cdDigits.style.display = 'none';
-                cdEnded.style.display = 'block';
-                return;
-            }
-            const totalSecs = Math.floor(diff / 1000);
-            const h = Math.floor(totalSecs / 3600);
-            const m = Math.floor((totalSecs % 3600) / 60);
-            const s = totalSecs % 60;
-            cdHours.textContent = String(h).padStart(2, '0');
-            cdMins.textContent = String(m).padStart(2, '0');
-            cdSecs.textContent = String(s).padStart(2, '0');
-        }
-
-        tickCountdown();
-        setInterval(tickCountdown, 1000);
     </script>
 </body>
 </html>
