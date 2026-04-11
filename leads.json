@@ -124,12 +124,13 @@
       "role": "Co-Founder & Product Manager",
       "source": "linkedin_search",
       "created": "2026-04-08T02:19:00Z",
-      "status": "ready_to_contact",
+      "status": "contacted",
       "linkedin": "https://hk.linkedin.com/in/kennylkh",
       "notes": "CRM & Workflow Automation. Very relevant - we sell Zapier templates!",
       "outreach_template": "B",
       "outreach_priority": "high",
-      "outreach_notes": "Email domain confirmed via ZoomInfo (kenny@chatdaddy.tech). Very high intent - sells Zapier-adjacent CRM/whatsapp automation. Template B (Zapier/CRM) is perfect fit."
+      "outreach_notes": "Email domain confirmed via ZoomInfo (kenny@chatdaddy.tech). Very high intent - sells Zapier-adjacent CRM/whatsapp automation. Template B (Zapier/CRM) is perfect fit.",
+      "date_contacted": "2026-04-11T20:35:41.139889Z"
     },
     {
       "name": "Gavin Fung",
