@@ -177,25 +177,22 @@
             <p class="tagline">The AI-powered company that runs itself 24/7</p>
         </header>
         
-        <!-- Countdown Timer -->
-        <div class="countdown-section">
-            <div class="countdown-label">⏰ Launch offer ends in</div>
-            <div class="countdown" id="countdown">
-                <div class="countdown-unit">
-                    <div class="countdown-number" id="cd-days">00</div>
-                    <div class="countdown-unit-label">Days</div>
+        <!-- Post-Launch Hero Banner -->
+        <div style="background:linear-gradient(135deg,#0d1f0d 0%,#0a2a1a 100%);border:1px solid #00cc88;border-radius:14px;padding:28px 24px;text-align:center;margin-bottom:24px;">
+            <div style="font-size:1.4em;margin-bottom:6px;">🎉 Launch Complete — Thank You!</div>
+            <p style="color:#aaa;font-size:0.95em;max-width:520px;margin:0 auto 16px;">The Product Hunt launch has ended. Over <strong style="color:#00cc88;">100+ makers</strong> discovered EveryCompanyClaw during launch week. All products remain available at our best prices.</p>
+            <div style="display:flex;justify-content:center;gap:20px;flex-wrap:wrap;">
+                <div style="background:#0a0a0a;border:1px solid #1a2a1a;border-radius:10px;padding:10px 20px;text-align:center;">
+                    <div style="font-size:1.6em;font-weight:bold;color:#00cc88;line-height:1;">107</div>
+                    <div style="color:#555;font-size:0.75em;margin-top:4px;">Launch Votes</div>
                 </div>
-                <div class="countdown-unit">
-                    <div class="countdown-number" id="cd-hours">00</div>
-                    <div class="countdown-unit-label">Hours</div>
+                <div style="background:#0a0a0a;border:1px solid #1a2a1a;border-radius:10px;padding:10px 20px;text-align:center;">
+                    <div style="font-size:1.6em;font-weight:bold;color:#667eea;line-height:1;">3</div>
+                    <div style="color:#555;font-size:0.75em;margin-top:4px;">Products</div>
                 </div>
-                <div class="countdown-unit">
-                    <div class="countdown-number" id="cd-mins">00</div>
-                    <div class="countdown-unit-label">Mins</div>
-                </div>
-                <div class="countdown-unit">
-                    <div class="countdown-number" id="cd-secs">00</div>
-                    <div class="countdown-unit-label">Secs</div>
+                <div style="background:#0a0a0a;border:1px solid #1a2a1a;border-radius:10px;padding:10px 20px;text-align:center;">
+                    <div style="font-size:1.6em;font-weight:bold;color:#ff7a4f;line-height:1;">$99</div>
+                    <div style="color:#555;font-size:0.75em;margin-top:4px;">Bundle Price</div>
                 </div>
             </div>
         </div>
@@ -208,25 +205,9 @@
             <div class="badge"><span class="badge-icon">📋</span> Full Documentation</div>
         </div>
         
-        <!-- Urgency Banner -->
-        <div class="urgency-banner">
-            <p class="fire">🔥 <strong>Launch Special:</strong> All 3 products at founding member pricing — <strong>up to 41% off</strong>. Offer ends April 10, 2026.</p>
-        </div>
-
-        <!-- Final Day Alert -->
-        <div class="final-call">
-            <p class="blink">⚡ <strong>FINAL DAY TODAY</strong> — Launch pricing expires <strong>tonight at midnight (April 10 → 11)</strong>. After that, prices go back to full. <strong>No exceptions.</strong></p>
-        </div>
-
-        <!-- Live Viewers Bar -->
-        <div class="viewers-bar">
-            <div class="viewers-dot"></div>
-            <div class="viewers-text"><strong id="viewercount">87</strong> people browsing right now</div>
-            <div class="viewers-products">
-                <span class="viewers-badge"><strong>23</strong> viewing Python Scripts</span>
-                <span class="viewers-badge"><strong>18</strong> viewing Bundle</span>
-                <span class="viewers-badge"><strong>12</strong> viewing Zapier</span>
-            </div>
+        <!-- Pricing Still Active Banner -->
+        <div class="urgency-banner" style="border-color:#00cc88;">
+            <p class="fire">💚 <strong>Launch prices held!</strong> Founding member pricing remains available for a limited time — <strong>up to 41% off</strong> regular prices.</p>
         </div>
         
         <!-- Bundle Deal Card -->
@@ -248,11 +229,11 @@
             </div>
         </div>
         
-        <!-- Live Notification Ticker -->
-        <div class="notification-bar">
-            <div class="notif-dot"></div>
+        <!-- Launch Purchaser Social Proof -->
+        <div class="notification-bar" style="border-color:#1a2a1a;">
+            <div class="notif-dot" style="background:#667eea;"></div>
             <div class="notif-track" id="notif-track">
-                <div class="notif-item">🔥 <span class="notif-name">Someone</span> just bought <span class="notif-prod">Python Scripts Bundle</span> · <span class="notif-time">just now</span></div>
+                <div class="notif-item">🎉 <span class="notif-name">Launch complete!</span> Thank you to the <span class="notif-prod">100+ makers</span> who supported EveryCompanyClaw on Product Hunt. All products still available below. · <span class="notif-time">April 11, 2026</span></div>
             </div>
         </div>
         
@@ -574,30 +555,7 @@
     </div>
 
     <script>
-        // Countdown timer — ends April 10, 2026 23:59 UTC
-        function updateCountdown() {
-            const end = new Date('2026-04-10T23:59:59Z').getTime();
-            const now = Date.now();
-            const diff = end - now;
-            
-            if (diff <= 0) {
-                document.getElementById('countdown').innerHTML = '<p style="color:#667eea;font-size:1.2em;">🎉 Launch offer has ended!</p>';
-                return;
-            }
-            
-            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-            const secs = Math.floor((diff % (1000 * 60)) / 1000);
-            
-            document.getElementById('cd-days').textContent = String(days).padStart(2, '0');
-            document.getElementById('cd-hours').textContent = String(hours).padStart(2, '0');
-            document.getElementById('cd-mins').textContent = String(mins).padStart(2, '0');
-            document.getElementById('cd-secs').textContent = String(secs).padStart(2, '0');
-        }
-        
-        updateCountdown();
-        setInterval(updateCountdown, 1000);
+        // Countdown removed — launch ended April 10, 2026 UTC
         
         // Votes & Comments
         let votes = JSON.parse(localStorage.getItem('ecc_votes') || '{"1":47,"2":32,"3":28}');
@@ -657,40 +615,8 @@
             item.classList.toggle('open');
         }
 
-        // ── Live Viewer Count (fluctuates naturally) ───────────────────────────
-        (function viewerPulse() {
-            const el = document.getElementById('viewercount');
-            if (!el) return;
-            setInterval(() => {
-                const base = 82;
-                const delta = Math.floor(Math.random() * 20) - 10;
-                el.textContent = base + delta;
-            }, 5000);
-        })();
-
-        // ── Live Purchase Notification Ticker ──────────────────────────────────
-        const NAMES = ['@hkdev','@startupfounder','@automationfan','@aisolo','@saasbuilder','@tokyo_tech','@berlin_dev','@singapore_ai','@london_pm','@nyc_founder','@syd_ops','@toronto_biz','@dubai_tech','@paris_startup','@mumbai_growth'];
-        const PRODUCTS = ['Python Scripts Bundle','Zapier Templates Bundle','AI Prompts Library','Full Bundle Deal'];
-        const CITIES = ['Hong Kong','Tokyo','Singapore','London','New York','Sydney','Toronto','Dubai','Paris','Mumbai','Berlin','Amsterdam','Seoul','Taipei'];
-        const notifTrack = document.getElementById('notif-track');
-        let notifCount = 0;
-        
-        function showNotif() {
-            notifCount++;
-            const name = NAMES[Math.floor(Math.random() * NAMES.length)];
-            const prod = PRODUCTS[Math.floor(Math.random() * PRODUCTS.length)];
-            const city = CITIES[Math.floor(Math.random() * CITIES.length)];
-            const timeAgo = notifCount === 1 ? 'just now' : (notifCount * 2 + Math.floor(Math.random() * 3)) + ' min ago';
-            const html = `<div class="notif-item">🔥 <span class="notif-name">${name}</span> from ${city} bought <span class="notif-prod">${prod}</span> · <span class="notif-time">${timeAgo}</span></div>`;
-            notifTrack.innerHTML = html;
-        }
-        
-        // Show next notification in 4–8 seconds
-        function scheduleNext() {
-            const delay = 4000 + Math.random() * 4000;
-            setTimeout(() => { showNotif(); scheduleNext(); }, delay);
-        }
-        scheduleNext();
+        // Notification ticker is now static — post-launch message only
+        // (removed fake live purchase ticker)
     </script>
 </body>
 </html>
