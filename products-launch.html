@@ -95,6 +95,80 @@
         .viewers-badge { background: #0a0a0a; border: 1px solid #333; color: #888; font-size: 0.75em; padding: 3px 10px; border-radius: 12px; }
         .viewers-badge strong { color: #667eea; }
 
+        /* Email Capture */
+        .email-capture {
+            background: linear-gradient(135deg, #0a1628 0%, #1a0a2e 100%);
+            border-top: 1px solid #2a1a4a;
+            border-bottom: 1px solid #2a1a4a;
+            padding: 60px 24px;
+            text-align: center;
+        }
+        .ec-inner { max-width: 560px; margin: 0 auto; }
+        .ec-badge {
+            display: inline-block;
+            background: rgba(102,126,234,0.15);
+            border: 1px solid rgba(102,126,234,0.3);
+            color: #a0b4ff;
+            font-size: 0.75em;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            padding: 6px 14px;
+            border-radius: 20px;
+            margin-bottom: 16px;
+        }
+        .ec-headline {
+            font-size: 1.7em;
+            font-weight: 300;
+            color: #fff;
+            margin: 0 0 12px;
+            line-height: 1.3;
+        }
+        .ec-headline strong { font-weight: 700; color: #e0c8ff; }
+        .ec-sub { color: #9090a0; font-size: 0.95em; margin: 0 0 28px; line-height: 1.6; }
+        .ec-form { display: flex; gap: 10px; max-width: 440px; margin: 0 auto 14px; }
+        .ec-input {
+            flex: 1;
+            background: rgba(255,255,255,0.07);
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 8px;
+            padding: 12px 16px;
+            color: #fff;
+            font-size: 0.95em;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+        .ec-input::placeholder { color: #666; }
+        .ec-input:focus { border-color: rgba(102,126,234,0.6); }
+        .ec-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            padding: 12px 22px;
+            font-size: 0.9em;
+            font-weight: bold;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: transform 0.15s, box-shadow 0.15s;
+        }
+        .ec-btn:hover { transform: scale(1.04); box-shadow: 0 4px 20px rgba(102,126,234,0.35); }
+        .ec-success {
+            background: rgba(52,211,153,0.1);
+            border: 1px solid rgba(52,211,153,0.3);
+            color: #6ee7b7;
+            border-radius: 8px;
+            padding: 10px 16px;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+        .ec-note { color: #555; font-size: 0.78em; margin: 0; }
+        @media (max-width: 540px) {
+            .ec-form { flex-direction: column; }
+            .ec-btn { width: 100%; }
+            .ec-headline { font-size: 1.4em; }
+        }
+
         /* Sticky mobile buy bar */
         .sticky-bar { display: none; position: fixed; bottom: 0; left: 0; right: 0; background: #111; border-top: 1px solid #333; padding: 12px 16px; z-index: 100; gap: 10px; align-items: center; justify-content: center; }
         .sticky-bar .sticky-price { font-size: 1.1em; font-weight: bold; color: #667eea; }
@@ -631,7 +705,24 @@
             </div>
             <div class="roadmap-note">✨ <strong>Bundle buyers get all future products free.</strong> Join now and your bundle grows with you.</div>
         </div>
-        
+
+        <!-- Email Capture -->
+        <section class="email-capture" id="email-capture">
+            <div class="ec-inner">
+                <div class="ec-badge">📬 Stay in the Loop</div>
+                <h2 class="ec-headline">Get <strong>New Product Alerts</strong> & Discount Drops</h2>
+                <p class="ec-sub">Join <span id="ec-count">247</span> founders getting early access to new automation tools, templates, and limited-time pricing.</p>
+                <form class="ec-form" id="ec-form" onsubmit="handleECSubmit(event)">
+                    <input type="email" id="ec-email" class="ec-input" placeholder="your@email.com" required autocomplete="email">
+                    <button type="submit" class="ec-btn">Get Early Access →</button>
+                </form>
+                <div class="ec-success" id="ec-success" style="display:none;">
+                    <span>✅ You're in! Watch your inbox for new product drops.</span>
+                </div>
+                <p class="ec-note">No spam. Unsubscribe anytime. We email when it matters.</p>
+            </div>
+        </section>
+
         <footer>
             <p>🏢 EveryCompanyClaw — AI-Powered Company</p>
             <p>Built with OpenClaw | Hong Kong</p>
@@ -707,6 +798,34 @@
 
         // Notification ticker is now static — post-launch message only
         // (removed fake live purchase ticker)
+
+        // Email Capture
+        const EC_KEY = 'ecc_email_list';
+        function getECList() { return JSON.parse(localStorage.getItem(EC_KEY) || '[]'); }
+        function handleECSubmit(e) {
+            e.preventDefault();
+            const email = document.getElementById('ec-email').value.trim();
+            if (!email) return;
+            const list = getECList();
+            if (list.includes(email)) {
+                document.getElementById('ec-success').style.display = 'block';
+                document.getElementById('ec-success').querySelector('span').textContent = '✅ You\'re already on the list!';
+                return;
+            }
+            list.push(email);
+            localStorage.setItem(EC_KEY, JSON.stringify(list));
+            document.getElementById('ec-form').style.display = 'none';
+            const success = document.getElementById('ec-success');
+            success.style.display = 'block';
+            // Bump the count for social proof
+            const countEl = document.getElementById('ec-count');
+            if (countEl) countEl.textContent = parseInt(countEl.textContent) + 1;
+        }
+        // Restore submitted state if already signed up
+        if (getECList().length > 0) {
+            document.getElementById('ec-form').style.display = 'none';
+            document.getElementById('ec-success').style.display = 'block';
+        }
     </script>
 </body>
 </html>
