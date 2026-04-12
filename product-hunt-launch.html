@@ -82,6 +82,22 @@
         .diff-item .title { font-weight: bold; margin-bottom: 4px; font-size: 0.95em; }
         .diff-item .desc { color: #666; font-size: 0.85em; }
 
+        /* How It Works */
+        .how-it-works { background: #111; border-radius: 16px; padding: 40px 32px; margin: 30px 0; border: 1px solid #222; }
+        .how-it-works h2 { font-size: 1.5em; margin-bottom: 8px; text-align: center; }
+        .how-it-works .hw-sub { text-align: center; color: #666; font-size: 0.9em; margin-bottom: 36px; }
+        .hw-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; position: relative; }
+        .hw-step { background: #0a0a0a; border: 1px solid #222; border-radius: 12px; padding: 24px 20px; text-align: center; position: relative; }
+        .hw-step-num { display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 36px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 50%; font-weight: bold; font-size: 0.9em; margin-bottom: 14px; }
+        .hw-step-icon { font-size: 2em; margin-bottom: 10px; display: block; }
+        .hw-step h4 { font-size: 1em; margin-bottom: 8px; }
+        .hw-step p { color: #666; font-size: 0.83em; line-height: 1.5; }
+        .hw-connector { position: absolute; top: 36px; right: -14px; color: #333; font-size: 1.4em; z-index: 1; }
+        @media (max-width: 600px) {
+            .hw-steps { grid-template-columns: 1fr; gap: 14px; }
+            .hw-connector { display: none; }
+        }
+
         /* Trust badges */
         .trust-row { display: flex; justify-content: center; gap: 24px; margin: 20px 0; flex-wrap: wrap; }
         .trust-badge { display: flex; align-items: center; gap: 8px; background: #111; border: 1px solid #333; border-radius: 8px; padding: 10px 16px; color: #888; font-size: 0.82em; }
@@ -351,6 +367,33 @@
             </div>
             <a href="https://buy.stripe.com/9B65kF1OZfagcSg7qc4AU09" class="cta" target="_blank" rel="noopener">🔥 Get the Complete Bundle - $99</a>
             <p style="color: #555; font-size: 0.78em; margin-top: 10px;">One-time payment · Lifetime access · All future updates included</p>
+        </div>
+
+        <!-- How It Works -->
+        <div class="how-it-works">
+            <h2>⚡ Start Automating in 3 Steps</h2>
+            <p class="hw-sub">No setup calls. No approval process. Just pick, download, and run.</p>
+            <div class="hw-steps">
+                <div class="hw-step">
+                    <div class="hw-step-num">1</div>
+                    <span class="hw-step-icon">🛒</span>
+                    <h4>Pick Your Package</h4>
+                    <p>Choose a single product or the complete bundle. Pay once via secure Stripe checkout — takes 60 seconds.</p>
+                </div>
+                <div class="hw-step" style="position:relative;">
+                    <div class="hw-step-num">2</div>
+                    <span class="hw-step-icon">📦</span>
+                    <h4>Download &amp; Setup</h4>
+                    <p>Get instant download links. Every script, template, and prompt comes with step-by-step setup guides. Most setups take under 30 minutes.</p>
+                </div>
+                <div class="hw-step">
+                    <div class="hw-step-num">3</div>
+                    <span class="hw-step-icon">🚀</span>
+                    <h4>Automate &amp; Scale</h4>
+                    <p>Run your automations 24/7. Reclaim hours every week. All future updates are free — your stack keeps getting better automatically.</p>
+                </div>
+            </div>
+            <p style="text-align:center; color:#555; font-size:0.82em; margin-top:24px;">💬 Questions? <span style="color:#667eea;">Open a GitHub issue</span> — we respond within hours, not days.</p>
         </div>
 
         <div class="social-proof">
