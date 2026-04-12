@@ -358,8 +358,9 @@
       "role": "CTO",
       "source": "product_hunt",
       "created": "2026-04-13T01:00:00Z",
-      "status": "ready_to_contact",
-      "notes": "SaaS founder. Uses Zapier/Make extensively. Potential Python Scripts buyer."
+      "status": "contacted",
+      "notes": "SaaS founder. Uses Zapier/Make extensively. Potential Python Scripts buyer.",
+      "date_contacted": "2026-04-12T17:19:01.733390Z"
     },
     {
       "name": "Priya Nair",
@@ -398,8 +399,9 @@
       "role": "Founder",
       "source": "product_hunt",
       "created": "2026-04-13T01:00:00Z",
-      "status": "ready_to_contact",
-      "notes": "Automation agency founder. Uses Make/Zapier for client projects."
+      "status": "contacted",
+      "notes": "Automation agency founder. Uses Make/Zapier for client projects.",
+      "date_contacted": "2026-04-12T17:19:01.733390Z"
     }
   ],
   "last_updated": "2026-04-12T17:06:07.763831+00:00",
