@@ -32,16 +32,6 @@
         .vote-label { color: #666; font-size: 0.85em; margin-top: 4px; }
 
         /* Countdown timer */
-        .countdown-wrap { background: linear-gradient(135deg, #1a1a2e 0%, #0d0d1a 100%); border: 1px solid #333; border-radius: 12px; padding: 20px 24px; text-align: center; margin: 24px 0; }
-        .countdown-wrap h3 { font-size: 0.9em; color: #888; margin-bottom: 10px; letter-spacing: 0.05em; text-transform: uppercase; }
-        .countdown-digits { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; }
-        .cd-unit { text-align: center; min-width: 64px; }
-        .cd-num { font-size: 2.2em; font-weight: bold; color: #667eea; line-height: 1; }
-        .cd-label { font-size: 0.7em; color: #555; text-transform: uppercase; letter-spacing: 0.08em; margin-top: 4px; }
-        .cd-sep { font-size: 2em; color: #333; align-self: center; padding-bottom: 14px; }
-        .countdown-ended { color: #ff6154; font-size: 1.2em; font-weight: bold; padding: 10px 0; }
-        .countdown-ended-msg { color: #888; font-size: 0.9em; margin-top: 6px; }
-
         /* Products */
         .products { padding: 40px 0; }
         .section-title { text-align: center; font-size: 1.8em; margin-bottom: 12px; }
@@ -174,6 +164,18 @@
         .milestone:nth-child(4) { animation-delay: 0.3s; }
 
         /* Footer */
+        /* Email capture */
+        .email-capture { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); border: 1px solid #667eea; border-radius: 16px; padding: 36px 28px; margin: 30px 0; text-align: center; }
+        .email-capture-badge { display: inline-block; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: #fff; padding: 4px 12px; border-radius: 20px; font-size: 0.75em; font-weight: bold; margin-bottom: 14px; }
+        .email-capture h2 { font-size: 1.4em; margin-bottom: 10px; }
+        .email-capture p { color: #888; font-size: 0.95em; max-width: 480px; margin: 0 auto 20px; }
+        .email-form { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; max-width: 480px; margin: 0 auto 12px; }
+        .email-form input[type="email"] { flex: 1; min-width: 200px; background: #0a0a0a; border: 1px solid #333; color: #fff; padding: 12px 16px; border-radius: 8px; font-size: 0.95em; }
+        .email-form input[type="email"]:focus { outline: none; border-color: #667eea; }
+        .email-form button { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: #fff; border: none; padding: 12px 24px; border-radius: 8px; font-weight: bold; font-size: 0.95em; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; }
+        .email-form button:hover { transform: scale(1.05); box-shadow: 0 4px 20px rgba(102,126,234,0.4); }
+        .email-note { color: #555; font-size: 0.8em; }
+        .email-success { color: #00cc88; font-size: 1em; font-weight: bold; display: none; }
         footer { text-align: center; padding: 40px 0; border-top: 1px solid #222; color: #666; }
         footer p { margin: 6px 0; }
 
@@ -205,7 +207,7 @@
         <div class="hero">
             <h1>EveryCompanyClaw</h1>
             <p class="subtitle">The AI company that runs itself 24/7 - marketing, sales, ops, all autonomous. No employees, no office, just results.</p>
-            <p class="hero-note">⚡ Founding member pricing still active - limited time. No subscription, lifetime access, free updates forever.</p>
+            <p class="hero-note">⚡ Standard pricing active — one-time payment, lifetime access, free updates forever.</p>
         </div>
 
         <!-- Launch Complete Banner -->
@@ -217,7 +219,7 @@
         <!-- Post-Launch Milestone Stats -->
         <div class="vote-counter" style="margin-top:8px;">
             <div class="vote-item milestone">
-                <div class="vote-number" style="color:#ff6154;">100+</div>
+                <div class="vote-number" style="color:#ff6154;">107</div>
                 <div class="vote-label">Product Hunt Upvotes</div>
             </div>
             <div class="vote-item milestone">
@@ -242,8 +244,8 @@
         </div>
 
         <div class="products">
-            <h2 class="section-title">⚡ Automation Tools for Founders - Founding Member Pricing</h2>
-            <p class="section-sub">Launch prices held for a limited time - all products include lifetime access & free updates</p>
+            <h2 class="section-title">⚡ Automation Tools for Founders</h2>
+            <p class="section-sub">One-time payment · Lifetime access · All products include free future updates</p>
 
             <!-- TOP PICK: Python Scripts Bundle -->
             <div class="product top-pick">
@@ -253,8 +255,8 @@
                         <p class="product-tagline">50+ battle-tested Python scripts for business automation</p>
                     </div>
                     <div class="price-wrap">
-                        <div class="price">$79 <span class="was">$129</span></div>
-                        <div class="price-note">One-time · Lifetime access</div>
+                        <div class="price">$79</div>
+                        <div class="price-note">One-time · Lifetime access · Free future updates</div>
                     </div>
                 </div>
                 <ul class="features">
@@ -278,8 +280,8 @@
                         <p class="product-tagline">25+ proven Zapier workflows for instant automation</p>
                     </div>
                     <div class="price-wrap">
-                        <div class="price">$49 <span class="was">$79</span></div>
-                        <div class="price-note">One-time · Lifetime access</div>
+                        <div class="price">$49</div>
+                        <div class="price-note">One-time · Lifetime access · Free future updates</div>
                     </div>
                 </div>
                 <ul class="features">
@@ -303,8 +305,8 @@
                         <p class="product-tagline">200+ curated prompts for ChatGPT, Claude, Gemini & more</p>
                     </div>
                     <div class="price-wrap">
-                        <div class="price">$29 <span class="was">$49</span></div>
-                        <div class="price-note">One-time · Lifetime access</div>
+                        <div class="price">$29</div>
+                        <div class="price-note">One-time · Lifetime access · Free future updates</div>
                     </div>
                 </div>
                 <ul class="features">
@@ -395,6 +397,7 @@
                 </div>
             </div>
             <p style="text-align: center; color: #667eea; font-size: 0.85em; margin-top: 16px;">All future products included free for existing bundle buyers. ✨</p>
+            <p style="text-align: center; color: #555; font-size: 0.82em; margin-top: 8px;">No subscription · One-time payment · Yours forever</p>
         </div>
 
         <div class="diff-section">
@@ -485,7 +488,7 @@
             <p style="text-align:center; color:#666; font-size:0.9em; margin-bottom:24px;">What happened after we went live on Product Hunt</p>
             <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(180px,1fr)); gap:16px; margin-bottom:24px;">
                 <div style="background:#0a0a0a; border:1px solid #222; border-radius:12px; padding:20px; text-align:center;">
-                    <div style="font-size:2em; font-weight:bold; color:#ff6154; margin-bottom:4px;">100+</div>
+                    <div style="font-size:2em; font-weight:bold; color:#ff6154; margin-bottom:4px;">107</div>
                     <div style="color:#666; font-size:0.85em;">Product Hunt Upvotes</div>
                 </div>
                 <div style="background:#0a0a0a; border:1px solid #222; border-radius:12px; padding:20px; text-align:center;">
@@ -502,7 +505,7 @@
                 </div>
             </div>
             <div style="background:linear-gradient(135deg, #0d1f0d 0%, #0a1a0a 100%); border:1px solid #00cc88; border-radius:10px; padding:16px 20px; text-align:center;">
-                <p style="color:#00cc88; font-size:0.95em;">🎉 <strong>Founding member pricing is still active</strong> - but not forever. Prices increase when the PH launch window closes. Lock in your rate while you can.</p>
+                <p style="color:#00cc88; font-size:0.95em;">🎉 <strong>Founding member pricing active.</strong> One-time payment, lifetime access, all future updates included. No subscription — ever.</p>
             </div>
         </div>
 
@@ -603,6 +606,19 @@
             <a href="https://buy.stripe.com/9B65kF1OZfagcSg7qc4AU09" style="display:inline-block; background:#00cc88; color:#000; padding:14px 32px; border-radius:8px; text-decoration:none; font-weight:bold; font-size:1em;" target="_blank" rel="noopener">🔥 Complete Bundle - $99 (Save $58)</a>
         </div>
 
+        <!-- Email Capture -->
+        <div class="email-capture">
+            <div class="email-capture-badge">📬 Early Access</div>
+            <h2>Get Early Access to New Products</h2>
+            <p>Join the EveryCompanyClaw alert list. Be first to know when new automation tools, scripts, and templates drop — before anyone else.</p>
+            <form class="email-form" onsubmit="handleEmailSubmit(event)">
+                <input type="email" placeholder="your@email.com" required id="emailInput">
+                <button type="submit">Notify Me →</button>
+            </form>
+            <div class="email-success" id="emailSuccess">✓ You're on the list! We'll email you when new products drop.</div>
+            <p class="email-note">No spam. No subscription. Unsubscribe anytime. We send ~1 email per product launch.</p>
+        </div>
+
         <footer>
             <p>🏢 EveryCompanyClaw - AI-Powered Company</p>
             <p>Built with OpenClaw | Hong Kong | <a href="https://github.com/mick-my-ac/everycompanyclaw" style="color:#667eea;">GitHub</a></p>
@@ -682,6 +698,20 @@
             // Initialize
             updateCalculator();
         })();
+
+        // Email capture handler
+        function handleEmailSubmit(e) {
+            e.preventDefault();
+            var input = document.getElementById('emailInput');
+            var success = document.getElementById('emailSuccess');
+            if (input && input.value) {
+                input.style.display = 'none';
+                e.target.querySelector('button').style.display = 'none';
+                if (success) success.style.display = 'block';
+                // In production: send to email service (Resend, Mailchimp, etc.)
+                console.log('Email captured:', input.value);
+            }
+        }
     </script>
 </body>
 </html>
