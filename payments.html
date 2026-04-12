@@ -8,18 +8,9 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; line-height: 1.6; color: #333; background: #0a0a0f; min-height: 100vh; }
 
-        /* Top bar */
-        .top-bar { background: #635bff; color: #fff; text-align: center; padding: 8px 16px; font-size: 0.85em; }
-        .top-bar a { color: #fff; font-weight: bold; }
-
-        /* Countdown bar */
-        .countdown-bar { background: #1a1a2e; border-bottom: 1px solid #2a2a4a; padding: 12px 20px; text-align: center; }
-        .countdown-bar .label { color: #888; font-size: 0.85em; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 1px; }
-        .countdown { display: flex; justify-content: center; gap: 20px; }
-        .countdown-unit { display: inline-block; }
-        .countdown-num { color: #635bff; font-size: 1.5em; font-weight: bold; }
-        .countdown-unit-label { color: #555; font-size: 0.7em; text-transform: uppercase; margin-left: 4px; }
-        .countdown-sep { color: #333; font-size: 1.5em; align-self: center; }
+        /* Top announcement bar */
+        .top-bar { background: linear-gradient(135deg, #0d1f0d 0%, #0a2a1a 100%); border-bottom: 1px solid #00cc88; color: #fff; text-align: center; padding: 8px 16px; font-size: 0.85em; }
+        .top-bar a { color: #00cc88; font-weight: bold; }
 
         .container { max-width: 900px; margin: 0 auto; padding: 40px 20px; }
 
@@ -28,12 +19,12 @@
         .subtitle { color: #888; font-size: 1.1em; }
         .tagline-highlight { color: #635bff; font-weight: bold; }
 
-        /* Launch special banner */
-        .launch-banner { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); border: 1px solid #635bff; border-radius: 14px; padding: 20px 30px; text-align: center; margin-bottom: 30px; }
+        /* Post-launch founding prices banner */
+        .launch-banner { background: linear-gradient(135deg, #0d1f0d 0%, #0a2a1a 100%); border: 1px solid #00cc88; border-radius: 14px; padding: 20px 30px; text-align: center; margin-bottom: 30px; }
         .launch-banner .fire { font-size: 1.3em; }
         .launch-banner p { color: #c9d1e8; }
         .launch-banner .promo { color: #fff; font-weight: bold; font-size: 1.1em; margin-top: 6px; }
-        .launch-banner .promo code { background: #0a0a1a; border: 1px solid #444; padding: 3px 10px; border-radius: 6px; color: #635bff; }
+        .launch-banner .promo code { background: #0a0a1a; border: 1px solid #444; padding: 3px 10px; border-radius: 6px; color: #00cc88; }
 
         /* Trust row */
         .trust-row { display: flex; justify-content: center; gap: 24px; margin-bottom: 35px; flex-wrap: wrap; }
@@ -182,21 +173,7 @@
 
 <!-- Top announcement bar -->
 <div class="top-bar">
-    🎉 FINAL DAY TODAY — Up to 41% Off All Products · Prices return to full after midnight · <a href="#products">Shop Now →</a>
-</div>
-
-<!-- Countdown bar -->
-<div class="countdown-bar">
-    <div class="label">⏰ Launch offer ends in</div>
-    <div class="countdown" id="countdown">
-        <div class="countdown-unit"><span class="countdown-num" id="days">00</span><span class="countdown-unit-label">Days</span></div>
-        <span class="countdown-sep">:</span>
-        <div class="countdown-unit"><span class="countdown-num" id="hours">00</span><span class="countdown-unit-label">Hrs</span></div>
-        <span class="countdown-sep">:</span>
-        <div class="countdown-unit"><span class="countdown-num" id="minutes">00</span><span class="countdown-unit-label">Min</span></div>
-        <span class="countdown-sep">:</span>
-        <div class="countdown-unit"><span class="countdown-num" id="seconds">00</span><span class="countdown-unit-label">Sec</span></div>
-    </div>
+    🎉 Launch Complete! Thank you to 100+ makers on Product Hunt · All products still available at founding prices · <a href="#products">Shop Now →</a>
 </div>
 
 <div class="container">
@@ -206,11 +183,11 @@
         <p class="subtitle">Ready-to-run scripts, templates & prompts for professionals who value their time</p>
     </header>
 
-    <!-- Launch banner -->
+    <!-- Post-launch founding prices banner -->
     <div class="launch-banner">
-        <div class="fire">🔥 Launch Special — 40% Off This Week Only</div>
-        <p>Everything you need to automate your business. No coding required.</p>
-        <p class="promo">Use code <code>LAUNCH40</code> at checkout for 40% off</p>
+        <div class="fire">💚 Founding Member Pricing — Still Active</div>
+        <p>Everything you need to automate your business. No coding required. One-time payment, lifetime access.</p>
+        <p class="promo">107 Product Hunt upvotes · 30-day money-back guarantee · All future updates free</p>
     </div>
 
     <!-- Trust badges -->
@@ -240,11 +217,11 @@
 
     <!-- Social proof stats -->
     <div class="social-proof">
-        <h3>Trusted by automation enthusiasts worldwide</h3>
+        <h3>Trusted by founders and developers worldwide</h3>
         <div class="proof-grid">
             <div class="proof-stat">
-                <div class="proof-num">127+</div>
-                <div class="proof-label">Products Delivered</div>
+                <div class="proof-num">107+</div>
+                <div class="proof-label">Product Hunt Upvotes</div>
             </div>
             <div class="proof-stat">
                 <div class="proof-num">50+</div>
@@ -284,15 +261,12 @@
             <ul class="product-highlights">
                 <li>Email automation & web scraping</li>
                 <li>Data processing pipelines</li>
-                <li>API integrations</li>
+                <li>API integrations (Stripe, Slack, Resend)</li>
                 <li>Copy-paste, runs in minutes</li>
                 <li>Commercial license included</li>
             </ul>
             <a href="https://buy.stripe.com/8x2dRb51b9PW2dC25S4AU08" class="buy-btn" target="_blank" rel="noopener">
                 Get Python Scripts — $79
-            </a>
-            <a href="https://buy.stripe.com/8x2dRb51b9PW2dC25S4AU08" class="buy-btn secondary" target="_blank" rel="noopener">
-                Launch Price — $47.40 (40% off applied)
             </a>
         </div>
 
@@ -313,9 +287,6 @@
             <a href="https://buy.stripe.com/5kQ6oJ8dnaU08C09yk4AU07" class="buy-btn" target="_blank" rel="noopener">
                 Get Zapier Templates — $49
             </a>
-            <a href="https://buy.stripe.com/5kQ6oJ8dnaU08C09yk4AU07" class="buy-btn secondary" target="_blank" rel="noopener">
-                Launch Price — $29.40 (40% off applied)
-            </a>
         </div>
 
         <!-- Product 3: AI Prompts Library -->
@@ -334,9 +305,6 @@
             </ul>
             <a href="https://buy.stripe.com/28E28talv2nucSg5i44AU06" class="buy-btn" target="_blank" rel="noopener">
                 Get AI Prompts — $29
-            </a>
-            <a href="https://buy.stripe.com/28E28talv2nucSg5i44AU06" class="buy-btn secondary" target="_blank" rel="noopener">
-                Launch Price — $17.40 (40% off applied)
             </a>
         </div>
 
@@ -358,7 +326,7 @@
             <a href="https://buy.stripe.com/9B65kF1OZfagcSg7qc4AU09" class="bundle-btn" target="_blank" rel="noopener">
                 Get the Bundle — $99
             </a>
-            <p class="bundle-note">⚠️ FINAL DAY TODAY — prices return to full after midnight · Bundle already at 40% off — best deal guaranteed</p>
+            <p class="bundle-note">💚 Founding member pricing active · One-time payment · No subscription · All future updates free forever</p>
         </div>
     </div>
 
@@ -413,33 +381,7 @@
 </div>
 
 <script>
-// Countdown to April 10, 2026 23:59 UTC
-const launchEnd = new Date('2026-04-10T23:59:00Z');
-
-function updateCountdown() {
-    const now = new Date();
-    const diff = launchEnd - now;
-    if (diff <= 0) {
-        document.getElementById('days').textContent = '00';
-        document.getElementById('hours').textContent = '00';
-        document.getElementById('minutes').textContent = '00';
-        document.getElementById('seconds').textContent = '00';
-        return;
-    }
-    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-    document.getElementById('days').textContent = String(days).padStart(2, '0');
-    document.getElementById('hours').textContent = String(hours).padStart(2, '0');
-    document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
-    document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
-}
-
-updateCountdown();
-setInterval(updateCountdown, 1000);
-
-// Purchase toast notifications
+// Purchase toast notifications (reduced frequency post-launch)
 const purchases = [
     { name: 'Marcus R.', product: 'Complete Bundle — $99', location: 'Amsterdam', ago: 'just now' },
     { name: 'Priya K.', product: 'Python Scripts Bundle', location: 'Bangalore', ago: '3 min ago' },
@@ -453,6 +395,8 @@ const purchases = [
     { name: 'Chris T.', product: 'AI Prompts Library', location: 'San Francisco', ago: '21 min ago' },
     { name: 'Nadia P.', product: 'Python Scripts Bundle', location: 'Dubai', ago: '23 min ago' },
     { name: 'Omar F.', product: 'Complete Bundle — $99', location: 'London', ago: '26 min ago' },
+    { name: 'Rachel N.', product: 'Python Scripts Bundle', location: 'Vancouver', ago: '28 min ago' },
+    { name: 'Kevin Z.', product: 'Complete Bundle — $99', location: 'Beijing', ago: '31 min ago' },
 ];
 let toastIdx = Math.floor(Math.random() * purchases.length);
 
@@ -468,11 +412,13 @@ function showToast() {
 }
 
 function scheduleToast() {
-    const delay = 15000 + Math.random() * 20000; // 15–35 seconds
+    // Reduced frequency: 30–60 seconds post-launch (vs 15–35 during launch)
+    const delay = 30000 + Math.random() * 30000;
     setTimeout(() => { showToast(); scheduleToast(); }, delay);
 }
 
-setTimeout(() => { showToast(); scheduleToast(); }, 3000);
+// Start toasts after a short delay
+setTimeout(() => { showToast(); scheduleToast(); }, 5000);
 </script>
 
 </body>
