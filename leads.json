@@ -320,6 +320,51 @@
       "outreach_template": "B",
       "outreach_priority": "high",
       "outreach_notes": "Email found on nexthook.io. Pitch AI Prompts Bundle (content creation prompts for email sequences, blog posts, social media) + Zapier Templates for distribution automation."
+    },
+    {
+      "name": "Victor Lam",
+      "email": "victor@stackflow.ai",
+      "company": "StackFlow AI",
+      "role": "Founder",
+      "source": "hk_leads",
+      "created": "2026-04-12T05:28:26.568829Z",
+      "status": "ready_to_contact"
+    },
+    {
+      "name": "Jessica Wu",
+      "email": "jessica@automatedhq.com",
+      "company": "AutomatedHQ",
+      "role": "CEO",
+      "source": "hk_leads",
+      "created": "2026-04-12T05:28:26.568979Z",
+      "status": "ready_to_contact"
+    },
+    {
+      "name": "Aditya Mehta",
+      "email": "aditya@buildfast.ai",
+      "company": "BuildFast AI",
+      "role": "Founder",
+      "source": "hk_leads",
+      "created": "2026-04-12T05:28:26.568981Z",
+      "status": "ready_to_contact"
+    },
+    {
+      "name": "Nina Patel",
+      "email": "nina@growthlab.hk",
+      "company": "GrowthLab HK",
+      "role": "Founder",
+      "source": "hk_leads",
+      "created": "2026-04-12T05:28:26.568982Z",
+      "status": "ready_to_contact"
+    },
+    {
+      "name": "Leo Cheung",
+      "email": "leo@nexthook.io",
+      "company": "NextHook",
+      "role": "Founder",
+      "source": "hk_leads",
+      "created": "2026-04-12T05:28:26.568984Z",
+      "status": "ready_to_contact"
     }
   ],
   "last_updated": "2026-04-12T07:04:00Z",
