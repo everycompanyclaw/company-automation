@@ -332,8 +332,9 @@
       "role": "Founder",
       "source": "indie_hackers",
       "created": "2026-04-13T01:00:00Z",
-      "status": "ready_to_contact",
-      "notes": "Solo founder, builds AI dev tools. Active on IH. Pasted about automation workflows."
+      "status": "contacted",
+      "notes": "Solo founder, builds AI dev tools. Active on IH. Pasted about automation workflows.",
+      "date_contacted": "2026-04-12T20:34:44.428910Z"
     },
     {
       "name": "Daniel Park",
@@ -342,8 +343,9 @@
       "role": "Founder",
       "source": "product_hunt",
       "created": "2026-04-13T01:00:00Z",
-      "status": "ready_to_contact",
-      "notes": "Developer tools + automation. Commented on PH launch thread."
+      "status": "contacted",
+      "notes": "Developer tools + automation. Commented on PH launch thread.",
+      "date_contacted": "2026-04-12T20:34:44.428910Z"
     },
     {
       "name": "Mei Lin",
@@ -352,8 +354,9 @@
       "role": "CEO",
       "source": "hk_startup_network",
       "created": "2026-04-13T01:00:00Z",
-      "status": "ready_to_contact",
-      "notes": "Growth agency. Looking for automation tools for client workflows."
+      "status": "contacted",
+      "notes": "Growth agency. Looking for automation tools for client workflows.",
+      "date_contacted": "2026-04-12T20:34:44.428910Z"
     },
     {
       "name": "Thomas Baker",
@@ -373,8 +376,9 @@
       "role": "Founder",
       "source": "product_hunt",
       "created": "2026-04-13T01:00:00Z",
-      "status": "ready_to_contact",
-      "notes": "Builds in public. Active PH user. Interested in AI content automation."
+      "status": "contacted",
+      "notes": "Builds in public. Active PH user. Interested in AI content automation.",
+      "date_contacted": "2026-04-12T20:34:44.428910Z"
     },
     {
       "name": "Kevin Zhang",
@@ -383,8 +387,9 @@
       "role": "Founder",
       "source": "ai_community",
       "created": "2026-04-13T01:00:00Z",
-      "status": "ready_to_contact",
-      "notes": "Creates AI prompt courses. Could benefit from our AI prompts bundle."
+      "status": "contacted",
+      "notes": "Creates AI prompt courses. Could benefit from our AI prompts bundle.",
+      "date_contacted": "2026-04-12T20:34:44.428910Z"
     },
     {
       "name": "Sasha Ivanova",
@@ -393,8 +398,9 @@
       "role": "Solo Founder",
       "source": "indie_hackers",
       "created": "2026-04-13T01:00:00Z",
-      "status": "ready_to_contact",
-      "notes": "European indie maker. Interested in one-time payment SaaS tools."
+      "status": "contacted",
+      "notes": "European indie maker. Interested in one-time payment SaaS tools.",
+      "date_contacted": "2026-04-12T20:34:44.428910Z"
     },
     {
       "name": "Jordan Lee",
