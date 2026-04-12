@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EveryCompanyClaw — Product Launches</title>
+    <title>EveryCompanyClaw — AI Automation Tools for Founders</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0a0a0a; color: #fff; line-height: 1.6; }
@@ -11,26 +11,19 @@
         
         header { text-align: center; padding: 40px 0; border-bottom: 1px solid #222; margin-bottom: 40px; }
         h1 { font-size: 2.5em; margin-bottom: 10px; }
-        .tagline { color: #888; font-size: 1.2em; }
+        .tagline { color: #888; font-size: 1.1em; }
+        .post-launch-note { background: linear-gradient(135deg, #0a1628 0%, #0d1f0d 100%); border: 1px solid #00cc88; border-radius: 12px; padding: 16px 24px; text-align: center; margin-bottom: 24px; }
+        .post-launch-note p { color: #a0d8b0; font-size: 0.95em; }
+        .post-launch-note strong { color: #00cc88; }
         
-        /* Countdown */
+        /* Post-launch note */
         .countdown-section { text-align: center; margin-bottom: 30px; }
         .countdown-label { color: #888; font-size: 0.9em; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 1px; }
-        .countdown { display: flex; justify-content: center; gap: 16px; }
-        .countdown-unit { background: #111; border: 1px solid #333; border-radius: 12px; padding: 16px 20px; min-width: 72px; }
-        .countdown-number { font-size: 2em; font-weight: bold; color: #667eea; line-height: 1; }
-        .countdown-unit-label { font-size: 0.75em; color: #666; text-transform: uppercase; letter-spacing: 1px; margin-top: 4px; }
         
-        /* Urgency Banner */
-        .urgency-banner { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); border: 1px solid #667eea; border-radius: 12px; padding: 16px 24px; text-align: center; margin-bottom: 24px; }
-        .urgency-banner .fire { font-size: 1.2em; }
-        .urgency-banner p { color: #c9d1e8; font-size: 0.95em; }
-        .final-call { background: linear-gradient(135deg, #1a0505 0%, #2d0a0a 100%); border: 1px solid #ff4f1f; border-radius: 12px; padding: 16px 24px; text-align: center; margin-bottom: 24px; }
-        .final-call p { color: #ffb0a0; font-size: 1em; }
-        .final-call strong { color: #ff4f1f; }
-        .final-call .blink { animation: blink-text 1.2s infinite; }
-        @keyframes blink-text { 0%,100%{opacity:1} 50%{opacity:0.4} }
-        .urgency-banner strong { color: #667eea; }
+        /* Pricing Banner */
+        .pricing-banner { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); border: 1px solid #667eea; border-radius: 12px; padding: 16px 24px; text-align: center; margin-bottom: 24px; }
+        .pricing-banner p { color: #c9d1e8; font-size: 0.95em; }
+        .pricing-banner strong { color: #667eea; }
         
         /* Trust badges */
         .trust-badges { display: flex; justify-content: center; gap: 24px; margin-bottom: 30px; flex-wrap: wrap; }
@@ -465,9 +458,9 @@
             </div>
         </div>
         
-        <!-- Pricing Still Active Banner -->
-        <div class="urgency-banner" style="border-color:#00cc88;">
-            <p class="fire">💚 <strong>Launch prices held!</strong> Founding member pricing remains available for a limited time — <strong>up to 41% off</strong> regular prices.</p>
+        <!-- Standard Pricing Banner -->
+        <div class="pricing-banner">
+            <p>💚 <strong>Founding member pricing active.</strong> All products available at the same launch prices — one-time payment, lifetime access, no subscription fees.</p>
         </div>
         
         <!-- Bundle Deal Card -->
@@ -540,8 +533,8 @@
                         <span style="background:#1a1a2e;color:#888;font-size:0.75em;padding:3px 10px;border-radius:12px;">+44 more</span>
                     </div>
                 </div>
-                <div class="product-price">$79 <span class="original">$129</span></div>
-                <div class="price-note">One-time payment · Lifetime access · Free updates</div>
+                <div class="product-price">$79</div>
+                <div class="price-note">One-time payment · Lifetime access · Free future updates</div>
                 <a href="https://buy.stripe.com/8x2dRb51b9PW2dC25S4AU08" class="buy-btn" target="_blank">Get It Now →</a>
                 
                 <div class="comments-section">
@@ -602,8 +595,8 @@
                         <span style="background:#1a1a2e;color:#888;font-size:0.75em;padding:3px 10px;border-radius:12px;">+21 more</span>
                     </div>
                 </div>
-                <div class="product-price">$49 <span class="original">$79</span></div>
-                <div class="price-note">One-time payment · Lifetime access · Free updates</div>
+                <div class="product-price">$49</div>
+                <div class="price-note">One-time payment · Lifetime access · Free future updates</div>
                 <a href="https://buy.stripe.com/5kQ6oJ8dnaU08C09yk4AU07" class="buy-btn" target="_blank">Get It Now →</a>
                 
                 <div class="comments-section">
@@ -661,8 +654,8 @@
                         <span style="background:#1a1a2e;color:#888;font-size:0.75em;padding:3px 10px;border-radius:12px;">+more</span>
                     </div>
                 </div>
-                <div class="product-price">$29 <span class="original">$49</span></div>
-                <div class="price-note">One-time payment · Lifetime access · Free updates</div>
+                <div class="product-price">$29</div>
+                <div class="price-note">One-time payment · Lifetime access · Free future updates</div>
                 <a href="https://buy.stripe.com/28E28talv2nucSg5i44AU06" class="buy-btn" target="_blank">Get It Now →</a>
                 
                 <div class="comments-section">
