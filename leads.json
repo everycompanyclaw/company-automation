@@ -262,12 +262,13 @@
       "role": "Founder & CEO",
       "source": "product_hunt",
       "created": "2026-04-12T07:04:00Z",
-      "status": "researching",
+      "status": "contacted",
       "linkedin": "https://hk.linkedin.com/in/victorlam-stackflow",
       "notes": "AI developer tools for startups in Hong Kong. Builds automation tooling for dev teams. Strong Python Scripts prospect - scripts for CI/CD, monitoring, and deployment automation.",
       "outreach_template": "A",
       "outreach_priority": "high",
-      "outreach_notes": "Email found via company website stackflow.ai. Emphasize Python Scripts Bundle - specifically log_analyzer.py and backup_to_s3.py. Also Zapier templates for dev ops workflows."
+      "outreach_notes": "Email found via company website stackflow.ai. Emphasize Python Scripts Bundle - specifically log_analyzer.py and backup_to_s3.py. Also Zapier templates for dev ops workflows.",
+      "date_contacted": "2026-04-12T23:06:19.044434+00:00"
     },
     {
       "name": "Jessica Wu",
@@ -276,12 +277,13 @@
       "role": "Head of Product",
       "source": "hk_ai_community",
       "created": "2026-04-12T07:04:00Z",
-      "status": "researching",
+      "status": "contacted",
       "linkedin": "https://hk.linkedin.com/in/jessicawu-automatedhq",
       "notes": "Builds no-code automation for mid-market companies in APAC. Their customers use Zapier heavily - potential reseller or bulk buyer of Zapier Templates. Also relevant for AI Prompts Bundle.",
       "outreach_template": "B",
       "outreach_priority": "medium",
-      "outreach_notes": "Direct email found on company site. Lead with Zapier Templates offer - she understands the no-code automation space well. Cross-sell AI Prompts for her team's content workflows."
+      "outreach_notes": "Direct email found on company site. Lead with Zapier Templates offer - she understands the no-code automation space well. Cross-sell AI Prompts for her team's content workflows.",
+      "date_contacted": "2026-04-12T23:06:19.044434+00:00"
     },
     {
       "name": "Aditya Mehta",
@@ -290,12 +292,13 @@
       "role": "Co-founder",
       "source": "product_hunt",
       "created": "2026-04-12T07:04:00Z",
-      "status": "researching",
+      "status": "contacted",
       "linkedin": "https://in.linkedin.com/in/adityamehta-buildfast",
       "notes": "AI-powered code generation for enterprise dev teams. India/HK based. Very technical audience - Python Scripts Bundle is a natural fit. Also relevant for Zapier Templates connecting their product to client CRMs.",
       "outreach_template": "A",
       "outreach_priority": "medium",
-      "outreach_notes": "Email via company site buildfast.ai. Lead with Python Scripts Bundle, specifically invoice_generator.py and stripe_webhook_handler.py as examples of production-quality code they could use internally."
+      "outreach_notes": "Email via company site buildfast.ai. Lead with Python Scripts Bundle, specifically invoice_generator.py and stripe_webhook_handler.py as examples of production-quality code they could use internally.",
+      "date_contacted": "2026-04-12T23:06:19.044434+00:00"
     },
     {
       "name": "Nina Patel",
@@ -318,12 +321,13 @@
       "role": "Founder",
       "source": "cold_outreach_hk",
       "created": "2026-04-12T07:04:00Z",
-      "status": "researching",
+      "status": "contacted",
       "linkedin": "https://hk.linkedin.com/in/leocnext",
       "notes": "AI content automation for media publishers in APAC. Hong Kong based. Building tools that automate newsletter, blog, and social content production. AI Prompts Bundle + Zapier Templates = natural fit.",
       "outreach_template": "B",
       "outreach_priority": "high",
-      "outreach_notes": "Email found on nexthook.io. Pitch AI Prompts Bundle (content creation prompts for email sequences, blog posts, social media) + Zapier Templates for distribution automation."
+      "outreach_notes": "Email found on nexthook.io. Pitch AI Prompts Bundle (content creation prompts for email sequences, blog posts, social media) + Zapier Templates for distribution automation.",
+      "date_contacted": "2026-04-12T23:06:19.044434+00:00"
     },
     {
       "name": "Rachel Ng",
@@ -414,8 +418,8 @@
       "date_contacted": "2026-04-12T17:19:01.733390Z"
     }
   ],
-  "last_updated": "2026-04-12T17:06:07.763831+00:00",
+  "last_updated": "2026-04-12T23:06:19.044434+00:00",
   "total_leads": 32,
-  "contacted": 15,
-  "pending": 8
+  "contacted": 29,
+  "pending": 3
 }
