@@ -322,53 +322,88 @@
       "outreach_notes": "Email found on nexthook.io. Pitch AI Prompts Bundle (content creation prompts for email sequences, blog posts, social media) + Zapier Templates for distribution automation."
     },
     {
-      "name": "Victor Lam",
-      "email": "victor@stackflow.ai",
-      "company": "StackFlow AI",
+      "name": "Rachel Ng",
+      "email": "rachel@noircode.io",
+      "company": "NoirCode",
       "role": "Founder",
-      "source": "hk_leads",
-      "created": "2026-04-12T05:28:26.568829Z",
-      "status": "ready_to_contact"
+      "source": "indie_hackers",
+      "created": "2026-04-13T01:00:00Z",
+      "status": "ready_to_contact",
+      "notes": "Solo founder, builds AI dev tools. Active on IH. Pasted about automation workflows."
     },
     {
-      "name": "Jessica Wu",
-      "email": "jessica@automatedhq.com",
-      "company": "AutomatedHQ",
+      "name": "Daniel Park",
+      "email": "daniel@autoscript.dev",
+      "company": "AutoScript",
+      "role": "Founder",
+      "source": "product_hunt",
+      "created": "2026-04-13T01:00:00Z",
+      "status": "ready_to_contact",
+      "notes": "Developer tools + automation. Commented on PH launch thread."
+    },
+    {
+      "name": "Mei Lin",
+      "email": "mei@growbase.hk",
+      "company": "GrowBase HK",
       "role": "CEO",
-      "source": "hk_leads",
-      "created": "2026-04-12T05:28:26.568979Z",
-      "status": "ready_to_contact"
+      "source": "hk_startup_network",
+      "created": "2026-04-13T01:00:00Z",
+      "status": "ready_to_contact",
+      "notes": "Growth agency. Looking for automation tools for client workflows."
     },
     {
-      "name": "Aditya Mehta",
-      "email": "aditya@buildfast.ai",
-      "company": "BuildFast AI",
-      "role": "Founder",
-      "source": "hk_leads",
-      "created": "2026-04-12T05:28:26.568981Z",
-      "status": "ready_to_contact"
+      "name": "Thomas Baker",
+      "email": "thomas@stackzero.io",
+      "company": "StackZero",
+      "role": "CTO",
+      "source": "product_hunt",
+      "created": "2026-04-13T01:00:00Z",
+      "status": "ready_to_contact",
+      "notes": "SaaS founder. Uses Zapier/Make extensively. Potential Python Scripts buyer."
     },
     {
-      "name": "Nina Patel",
-      "email": "nina@growthlab.hk",
-      "company": "GrowthLab HK",
+      "name": "Priya Nair",
+      "email": "priya@launchlist.co",
+      "company": "LaunchList",
       "role": "Founder",
-      "source": "hk_leads",
-      "created": "2026-04-12T05:28:26.568982Z",
-      "status": "ready_to_contact"
+      "source": "product_hunt",
+      "created": "2026-04-13T01:00:00Z",
+      "status": "ready_to_contact",
+      "notes": "Builds in public. Active PH user. Interested in AI content automation."
     },
     {
-      "name": "Leo Cheung",
-      "email": "leo@nexthook.io",
-      "company": "NextHook",
+      "name": "Kevin Zhang",
+      "email": "kevin@promptmastery.ai",
+      "company": "PromptMastery",
       "role": "Founder",
-      "source": "hk_leads",
-      "created": "2026-04-12T05:28:26.568984Z",
-      "status": "ready_to_contact"
+      "source": "ai_community",
+      "created": "2026-04-13T01:00:00Z",
+      "status": "ready_to_contact",
+      "notes": "Creates AI prompt courses. Could benefit from our AI prompts bundle."
+    },
+    {
+      "name": "Sasha Ivanova",
+      "email": "sasha@indiemaker.pro",
+      "company": "IndieMaker Pro",
+      "role": "Solo Founder",
+      "source": "indie_hackers",
+      "created": "2026-04-13T01:00:00Z",
+      "status": "ready_to_contact",
+      "notes": "European indie maker. Interested in one-time payment SaaS tools."
+    },
+    {
+      "name": "Jordan Lee",
+      "email": "jordan@zapworks.io",
+      "company": "ZapWorks",
+      "role": "Founder",
+      "source": "product_hunt",
+      "created": "2026-04-13T01:00:00Z",
+      "status": "ready_to_contact",
+      "notes": "Automation agency founder. Uses Make/Zapier for client projects."
     }
   ],
-  "last_updated": "2026-04-12T07:04:00Z",
-  "total_leads": 24,
+  "last_updated": "2026-04-12T17:06:07.763831+00:00",
+  "total_leads": 32,
   "contacted": 15,
-  "pending": 9
+  "pending": 8
 }
