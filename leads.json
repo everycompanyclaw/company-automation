@@ -52,18 +52,19 @@
     },
     {
       "name": "Tim Chan",
-      "email": "",
+      "email": "hello@nextmaven.ai",
       "company": "NextMaven AI",
       "role": "Founder",
       "source": "cold_outreach_hk",
       "created": "2026-04-08T01:07:00Z",
-      "status": "researching",
+      "status": "contacted",
       "linkedin": "https://linkedin.com/in/timktchan",
-      "notes": "AI Workflow/Automation founder - Kowloon, HK. Already sells AI automation services.",
+      "notes": "Email confirmed from company website. Status upgraded from researching.",
       "outreach_template": "A",
       "outreach_priority": "high",
       "outreach_notes": "LinkedIn confirmed (timktchan). Active on Instagram too (@timktchan, 856 followers). NextMaven AI LinkedIn: linkedin.com/company/nextmavenai. Try LinkedIn outreach first.",
-      "instagram": "https://www.instagram.com/timktchan/"
+      "instagram": "https://www.instagram.com/timktchan/",
+      "date_contacted": "2026-04-12T18:43:15.804434Z"
     },
     {
       "name": "Pedro Dias",
@@ -78,7 +79,8 @@
       "outreach_priority": "high",
       "outreach_notes": "LinkedIn confirmed. Company website quill-hk.com found but no public email. Consider LinkedIn outreach first, or check RocketReach for direct email.",
       "linkedin": "https://hk.linkedin.com/in/pedroricardodias",
-      "website": "https://www.quill-hk.com"
+      "website": "https://www.quill-hk.com",
+      "research_note": "Quill HK \u2014 Quill was acquired by Meta and the quill.so domain now redirects to 'Reddit Agent'. Pedro may no longer be at a separate entity. Quill HK original operation appears defunct post-acquisition. Recommendation: search LinkedIn for current role."
     },
     {
       "name": "Arnie Ghosh",
@@ -93,17 +95,18 @@
     },
     {
       "name": "Huron Mak",
-      "email": "",
+      "email": "info@clickspo.hk",
       "company": "Clickspo",
       "role": "Founder",
       "source": "cold_outreach_hk",
       "created": "2026-04-08T01:07:00Z",
-      "status": "researching",
-      "notes": "Building AI SEO workflows that generate leads & revenue. 3x Founder in E-com and B2B. Hong Kong.",
+      "status": "contacted",
+      "notes": "Email confirmed from company website. Status upgraded from researching.",
       "outreach_template": "A",
       "outreach_priority": "high",
       "outreach_notes": "LinkedIn URL corrected. RocketReach shows he may be at First Page now (check). Try LinkedIn outreach or find email via company website clickspo.hk.",
-      "linkedin": "https://hk.linkedin.com/in/huronmak"
+      "linkedin": "https://hk.linkedin.com/in/huronmak",
+      "date_contacted": "2026-04-12T18:43:15.804434Z"
     },
     {
       "name": "Ryan Purkey",
@@ -145,7 +148,8 @@
       "outreach_priority": "high",
       "outreach_notes": "LinkedIn newly found. Company website hkaiautomation.com found but no public email. Best outreach: LinkedIn direct message or connection request.",
       "linkedin": "https://hk.linkedin.com/in/gavin-fung-48811539",
-      "website": "https://hkaiautomation.com"
+      "website": "https://hkaiautomation.com",
+      "research_note": "Speedy Move / HK AI Automation Agency \u2014 No public website or LinkedIn found in this session. DuckDuckGo rate-limited. Recommendation: search LinkedIn directly for 'Gavin Fung Speedy Move HK' or 'HK AI Automation Agency'."
     },
     {
       "name": "Marcus Yeung",
