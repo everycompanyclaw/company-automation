@@ -1,215 +1,202 @@
-# EveryCompanyClaw — Email Outreach Templates
-
-**Last Updated:** April 13, 2026  
-**Author:** PM Agent (EveryCompanyClaw Operations)
+# EveryCompanyClaw — Email Outreach Templates (Post-Launch)
+*Updated: April 13, 2026 — After Product Hunt launch completion*
 
 ---
 
-## Overview
+## Context
 
-Two templates designed for different lead personas:
+Product Hunt launch completed successfully:
+- 107 upvotes on Product Hunt
+- 3 products launched: Python Scripts ($79), Zapier Templates ($49), AI Prompts ($29), Bundle ($99)
+- All at founding member pricing (launch prices still active)
+- 30-day money-back guarantee
 
-- **Template A (Technical Founders)** — Python Scripts Bundle + Zapier Templates. For: founders building AI/dev tools, automation agencies, DevOps backgrounds, or anyone writing code.
-- **Template B (Growth/Marketing Ops)** — Zapier Templates + AI Prompts. For: growth leads, marketers, agency founders, content creators.
-
-**Rules:**
-- Always personalise the `[bracketed]` fields
-- Send within 24h of lead research completion
-- Follow up once after 4 days if no reply
-- CC `hello@everycompanyclaw.com` on all emails
+**Outbound goal:** Convert warm researching/ready_to_contact leads who didn't buy during launch.
 
 ---
 
-## Template A — Technical Founders
+## Template A — General Post-Launch Announcement
+*For: Rachel Ng, Daniel Park, Mei Lin, Priya Nair (LaunchList), Kevin Zhang, Sasha Ivanova*
+*Priority: High — all have emails ready*
 
-**Best for:** Tim Chan (NextMaven AI), Gavin Fung (HK AI Automation), Victor Lam (StackFlow AI), Daniel Ho (StackLens), Chris Tam (WorkflowAI), Leo Cheung (NextHook), Tim Chan, Huron Mak, Arnie Ghosh, Marcus Reinholt
+**Subject:** We just launched on Product Hunt — thought you'd find this relevant 👀
 
----
+Hi [NAME],
 
-### Email 1 of 3 — Initial Outreach
+Quick one — EveryCompanyClaw just wrapped up our Product Hunt launch. We built an AI company that runs itself 24/7 using automation scripts, Zapier templates, and AI prompts.
 
-**Subject:** Quick question about [Company] — automation + AI scripts
+We're still in early days but the founding member pricing is still active:
+- 🐍 Python Scripts Bundle: 50+ production-ready scripts ($79, was $129)
+- ⚡ Zapier Templates: 25+ no-code automation workflows ($49, was $79)
+- 💡 AI Prompts Library: 200+ curated prompts ($29, was $49)
+- 🔥 Complete Bundle: all 3 for $99 (was $257)
 
-Hi `[First Name]`,
+[YOUR_NAME/Company] came up in my research as someone building with AI and automation — exactly who we built this for.
 
-Hope you're doing well. I came across `[Company]` and noticed you're building `[specific thing they do — e.g., "AI workflow automation for HK enterprises"]`.
+Happy to send over whichever product fits your stack. Or just grab the bundle — it's what most people do.
 
-Quick question: are you currently handling `[specific pain point — e.g., "webhook integrations, lead enrichment, or automated reporting"]` manually or with in-house scripts?
+Link: https://buy.stripe.com/9B65kF1OZfagcSg7qc4AU09
 
-I'm with **EveryCompanyClaw** — we sell battle-tested Python automation scripts and Zapier templates. Things like:
-- ✅ Stripe webhook handlers (ready to deploy)
-- ✅ LinkedIn + Email Hunter enrichment pipelines
-- ✅ Slack alert automation
-- ✅ CRM sync utilities
+Let me know if you have questions.
 
-All production-ready, fully documented. One customer told me it saved him a full day's work just from the Stripe webhook script alone.
-
-**Founding price:** Python Scripts Bundle is `$79` one-time (lifetime access, free updates). Or all 3 products for `$99`.
-
-Worth a quick chat? Happy to show you what's inside.
-
-Cheers,  
-MK  
-EveryCompanyClaw — AI Automation for Founders  
-[Product Hunt link: https://everycompanyclaw.com/products-launch.html]
+Best,
+[YOUR_NAME]
+EveryCompanyClaw
 
 ---
 
-### Email 2 of 3 — Follow-up (Day 4, No Reply)
+## Template B — Zapier/CRM-Focused (for automation agency founders)
+*For: Jordan Lee (ZapWorks — already contacted), potentially for Leo Cheung (Nexthook), Nina Patel (GrowthLab HK)*
 
-**Subject:** Re: Quick question about [Company] — one more thing
+**Subject:** Post-launch check-in — automation templates at founding prices
 
-Hi `[First Name]`,
+Hi [NAME],
 
-Following up on my last note — just one more thing that might be relevant.
+Saw what you're building at [COMPANY] — the automation agency model is exactly where the market is heading.
 
-A lot of founders at `[similar company or community — e.g., "HK AI community or Product Hunt"]` have been using our Python Scripts Bundle to automate the repetitive API work that eats up dev time.
+We just closed our Product Hunt launch (107 upvotes 🎉) with a full automation toolkit:
+- ⚡ **Zapier Templates Bundle** — 25+ production-ready workflows, no-code setup in minutes
+- 🐍 **Python Scripts** — API integrations, webhooks, data pipelines for devs
+- 💡 **AI Prompts** — copy-paste prompts for content, sales, and outreach
 
-Specifically, if you're ever dealing with:
-- Recurring data exports from SaaS tools
-- Webhook error handling
-- Automated alerts when metrics go sideways
+Founding member pricing is still active — one-time payment, lifetime access, all future updates included.
 
-— our scripts handle all of that. One buyer said the Stripe webhook handler alone was worth the `$79` price.
+If your clients are always asking you to build the same workflows (lead gen, CRM sync, email sequences) — these templates are exactly what I'd send them.
 
-No pressure. But if you're curious, here's the full product page: `[link]`
+Still building? Happy to do a 15-min call to see if there's a fit.
 
-Happy to send you a specific script that solves something you're working on right now — just tell me what tool you're using.
-
-Cheers,  
-MK
-
----
-
-### Email 3 of 3 — Breakup Email (Day 10, No Reply)
-
-**Subject:** Last note — then I'll leave you alone 🙂
-
-Hi `[First Name]`,
-
-Understood — not everyone needs automation scripts right now. I'll stop here.
-
-But if you ever hit a point where you're thinking "I wish I had a script for this," come back and check us out. The Python Scripts Bundle is `$79` one-time, and we add new scripts every month at no extra cost.
-
-Thanks for your time regardless.
-
-Best,  
-MK  
-EveryCompanyClaw  
-[Link]
+Best,
+[YOUR_NAME]
+EveryCompanyClaw
 
 ---
 
-## Template B — Growth / Marketing / Agency
+## Template C — Cross-Sell for Recent Buyers
+*For: Marcus Reinholt (recent Python Scripts buyer — cross-sell Zapier Templates + Bundle upgrade)*
 
-**Best for:** Nina Patel (GrowthLab HK), Anita Liu (AutoPilotPro), Kenny Lim (ChatDaddy), Leo Cheung (NextHook), Ryan Purkey (Voyager AI), Jessica Wu (AutomatedHQ), Marcus Yeung (NexusFlow)
+**Subject:** Welcome to EveryCompanyClaw — what's next for your stack?
 
----
+Hi Marcus,
 
-### Email 1 of 3 — Initial Outreach
+Congrats on getting the Python Scripts Bundle set up! Hope it's already saving you some hours.
 
-**Subject:** `[First Name]` — automate `[specific workflow]` without writing code?
+Quick follow-up — since you bought the Python Scripts, I wanted to make sure you knew about the other two products:
 
-Hi `[First Name]`,
+**Zapier Templates ($49)** — If you're connecting your scripts to other apps (Stripe → Slack, form → CRM, etc.), these templates give you the no-code connective tissue. 25+ workflows, setup in minutes.
 
-Hope you're well. I noticed `[Company]` is working on `[specific thing — e.g., "AI-powered marketing automation for D2C brands"]`.
+**Complete Bundle ($99)** — If you want both the templates + AI Prompts Library on top of your scripts, the bundle is $99 total. You'd be paying $20 extra for $78 worth of product — essentially a free upgrade.
 
-Quick question: how much time does your team spend setting up and maintaining workflows between tools like `[tool A]` → `[tool B]`?
+Both at founding member pricing. No subscription — pay once, keep forever.
 
-We built **EveryCompanyClaw** — specifically for teams who want powerful automation without the dev dependency. Two products that might be useful:
+Worth considering if you want to close the gap between your Python automations and the rest of your stack.
 
-**⚡ Zapier Templates (25+ workflows)** — ready-to-deploy automations for things like:
-- New lead → Slack notification → CRM entry
-- Invoice paid → Google Sheet update → team alert
-- Form submission → welcome email sequence
-- Social post → Buffer queue → analytics sync
+Here's the bundle link: https://buy.stripe.com/9B65kF1OZfagcSg7qc4AU09
 
-**💡 AI Prompts Library (200+ prompts)** — copy-paste prompts for ChatGPT/Claude to write:
-- Cold emails that actually convert
-- LinkedIn posts that get engagement
-- Ad copy variations in seconds
-- Meeting summaries and follow-ups
+Let me know if you have questions — happy to help with setup.
 
-All one-time purchase, no subscription fees. **$49** for templates, **$29** for prompts, or **both + Python Scripts for $99**.
-
-Worth a 15-minute call to see if it fits your workflow? `[calendly link or "Happy to jump on a quick call this week"]`
-
-Cheers,  
-MK  
-EveryCompanyClaw  
-[Link]
+Best,
+[YOUR_NAME]
+EveryCompanyClaw
 
 ---
 
-### Email 2 of 3 — Follow-up (Day 4, No Reply)
+## Template D — HK/Asia-Focused (for regional leads)
+*For: Tim Chan (NextMaven AI), Huron Mak (Clickspo), Chris Tam (WorkflowAI), Lydia Chow (CloudScale AI)*
 
-**Subject:** Re: [First Name] — automate [specific workflow] without writing code?
+**Subject:** From HK — everycompanyclaw just wrapped PH launch 🎉
 
-Hi `[First Name]`,
+Hi [NAME],
 
-Following up briefly — did you get a chance to look at the Zapier templates?
+Quick note from a HK maker — everycompanyclaw just finished a Product Hunt launch and it went well (107 upvotes, top 5 in AI category).
 
-I ask because a lot of growth teams at `[similar company]` were spending 5–10 hours/month on manual task-handoffs between tools. After setting up our templates, they told us it freed up at least a full day every week.
+We're an AI company that runs itself 24/7 — automation scripts, Zapier templates, and AI prompts for founders and builders. All one-time payment, no subscription, lifetime access.
 
-If you're using Zapier already, here's the thing: our templates are **one-time purchases** — no monthly fee. After 2 months, you've already saved more than the cost vs. Zapier's subscription.
+Thought of you since you're building in the same AI/automation space in Hong Kong.
 
-Curious if this is relevant: `[specific template name that matches their use case — e.g., "I noticed you do a lot of LinkedIn lead routing — we have a template for that"]`
+Founding member pricing is still active for another few days. If any of this fits your stack:
 
-Let me know. Happy to share the exact template list first.  
-MK
+🐍 Python Scripts: https://buy.stripe.com/8x2dRb51b9PW2dC25S4AU08
+⚡ Zapier Templates: https://buy.stripe.com/5kQ6oJ8dnaU08C09yk4AU07
+🔥 Bundle (all 3): https://buy.stripe.com/9B65kF1OZfagcSg7qc4AU09
 
----
+Happy to chat if you want a walkthrough.
 
-### Email 3 of 3 — Breakup Email (Day 10, No Reply)
-
-**Subject:** Last email — promise
-
-Hi `[First Name]`,
-
-I'll stop here — didn't want to clutter your inbox.
-
-If you ever want to cut down on `[specific repetitive task]` without hiring a developer or paying for another subscription, come find us at EveryCompanyClaw.
-
-No hard feelings. Best of luck with `[Company]`.
-
-Cheers,  
-MK
+Cheers,
+[YOUR_NAME]
+EveryCompanyClaw | Hong Kong
 
 ---
 
-## Personalisation Quick Reference
+## Template E — Nurture for "Researching" Leads
+*For: Victor Lam (StackFlow AI), Jessica Wu (AutomatedHQ), Aditya Mehta (BuildFast AI), Leo Cheung (Nexthook), Nina Patel (GrowthLab HK)*
+*Note: These leads are still "researching" — warm, not ready to buy yet. Longer-term nurture.*
 
-| Lead | Personalisation Angle |
-|------|---------------------|
-| **Tim Chan** (NextMaven AI) | "AI automation services" — pitch as tools they can resell to clients |
-| **Huron Mak** (Clickspo) | "AI SEO workflows" — pitch Zapier Templates for lead gen automation |
-| **Kenny Lim** (ChatDaddy) | CRM + WhatsApp automation — very aligned with Zapier Templates |
-| **Gavin Fung** (HK AI Automation Agency) | Channel partner angle — sell templates they can bundle with services |
-| **Victor Lam** (StackFlow AI) | Dev tools audience — Python Scripts for CI/CD + monitoring |
-| **Leo Cheung** (NextHook) | Content automation — AI Prompts + Zapier for distribution |
-| **Nina Patel** (GrowthLab HK) | Agency workflow — Zapier Templates for client reporting |
-| **Jessica Wu** (AutomatedHQ) | No-code automation reseller — bulk template pitch |
+**Subject:** EveryCompanyClaw — founding member pricing update
 
----
+Hi [NAME],
 
-## Subject Line Options (A/B Test)
+Following up from my earlier note — EveryCompanyClaw just completed its Product Hunt launch and the response was solid (107 upvotes, 3 products, founding member pricing still active).
 
-**Template A:**
-- Quick question about [Company] — automation + AI scripts
-- Do you still handle [pain point] manually?
-- One founder's automation stack question
-- Saw [Company] — quick question about your dev workflow
+I mentioned we built this for builders like yourself — AI/automation tools without the subscription trap.
 
-**Template B:**
-- [First Name] — automate [specific workflow] without code?
-- Cut [specific task] down to 10 minutes
-- Your team deserves better than manual [task]
-- Quick question about [Company]'s growth stack
+Since you're still evaluating, I wanted to share where we're at:
+- Launch complete ✅
+- Founding prices still active for [X] more days
+- 30-day money-back guarantee on everything
+
+No pressure — just wanted to make sure you had the info while founding prices are still available.
+
+Here's the bundle link: https://buy.stripe.com/9B65kF1OZfagcSg7qc4AU09
+
+Happy to answer any questions anytime.
+
+Best,
+[YOUR_NAME]
+EveryCompanyClaw
 
 ---
 
-## Send Log (update after each send)
+## Send Log
 
-| Lead | Email | Sent Date | Reply? | Notes |
-|------|-------|-----------|--------|-------|
-| | | | | |
+| Lead | Email | Template | Priority | Status | Sent Date |
+|------|-------|----------|----------|--------|-----------|
+| Rachel Ng | rachel@noircode.io | A | High | ready_to_contact | |
+| Daniel Park | daniel@autoscript.dev | A | High | ready_to_contact | |
+| Mei Lin | mei@growbase.hk | B | High | ready_to_contact | |
+| Priya Nair (LaunchList) | priya@launchlist.co | A | Medium | ready_to_contact | |
+| Kevin Zhang | kevin@promptmastery.ai | A | Medium | ready_to_contact | |
+| Sasha Ivanova | sasha@indiemaker.pro | A | Medium | ready_to_contact | |
+| Tim Chan | hello@nextmaven.ai | D | High | contacted | |
+| Huron Mak | info@clickspo.hk | D | High | contacted | |
+| Chris Tam | chris@workflowai.hk | D | High | contacted | |
+| Lydia Chow | lydia@cloudscale.ai | D | Medium | contacted | |
+| Marcus Reinholt | marcus@indiebuilds.io | C | High | contacted | |
+| Leo Cheung | leo@nexthook.io | B | High | researching | |
+| Nina Patel | nina@growthlab.hk | B | Medium | researching | |
+| Victor Lam | victor@stackflow.ai | A | High | researching | |
+| Jessica Wu | jessica@automatedhq.com | B | Medium | researching | |
+| Aditya Mehta | aditya@buildfast.ai | A | Medium | researching | |
+| Jordan Lee | jordan@zapworks.io | B | Medium | contacted | |
+
+## Send Timing Recommendations
+
+- **Best days:** Tuesday–Thursday
+- **Best times (HKT):** 9–11 AM, 2–4 PM
+- **Follow-up cadence:** Send first email → wait 3 days → send follow-up → wait 7 days → send final
+- **Tracking:** Use UTM parameters on Stripe links to track conversions per lead
+
+UTM format: `?utm_source=email&utm_medium=outreach&utm_campaign=post_launch_2026&utm_content=[lead_name]`
+
+Example:
+```
+https://buy.stripe.com/9B65kF1OZfagcSg7qc4AU09?utm_source=email&utm_medium=outreach&utm_campaign=post_launch_2026&utm_content=rachel_ng
+```
+
+## Post-Launch Angle — Key Selling Points
+
+1. **Social proof:** 107 Product Hunt upvotes, PH launch success
+2. **Pricing:** Founding member prices still active (one-time, not subscription)
+3. **Urgency:** "Limited time — founding member pricing" (MK to decide expiry)
+4. **Risk reversal:** 30-day money-back guarantee, no questions asked
+5. **Differentiation:** One-time payment vs. Zapier's $49/mo subscription trap
+6. **Future-proofing:** All future updates included free — bundle grows with buyer
