@@ -225,6 +225,90 @@
         .vs-breakdown strong { color: #fff; }
         .vs-bottom-note { color: #00cc88; font-size: 0.9em; text-align: center; background: rgba(0,204,136,0.05); border: 1px solid rgba(0,204,136,0.15); border-radius: 8px; padding: 12px; }
         
+        /* ROI Calculator */
+        .roi-calc { background: #111; border-radius: 16px; padding: 32px 28px; margin: 30px 0; border: 1px solid #222; }
+        .roi-calc h2 { text-align: center; font-size: 1.4em; margin-bottom: 6px; }
+        .roi-calc .roi-sub { text-align: center; color: #666; font-size: 0.9em; margin-bottom: 28px; }
+        .roi-inner { display: flex; gap: 28px; align-items: center; flex-wrap: wrap; }
+        .roi-inputs { flex: 1; min-width: 220px; }
+        .roi-field { margin-bottom: 18px; }
+        .roi-field label { display: block; color: #aaa; font-size: 0.88em; margin-bottom: 8px; font-weight: 500; }
+        .roi-field .roi-slider-row { display: flex; align-items: center; gap: 10px; }
+        .roi-slider {
+            flex: 1;
+            -webkit-appearance: none;
+            height: 6px;
+            border-radius: 3px;
+            background: #2a2a2a;
+            outline: none;
+            cursor: pointer;
+        }
+        .roi-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 20px; height: 20px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(102,126,234,0.4);
+        }
+        .roi-slider::-moz-range-thumb {
+            width: 20px; height: 20px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            cursor: pointer;
+            border: none;
+        }
+        .roi-amount-display {
+            background: #0a0a0a;
+            border: 1px solid #333;
+            border-radius: 8px;
+            padding: 10px 14px;
+            color: #667eea;
+            font-weight: bold;
+            font-size: 1em;
+            min-width: 80px;
+            text-align: center;
+        }
+        .roi-presets { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 10px; }
+        .roi-preset {
+            background: #1a1a2e;
+            border: 1px solid #333;
+            color: #888;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.78em;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .roi-preset:hover, .roi-preset.active { border-color: #667eea; color: #667eea; background: rgba(102,126,234,0.08); }
+        .roi-results { flex: 1; min-width: 220px; }
+        .roi-result-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 18px; }
+        .roi-result-card {
+            background: #0a0a0a;
+            border-radius: 12px;
+            padding: 18px 14px;
+            text-align: center;
+            border: 1px solid #1e1e1e;
+        }
+        .roi-result-card.highlight { border-color: #00cc88; background: rgba(0,204,136,0.04); }
+        .roi-result-label { color: #555; font-size: 0.72em; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
+        .roi-result-value { font-size: 1.6em; font-weight: bold; color: #667eea; line-height: 1; }
+        .roi-result-card.highlight .roi-result-value { color: #00cc88; }
+        .roi-result-sub { color: #444; font-size: 0.72em; margin-top: 4px; }
+        .roi-savings-bar {
+            background: #1a1a2e;
+            border-radius: 10px;
+            padding: 14px 16px;
+            margin-bottom: 14px;
+        }
+        .roi-savings-bar-label { color: #888; font-size: 0.78em; margin-bottom: 6px; }
+        .roi-savings-bar-track { background: #222; border-radius: 4px; height: 10px; overflow: hidden; }
+        .roi-savings-bar-fill { background: linear-gradient(90deg, #667eea, #00cc88); border-radius: 4px; height: 10px; transition: width 0.5s ease; }
+        .roi-savings-bar-text { color: #00cc88; font-size: 0.82em; margin-top: 6px; font-weight: bold; }
+        .roi-cta { display: block; text-align: center; background: linear-gradient(135deg, #ff4f1f 0%, #ff7a4f 100%); color: #fff; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: bold; font-size: 0.95em; transition: transform 0.15s, box-shadow 0.15s; }
+        .roi-cta:hover { transform: scale(1.03); box-shadow: 0 4px 20px rgba(255,79,31,0.3); }
+        @media (max-width: 600px) { .roi-inner { flex-direction: column; } .roi-result-grid { grid-template-columns: 1fr 1fr; } }
+
         @media (max-width: 600px) {
             .countdown { gap: 8px; }
             .countdown-unit { padding: 12px 14px; min-width: 60px; }
@@ -758,6 +842,50 @@
             <p class="vs-bottom-note">⚡ <strong>Bottom line:</strong> Our bundle pays for itself in 2 months vs Zapier Standard — and then saves you $588/year, every year.</p>
         </div>
         
+        <!-- ROI Calculator -->
+        <div class="roi-calc">
+            <h2>🧮 See Your Savings in Under 30 Seconds</h2>
+            <p class="roi-sub">Enter your current monthly Zapier (or similar) spend to see exactly when our bundle pays for itself</p>
+            <div class="roi-inner">
+                <div class="roi-inputs">
+                    <div class="roi-field">
+                        <label>Your monthly automation tool spend (USD)</label>
+                        <div class="roi-slider-row">
+                            <input type="range" class="roi-slider" id="roi-slider" min="20" max="300" value="49" oninput="calculateROI(this.value)">
+                            <div class="roi-amount-display" id="roi-amount-display">$49/mo</div>
+                        </div>
+                        <div class="roi-presets">
+                            <span class="roi-preset" onclick="setROI(29)">Starter $29</span>
+                            <span class="roi-preset active" onclick="setROI(49)">Standard $49</span>
+                            <span class="roi-preset" onclick="setROI(99)">Pro $99</span>
+                            <span class="roi-preset" onclick="setROI(199)">Team $199</span>
+                            <span class="roi-preset" onclick="setROI(299)">Advanced $299</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="roi-results">
+                    <div class="roi-result-grid">
+                        <div class="roi-result-card">
+                            <div class="roi-result-label">Bundle Pays Off In</div>
+                            <div class="roi-result-value" id="roi-payback">2.0 mo</div>
+                            <div class="roi-result-sub">one-time $99</div>
+                        </div>
+                        <div class="roi-result-card highlight">
+                            <div class="roi-result-label">Annual Savings</div>
+                            <div class="roi-result-value" id="roi-savings">$489</div>
+                            <div class="roi-result-sub">every year, forever</div>
+                        </div>
+                    </div>
+                    <div class="roi-savings-bar">
+                        <div class="roi-savings-bar-label">Your savings vs 12 months of subscription</div>
+                        <div class="roi-savings-bar-track"><div class="roi-savings-bar-fill" id="roi-bar-fill" style="width:83%"></div></div>
+                        <div class="roi-savings-bar-text" id="roi-bar-text">You save $489 this year alone</div>
+                    </div>
+                    <a href="https://buy.stripe.com/9B65kF1OZfagcSg7qc4AU09" class="roi-cta" target="_blank" rel="noopener">🔥 Get the Bundle — Stop Paying Forever</a>
+                </div>
+            </div>
+        </div>
+        
         <!-- FAQ (Accordion) -->
         <div class="faq">
             <h2>❓ Frequently Asked Questions</h2>
@@ -916,6 +1044,34 @@
 
         // Notification ticker is now static — post-launch message only
         // (removed fake live purchase ticker)
+
+        // ── ROI Calculator ──────────────────────────────────────────────────────
+        const BUNDLE_PRICE = 99;
+        function calculateROI(monthlySpend) {
+            const spend = parseInt(monthlySpend);
+            const annualSubscription = spend * 12;
+            const paybackMonths = (BUNDLE_PRICE / spend).toFixed(1);
+            const annualSavings = annualSubscription - BUNDLE_PRICE;
+            const savingsPct = Math.min(100, Math.round((annualSavings / annualSubscription) * 100));
+            
+            document.getElementById('roi-amount-display').textContent = '$' + spend + '/mo';
+            document.getElementById('roi-payback').textContent = paybackMonths + ' mo';
+            document.getElementById('roi-savings').textContent = '$' + annualSavings;
+            document.getElementById('roi-bar-fill').style.width = savingsPct + '%';
+            document.getElementById('roi-bar-text').textContent = 'You save $' + annualSavings + ' this year alone';
+            
+            // Update preset active state
+            document.querySelectorAll('.roi-preset').forEach(p => p.classList.remove('active'));
+        }
+        function setROI(amount) {
+            const slider = document.getElementById('roi-slider');
+            slider.value = amount;
+            calculateROI(amount);
+            document.querySelectorAll('.roi-preset').forEach(p => p.classList.remove('active'));
+            event.target.classList.add('active');
+        }
+        // Initialize on load
+        calculateROI(49);
 
         // Email Capture
         const EC_KEY = 'ecc_email_list';
