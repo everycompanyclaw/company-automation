@@ -877,7 +877,177 @@ Monday.com is the #1 project management tool for agencies. If we built a Monday.
 
 ---
 
+---
+
 **Research completed:** 2026-04-13 18:14 HKT (10:14 UTC)
 **Segment researched:** Agency automation tools (Monday.com, Zapier, Make, Airtable, ActiveCampaign)
 **Key finding:** AI content generation is the universal gap in the agency automation stack — EveryCompanyClaw's AI Prompts are uniquely positioned here.
+
+---
+
+## Competitor Research Entry — 2026-04-13 19:04 HKT (11:04 UTC)
+## 🎯 Research Focus: Pabbly Connect — The Aggressive Zapier Alternative
+
+**Why this competitor matters:**
+Pabbly Connect is one of the most aggressive competitors in the automation space, particularly because of their bold lifetime deal ($349 one-time) and their India-based pricing structure that undercuts everyone. They claim 14,099+ businesses and 21,000+ community members. They are explicitly targeting users who want to escape Zapier's subscription model — the same buyer EveryCompanyClaw targets.
+
+---
+
+## What Pabbly Connect Does
+
+Pabbly is a cloud-based workflow automation platform (no-code) with 2,000+ app integrations. Like Zapier/Make, it uses a trigger → action workflow model. Their differentiator is:
+1. **"Unlimited tasks" pricing** — only action steps count toward task limits; triggers and internal steps are free
+2. **Lifetime deal** — $349 one-time payment (close to EveryCompanyClaw Bundle pricing)
+3. **India-priced SaaS** — converts to ~$13.50/mo for Standard, ~$59/mo for Unlimited in USD terms
+4. **12,274+ video tutorials** — massive self-serve education library
+5. **Built-in AI assistant** — AI within workflows
+6. **Python and JavaScript modules** — custom code within workflows
+
+**Core Products:**
+- Pabbly Connect (workflow automation)
+- Pabbly Email Marketing
+- Pabbly Form Builder
+- Pabbly Subscriptions / Billing
+- Pabbly Chatbot
+
+---
+
+## 💰 Pricing (2026)
+
+| Plan | Price | Tasks/Month |
+|------|-------|------------|
+| Free | $0 | 100 tasks/mo |
+| Standard | ~$13.50/mo (₹1,138/mo) | 10,000 tasks/mo |
+| Unlimited | ~$59/mo (₹4,999/mo) | Unlimited tasks |
+| **Lifetime** | **$349 one-time** | Unlimited |
+
+**Key pricing insight:** Pabbly's $349 lifetime deal is only $9 more than EveryCompanyClaw's $99 bundle × 3 + $99 bundle. A founder could buy Pabbly lifetime ($349) + a Python scripts bundle elsewhere, vs EveryCompanyClaw Bundle ($99) — but EveryCompanyClaw includes AI prompts + Zapier templates + Python scripts. Pabbly is only automation workflows.
+
+**Pabbly's own comparison claims:**
+- 91% cheaper than Zapier for 10K tasks/month
+- 49% cheaper than Make for 10K tasks/month
+- 75% cheaper than n8n Cloud for 10K tasks/month
+
+---
+
+## ✅ Strengths (What They Do Well)
+
+### 1. The "Unlimited Tasks" Positioning
+Pabbly's "only action steps count" model is genuinely differentiated. In EveryCompanyClaw's Zapier templates comparison, this is worth acknowledging — it IS a real advantage vs Zapier's task-counting model.
+
+### 2. Lifetime Deal Creates FOMO
+$349 one-time is a powerful acquisition hook. Founders who are tired of subscriptions will pay $349 to "own" their automation tool. This is the same one-time-payment psychology EveryCompanyClaw uses — EveryCompanyClaw is $99 for the bundle, significantly cheaper.
+
+### 3. Massive Video Tutorial Library
+12,274 video tutorials means non-technical users can self-serve. This reduces churn because users feel supported. EveryCompanyClaw currently lacks this depth of educational content.
+
+### 4. Community & Social Proof
+21,000+ member community + 14,099+ businesses is real scale. Their testimonials show heavy users (1.6M tasks/month for one business) which provides credible proof of scalability.
+
+### 5. Built-in AI Assistant
+Pabbly has its own AI assistant within workflows. This is a direct response to the AI wave — they recognized AI integration as table stakes.
+
+### 6. Python + JavaScript Code Modules
+Unlike Zapier, Pabbly lets users write custom Python and JavaScript within workflows. This is surprisingly close to EveryCompanyClaw's Python Scripts value proposition — though Pabbly requires workflow context, not standalone scripts.
+
+---
+
+## ❌ Weaknesses (Vulnerabilities to Exploit)
+
+### 1. "Generic Workflows" — No Pre-Built Solution Library
+Pabbly has templates but they're generic trigger→action patterns. EveryCompanyClaw's **Python Scripts Bundle** provides production-ready scripts for Stripe, Slack, Gumroad, Resend — specific business problems, not generic patterns. The scripts are owned and customizable, not locked in a platform.
+
+### 2. No Python Scripts / Code Library as a Product
+Pabbly's Python module is a tool *within* the platform — you still have to write the code yourself. EveryCompanyClaw **sells the scripts** — no coding required, just configure and run. For non-technical founders, this is a massive difference.
+
+### 3. No AI Prompts Library
+Despite having an "AI Assistant," Pabbly does NOT sell curated AI prompts as a standalone product. EveryCompanyClaw's **AI Prompts Bundle** ($29) is uniquely positioned — it's not automation-specific, it's content-creation-focused. This is an entirely separate buyer journey.
+
+### 4. "Lifetime Deal" Risk — Quality & Support Anxiety
+$349 lifetime sounds great until you need enterprise-grade reliability, SOC2 compliance, or priority support. Pabbly's lifetime deal users may be deprioritized for support. EveryCompanyClaw's $29–$99 one-time payments with a 30-day guarantee and ongoing updates is lower risk for a first-time buyer.
+
+### 5. India-Priced SaaS — Trust Gap in Western Markets
+Pabbly's INR pricing (₹) signals India-market primary focus. For US/EU founders, this can create a subconscious trust gap (support hours, PCI compliance, data residency). EveryCompanyClaw's Stripe-based checkout in USD signals mainstream Western SaaS.
+
+### 6. Zapier/Make Clone — No Unique Wedge
+Pabbly is essentially "Zapier but cheaper." They don't have a unique insight or category creation. EveryCompanyClaw's positioning as a **pre-built automation toolkit for founders** (not a platform you build on) is genuinely different.
+
+### 7. No Bundled Product Philosophy
+Pabbly sells one product (workflow automation). EveryCompanyClaw's **3-product bundle** ($99) creates more perceived value. A founder comparing "$349 for lifetime automation" vs "$99 for Python scripts + Zapier templates + AI prompts + lifetime updates" will see better value in EveryCompanyClaw.
+
+---
+
+## 🎯 Market Positioning
+
+**Pabbly's target:** Cost-conscious small businesses and solo founders leaving Zapier. Heavy in India, growing in Southeast Asia, gaining traction in US/EU via lifetime deal hunters and YouTube tutorial watchers.
+
+**Pabbly's positioning:** "Zapier without the subscription trap."
+
+**EveryCompanyClaw's positioning:** "Pre-built automation solutions — no builder required."
+
+These are subtly different. Pabbly is a **platform** (you build workflows). EveryCompanyClaw is a **product** (you use solutions). Founders who want to DIY choose Pabbly. Founders who want done-for-you choose EveryCompanyClaw.
+
+---
+
+## 💡 Opportunities for EveryCompanyClaw vs Pabbly
+
+### 1. Own the "No Build Required" Differentiation
+EveryCompanyClaw's copy should emphasize: "Stop building. Start using." Pabbly users who are frustrated with building workflows (even if Pabbly is easier than Zapier) are a warm audience for EveryCompanyClaw's pre-built scripts.
+
+**Action:** Add a "Built by us, owned by you" section to product pages. Contrast: Pabbly (you build) vs EveryCompanyClaw (we built, you own).
+
+### 2. "$99 Bundle vs $349 Lifetime" — Win on Price, Tie on Value
+EveryCompanyClaw Bundle ($99) vs Pabbly Lifetime ($349). Pabbly is 3.5× more expensive AND doesn't include Python scripts or AI prompts. EveryCompanyClaw's pricing page should explicitly call this out.
+
+**Action:** Add a "Pabbly vs EveryCompanyClaw" comparison to the comparison table.
+
+### 3. "12,000 Tutorials vs 0" — Content Gap
+EveryCompanyClaw lacks tutorial content. Pabbly has 12,274 videos. This is a real conversion barrier for non-technical buyers who want hand-holding.
+
+**Action:** Add a "Quick Start Guide" PDF to every product. Even 5 pages of setup guides would reduce anxiety for non-technical founders.
+
+### 4. AI Prompts Are the Undefended Wedge
+Pabbly has an AI assistant. They do NOT sell a curated AI prompts library. EveryCompanyClaw's AI Prompts Bundle is a product Pabbly literally cannot compete with — they have no equivalent. This is the clearest unique selling point.
+
+**Action:** Emphasize AI Prompts Bundle in all outbound messaging. It is the product no automation platform has.
+
+### 5. Pabbly Lifetime Buyers Are Future Leads
+Founders who bought Pabbly's $349 lifetime deal are already comfortable with one-time payments. They're warm leads for EveryCompanyClaw — especially the AI Prompts Bundle ($29) which adds AI content capabilities Pabbly doesn't have.
+
+**Action:** Target Pabbly users in cold outreach. They already believe in one-time payments.
+
+---
+
+## 📊 Pabbly vs EveryCompanyClaw Comparison
+
+| Feature | Pabbly Connect | EveryCompanyClaw |
+|---------|----------------|-----------------|
+| Pricing | $0–$59/mo or $349 lifetime | $29–$99 one-time |
+| Workflows | ✅ (2,000+ integrations) | ✅ (25+ Zapier templates) |
+| Python Scripts | ⚠️ Write your own | ✅ 50+ ready-to-use |
+| AI Prompts | ❌ | ✅ 200+ curated |
+| No-Code Setup | ✅ | ✅ |
+| Custom Code | ✅ JS + Python in workflows | ✅ Standalone scripts |
+| Lifetime Access | ✅ ($349) | ✅ (all plans) |
+| 30-Day Refund | ✅ | ✅ |
+| Educational Content | 12,274 videos | Limited |
+| AI Integration | Built-in AI assistant | AI prompts library |
+| Target User | DIY automation builders | Founders wanting done-for-you |
+| Trust Signals | India-based, growing | Stripe checkout, USD |
+
+---
+
+## 🎯 Recommended Actions from Pabbly Research
+
+1. **Add Pabbly to the comparison table** on product pages — explicitly call out that EveryCompanyClaw Bundle ($99) vs Pabbly Lifetime ($349) is 3.5× cheaper AND includes AI prompts and Python scripts.
+2. **Create "Built by Us, Owned by You" messaging** — contrast platform building vs using pre-built solutions.
+3. **Add a Quick Start Guide** to reduce non-technical buyer anxiety.
+4. **Outreach to Pabbly lifetime buyers** — they're pre-qualified for one-time payment SaaS.
+5. **Double down on AI Prompts** — this is EveryCompanyClaw's undefended unique product.
+
+---
+
+**Research completed:** 2026-04-13 19:04 HKT (11:04 UTC)
+**Competitor researched:** Pabbly Connect
+**Key finding:** Pabbly is a credible "Zapier-killer" with strong lifetime deal and unlimited tasks, but lacks Python scripts and AI prompts as products. EveryCompanyClaw's bundle pricing ($99) undercuts Pabbly Lifetime ($349) by 3.5× while including more product categories. The AI Prompts Bundle has no direct competitor in the automation space.
 
