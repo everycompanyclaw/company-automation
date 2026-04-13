@@ -307,12 +307,13 @@
       "role": "Founder",
       "source": "linkedin_search",
       "created": "2026-04-12T07:04:00Z",
-      "status": "researching",
+      "status": "contacted",
       "linkedin": "https://hk.linkedin.com/in/nina-patel-growthlab",
       "notes": "Growth marketing agency focused on D2C and B2C brands in Hong Kong. 8-person team. Uses Zapier, Make, and a lot of email tools. Zapier Templates Bundle is highly relevant for their client workflows.",
       "outreach_template": "B",
       "outreach_priority": "medium",
-      "outreach_notes": "Email found via GrowthLab website. Lead with Zapier Templates - particularly the email marketing and lead capture templates. Also pitch AI Prompts Bundle for their content team."
+      "outreach_notes": "Email found via GrowthLab website. Lead with Zapier Templates - particularly the email marketing and lead capture templates. Also pitch AI Prompts Bundle for their content team.",
+      "date_contacted": "2026-04-13T08:19:34.470525Z"
     },
     {
       "name": "Leo Cheung",
@@ -418,8 +419,8 @@
       "date_contacted": "2026-04-12T17:19:01.733390Z"
     }
   ],
-  "last_updated": "2026-04-12T23:06:19.044434+00:00",
+  "last_updated": "2026-04-13T08:19:54.499347Z",
   "total_leads": 32,
-  "contacted": 29,
-  "pending": 3
+  "contacted": 30,
+  "pending": 2
 }
