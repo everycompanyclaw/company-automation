@@ -1051,3 +1051,138 @@ Founders who bought Pabbly's $349 lifetime deal are already comfortable with one
 **Competitor researched:** Pabbly Connect
 **Key finding:** Pabbly is a credible "Zapier-killer" with strong lifetime deal and unlimited tasks, but lacks Python scripts and AI prompts as products. EveryCompanyClaw's bundle pricing ($99) undercuts Pabbly Lifetime ($349) by 3.5× while including more product categories. The AI Prompts Bundle has no direct competitor in the automation space.
 
+
+---
+
+## 🏆 Sixth Competitor: Workflow86
+
+**Website:** https://workflow86.com
+**Type:** Agentic workflow automation platform
+**Tagline:** "Agentic workflows for really complex tasks"
+**Founded:** ~2024, emerging player
+**Threat Level:** LOW-MODERATE (different market segment, but shares technical founder audience)
+
+---
+
+## What Workflow86 Does
+
+Workflow86 is an AI-powered workflow orchestration platform that targets **complex, long-running business processes**. Unlike traditional automation tools (Zapier, Make) that handle quick triggers-and-actions, Workflow86 is designed for workflows that run over days, weeks, or months — with human approval checkpoints, parallel execution branches, and built-in task management.
+
+**Key differentiating features:**
+- Agentic AI actions (web research, content generation, data analysis built into workflows)
+- Human-in-the-loop task manager (workflows pause for human review/approval)
+- Parallel execution (hundreds of actions simultaneously)
+- Long-running workflow persistence (can pause and resume after weeks)
+- Form builder for stakeholder input
+
+**Target customer:** Enterprise/operations teams, agencies managing complex multi-stakeholder workflows (e.g., loan approval, onboarding workflows, compliance processes).
+
+---
+
+## 💰 Pricing (2026)
+
+| Plan | Price | What's Included |
+|------|-------|----------------|
+| **Free** | $0 | 5 workflows, 300 actions, 50 AI actions, 1 user |
+| **Enterprise** | Custom | Unlimited workflows, unlimited AI, custom integrations, dedicated account manager |
+
+**Key pricing insight:** Free tier is generous but capped at 300 actions/month. Enterprise requires custom demo/negotiation — high-touch sales cycle, not self-serve. EveryCompanyClaw is entirely self-serve with one-time pricing.
+
+---
+
+## ✅ Strengths (What They Do Well)
+
+1. **Agentic AI built into the workflow engine** — AI actions (web research, content generation, data extraction) are first-class citizens, not add-ons
+2. **Human-in-the-loop** — unique in the market; workflows can pause for human task completion (approval, form submission, review)
+3. **Parallel execution** — hundreds of actions can run simultaneously, enabling complex orchestration
+4. **Long-running workflow persistence** — workflows survive system restarts, can pause for weeks/months
+5. **Built-in form builder** — stakeholders can submit input without being workflow users
+6. **100+ integrations** — covers major SaaS tools
+7. **Enterprise-ready** — SSO, on-premise support, dedicated account managers
+
+---
+
+## ❌ Weaknesses (Vulnerabilities to Exploit)
+
+1. **Not self-serve for serious use** — Enterprise pricing requires a demo call; no clear per-seat or usage-based self-serve option
+2. **Steep learning curve** — built for complex, long-running processes; simple automations are over-engineered
+3. **No pre-built templates or solutions marketplace** — users build workflows from scratch; same "blank canvas" problem as n8n/Activepieces
+4. **Free tier too limited for real work** — 300 actions/month is ~10 small workflows; barely enough for a small team's daily automations
+5. **No individual/founder pricing** — Enterprise target market means no pricing for solo founders or small teams
+6. **No Python scripts, no content prompts** — purely workflow orchestration; no "solution bundles" for specific use cases
+7. **No one-time purchase option** — subscription-only model (even Enterprise is recurring)
+8. **Very new product** — limited track record, community, or case studies compared to Zapier/Make
+
+---
+
+## 🎯 Market Positioning
+
+**Target customer:** Enterprise operations teams, agencies, compliance-driven industries (finance, healthcare, legal). Workflows that require multiple human approvals, run over weeks, involve complex branching logic.
+
+**Sweet spot:** Multi-stakeholder business processes with approval gates, parallel tracks, and long timelines.
+
+**What Workflow86 is NOT:** A tool for solo founders, indie hackers, or marketers wanting quick, simple automations. Not self-serve at scale. No pre-built solutions.
+
+---
+
+## 💡 Opportunities for EveryCompanyClaw vs Workflow86
+
+### 1. Complementary, Not Competitive
+
+Workflow86 and EveryCompanyClaw serve completely different buyers:
+- Workflow86: Enterprise ops teams, compliance workflows, complex multi-stakeholder processes
+- EveryCompanyClaw: Solo founders, indie hackers, marketers who want quick wins
+
+**Strategy:** Don't compete. EveryCompanyClaw's buyers might graduate to Workflow86 as their company grows — plant seeds for future expansion.
+
+### 2. The Speed Angle
+
+Workflow86's complexity (forms, human tasks, branching logic) means even simple automations take hours to design and deploy.
+
+**EveryCompanyClaw advantage:** "Get a working automation in 30 minutes, not 3 weeks. Our Zapier templates are pre-built. Our Python scripts are production-ready. No forms to fill out, no demo calls, no enterprise sales cycle."
+
+### 3. AI Content Generation Gap (Again)
+
+Workflow86 has AI actions built in (web research, content generation, data extraction) — but no curated prompt library. Their AI is a technical component; EveryCompanyClaw's AI Prompts Bundle is a ready-to-use content solution.
+
+**EveryCompanyClaw advantage:** "Workflow86 can run AI. But we give you 200+ prompts that actually work — cold emails, LinkedIn posts, ad copy, objection handling. Just copy, paste, done."
+
+### 4. Solo Founder / Indie Hacker Pricing Gap
+
+Workflow86 has no founder-friendly pricing. EveryCompanyClaw's $29–$99 one-time model is uniquely accessible to bootstrapped builders.
+
+**EveryCompanyClaw advantage:** "Workflow86 wants to sell you an enterprise contract. We're here for the solo founder shipping on nights and weekends."
+
+---
+
+## 📊 Competitive Summary: Six-Platform Comparison
+
+| Feature | EveryCompanyClaw | Zapier | n8n | Make | Pabbly | Workflow86 |
+|---------|-----------------|--------|------|------|--------|-----------|
+| **Pricing** | $29–$99 one-time | $19–$599/mo | $0–$60/mo | $9–$299/mo | $0–$59/mo or $349 | $0 + Enterprise |
+| **Self-serve** | ✅ Full | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes | ❌ Demo required |
+| **Human-in-loop** | ❌ | ❌ | ⚠️ Some | ❌ | ❌ | ✅ Built-in |
+| **AI Prompts** | ✅ 200+ | ❌ | ❌ | ❌ | ❌ | ⚠️ AI actions only |
+| **Python Scripts** | ✅ 50+ | ❌ | ✅ Custom | ❌ | ❌ | ❌ |
+| **Pre-built solutions** | ✅ Templates+Scripts+Prompts | ⚠️ Thin | ❌ None | ⚠️ Better | ⚠️ Some | ❌ None |
+| **Long-running workflows** | ⚠️ Limited | ❌ | ⚠️ Yes | ⚠️ Yes | ⚠️ Yes | ✅ Built for it |
+| **Parallel execution** | ❌ | ❌ | ✅ | ✅ | ❌ | ✅ |
+| **One-time pricing** | ✅ Yes | ❌ | ⚠️ Self-host | ❌ | ✅ $349 lifetime | ❌ |
+| **Solo founder target** | ✅ Primary | ⚠️ Some | ⚠️ Some | ⚠️ Some | ✅ Yes | ❌ |
+| **Commercial license** | ✅ Yes | ⚠️ Extra | ⚠️ Check | ❌ | ⚠️ Check | ⚠️ Check |
+
+---
+
+## 🎯 Recommended Actions from Workflow86 Research
+
+1. **No direct competitive action needed** — Workflow86 serves enterprise, EveryCompanyClaw serves solo founders. Different markets.
+2. **Use Workflow86 as a "level up" story** — "As your automation needs grow from 3 Zaps to 30-step compliance workflows, you might need Workflow86. But start with EveryCompanyClaw."
+3. **Double down on speed** — Workflow86's complexity (forms, tasks, branches) is EveryCompanyClaw's simplicity's biggest contrast. "Up and running in 30 minutes" is a real differentiator.
+4. **Add "Complex Workflows → Workflow86" note** — honest comparison that builds trust. If a lead's needs are genuinely too complex for templates/scripts, acknowledge it and refer them to Workflow86. Builds credibility.
+5. **Monitor Workflow86** — they're new and could pivot to serve indie hackers. If they launch a founder-friendly tier, reassess competitive threat.
+
+---
+
+**Research completed:** 2026-04-14 04:04 HKT (2026-04-13 20:04 UTC)
+**Competitor researched:** Workflow86
+**Key finding:** Workflow86 targets enterprise operations teams with complex, multi-stakeholder, long-running workflows. EveryCompanyClaw targets solo founders wanting quick automations. No direct competitive overlap. EveryCompanyClaw's speed and simplicity is the key differentiator. Consider Workflow86 as a potential "level up" referral for leads whose needs outgrow templates/scripts.
