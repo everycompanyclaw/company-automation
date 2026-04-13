@@ -88,6 +88,33 @@
         .comment-input { width: 100%; background: #0a0a0a; border: 1px solid #333; color: #fff; padding: 12px; border-radius: 8px; margin-top: 15px; resize: none; }
         .comment-input:focus { outline: none; border-color: #667eea; }
         
+        /* Pricing Comparison Table */
+        .compare-section { margin: 30px 0 24px; }
+        .compare-section h2 { font-size: 1.2em; text-align: center; margin-bottom: 20px; color: #fff; }
+        .compare-table-wrap { overflow-x: auto; }
+        .compare-table { width: 100%; border-collapse: collapse; background: #0d0d1a; border-radius: 12px; overflow: hidden; border: 1px solid #222; }
+        .compare-table th { padding: 14px 16px; text-align: center; font-size: 0.85em; color: #888; background: #111; border-bottom: 1px solid #222; }
+        .compare-table th:first-child { text-align: left; }
+        .compare-table td { padding: 12px 16px; font-size: 0.88em; color: #aaa; border-bottom: 1px solid #1a1a2e; vertical-align: middle; }
+        .compare-table tr:last-child td { border-bottom: none; }
+        .compare-table td:first-child { color: #c0c8e0; font-weight: 500; }
+        .compare-table td:not(:first-child) { text-align: center; }
+        .compare-table .row-bundle { background: rgba(102,126,234,0.07); }
+        .compare-table .row-bundle td { color: #fff; font-weight: 600; border-color: rgba(102,126,234,0.15); }
+        .compare-table .row-bundle td:first-child { color: #667eea; }
+        .check-yes { color: #00cc88; font-weight: bold; font-size: 1.1em; }
+        .check-no { color: #444; font-size: 1.1em; }
+        .price-individual { color: #888; text-decoration: line-through; }
+        .price-bundle { color: #00cc88; font-weight: bold; }
+        .savings-badge { display: inline-block; background: linear-gradient(135deg, #ff4f1f, #ff7a4f); color: #fff; font-size: 0.7em; padding: 2px 8px; border-radius: 10px; font-weight: bold; margin-left: 6px; }
+        .highlight-col { background: rgba(102,126,234,0.1) !important; border-left: 2px solid #667eea !important; border-right: 2px solid #667eea !important; }
+
+        /* Trust Badges */
+        .trust-badges { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin: 14px 0 20px; }
+        .trust-badge { display: flex; align-items: center; gap: 6px; background: #0d0d1a; border: 1px solid #222; border-radius: 8px; padding: 8px 14px; font-size: 0.78em; color: #888; }
+        .trust-badge-icon { font-size: 1.1em; }
+        .trust-badge strong { color: #c0c8e0; }
+
         /* FAQ Section */
         .faq { background: #111; border-radius: 16px; padding: 30px; margin: 30px 0; border: 1px solid #222; }
         .faq h2 { font-size: 1.3em; margin-bottom: 20px; text-align: center; }
@@ -712,10 +739,85 @@
         </div>
         
         <!-- Standard Pricing Banner -->
+        <!-- Pricing Comparison Table -->
+        <div class="compare-section">
+            <h2>📊 The Math: Bundle vs. Individual</h2>
+            <div class="compare-table-wrap">
+                <table class="compare-table">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>🐍 Python Scripts</th>
+                            <th>⚡ Zapier Templates</th>
+                            <th>💡 AI Prompts</th>
+                            <th class="highlight-col">🚀 Bundle</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Price</td>
+                            <td><span class="price-individual">$79</span></td>
+                            <td><span class="price-individual">$49</span></td>
+                            <td><span class="price-individual">$29</span></td>
+                            <td class="highlight-col"><span class="price-bundle">$99</span></td>
+                        </tr>
+                        <tr>
+                            <td>50+ Python Scripts</td>
+                            <td><span class="check-yes">✓</span></td>
+                            <td><span class="check-no">—</span></td>
+                            <td><span class="check-no">—</span></td>
+                            <td class="highlight-col"><span class="check-yes">✓</span></td>
+                        </tr>
+                        <tr>
+                            <td>25+ Zapier Templates</td>
+                            <td><span class="check-no">—</span></td>
+                            <td><span class="check-yes">✓</span></td>
+                            <td><span class="check-no">—</span></td>
+                            <td class="highlight-col"><span class="check-yes">✓</span></td>
+                        </tr>
+                        <tr>
+                            <td>200+ AI Prompts</td>
+                            <td><span class="check-no">—</span></td>
+                            <td><span class="check-no">—</span></td>
+                            <td><span class="check-yes">✓</span></td>
+                            <td class="highlight-col"><span class="check-yes">✓</span></td>
+                        </tr>
+                        <tr>
+                            <td>Lifetime Updates</td>
+                            <td><span class="check-yes">✓</span></td>
+                            <td><span class="check-yes">✓</span></td>
+                            <td><span class="check-yes">✓</span></td>
+                            <td class="highlight-col"><span class="check-yes">✓</span></td>
+                        </tr>
+                        <tr>
+                            <td>Commercial License</td>
+                            <td><span class="check-yes">✓</span></td>
+                            <td><span class="check-yes">✓</span></td>
+                            <td><span class="check-yes">✓</span></td>
+                            <td class="highlight-col"><span class="check-yes">✓</span></td>
+                        </tr>
+                        <tr>
+                            <td>Future Products</td>
+                            <td><span class="check-no">—</span></td>
+                            <td><span class="check-no">—</span></td>
+                            <td><span class="check-no">—</span></td>
+                            <td class="highlight-col"><span class="check-yes">✓</span> <span class="savings-badge">FREE</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Total</strong></td>
+                            <td colspan="3" style="text-align:right;padding-right:20px;"><strong>$157</strong></td>
+                            <td class="highlight-col"><strong style="color:#00cc88;">$99</strong> <span class="savings-badge">SAVE $58</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p style="text-align:center;color:#555;font-size:0.8em;margin-top:10px;">💡 Individual buyers pay $157 total. Bundle buyers get everything for $99 — and future products free.</p>
+        </div>
+
         <div class="pricing-banner">
             <p>💚 <strong>Founding member pricing active.</strong> All products available at the same launch prices — one-time payment, lifetime access, no subscription fees.</p>
         </div>
-        
+
         <!-- Bundle Deal Card -->
         <div class="bundle-card">
             <div class="bundle-badge">⚡ BUNDLE DEAL</div>
@@ -790,6 +892,14 @@
                     <div class="bu-clock-unit"><span class="bu-clock-num" id="bu-seconds">00</span><span class="bu-clock-label">sec</span></div>
                 </div>
             </div>
+            <!-- Trust Badges -->
+            <div class="trust-badges">
+                <div class="trust-badge"><span class="trust-badge-icon">🔒</span> <strong>Secure Checkout</strong> · Stripe encrypted</div>
+                <div class="trust-badge"><span class="trust-badge-icon">💸</span> <strong>30-Day</strong> Money-back guarantee</div>
+                <div class="trust-badge"><span class="trust-badge-icon">⚡</span> <strong>Instant</strong> Download after payment</div>
+                <div class="trust-badge"><span class="trust-badge-icon">♻️</span> <strong>Lifetime</strong> access · No subscription</div>
+            </div>
+
             <div class="bundle-cta">
                 <a href="https://buy.stripe.com/9B65kF1OZfagcSg7qc4AU09" class="bundle-buy-btn" target="_blank" rel="noopener">🔥 Get the Bundle — $99</a>
                 <span class="bundle-note">Save <strong>$58</strong> vs buying separately</span>
