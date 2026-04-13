@@ -458,11 +458,40 @@
         "AI Prompts Bundle"
       ],
       "date_contacted": "2026-04-13T13:08:17.740893Z"
+    },
+    {
+      "name": "Tom\u00e1s Reverter",
+      "email": "tomas@saasfuel.io",
+      "company": "SaaSFuel",
+      "role": "Founder",
+      "source": "product_hunt",
+      "created": "2026-04-13T15:04:00Z",
+      "status": "contacted",
+      "notes": "B2B SaaS founder running a database monitoring tool. Pays $249/mo on automation (Zapier Enterprise + custom webhook integrations). Building in public, 2.3K Twitter followers. Strong fit for Python Scripts Bundle (self-host the webhook handlers and save $150+/mo) + Zapier Templates (migrate existing Zaps). Open to one-time purchases \u2014 already bought 3 lifetime deals. Active in indie hacker communities, potential affiliate + content partner.",
+      "outreach_template": "B",
+      "outreach_priority": "high",
+      "outreach_notes": "Lead with 'self-host your automation webhooks, save $150/mo vs Zapier Enterprise'. He's already comfortable with lifetime deals so the one-time payment model will resonate. Offer migration of his top 2 Zapier webhooks to Python scripts. Potential Twitter collab: he tweets about 'how I cut my SaaS costs', we supply the scripts.",
+      "linkedin": "https://www.linkedin.com/in/tomasreverter",
+      "website": "https://saasfuel.io",
+      "prospect_value": "high",
+      "automation_tools_current": [
+        "Zapier Enterprise ($199/mo)",
+        "Custom webhook integrations"
+      ],
+      "monthly_automation_spend": 249,
+      "product_interest": [
+        "Python Scripts Bundle",
+        "Zapier Templates"
+      ],
+      "twitter_followers": 2300,
+      "building_in_public": true,
+      "lifetime_deal_buyer": true,
+      "date_contacted": "2026-04-13T15:08:15.187255Z"
     }
   ],
-  "last_updated": "2026-04-13T13:06:50.350429+00:00",
-  "total_leads": 34,
+  "last_updated": "2026-04-13T15:04:00.000000+00:00",
+  "total_leads": 35,
   "contacted": 31,
   "pending": 2,
-  "new": 1
+  "new": 2
 }
