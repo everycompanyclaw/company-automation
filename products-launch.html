@@ -278,6 +278,40 @@
         .accordion-item { background: #111; border: 1px solid #222; border-radius: 6px; padding: 5px 10px; font-size: 0.78em; color: #888; }
         .accordion-item::before { content: '→ '; color: #00cc66; }
         
+        /* Integration Logos */
+        .integrations-section { margin: 28px 0 30px; }
+        .integrations-section h2 { text-align: center; font-size: 1.25em; margin-bottom: 8px; color: #fff; }
+        .integrations-sub { text-align: center; color: #555; font-size: 0.88em; margin-bottom: 22px; }
+        .integrations-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(90px, 1fr)); gap: 10px; }
+        .integration-chip {
+            background: #111;
+            border: 1px solid #222;
+            border-radius: 10px;
+            padding: 14px 8px;
+            text-align: center;
+            transition: border-color 0.2s, transform 0.2s;
+        }
+        .integration-chip:hover { border-color: #667eea; transform: translateY(-2px); }
+        .integration-icon { font-size: 1.6em; display: block; margin-bottom: 5px; }
+        .integration-name { font-size: 0.7em; color: #777; font-weight: 500; display: block; }
+        .integrations-product-label {
+            background: #0a0a0a;
+            border: 1px solid #1e1e1e;
+            border-radius: 8px;
+            padding: 10px 14px;
+            margin-bottom: 14px;
+            text-align: center;
+        }
+        .integrations-product-label span { color: #667eea; font-weight: bold; font-size: 0.88em; }
+        .integrations-product-label small { color: #444; font-size: 0.78em; }
+        .integrations-group { margin-bottom: 18px; }
+        .integrations-group:last-child { margin-bottom: 0; }
+        .integrations-scroll-row { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 4px; }
+        .integrations-scroll-row::-webkit-scrollbar { height: 3px; }
+        .integrations-scroll-row::-webkit-scrollbar-track { background: #111; border-radius: 2px; }
+        .integrations-scroll-row::-webkit-scrollbar-thumb { background: #333; border-radius: 2px; }
+        @media (min-width: 600px) { .integrations-scroll-row { flex-wrap: wrap; overflow: visible; } }
+
         /* Live Notification Ticker */
         .notification-bar { background: #111; border: 1px solid #222; border-radius: 10px; padding: 10px 16px; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; overflow: hidden; }
         .notif-dot { width: 8px; height: 8px; background: #00cc66; border-radius: 50%; flex-shrink: 0; animation: pulse-dot 2s infinite; }
@@ -907,7 +941,69 @@
                 <span class="bundle-note">Save <strong>$58</strong> vs buying separately</span>
             </div>
         </div>
-        
+
+        <!-- Integrations Showcase -->
+        <div class="integrations-section">
+            <h2>🔌 Works With the Tools You Already Use</h2>
+            <p class="integrations-sub">Every product connects to the apps your team uses every day — no new subscriptions needed.</p>
+
+            <div class="integrations-group">
+                <div class="integrations-product-label"><span>🐍 Python Scripts Bundle</span> <small>— API-based integrations, runs on any server</small></div>
+                <div class="integrations-scroll-row">
+                    <div class="integration-chip"><span class="integration-icon">💳</span><span class="integration-name">Stripe</span></div>
+                    <div class="integration-chip"><span class="integration-icon">📧</span><span class="integration-name">Gmail</span></div>
+                    <div class="integration-chip"><span class="integration-icon">💬</span><span class="integration-name">Slack</span></div>
+                    <div class="integration-chip"><span class="integration-icon">📋</span><span class="integration-name">Notion</span></div>
+                    <div class="integration-chip"><span class="integration-icon">🔗</span><span class="integration-name">LinkedIn</span></div>
+                    <div class="integration-chip"><span class="integration-icon">📊</span><span class="integration-name">Google Sheets</span></div>
+                    <div class="integration-chip"><span class="integration-icon">📱</span><span class="integration-name">Telegram</span></div>
+                    <div class="integration-chip"><span class="integration-icon">☁️</span><span class="integration-name">AWS / Cloud</span></div>
+                    <div class="integration-chip"><span class="integration-icon">📬</span><span class="integration-name">Email Hunter</span></div>
+                    <div class="integration-chip"><span class="integration-icon">🔄</span><span class="integration-name">Webhooks</span></div>
+                    <div class="integration-chip"><span class="integration-icon">🐘</span><span class="integration-name">PostgreSQL</span></div>
+                    <div class="integration-chip"><span class="integration-icon">📦</span><span class="integration-name">HubSpot CRM</span></div>
+                </div>
+            </div>
+
+            <div class="integrations-group">
+                <div class="integrations-product-label"><span>⚡ Zapier Templates</span> <small>— No-code, 5000+ apps available</small></div>
+                <div class="integrations-scroll-row">
+                    <div class="integration-chip"><span class="integration-icon">📧</span><span class="integration-name">Gmail</span></div>
+                    <div class="integration-chip"><span class="integration-icon">📊</span><span class="integration-name">Google Sheets</span></div>
+                    <div class="integration-chip"><span class="integration-icon">📝</span><span class="integration-name">Typeform</span></div>
+                    <div class="integration-chip"><span class="integration-icon">🛒</span><span class="integration-name">Shopify</span></div>
+                    <div class="integration-chip"><span class="integration-icon">📅</span><span class="integration-name">Calendly</span></div>
+                    <div class="integration-chip"><span class="integration-icon">💬</span><span class="integration-name">Slack</span></div>
+                    <div class="integration-chip"><span class="integration-icon">📱</span><span class="integration-name">Telegram</span></div>
+                    <div class="integration-chip"><span class="integration-icon">🎮</span><span class="integration-name">Discord</span></div>
+                    <div class="integration-chip"><span class="integration-icon">📷</span><span class="integration-name">Buffer</span></div>
+                    <div class="integration-chip"><span class="integration-icon">💳</span><span class="integration-name">Stripe</span></div>
+                    <div class="integration-chip"><span class="integration-icon">📧</span><span class="integration-name">Mailchimp</span></div>
+                    <div class="integration-chip"><span class="integration-icon">📋</span><span class="integration-name">Notion</span></div>
+                    <div class="integration-chip"><span class="integration-icon">🔗</span><span class="integration-name">Airtable</span></div>
+                    <div class="integration-chip"><span class="integration-icon">📞</span><span class="integration-name">Twilio</span></div>
+                    <div class="integration-chip"><span class="integration-icon">🐦</span><span class="integration-name">Twitter / X</span></div>
+                    <div class="integration-chip"><span class="integration-icon">📸</span><span class="integration-name">Instagram</span></div>
+                </div>
+            </div>
+
+            <div class="integrations-group">
+                <div class="integrations-product-label"><span>💡 AI Prompts Library</span> <small>— Works with ChatGPT, Claude, Gemini, Grok & any AI model</small></div>
+                <div class="integrations-scroll-row">
+                    <div class="integration-chip"><span class="integration-icon">🤖</span><span class="integration-name">ChatGPT</span></div>
+                    <div class="integration-chip"><span class="integration-icon">🧠</span><span class="integration-name">Claude</span></div>
+                    <div class="integration-chip"><span class="integration-icon">✨</span><span class="integration-name">Gemini</span></div>
+                    <div class="integration-chip"><span class="integration-icon">🌟</span><span class="integration-name">Grok / xAI</span></div>
+                    <div class="integration-chip"><span class="integration-icon">🔬</span><span class="integration-name">Perplexity</span></div>
+                    <div class="integration-chip"><span class="integration-icon">📝</span><span class="integration-name">Notion AI</span></div>
+                    <div class="integration-chip"><span class="integration-icon">📄</span><span class="integration-name">Google AI</span></div>
+                    <div class="integration-chip"><span class="integration-icon">💼</span><span class="integration-name">Microsoft Copilot</span></div>
+                </div>
+            </div>
+
+            <p style="text-align:center;color:#444;font-size:0.8em;margin-top:16px;">...and 5000+ more via Zapier. No new tools to learn. Everything works with your existing stack.</p>
+        </div>
+
         <!-- Launch Purchaser Social Proof -->
         <div class="notification-bar" style="border-color:#1a2a1a;">
             <div class="notif-dot" style="background:#667eea;"></div>
