@@ -431,10 +431,38 @@
       "outreach_priority": "high",
       "outreach_notes": "Pitch Python Scripts Bundle + Zapier Templates combo. Offer affiliate partnership - he promotes to his audience, gets commission. Content partnership opportunity: he makes tutorial videos using our tools.",
       "date_contacted": "2026-04-13T09:34:29.088211Z"
+    },
+    {
+      "name": "Lena Xu",
+      "email": "lena@autokitapp.com",
+      "company": "AutoKit App",
+      "role": "Solo Founder",
+      "source": "product_hunt",
+      "created": "2026-04-13T13:04:00Z",
+      "status": "contacted",
+      "notes": "Solo SaaS founder building email automation tools. Currently paying $149/mo for Zapier + $49/mo for Make. Total $198/mo on automation subscriptions. Burning cash on tools that eat into margins on her $29/mo micro-SaaS. Perfect fit: Python Scripts Bundle (replace Zapier with self-hosted scripts) + Zapier Templates (migrate existing workflows). AI Prompts Bundle for customer email sequences. One-time $99 bundle vs $198/mo = pays for itself in 2 weeks.",
+      "outreach_template": "B",
+      "outreach_priority": "high",
+      "outreach_notes": "Lead with savings angle: 'You spend $198/mo on automation. Our bundle is $99, one-time. Pays for itself in 2 weeks.' Specific hook: offer free migration assistance for her top 3 Zapier workflows to our templates. Pain point: subscription fatigue on micro-SaaS margins.",
+      "linkedin": "https://www.linkedin.com/in/lenaxu-auto",
+      "website": "https://autokitapp.com",
+      "prospect_value": "high",
+      "automation_tools_current": [
+        "Zapier ($149/mo)",
+        "Make.com ($49/mo)"
+      ],
+      "monthly_automation_spend": 198,
+      "product_interest": [
+        "Python Scripts Bundle",
+        "Zapier Templates",
+        "AI Prompts Bundle"
+      ],
+      "date_contacted": "2026-04-13T13:08:17.740893Z"
     }
   ],
-  "last_updated": "2026-04-13T09:06:11.887788+00:00",
-  "total_leads": 33,
-  "contacted": 30,
-  "pending": 1
+  "last_updated": "2026-04-13T13:06:50.350429+00:00",
+  "total_leads": 34,
+  "contacted": 31,
+  "pending": 2,
+  "new": 1
 }
