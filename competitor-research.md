@@ -732,3 +732,152 @@ Pipedream has no tools for generating:
 **Research completed:** 2026-04-12 05:12 HKT
 **Competitors now fully researched:** Zapier, n8n, Make.com, Activepieces, Pipedream (5 of 5 major automation competitors)
 **Next recommended research:** Consider deeper-dive on specific vertical competitors (e.g., Instant Agencies, Attach.io for agency automation) or B2B SaaS tools with built-in automation (HubSpot workflows, Salesforce Flow).
+
+---
+
+## Competitor Research Entry — 2026-04-13 (Hourly PM Task #18:04 HKT)
+
+## 🎯 Research Focus: Agency Automation Stack (Monday.com, Zapier, Make, Airtable, ActiveCampaign)
+
+### Why This Segment Matters
+
+EveryCompanyClaw's ICP includes founders, indie hackers, and agencies who need automation. The agency automation market is a direct competitive and co-selling space. Understanding how agencies currently buy and deploy automation tools reveals where EveryCompanyClaw fits — and where it wins.
+
+**Key insight from agency research:** Agencies recover 12–18 billable hours per account manager per month through automated reporting alone. The ROI is proven, which means agencies are already budgeted for automation spend.
+
+---
+
+## 1. Monday.com — $9/seat/month
+
+**Target:** Digital agencies managing client projects
+**Automation type:** Project management workflow automation
+
+**What they do:**
+- 200+ no-code automation recipes for task creation, status changes, deadline escalation
+- Client-facing project boards with time tracking linked to budgets
+- Template-based onboarding and campaign launch checklists
+
+**Competitive angle for EveryCompanyClaw:**
+Monday.com automates *internal agency operations*. EveryCompanyClaw's Zapier Templates + Python Scripts automate *client deliverables and external workflows* (email sequences, CRM sync, data collection). These are complementary — but agencies paying for Monday.com already have operational budgets committed.
+
+**Weakness:** Monday.com has no AI content generation. No pre-built scripts for cold outreach, LinkedIn engagement, or sales automation. This is EveryCompanyClaw's gap to fill.
+
+---
+
+## 2. Zapier — $19.99/month (Teams plan ~$69.50/month)
+
+**Target:** Business users and agencies cross-connecting 12–18 tools
+**Automation type:** Cross-app integration (7,000+ integrations)
+
+**What they do:**
+- New lead from website form → CRM + Slack notification
+- Google Ads spend threshold alerts
+- Social media post scheduling across multiple client accounts
+- Invoice generation from completed projects
+
+**Competitive angle for EveryCompanyClaw:**
+Zapier is already EveryCompanyClaw's closest competitor — and this is confirmed by the existing Zapier comparison table in the main research. The new angle from agency research: agencies are already paying $69.50/month for Zapier Teams plan (multi-step Zaps). At $99 *one-time*, EveryCompanyClaw's Zapier Templates are 1.4 months of Zapier Pro cost — and come with 50+ pre-built templates + Python Scripts + AI Prompts bundles.
+
+**The agency's mental math:** "I'm already paying $834/year for Zapier. For $99 once, I get 50 templates I can remix + AI prompts my team actually uses." That's an easy sell.
+
+---
+
+## 3. Make.com — $9/month (10,000 operations)
+
+**Target:** Agencies building complex reporting pipelines
+**Automation type:** Multi-source data aggregation and reporting automation
+
+**What they do:**
+- Pull from Google Analytics + Google Ads + Meta Ads + LinkedIn Ads
+- Normalize metrics → populate Google Sheets → generate PDF report → email to client
+- HTTP module connects to any API that Zapier doesn't support
+
+**Competitive angle for EveryCompanyClaw:**
+Make is the most technically capable of the agency stack. But it's still workflow automation for *operations*, not AI-powered *content generation*. EveryCompanyClaw's Python Scripts handle data collection + API calls + AI-generated outputs in ways Make can't without extensive custom module building.
+
+**Key opportunity:** Sell Python Scripts to Make users. Make handles orchestration; EveryCompanyClaw handles the Python-heavy lifting that Make charges per-operation for.
+
+---
+
+## 4. Airtable — $20/seat/month (Team plan)
+
+**Target:** Agencies as central client database
+**Automation type:** Relational database with trigger-based automations
+
+**What they do:**
+- Client records → project records → task records → time entries (relational)
+- New client record → triggers onboarding sequence
+- Project status "complete" → triggers invoice generation
+- Interface Designer builds client-facing portals
+
+**Competitive angle for EveryCompanyClaw:**
+Airtable is a database that happens to have automation. EveryCompanyClaw's Python Scripts can integrate with Airtable's API to automate data enrichment, AI-powered lead scoring, and CRM enrichment workflows. Sell Python Scripts as the "intelligence layer" sitting on top of Airtable.
+
+**Upsell angle:** "Your agency uses Airtable for client records. Use our Python Scripts to automatically enrich every new lead with company data, LinkedIn info, and email verification — before it hits your Airtable base."
+
+---
+
+## 5. ActiveCampaign — $29/month
+
+**Target:** Agencies managing their own sales pipeline
+**Automation type:** Email nurture sequences with conditional branching
+
+**What they do:**
+- Inbound leads enter segmented nurture sequences (by service interest, company size, engagement)
+- Opens email → receives meeting request; no open → lower-frequency track
+- Manages referral partner communications and post-project feedback
+
+**Competitive angle for EveryCompanyClaw:**
+ActiveCampaign automates email sequences. EveryCompanyClaw's AI Prompts Bundle generates the *content* those sequences run on. Agencies buy ActiveCampaign for the send infrastructure; they still need to write the emails, follow-ups, and objection handling. That's EveryCompanyClaw's AI Prompts.
+
+**Bundled sell:** "ActiveCampaign sends your emails. Our AI Prompts write 30 variations of your welcome sequence, case study follow-up, and objection responses — ready to paste in."
+
+---
+
+## 📊 Competitive Summary: Agency Automation Stack
+
+| Feature | EveryCompanyClaw | Monday.com | Zapier | Make | Airtable | ActiveCampaign |
+|---------|-----------------|-------------|--------|------|----------|---------------|
+| **Agency use case** | Content + Deliverables | Project mgmt | Integrations | Reporting | Database | Email nurture |
+| **AI content generation** | ✅ Prompts included | ❌ | ❌ | ❌ | ❌ | ❌ |
+| **One-time pricing** | ✅ $99 | ❌ | ❌ | ❌ | ❌ | ❌ |
+| **No-code setup** | ✅ Minutes | ✅ Minutes | ✅ Minutes | ⚠️ Hours | ⚠️ Hours | ⚠️ Hours |
+| **Reporting automation** | ⚠️ Templates | ✅ Built-in | ⚠️ Manual | ✅ Best-in-class | ⚠️ Basic | ⚠️ Basic |
+| **CRM/Lead enrichment** | ✅ Python Scripts | ❌ | ❌ | ⚠️ Via HTTP | ❌ | ⚠️ Basic |
+| **Client portal** | ❌ | ✅ Yes | ❌ | ❌ | ✅ Airtable Bases | ⚠️ SiteIDA |
+| **Cross-tool integration** | ⚠️ Zapier templates | ❌ | ✅ Best | ✅ Best | ⚠️ Via integrations | ⚠️ Limited |
+
+---
+
+## 🎯 Competitive Insights for EveryCompanyClaw
+
+### Insight 1: Agency Stack Is Fragmented — That's Our Opportunity
+Most agencies use 4–6 tools from this list. EveryCompanyClaw doesn't need to replace all of them. The pitch is: "Stop paying $150+/month across Monday.com + Zapier + Make + ActiveCampaign. Get the Python Scripts + Zapier Templates + AI Prompts for $99 once. Use your existing stack for operations; use EveryCompanyClaw for the intelligent content layer."
+
+### Insight 2: AI Content Is the Gap in Every Agency Stack
+None of these five tools generate content. They all move data, trigger actions, and route information. But none write the cold email, the LinkedIn post, the meeting follow-up, or the ad copy. That's EveryCompanyClaw's AI Prompts — and it's genuinely unique in this space.
+
+### Insight 3: Agency Owners Are Our Best Customers
+Agency owners are technical enough to use Python Scripts, have budget authority, and face the same automation problems as founders (but at larger scale). The ICP pitch: "You already have Zapier running your agency. Now use our AI Prompts to auto-generate all the client content Zapier delivers."
+
+### Insight 4: Monday.com Integration Opportunity
+Monday.com is the #1 project management tool for agencies. If we built a Monday.com integration (new project = trigger automation via Python Script + AI content generation), that becomes a powerful add-on for their 200,000+ customers.
+
+---
+
+## 🎯 Recommended Actions from This Research
+
+1. **New outreach template for agencies:** Create agency-specific email template targeting agency founders (not just indie hackers). Angle: "You're already paying $X/month for [Zapier/Monday/Make]. Here's how to cut that in half with AI-generated content + our template library." Save to `/tmp/company-automation/outreach-template.md`.
+
+2. **"For Agencies" landing page section:** Add a section on products-launch.html or product-hunt-launch.html: "Used by agencies running 12–18 tools. We add the AI content layer." Target: agency founders who already have Monday.com + Zapier but need content automation.
+
+3. **Pricing comparison sheet:** Add a line to the sales kit: "Your current stack costs $X/month. EveryCompanyClaw: $99 once. Here's the math." Use actual numbers from the 5-tool agency stack.
+
+4. **Monday.com integration beta:** Consider a Python Script that reads from a Monday.com webhook and generates AI content (proposal draft, client update, meeting summary) — positions EveryCompanyClaw as a Monday.com add-on.
+
+---
+
+**Research completed:** 2026-04-13 18:14 HKT (10:14 UTC)
+**Segment researched:** Agency automation tools (Monday.com, Zapier, Make, Airtable, ActiveCampaign)
+**Key finding:** AI content generation is the universal gap in the agency automation stack — EveryCompanyClaw's AI Prompts are uniquely positioned here.
+
