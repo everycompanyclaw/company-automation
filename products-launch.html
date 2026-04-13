@@ -238,15 +238,15 @@
         .bundle-note strong { color: #00cc88; }
         
         /* Bundle urgency */
-        .bundle-urgency { background: rgba(255,79,31,0.1); border: 1px solid rgba(255,79,31,0.3); border-radius: 8px; padding: 10px 14px; margin-bottom: 14px; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+        .bundle-urgency { background: rgba(16,185,129,0.08); border: 1px solid rgba(16,185,129,0.3); border-radius: 8px; padding: 10px 14px; margin-bottom: 14px; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
         .bundle-urgency-icon { font-size: 1.1em; flex-shrink: 0; }
-        .bundle-urgency-text { font-size: 0.82em; color: #ff9a7a; flex: 1; }
-        .bundle-urgency-text strong { color: #ff6154; }
+        .bundle-urgency-text { font-size: 0.82em; color: #6ee7b7; flex: 1; }
+        .bundle-urgency-text strong { color: #10b981; }
         .bundle-urgency-countdown { display: flex; gap: 6px; flex-shrink: 0; }
         .bu-clock-unit { text-align: center; background: #1a1a2e; border: 1px solid #333; border-radius: 6px; padding: 5px 8px; min-width: 38px; }
-        .bu-clock-num { color: #ff6154; font-size: 1.05em; font-weight: bold; display: block; line-height: 1.2; }
+        .bu-clock-num { color: #10b981; font-size: 1.05em; font-weight: bold; display: block; line-height: 1.2; }
         .bu-clock-label { color: #555; font-size: 0.65em; text-transform: uppercase; display: block; }
-        .bu-sep { color: #ff6154; font-size: 1.2em; font-weight: bold; align-self: center; line-height: 1; }
+        .bu-sep { color: #10b981; font-size: 1.2em; font-weight: bold; align-self: center; line-height: 1; }
 
         /* Bundle Accordion — What's Included */
         .bundle-accordion { margin: 0 0 16px; }
@@ -885,6 +885,8 @@
                 <span class="bundle-urgency-icon">⏱</span>
                 <span class="bundle-urgency-text">Founding member pricing ends in:</span>
                 <div class="bundle-urgency-countdown" id="bundle-countdown">
+                    <div class="bu-clock-unit"><span class="bu-clock-num" id="bu-days">0</span><span class="bu-clock-label">days</span></div>
+                    <span class="bu-sep">:</span>
                     <div class="bu-clock-unit"><span class="bu-clock-num" id="bu-hours">00</span><span class="bu-clock-label">hrs</span></div>
                     <span class="bu-sep">:</span>
                     <div class="bu-clock-unit"><span class="bu-clock-num" id="bu-minutes">00</span><span class="bu-clock-label">min</span></div>
@@ -1499,10 +1501,11 @@
             // Founding member pricing ends: 7 days from April 11, 2026 launch
             var launchDate = new Date('2026-04-11T00:00:00Z');
             var endDate = new Date(launchDate.getTime() + 7 * 24 * 60 * 60 * 1000);
+            var daysEl = document.getElementById('bu-days');
             var hrsEl = document.getElementById('bu-hours');
             var minEl = document.getElementById('bu-minutes');
             var secEl = document.getElementById('bu-seconds');
-            if (!hrsEl || !minEl || !secEl) return;
+            if (!daysEl || !hrsEl || !minEl || !secEl) return;
             function tick() {
                 var now = new Date();
                 var diff = endDate - now;
@@ -1510,13 +1513,15 @@
                     // Timer expired — hide countdown, update text
                     document.getElementById('bundle-countdown').style.display = 'none';
                     var txt = document.querySelector('.bundle-urgency-text');
-                    if (txt) txt.textContent = 'Founding member pricing has ended — price increases soon.';
+                    if (txt) txt.textContent = 'Founding member pricing has ended — but our best price is still available below.';
                     return;
                 }
                 var totalSecs = Math.floor(diff / 1000);
-                var hrs = Math.floor(totalSecs / 3600);
+                var days = Math.floor(totalSecs / 86400);
+                var hrs = Math.floor((totalSecs % 86400) / 3600);
                 var mins = Math.floor((totalSecs % 3600) / 60);
                 var secs = totalSecs % 60;
+                daysEl.textContent = days;
                 hrsEl.textContent = String(hrs).padStart(2, '0');
                 minEl.textContent = String(mins).padStart(2, '0');
                 secEl.textContent = String(secs).padStart(2, '0');
