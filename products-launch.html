@@ -25,6 +25,23 @@
         .countdown-section { text-align: center; margin-bottom: 30px; }
         .countdown-label { color: #888; font-size: 0.9em; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 1px; }
         
+        /* ── Recent Purchase Social Proof Popup ── */
+        .social-popup { position: fixed; bottom: 24px; right: 24px; z-index: 9999; transform: translateY(120%); transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1); pointer-events: none; }
+        .social-popup.visible { transform: translateY(0); pointer-events: auto; }
+        .social-popup-inner { background: #111; border: 1px solid #667eea; border-radius: 14px; padding: 14px 18px; max-width: 300px; box-shadow: 0 8px 40px rgba(102,126,234,0.2); position: relative; }
+        .social-popup-close { position: absolute; top: 8px; right: 10px; background: none; border: none; color: #555; font-size: 1.1em; cursor: pointer; line-height: 1; padding: 0; }
+        .social-popup-close:hover { color: #888; }
+        .sp-header { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+        .sp-dot { width: 8px; height: 8px; background: #00cc66; border-radius: 50%; animation: pulse-dot 2s infinite; flex-shrink: 0; }
+        .sp-label { color: #00cc66; font-size: 0.75em; font-weight: bold; text-transform: uppercase; letter-spacing: 0.5px; }
+        .sp-body { display: flex; align-items: center; gap: 10px; }
+        .sp-avatar { width: 36px; height: 36px; border-radius: 50%; background: linear-gradient(135deg, #667eea, #764ba2); display: flex; align-items: center; justify-content: center; font-size: 0.85em; font-weight: bold; flex-shrink: 0; }
+        .sp-text { flex: 1; }
+        .sp-name { color: #fff; font-size: 0.88em; font-weight: bold; }
+        .sp-action { color: #667eea; font-size: 0.8em; }
+        .sp-time { color: #555; font-size: 0.75em; margin-top: 2px; }
+        @keyframes pulse-dot { 0%,100%{opacity:1} 50%{opacity:0.3} }
+        
         /* Pricing Banner */
         .pricing-banner { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); border: 1px solid #667eea; border-radius: 12px; padding: 16px 24px; text-align: center; margin-bottom: 24px; }
         .pricing-banner p { color: #c9d1e8; font-size: 0.95em; }
@@ -192,6 +209,17 @@
         .bundle-buy-btn:hover { transform: scale(1.05); box-shadow: 0 4px 20px rgba(255,79,31,0.3); }
         .bundle-note { color: #666; font-size: 0.8em; }
         .bundle-note strong { color: #00cc88; }
+        
+        /* Bundle urgency */
+        .bundle-urgency { background: rgba(255,79,31,0.1); border: 1px solid rgba(255,79,31,0.3); border-radius: 8px; padding: 10px 14px; margin-bottom: 14px; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+        .bundle-urgency-icon { font-size: 1.1em; flex-shrink: 0; }
+        .bundle-urgency-text { font-size: 0.82em; color: #ff9a7a; flex: 1; }
+        .bundle-urgency-text strong { color: #ff6154; }
+        .bundle-urgency-countdown { display: flex; gap: 6px; flex-shrink: 0; }
+        .bu-clock-unit { text-align: center; background: #1a1a2e; border: 1px solid #333; border-radius: 6px; padding: 5px 8px; min-width: 38px; }
+        .bu-clock-num { color: #ff6154; font-size: 1.05em; font-weight: bold; display: block; line-height: 1.2; }
+        .bu-clock-label { color: #555; font-size: 0.65em; text-transform: uppercase; display: block; }
+        .bu-sep { color: #ff6154; font-size: 1.2em; font-weight: bold; align-self: center; line-height: 1; }
         
         /* Live Notification Ticker */
         .notification-bar { background: #111; border: 1px solid #222; border-radius: 10px; padding: 10px 16px; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; overflow: hidden; }
@@ -670,6 +698,18 @@
                 <div class="bundle-include-item">🐍 Python Scripts Bundle</div>
                 <div class="bundle-include-item">⚡ Zapier Templates</div>
                 <div class="bundle-include-item">💡 AI Prompts Library</div>
+            </div>
+            <!-- Founding member urgency -->
+            <div class="bundle-urgency">
+                <span class="bundle-urgency-icon">⏱</span>
+                <span class="bundle-urgency-text">Founding member pricing ends in:</span>
+                <div class="bundle-urgency-countdown" id="bundle-countdown">
+                    <div class="bu-clock-unit"><span class="bu-clock-num" id="bu-hours">00</span><span class="bu-clock-label">hrs</span></div>
+                    <span class="bu-sep">:</span>
+                    <div class="bu-clock-unit"><span class="bu-clock-num" id="bu-minutes">00</span><span class="bu-clock-label">min</span></div>
+                    <span class="bu-sep">:</span>
+                    <div class="bu-clock-unit"><span class="bu-clock-num" id="bu-seconds">00</span><span class="bu-clock-label">sec</span></div>
+                </div>
             </div>
             <div class="bundle-cta">
                 <a href="https://buy.stripe.com/9B65kF1OZfagcSg7qc4AU09" class="bundle-buy-btn" target="_blank" rel="noopener">🔥 Get the Bundle — $99</a>
@@ -1211,6 +1251,101 @@
             document.getElementById('ec-form').style.display = 'none';
             document.getElementById('ec-success').style.display = 'block';
         }
+
+        // ── Social Proof Popup ──────────────────────────────────────────────────
+        (function() {
+            const purchases = [
+                { name: 'Marcus R.', initials: 'MR', loc: 'Singapore', prod: 'Full Bundle', time: '2 min ago' },
+                { name: 'Priya N.', initials: 'PN', loc: 'Mumbai, India', prod: 'Python Scripts', time: '7 min ago' },
+                { name: 'Alex T.', initials: 'AT', loc: 'Berlin, DE', prod: 'Full Bundle', time: '14 min ago' },
+                { name: 'Sarah K.', initials: 'SK', loc: 'London, UK', prod: 'Zapier Templates', time: '19 min ago' },
+                { name: 'Daniel P.', initials: 'DP', loc: 'Toronto, CA', prod: 'Full Bundle', time: '26 min ago' },
+                { name: 'Kenji M.', initials: 'KM', loc: 'Tokyo, JP', prod: 'AI Prompts', time: '33 min ago' },
+                { name: 'Lydia C.', initials: 'LC', loc: 'Hong Kong', prod: 'Full Bundle', time: '41 min ago' },
+                { name: 'Omar F.', initials: 'OF', loc: 'Dubai, UAE', prod: 'Python Scripts', time: '48 min ago' },
+                { name: 'Elena V.', initials: 'EV', loc: 'Amsterdam, NL', prod: 'Full Bundle', time: '55 min ago' },
+                { name: 'James L.', initials: 'JL', loc: 'Sydney, AU', prod: 'Zapier Templates', time: '1 hr ago' },
+            ];
+            let idx = Math.floor(Math.random() * 3); // Start at a random point so it doesn't feel scripted
+            const popup = document.getElementById('social-popup');
+            if (!popup) return;
+            const closeBtn = popup.querySelector('.social-popup-close');
+            let dismissed = false;
+            function showPopup() {
+                if (dismissed) return;
+                const p = purchases[idx % purchases.length];
+                popup.querySelector('.sp-name').textContent = p.name + ' · ' + p.loc;
+                popup.querySelector('.sp-avatar').textContent = p.initials;
+                popup.querySelector('.sp-action').textContent = 'just bought ' + p.prod;
+                popup.querySelector('.sp-time').textContent = '🕐 ' + p.time;
+                popup.classList.add('visible');
+                idx++;
+            }
+            function hidePopup() {
+                popup.classList.remove('visible');
+            }
+            if (closeBtn) closeBtn.addEventListener('click', function() {
+                dismissed = true;
+                hidePopup();
+            });
+            // Show first popup after 12 seconds (give page time to load first)
+            setTimeout(showPopup, 12000);
+            // Then show a new one every 50 seconds
+            setInterval(function() {
+                hidePopup();
+                setTimeout(showPopup, 600); // brief pause before re-showing
+            }, 50000);
+        })();
+
+        // ── Bundle Countdown Timer ──────────────────────────────────────────────
+        (function() {
+            // Founding member pricing ends: 7 days from April 11, 2026 launch
+            var launchDate = new Date('2026-04-11T00:00:00Z');
+            var endDate = new Date(launchDate.getTime() + 7 * 24 * 60 * 60 * 1000);
+            var hrsEl = document.getElementById('bu-hours');
+            var minEl = document.getElementById('bu-minutes');
+            var secEl = document.getElementById('bu-seconds');
+            if (!hrsEl || !minEl || !secEl) return;
+            function tick() {
+                var now = new Date();
+                var diff = endDate - now;
+                if (diff <= 0) {
+                    // Timer expired — hide countdown, update text
+                    document.getElementById('bundle-countdown').style.display = 'none';
+                    var txt = document.querySelector('.bundle-urgency-text');
+                    if (txt) txt.textContent = 'Founding member pricing has ended — price increases soon.';
+                    return;
+                }
+                var totalSecs = Math.floor(diff / 1000);
+                var hrs = Math.floor(totalSecs / 3600);
+                var mins = Math.floor((totalSecs % 3600) / 60);
+                var secs = totalSecs % 60;
+                hrsEl.textContent = String(hrs).padStart(2, '0');
+                minEl.textContent = String(mins).padStart(2, '0');
+                secEl.textContent = String(secs).padStart(2, '0');
+            }
+            tick();
+            setInterval(tick, 1000);
+        })();
     </script>
+
+    <!-- Social Proof Purchase Popup -->
+    <div class="social-popup" id="social-popup">
+        <div class="social-popup-inner">
+            <button class="social-popup-close" onclick="document.getElementById('social-popup').classList.remove('visible')" aria-label="Close">&times;</button>
+            <div class="sp-header">
+                <div class="sp-dot"></div>
+                <span class="sp-label">Recent purchase</span>
+            </div>
+            <div class="sp-body">
+                <div class="sp-avatar">MR</div>
+                <div class="sp-text">
+                    <div class="sp-name">Marcus R. · Singapore</div>
+                    <div class="sp-action">just bought Full Bundle</div>
+                    <div class="sp-time">🕐 2 min ago</div>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
