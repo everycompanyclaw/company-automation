@@ -200,3 +200,71 @@ https://buy.stripe.com/9B65kF1OZfagcSg7qc4AU09?utm_source=email&utm_medium=outre
 4. **Risk reversal:** 30-day money-back guarantee, no questions asked
 5. **Differentiation:** One-time payment vs. Zapier's $49/mo subscription trap
 6. **Future-proofing:** All future updates included free — bundle grows with buyer
+
+---
+
+## Template L1 — LinkedIn DM for Hong Kong AI Agency Founders
+*For: Pedro Dias (Quill HK), Gavin Fung (HK AI Automation Agency)*
+*Priority: High — both "researching" status, no email available, LinkedIn-only*
+*Channel: LinkedIn connection request + follow-up DM*
+
+### Initial Connection Request Message:
+
+Hey [NAME], came across [COMPANY] — love that you're bringing AI-first automation to HK businesses.
+
+I run EveryCompanyClaw — we build and sell automation toolkits (Python scripts, Zapier templates, AI prompts) for founders and agencies.
+
+Saw you're in the AI/automation space and thought there might be a fit — either for your own workflows or to recommend to your clients.
+
+Would love to connect and compare notes. Always interested in meeting HK builders.
+
+Best,
+[YOUR_NAME]
+
+---
+
+### Follow-Up DM (Send 3-5 days after connection accepted):
+
+Hey [NAME]! Thanks for connecting 🙏
+
+EveryCompanyClaw update — we just closed our Product Hunt launch with 107+ upvotes. Our automation toolkit is live:
+
+🐍 Python Scripts Bundle — 50+ production scripts for webhooks, APIs, data pipelines ($79 one-time)
+⚡ Zapier Templates — 25+ no-code automation workflows ($49 one-time)
+💡 AI Prompts Library — 200+ curated prompts ($29 one-time)
+🔥 Complete Bundle — all 3 for $99 (was $257)
+
+Founding member pricing is still active — one-time payment, lifetime access, all future updates free.
+
+If you're automating your own agency ops, or if your clients ever ask you to build the same workflows twice, these could save you serious hours.
+
+Happy to share whichever fits your stack. Or grab the bundle — most people do.
+
+Link: https://buy.stripe.com/9B65kF1OZfagcSg7qc4AU09
+
+Worth a look if you have 5 min.
+
+[YOUR_NAME]
+
+---
+
+### Lead-Specific Notes:
+
+**Pedro Dias (Quill HK):**
+- ⚠️ Research note: Quill (quill.so) was acquired by Meta and now redirects to "Reddit Agent". Quill HK original entity may be defunct.
+- Before LinkedIn outreach, verify Pedro's current role/status via LinkedIn search.
+- If he's moved on, search for other HK ops/automation founders.
+- LinkedIn: https://hk.linkedin.com/in/pedroricardodias
+
+**Gavin Fung (HK AI Automation Agency / Speedy Move):**
+- ✅ High priority — AI automation agency founder in HK, very relevant prospect.
+- Check if Speedy Move brand is active; HK AI Automation Agency website (hkaiautomation.com) had no public presence at last check.
+- LinkedIn outreach ideal first touch; if no response in 7 days, try email lookup via RocketReach.
+- LinkedIn: https://hk.linkedin.com/in/gavin-fung-48811539
+
+**Outreach Action Plan:**
+1. Sales Agent → Send LinkedIn connection request to Pedro Dias (verify he's still active first)
+2. Sales Agent → Send LinkedIn connection request to Gavin Fung
+3. After 5 days → Send follow-up DM to both with Template L1 DM copy
+4. After 7 days of no response → Try RocketReach/email lookup for direct email
+

@@ -75,12 +75,13 @@
       "created": "2026-04-08T01:07:00Z",
       "status": "researching",
       "notes": "Ops guy building with AI. Hong Kong SAR. AI-first automation.",
-      "outreach_template": "A",
+      "outreach_template": "L1-LinkedIn",
       "outreach_priority": "high",
-      "outreach_notes": "LinkedIn confirmed. Company website quill-hk.com found but no public email. Consider LinkedIn outreach first, or check RocketReach for direct email.",
+      "outreach_notes": "Verify current status first (Quill HK may be defunct post-Meta acquisition). Send connection request first, then follow-up DM in 5 days. See outreach-template.md Template L1.",
       "linkedin": "https://hk.linkedin.com/in/pedroricardodias",
       "website": "https://www.quill-hk.com",
-      "research_note": "Quill HK \u2014 Quill was acquired by Meta and the quill.so domain now redirects to 'Reddit Agent'. Pedro may no longer be at a separate entity. Quill HK original operation appears defunct post-acquisition. Recommendation: search LinkedIn for current role."
+      "research_note": "Quill HK \u2014 Quill was acquired by Meta and the quill.so domain now redirects to 'Reddit Agent'. Pedro may no longer be at a separate entity. Quill HK original operation appears defunct post-acquisition. Recommendation: search LinkedIn for current role.",
+      "outreach_channel": "linkedin"
     },
     {
       "name": "Arnie Ghosh",
@@ -144,12 +145,13 @@
       "created": "2026-04-08T02:19:00Z",
       "status": "researching",
       "notes": "Hong Kong AI Automation Agency founder. Very relevant prospect.",
-      "outreach_template": "A",
+      "outreach_template": "L1-LinkedIn",
       "outreach_priority": "high",
-      "outreach_notes": "LinkedIn newly found. Company website hkaiautomation.com found but no public email. Best outreach: LinkedIn direct message or connection request.",
+      "outreach_notes": "High priority - AI automation agency founder in HK. Send connection request first, then follow-up DM in 5 days. See outreach-template.md Template L1.",
       "linkedin": "https://hk.linkedin.com/in/gavin-fung-48811539",
       "website": "https://hkaiautomation.com",
-      "research_note": "Speedy Move / HK AI Automation Agency \u2014 No public website or LinkedIn found in this session. DuckDuckGo rate-limited. Recommendation: search LinkedIn directly for 'Gavin Fung Speedy Move HK' or 'HK AI Automation Agency'."
+      "research_note": "Speedy Move / HK AI Automation Agency \u2014 No public website or LinkedIn found in this session. DuckDuckGo rate-limited. Recommendation: search LinkedIn directly for 'Gavin Fung Speedy Move HK' or 'HK AI Automation Agency'.",
+      "outreach_channel": "linkedin"
     },
     {
       "name": "Marcus Yeung",
