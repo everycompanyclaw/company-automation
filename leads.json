@@ -417,10 +417,24 @@
       "status": "contacted",
       "notes": "Automation agency founder. Uses Make/Zapier for client projects.",
       "date_contacted": "2026-04-12T17:19:01.733390Z"
+    },
+    {
+      "name": "Marcus Chen",
+      "email": "marcus@flowhacker.io",
+      "company": "FlowHacker",
+      "role": "Founder",
+      "source": "indie_hackers",
+      "created": "2026-04-13T09:04:00Z",
+      "status": "contacted",
+      "notes": "Builds no-code automation tutorials for founders. 5K+ audience of indie hackers wanting to automate without coding. Perfect fit for Python Scripts Bundle (automation scripts) + Zapier Templates (no-code workflows). Could do a tutorial video partnership or affiliate deal.",
+      "outreach_template": "A",
+      "outreach_priority": "high",
+      "outreach_notes": "Pitch Python Scripts Bundle + Zapier Templates combo. Offer affiliate partnership - he promotes to his audience, gets commission. Content partnership opportunity: he makes tutorial videos using our tools.",
+      "date_contacted": "2026-04-13T09:34:29.088211Z"
     }
   ],
-  "last_updated": "2026-04-13T08:19:54.499347Z",
-  "total_leads": 32,
+  "last_updated": "2026-04-13T09:06:11.887788+00:00",
+  "total_leads": 33,
   "contacted": 30,
-  "pending": 2
+  "pending": 1
 }
