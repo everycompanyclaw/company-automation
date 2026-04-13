@@ -21,7 +21,7 @@
 
         /* ── Hero ── */
         .hero { text-align: center; padding: 80px 20px 60px; max-width: 760px; margin: 0 auto; }
-        .hero-eyebrow { display: inline-block; background: rgba(245,101,101,0.15); border: 1px solid rgba(245,101,101,0.3); color: #f56565; font-size: 0.8em; padding: 4px 14px; border-radius: 20px; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 1px; }
+        .hero-eyebrow { display: inline-block; background: rgba(16,185,129,0.15); border: 1px solid rgba(16,185,129,0.3); color: #10b981; font-size: 0.8em; padding: 4px 14px; border-radius: 20px; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 1px; }
         .hero h1 { font-size: 3em; line-height: 1.15; margin-bottom: 16px; background: linear-gradient(135deg, #fff 0%, #ff9a9a 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
         .hero-sub { color: #888; font-size: 1.2em; margin-bottom: 32px; }
         .hero-cta-row { display: flex; gap: 14px; justify-content: center; align-items: center; flex-wrap: wrap; }
@@ -113,7 +113,7 @@
         .pricing-section { background: #0d0d1a; border-top: 1px solid #1e1e1e; border-bottom: 1px solid #1e1e1e; text-align: center; padding: 80px 20px; }
         .pricing-card { background: #111; border: 2px solid #f56565; border-radius: 20px; padding: 48px 40px; max-width: 480px; margin: 0 auto; position: relative; }
         .pricing-card::before { content: ''; position: absolute; inset: -1px; border-radius: 20px; background: linear-gradient(135deg, #f5656522, #e53e3e22); pointer-events: none; }
-        .pricing-badge { display: inline-block; background: linear-gradient(135deg, #ff4f1f 0%, #ff7a4f 100%); padding: 4px 14px; border-radius: 20px; font-size: 0.75em; font-weight: bold; margin-bottom: 16px; }
+        .pricing-badge { display: inline-block; background: linear-gradient(135deg, #059669 0%, #10b981 100%); padding: 4px 14px; border-radius: 20px; font-size: 0.75em; font-weight: bold; margin-bottom: 16px; }
         .pricing-amount { font-size: 4em; font-weight: bold; color: #fff; line-height: 1; }
         .pricing-amount .was { color: #444; text-decoration: line-through; font-size: 0.4em; vertical-align: middle; margin-left: 8px; }
         .pricing-note { color: #666; font-size: 0.85em; margin: 10px 0 24px; }
@@ -170,6 +170,13 @@
 </nav>
 
 <!-- Live Ticker -->
+    <!-- Post-Launch Banner -->
+    <div style="background: linear-gradient(135deg, #0d1f0d 0%, #0a1a0a 100%); border-bottom: 1px solid #00cc88; padding: 12px 20px; text-align: center;">
+        <p style="color: #a0d8b0; font-size: 0.88em;">
+            ✅ <strong style="color: #00cc88;">Product Hunt Launch Complete</strong> — 107+ upvotes, 124+ founders using our tools. Founding member pricing still active.
+        </p>
+    </div>
+
 <div class="live-ticker">
     <span class="pulse"></span>
     <span id="ticker-msg">Loading...</span>
@@ -177,14 +184,14 @@
 
 <!-- Hero -->
 <section class="hero">
-    <div class="hero-eyebrow">🎯 Launch Special — 40% Off This Week</div>
+    <div class="hero-eyebrow">🎯 Founding Member Pricing — Still Active</div>
     <h1>Stop Building the Same Zap Over and Over</h1>
     <p class="hero-sub">15 production-ready Zapier workflow templates that actually work. Lead capture, email routing, Stripe reporting, social scheduling — done for you in minutes.</p>
     <div class="hero-cta-row">
         <a href="https://buy.stripe.com/5kQ6oJ8dnaU08C09yk4AU07" target="_blank" rel="noopener" class="btn-primary">Get Zapier Templates — $49</a>
         <a href="#templates" class="btn-secondary">See All Templates →</a>
     </div>
-    <p class="hero-note">One-time payment · Lifetime access · <span>27 templates sold this week</span></p>
+    <p class="hero-note">One-time payment · Lifetime access · <span>107+ Product Hunt upvotes · 124+ founders using our tools</span></p>
 </section>
 
 <!-- Stats bar -->
@@ -433,7 +440,7 @@
 <!-- Pricing -->
 <section class="pricing-section" id="pricing">
     <div class="pricing-card">
-        <div class="pricing-badge">⚡ Founding Member Pricing — Limited Time</div>
+        <div class="pricing-badge">⚡ Founding Member Pricing — Best Price Locked In</div>
         <div class="pricing-amount">$49 <span class="was">$79</span></div>
         <p class="pricing-note">One-time payment · Lifetime access · Free updates forever</p>
         <ul class="pricing-features">
@@ -445,7 +452,7 @@
             <li><span class="check">✓</span> Instant digital delivery</li>
         </ul>
         <div class="pricing-urgency">
-            ⚠️ Founding member pricing is available for a limited time. No code needed — this is the best price you'll get.
+            ✅ Founding member pricing is still active. No code needed — this is the best price you'll get, guaranteed.
         </div>
         <a href="https://buy.stripe.com/5kQ6oJ8dnaU08C09yk4AU07" target="_blank" rel="noopener" class="btn-primary">Buy Zapier Templates — $49</a>
     </div>
@@ -466,6 +473,10 @@
     <div class="section-eyebrow">FAQ</div>
     <h2 class="section-title" style="margin-bottom:32px;">Common Questions</h2>
 
+    <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">Why is founding pricing still active?<span class="icon">+</span></div>
+        <div class="faq-a">Our Product Hunt launch ran April 8–10, 2026 and was a success — 107+ upvotes, 124+ founders using our tools. We kept founding member pricing active as a thank-you to early supporters. These prices won't last forever, but they're available now while stock lasts.</div>
+    </div>
     <div class="faq-item">
         <div class="faq-q" onclick="toggleFaq(this)">Do I need a Zapier account?<span class="icon">+</span></div>
         <div class="faq-a">Yes — you need a Zapier account to use these templates. The free tier works for most templates. Some advanced templates with high-volume triggers may need a paid Zapier plan (Zapier Starter at $19.99/mo or higher).</div>
