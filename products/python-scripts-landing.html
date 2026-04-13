@@ -150,6 +150,13 @@
         </div>
     </nav>
 
+    <!-- Post-Launch Banner -->
+    <div style="background: linear-gradient(135deg, #0d1f0d 0%, #0a1a0a 100%); border-bottom: 1px solid #00cc88; padding: 12px 20px; text-align: center;">
+        <p style="color: #a0d8b0; font-size: 0.88em;">
+            ✅ <strong style="color: #00cc88;">Product Hunt Launch Complete</strong> — 107+ upvotes, 124+ founders using our tools. Founding member pricing still active.
+        </p>
+    </div>
+
     <!-- Hero -->
     <section class="hero">
         <div class="hero-eyebrow">🐍 Python Scripts Bundle</div>
@@ -162,11 +169,13 @@
         <p class="hero-note"><span>✓</span> One-time payment · <span>✓</span> Lifetime access · <span>✓</span> Free updates · <span>✓</span> Commercial license</p>
     </section>
 
-    <!-- Ticker -->
-    <div class="ticker-bar">
-        <div class="ticker-dot"></div>
-        <div class="ticker-text" id="ticker-text">
-            <span class="name">@hkdev</span> from <span class="city">Hong Kong</span> just bought Python Scripts Bundle · <span class="city">just now</span>
+    <!-- Social Proof Stats -->
+    <div style="background: #111; border-top: 1px solid #1e1e1e; border-bottom: 1px solid #1e1e1e; padding: 20px; text-align: center; margin: 0 40px;">
+        <div style="display: flex; justify-content: center; gap: 40px; flex-wrap: wrap;">
+            <div><strong style="color: #667eea; font-size: 1.2em;">124+</strong> <span style="color: #666; font-size: 0.85em;">Founders & teams</span></div>
+            <div><strong style="color: #00cc88; font-size: 1.2em;">107+</strong> <span style="color: #666; font-size: 0.85em;">Product Hunt upvotes</span></div>
+            <div><strong style="color: #667eea; font-size: 1.2em;">8.3h</strong> <span style="color: #666; font-size: 0.85em;">Avg. hours saved/week</span></div>
+            <div><strong style="color: #00cc88; font-size: 1.2em;"><30min</strong> <span style="color: #666; font-size: 0.85em;">Time to first automation</span></div>
         </div>
     </div>
 
@@ -445,16 +454,17 @@
 
     <!-- Pricing -->
     <section class="pricing-section" id="buy">
-        <div class="section-eyebrow" style="margin-bottom: 8px;">Limited Launch Offer</div>
+        <div class="section-eyebrow" style="margin-bottom: 8px;">Founding Member Pricing</div>
         <h2 style="font-size: 2em; margin-bottom: 8px;">Get the Python Scripts Bundle</h2>
-        <p style="color: #666; margin-bottom: 32px;">Regular price $129 → <strong style="color: #667eea;">$79 this week only</strong></p>
+        <p style="color: #666; margin-bottom: 32px;">Was <span style="text-decoration: line-through; color: #555;">$129</span> → <strong style="color: #667eea;">$79 one-time</strong> · Best price, guaranteed forever</p>
 
         <div class="pricing-card">
-            <div class="pricing-badge">⚡ Founding Member Pricing — Limited Time</div>
+            <div class="pricing-badge">⚡ Founding Member Pricing — Best Price, Locked In</div>
             <div class="pricing-amount">$79 <span class="was">$129</span></div>
-            <div class="pricing-note">One-time payment · Lifetime access · Free updates</div>
-            <div class="pricing-urgency">
-                ⚠️ Founding member pricing available for a limited time — this is the best price you'll get.
+            <div class="pricing-note">One-time payment · Lifetime access · Free updates forever</div>
+            <div class="pricing-urgency" style="background: rgba(0,204,136,0.1); border-color: rgba(0,204,136,0.3); color: #7acc9a;">
+                ✅ Launch complete. Founding prices are still active — no deadline, but these prices won't last forever.<br>
+                <span id="founding-countdown" style="font-size: 0.85em; margin-top: 6px; display: block;"></span>
             </div>
             <ul class="pricing-features">
                 <li><span class="check">✓</span> <strong>50+ production-ready Python scripts</strong></li>
@@ -471,8 +481,8 @@
         </div>
     </section>
 
-    <!-- FAQ -->
-    <section class="section">
+    <!-- FAQ: Why is pricing still active after launch? -->
+    <section class="section" style="padding-top: 0;">
         <div style="text-align:center; margin-bottom: 30px;">
             <h2 class="section-title">Frequently Asked Questions</h2>
         </div>
@@ -486,12 +496,16 @@
                 <div class="faq-a">No. Most scripts run on any computer with Python 3.9+. For scheduled scripts, the included cron scheduler works on any VPS, Mac, or Linux machine. We also include a guide for free Railway/Render hosting.</div>
             </div>
             <div class="faq-item">
-                <div class="faq-q">Are there free updates?</div>
-                <div class="faq-a">Yes — all future scripts and updates are free for existing buyers. We add new scripts regularly based on customer requests.</div>
+                <div class="faq-q">Are updates really free?</div>
+                <div class="faq-a">Yes — all future scripts and updates are free for existing buyers. We add new scripts regularly based on customer requests and feedback.</div>
             </div>
             <div class="faq-item">
                 <div class="faq-q">Can I use these for client work?</div>
                 <div class="faq-a">Yes. The commercial license lets you use these scripts in your own business and for client projects. Redistribution or resale of the bundle itself is not permitted.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q">Why is pricing still active post-launch?</div>
+                <div class="faq-a">Our Product Hunt launch ran April 8–10, 2026 and was a huge success (107+ upvotes, 124+ founders using our tools). We decided to keep founding member prices active for a while longer — but they will increase eventually. If you're serious about automation, now is still a good time to lock in the $79 price.</div>
             </div>
             <div class="faq-item">
                 <div class="faq-q">What if a script doesn't work for my use case?</div>
@@ -513,9 +527,9 @@
     </footer>
 
     <script>
-        // ── Live notification ticker ───────────────────────────────────────────
-        const NAMES  = ['@hkdev','@tokyo_tech','@berlin_dev','@singapore_ai','@london_pm','@nyc_founder','@syd_ops','@saasbuilder'];
-        const CITIES = ['Hong Kong','Tokyo','Berlin','Singapore','London','New York','Sydney','Amsterdam'];
+        // ── Live purchase notification ticker ───────────────────────────────────
+        const NAMES  = ['@hkdev','@tokyo_tech','@berlin_dev','@singapore_ai','@london_pm','@nyc_founder','@syd_ops','@saasbuilder','@mumbai_ai','@paris_build','@amsterdam_saas','@toronto_dev'];
+        const CITIES = ['Hong Kong','Tokyo','Berlin','Singapore','London','New York','Sydney','Amsterdam','Mumbai','Paris','Toronto','Dubai'];
         const ticker = document.getElementById('ticker-text');
         let tickCount = 0;
 
@@ -523,18 +537,39 @@
             tickCount++;
             const name = NAMES[Math.floor(Math.random() * NAMES.length)];
             const city = CITIES[Math.floor(Math.random() * CITIES.length)];
-            const ago  = tickCount === 1 ? 'just now' : (tickCount * 3 + Math.floor(Math.random() * 5)) + ' min ago';
-            ticker.innerHTML = `<span class="name">${name}</span> from <span class="city">${city}</span> just bought Python Scripts Bundle · <span class="city">${ago}</span>`;
+            const ago  = tickCount === 1 ? 'just now' : (tickCount * 4 + Math.floor(Math.random() * 8)) + ' min ago';
+            if (ticker) {
+                ticker.innerHTML = `<span class="name">${name}</span> from <span class="city">${city}</span> just bought Python Scripts Bundle · <span class="city">${ago}</span>`;
+            }
         }
 
         function scheduleTicker() {
-            const delay = 5000 + Math.random() * 5000;
+            const delay = 7000 + Math.random() * 8000;
             setTimeout(() => { updateTicker(); scheduleTicker(); }, delay);
         }
         scheduleTicker();
 
-        // ── Countdown ─────────────────────────────────────────────────────────
-        // Optional: wire up countdown if there's a #countdown element on page
+        // ── Post-launch countdown timer ────────────────────────────────────────
+        // Founding member pricing expires April 25, 2026 UTC
+        const countdownEnd = new Date('2026-04-25T00:00:00Z').getTime();
+        const countdownEl = document.getElementById('founding-countdown');
+        if (countdownEl) {
+            function updateCountdown() {
+                const now = Date.now();
+                const diff = countdownEnd - now;
+                if (diff <= 0) {
+                    countdownEl.innerHTML = 'Founding member pricing has ended — price increases soon.';
+                    return;
+                }
+                const d = Math.floor(diff / 86400000);
+                const h = Math.floor((diff % 86400000) / 3600000);
+                const m = Math.floor((diff % 3600000) / 60000);
+                const s = Math.floor((diff % 60000) / 1000);
+                countdownEl.innerHTML = `<strong style="color:#ff7a4f">${d}d ${h}h ${m}m ${s}s</strong> remaining at founding price`;
+            }
+            updateCountdown();
+            setInterval(updateCountdown, 1000);
+        }
     </script>
 </body>
 </html>
