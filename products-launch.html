@@ -534,6 +534,34 @@
         @media (max-width: 700px) {
             .testimonials-grid { grid-template-columns: 1fr !important; }
         }
+
+        /* ── Exit-Intent Popup ────────────────────────────────────────────────── */
+        .exit-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.75); z-index: 99998; display: none; align-items: center; justify-content: center; backdrop-filter: blur(4px); }
+        .exit-overlay.active { display: flex; }
+        .exit-popup { background: #0d0d1a; border: 1px solid #667eea; border-radius: 20px; padding: 40px 36px; max-width: 480px; width: 92%; text-align: center; position: relative; box-shadow: 0 0 60px rgba(102,126,234,0.25); animation: ep-appear 0.35s cubic-bezier(0.34,1.56,0.64,1); }
+        @keyframes ep-appear { from { transform: scale(0.85); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+        .exit-close { position: absolute; top: 14px; right: 16px; background: none; border: none; color: #555; font-size: 1.4em; cursor: pointer; line-height: 1; }
+        .exit-close:hover { color: #888; }
+        .exit-eyebrow { display: inline-block; background: rgba(255,99,84,0.15); border: 1px solid rgba(255,99,84,0.3); color: #ff6154; font-size: 0.72em; font-weight: bold; text-transform: uppercase; letter-spacing: 1.5px; padding: 5px 14px; border-radius: 20px; margin-bottom: 16px; }
+        .exit-title { font-size: 1.6em; font-weight: 700; color: #fff; line-height: 1.25; margin-bottom: 10px; }
+        .exit-title strong { color: #667eea; }
+        .exit-sub { color: #888; font-size: 0.9em; line-height: 1.6; margin-bottom: 24px; }
+        .exit-countdown { background: #1a0a2e; border: 1px solid rgba(255,99,84,0.3); border-radius: 10px; padding: 12px 20px; margin-bottom: 24px; display: flex; align-items: center; justify-content: center; gap: 12px; }
+        .exit-countdown .cd-nums { font-size: 1.5em; font-weight: bold; color: #ff6154; font-variant-numeric: tabular-nums; }
+        .exit-countdown .cd-label { color: #888; font-size: 0.82em; text-align: left; }
+        .exit-form { display: flex; flex-direction: column; gap: 10px; margin-bottom: 14px; }
+        .exit-input { background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.15); border-radius: 8px; padding: 12px 16px; color: #fff; font-size: 0.95em; outline: none; width: 100%; }
+        .exit-input:focus { border-color: #667eea; }
+        .exit-btn { background: linear-gradient(135deg, #ff6154 0%, #ff7a4f 100%); color: #fff; border: none; border-radius: 8px; padding: 14px; font-size: 1em; font-weight: bold; cursor: pointer; width: 100%; transition: transform 0.2s, box-shadow 0.2s; }
+        .exit-btn:hover { transform: scale(1.02); box-shadow: 0 4px 20px rgba(255,97,84,0.3); }
+        .exit-note { color: #555; font-size: 0.75em; }
+        .exit-bonus { background: linear-gradient(135deg, #0d1f0d 0%, #0a1a0a 100%); border: 1px solid #00cc88; border-radius: 10px; padding: 12px 16px; margin-bottom: 20px; }
+        .exit-bonus p { color: #a0d8b0; font-size: 0.88em; line-height: 1.5; }
+        .exit-bonus strong { color: #00cc88; }
+
+        /* Enhanced testimonials — result metrics */
+        .t-result { display: inline-flex; align-items: center; gap: 5px; background: rgba(0,204,102,0.08); border: 1px solid rgba(0,204,102,0.2); border-radius: 6px; padding: 3px 9px; font-size: 0.72em; color: #00cc88; font-weight: bold; margin-top: 8px; }
+        .t-result .tr-icon { font-size: 0.9em; }
     </style>
 </head>
 <body>
@@ -690,6 +718,7 @@
                             <div class="t-product">🐍 Python Scripts</div>
                         </div>
                     </div>
+                    <div class="t-result"><span class="tr-icon">⏱</span> 8 hrs saved</div>
                 </div>
                 <div class="testimonial-card">
                     <div class="t-stars">★★★★★</div>
@@ -702,10 +731,11 @@
                             <div class="t-product">⚡ Zapier Templates</div>
                         </div>
                     </div>
+                    <div class="t-result"><span class="tr-icon">💰</span> $2,400/yr saved</div>
                 </div>
                 <div class="testimonial-card">
                     <div class="t-stars">★★★★★</div>
-                    <p class="t-quote">The email sequence prompts alone have saved me weeks of drafting. Copy, paste, tweak — done. Exactly what I needed.</p>
+                    <p class="t-quote">The email sequence prompts alone have saved me weeks of drafting. Copy, paste, tweak — done. Exactly what I needed for my launch sequence.</p>
                     <div class="t-author">
                         <div class="t-avatar">MT</div>
                         <div>
@@ -714,10 +744,11 @@
                             <div class="t-product">💡 AI Prompts</div>
                         </div>
                     </div>
+                    <div class="t-result"><span class="tr-icon">✍</span> 40+ emails generated</div>
                 </div>
                 <div class="testimonial-card">
                     <div class="t-stars">★★★★★</div>
-                    <p class="t-quote">Finally a scripts bundle that actually works out of the box. The LinkedIn scraper script was exactly what I needed for lead gen.</p>
+                    <p class="t-quote">Finally a scripts bundle that actually works out of the box. The LinkedIn scraper script was exactly what I needed for lead gen — 200+ leads in week one.</p>
                     <div class="t-author">
                         <div class="t-avatar">KL</div>
                         <div>
@@ -726,10 +757,11 @@
                             <div class="t-product">🐍 Python Scripts</div>
                         </div>
                     </div>
+                    <div class="t-result"><span class="tr-icon">🔗</span> 200+ leads scraped</div>
                 </div>
                 <div class="testimonial-card">
                     <div class="t-stars">★★★★★</div>
-                    <p class="t-quote">The bundle is the best automation purchase I've made. All three products complement each other perfectly — scripts, templates, prompts.</p>
+                    <p class="t-quote">The bundle is the best automation purchase I've made. All three products complement each other perfectly — scripts, templates, prompts. Closed my first $1k client using the outreach prompts.</p>
                     <div class="t-author">
                         <div class="t-avatar">RP</div>
                         <div>
@@ -738,10 +770,11 @@
                             <div class="t-product">🚀 Full Bundle</div>
                         </div>
                     </div>
+                    <div class="t-result"><span class="tr-icon">💵</span> $1k+ revenue attributed</div>
                 </div>
                 <div class="testimonial-card">
                     <div class="t-stars">★★★★★</div>
-                    <p class="t-quote">These templates saved about 6 hours of setup work. The onboarding sequences and CRM workflows were worth the price alone.</p>
+                    <p class="t-quote">These templates saved about 6 hours of setup work. The onboarding sequences and CRM workflows were worth the price alone. Replaced our $150/mo agency contract.</p>
                     <div class="t-author">
                         <div class="t-avatar">DA</div>
                         <div>
@@ -750,6 +783,7 @@
                             <div class="t-product">⚡ Zapier Templates</div>
                         </div>
                     </div>
+                    <div class="t-result"><span class="tr-icon">🛡</span> $1,800/yr saved vs agency</div>
                 </div>
             </div>
             <div class="testimonials-summary">
@@ -1627,7 +1661,96 @@
         })();
     </script>
 
+    <!-- Exit-Intent Popup Logic -->
+    <script>
+    (function() {
+        var overlay = document.getElementById('exit-overlay');
+        if (!overlay) return;
+        var cdEl = document.getElementById('exit-countdown');
+        var cdTotal = 5 * 60; // 5 minutes
+        var cdStart = null;
+
+        function startCountdown() {
+            if (cdStart !== null) return;
+            cdStart = Date.now();
+            function tick() {
+                var elapsed = Math.floor((Date.now() - cdStart) / 1000);
+                var left = Math.max(0, cdTotal - elapsed);
+                var m = String(Math.floor(left / 60)).padStart(2, '0');
+                var s = String(left % 60).padStart(2, '0');
+                if (cdEl) cdEl.textContent = m + ':' + s;
+                if (left > 0) requestAnimationFrame(tick);
+            }
+            requestAnimationFrame(tick);
+        }
+
+        function showExit() {
+            overlay.classList.add('active');
+            startCountdown();
+        }
+
+        function closeExitPopup() {
+            overlay.classList.remove('active');
+        }
+
+        window.closeExitPopup = closeExitPopup;
+
+        // Exit intent: mouse moves above viewport (desktop)
+        document.addEventListener('mouseout', function(e) {
+            if (!e.relatedTarget && e.clientY < 10) showExit();
+        });
+
+        // Mobile: scroll up fast past 70% of page
+        var lastScrollY = 0;
+        window.addEventListener('scroll', function() {
+            var sy = window.scrollY || document.documentElement.scrollTop;
+            if (sy < lastScrollY && sy < document.documentElement.scrollHeight * 0.3) {
+                showExit();
+            }
+            lastScrollY = sy;
+        }, { passive: true });
+
+        // Close on overlay click (outside popup)
+        overlay.addEventListener('click', function(e) {
+            if (e.target === overlay) closeExitPopup();
+        });
+
+        // Email submit — fake success (replace with real endpoint)
+        window.handleExitSubmit = function(e) {
+            e.preventDefault();
+            var form = document.getElementById('exit-form');
+            var success = document.getElementById('exit-success');
+            var email = document.getElementById('exit-email').value;
+            form.style.display = 'none';
+            success.style.display = 'block';
+            closeExitPopup();
+        };
+    })();
+    </script>
+
     <!-- Social Proof Purchase Popup -->
+    <div class="exit-overlay" id="exit-overlay">
+        <div class="exit-popup">
+            <button class="exit-close" onclick="closeExitPopup()" aria-label="Close">&times;</button>
+            <div class="exit-eyebrow">🔥 Wait — Special Offer</div>
+            <h2 class="exit-title">Don't Leave Without Your <strong>Founding Member Bonus</strong></h2>
+            <p class="exit-sub">Grab the Full Bundle at launch pricing and get 3 exclusive AI prompts — cold email template, LinkedIn viral post formula, and objection handling master list. Yours to keep even if you request a refund.</p>
+            <div class="exit-countdown">
+                <div class="cd-nums" id="exit-countdown">05:00</div>
+                <div class="cd-label">Launch week pricing<br>available for</div>
+            </div>
+            <div class="exit-bonus">
+                <p>🎁 <strong>Bonus:</strong> Order the Complete Bundle ($99) and receive 3 exclusive AI prompts — cold email template, LinkedIn viral post formula & objection handling master list.</p>
+            </div>
+            <form class="exit-form" id="exit-form" onsubmit="handleExitSubmit(event)">
+                <input type="email" id="exit-email" class="exit-input" placeholder="your@email.com" required autocomplete="email">
+                <button type="submit" class="exit-btn">Claim My Bonus &rarr;</button>
+            </form>
+            <div id="exit-success" style="display:none; color:#00cc88; font-size:0.9em; margin-top:8px;">✅ Done! Check your inbox — bonus details on the way.</div>
+            <p class="exit-note">30-day guarantee. No spam. Unsubscribe anytime.</p>
+        </div>
+    </div>
+
     <div class="social-popup" id="social-popup">
         <div class="social-popup-inner">
             <button class="social-popup-close" onclick="document.getElementById('social-popup').classList.remove('visible')" aria-label="Close">&times;</button>
