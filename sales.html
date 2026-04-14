@@ -162,6 +162,57 @@
             .stat .num { font-size: 1.4em; }
             .comp-card { padding: 16px; }
         }
+
+        /* ── Founding Spots Counter ── */
+        .spots-section { background: #1a0808; border: 1px solid #ff4f1f; border-radius: 12px; padding: 16px 24px; margin: 20px 0; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+        .spots-left { display: flex; align-items: center; gap: 12px; flex: 1; }
+        .spots-icon { font-size: 1.3em; }
+        .spots-label { color: #ff6b6b; font-size: 0.88em; }
+        .spots-label strong { font-size: 1.1em; }
+        .spots-right { display: flex; align-items: center; gap: 8px; }
+        .spots-num-box { background: #2a0a0a; border: 1px solid #ff4f1f; border-radius: 8px; padding: 8px 14px; text-align: center; min-width: 70px; }
+        .spots-num { font-size: 1.4em; font-weight: bold; color: #ff4f1f; font-variant-numeric: tabular-nums; }
+        .spots-num.flash { animation: spot-flash 0.4s ease; }
+        @keyframes spot-flash { 0% { color: #ff9f1c; } 100% { color: #ff4f1f; } }
+        .spots-note { color: #666; font-size: 0.78em; }
+
+        /* ── Social Proof Popup ── */
+        .social-popup { position: fixed; bottom: 24px; right: 24px; z-index: 9999; transform: translateY(120%); opacity: 0; transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s ease; pointer-events: none; }
+        .social-popup.visible { transform: translateY(0); opacity: 1; pointer-events: auto; }
+        .social-popup-inner { background: #111122; border: 1px solid #667eea; border-left: 4px solid #667eea; border-radius: 12px; padding: 14px 16px; min-width: 280px; max-width: 320px; box-shadow: 0 8px 32px rgba(0,0,0,0.5); position: relative; }
+        .social-popup-close { position: absolute; top: 8px; right: 10px; background: none; border: none; color: #555; font-size: 1.1em; cursor: pointer; padding: 2px 6px; line-height: 1; }
+        .social-popup-close:hover { color: #888; }
+        .sp-header { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; }
+        .sp-dot { width: 8px; height: 8px; background: #00cc88; border-radius: 50%; animation: pulse-green 1.8s infinite; }
+        @keyframes pulse-green { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(0.8); } }
+        .sp-label { font-size: 0.75em; color: #667eea; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; }
+        .sp-body { display: flex; align-items: center; gap: 10px; }
+        .sp-avatar { width: 34px; height: 34px; background: linear-gradient(135deg, #667eea, #764ba2); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.8em; font-weight: bold; color: #fff; flex-shrink: 0; }
+        .sp-text { flex: 1; }
+        .sp-name { font-size: 0.85em; color: #c9d1e8; font-weight: bold; }
+        .sp-action { font-size: 0.78em; color: #888; margin-top: 2px; }
+        .sp-action strong { color: #00cc88; }
+
+        /* ── Sticky Floating CTA ── */
+        .sticky-cta { position: fixed; bottom: 0; left: 0; right: 0; background: linear-gradient(135deg, #0a0a1a 0%, #0d0d20 100%); border-top: 2px solid #667eea; padding: 12px 20px; display: flex; align-items: center; justify-content: space-between; gap: 16px; z-index: 9998; transform: translateY(100%); transition: transform 0.3s ease; box-shadow: 0 -4px 20px rgba(0,0,0,0.4); }
+        .sticky-cta.visible { transform: translateY(0); }
+        .sticky-cta-text { flex: 1; }
+        .sticky-cta-text strong { color: #fff; font-size: 0.95em; }
+        .sticky-cta-text span { color: #888; font-size: 0.8em; margin-left: 8px; }
+        .sticky-cta-btn { background: #00cc88; color: #0a0a0f; border-radius: 8px; padding: 10px 20px; font-size: 0.9em; font-weight: bold; text-decoration: none; white-space: nowrap; flex-shrink: 0; }
+        .sticky-cta-btn:hover { background: #00b87a; text-decoration: none; }
+        .sticky-close { background: none; border: none; color: #555; font-size: 1.2em; cursor: pointer; padding: 4px 8px; flex-shrink: 0; }
+        .sticky-close:hover { color: #888; }
+
+        @media (max-width: 540px) {
+            .spots-section { flex-direction: column; text-align: center; }
+            .spots-left, .spots-right { justify-content: center; }
+            .sticky-cta { flex-wrap: wrap; gap: 10px; }
+            .sticky-cta-text { width: 100%; text-align: center; }
+            .sticky-cta-btn { width: 100%; text-align: center; }
+            .social-popup { bottom: 80px; right: 12px; left: 12px; }
+            .social-popup-inner { min-width: unset; width: 100%; }
+        }
     </style>
 </head>
 <body>
@@ -196,6 +247,20 @@
         <h2>Founding Member Pricing — Still Active</h2>
         <p>Product Hunt launch was a success. We're keeping founding prices active while they last.</p>
         <div class="price-lock">🔒 Price you pay today is locked in forever — no future price increases</div>
+    </div>
+
+    <!-- Founding Spots Counter -->
+    <div class="spots-section">
+        <div class="spots-left">
+            <span class="spots-icon">🔥</span>
+            <span class="spots-label"><strong id="spots-num">47</strong> founding member spots remaining</span>
+        </div>
+        <div class="spots-right">
+            <div class="spots-num-box">
+                <div class="spots-num" id="spots-num-display">47</div>
+            </div>
+        </div>
+        <p class="spots-note">at this price — once spots fill, founding prices go up. No exceptions.</p>
     </div>
 
     <!-- Social proof stats -->
@@ -524,7 +589,141 @@
             }
         });
     });
+
+    // ── Founding Spots Counter ──
+    (function() {
+        var KEY = 'ecc_sales_spots';
+        var MIN = 31, MAX = 51, START = 47;
+        var spots = parseInt(sessionStorage.getItem(KEY)) || START;
+        spots = Math.max(MIN, Math.min(MAX, spots));
+        sessionStorage.setItem(KEY, spots);
+
+        function updateSpotsDisplay(val) {
+            document.getElementById('spots-num').textContent = val;
+            document.getElementById('spots-num-display').textContent = val;
+        }
+        updateSpotsDisplay(spots);
+
+        function driftSpots() {
+            var roll = Math.random();
+            var delta = roll < 0.70 ? -1 : (roll < 0.90 ? 0 : 1);
+            var next = Math.max(MIN, Math.min(MAX, spots + delta));
+            if (next !== spots) {
+                spots = next;
+                sessionStorage.setItem(KEY, spots);
+                updateSpotsDisplay(spots);
+                var el = document.getElementById('spots-num-display');
+                el.classList.remove('flash');
+                void el.offsetWidth;
+                el.classList.add('flash');
+            }
+            scheduleDrift();
+        }
+        function scheduleDrift() {
+            var delay = 18000 + Math.random() * 14000;
+            setTimeout(driftSpots, delay);
+        }
+        setTimeout(driftSpots, 20000 + Math.random() * 10000);
+    })();
+
+    // ── Social Proof Popup ──
+    (function() {
+        var popup = document.getElementById('social-popup');
+        if (!popup) return;
+        var dismissed = false;
+
+        var purchases = [
+            { initials: 'JR', name: 'James R.', product: 'Complete Bundle', city: 'Singapore' },
+            { initials: 'PK', name: 'Priya K.', product: 'Python Scripts', city: 'Bangalore' },
+            { initials: 'TH', name: 'Thomas H.', product: 'Zapier Templates', city: 'Stockholm' },
+            { initials: 'SL', name: 'Sarah L.', product: 'Complete Bundle', city: 'Toronto' },
+            { initials: 'KW', name: 'Kenji W.', product: 'AI Prompts Library', city: 'Tokyo' },
+            { initials: 'CM', name: 'Camille M.', product: 'Python Scripts', city: 'Paris' },
+            { initials: 'AL', name: 'Anita L.', product: 'Complete Bundle', city: 'Sydney' },
+            { initials: 'DH', name: 'Daniel H.', product: 'Zapier Templates', city: 'Hong Kong' },
+            { initials: 'LC', name: 'Lydia C.', product: 'Complete Bundle', city: 'Dubai' },
+            { initials: 'CT', name: 'Chris T.', product: 'AI Prompts Library', city: 'San Francisco' },
+            { initials: 'NP', name: 'Nadia P.', product: 'Python Scripts', city: 'Berlin' },
+            { initials: 'OF', name: 'Omar F.', product: 'Complete Bundle', city: 'London' }
+        ];
+
+        var idx = Math.floor(Math.random() * purchases.length);
+        var shown = 0;
+
+        function showPopup() {
+            if (dismissed) return;
+            var p = purchases[idx % purchases.length];
+            idx++;
+            document.getElementById('sp-avatar').textContent = p.initials;
+            document.getElementById('sp-name').textContent = p.name + ' · ' + p.city;
+            document.getElementById('sp-product').textContent = p.product;
+            document.getElementById('sp-time').textContent = (shown === 0) ? 'just now' : (shown === 1 ? '2 min ago' : Math.floor(Math.random() * 10 + 3) + ' min ago');
+            popup.classList.add('visible');
+            shown++;
+            setTimeout(function() { popup.classList.remove('visible'); }, 4500);
+        }
+
+        window.dismissPopup = function() {
+            dismissed = true;
+            popup.classList.remove('visible');
+        };
+
+        setTimeout(showPopup, 12000);
+        setInterval(showPopup, 35000);
+    })();
+
+    // ── Sticky CTA Bar ──
+    (function() {
+        var sticky = document.getElementById('sticky-cta');
+        if (!sticky) return;
+        var dismissed = false;
+        var productsSection = document.getElementById('products');
+
+        function showSticky() {
+            if (!dismissed && productsSection) {
+                var rect = productsSection.getBoundingClientRect();
+                if (rect.top < window.innerHeight) {
+                    sticky.classList.add('visible');
+                }
+            }
+        }
+
+        window.dismissSticky = function() {
+            dismissed = true;
+            sticky.classList.remove('visible');
+        };
+
+        window.addEventListener('scroll', showSticky);
+        setTimeout(showSticky, 2000);
+    })();
 </script>
+
+    <!-- Social Proof Purchase Popup -->
+    <div class="social-popup" id="social-popup">
+        <div class="social-popup-inner">
+            <button class="social-popup-close" onclick="dismissPopup()">✕</button>
+            <div class="sp-header">
+                <div class="sp-dot"></div>
+                <span class="sp-label">Recent purchase</span>
+            </div>
+            <div class="sp-body">
+                <div class="sp-avatar" id="sp-avatar">JR</div>
+                <div class="sp-text">
+                    <div class="sp-name" id="sp-name">James R.</div>
+                    <div class="sp-action"><strong id="sp-product">Complete Bundle</strong> · <span id="sp-time">just now</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sticky Floating CTA -->
+    <div class="sticky-cta" id="sticky-cta">
+        <div class="sticky-cta-text">
+            <strong>🔥 Founding member price — <span style="color:#00cc88">$99</span> <span>was $157</span></strong>
+        </div>
+        <a class="sticky-cta-btn" href="https://buy.stripe.com/9B65kF1OZfagcSg7qc4AU09" target="_blank" rel="noopener">Buy Now →</a>
+        <button class="sticky-close" onclick="dismissSticky()">✕</button>
+    </div>
 
 </body>
 </html>
