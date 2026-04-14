@@ -894,17 +894,7 @@
         </div>
 
         <div class="pricing-banner">
-            <p>💚 <strong>Founding member pricing active.</strong> All products available at the same launch prices — one-time payment, lifetime access, no subscription fees.</p>
-        </div>
-
-        <!-- Founding Spots Remaining Counter -->
-        <div class="spots-counter" id="spots-counter">
-            <div class="spots-counter-label">🔥 <strong id="spots-num">47</strong> founding member spots remaining at this price</div>
-            <div class="spots-number">
-                <span class="spots-num" id="spots-num-display">47</span>
-                <span class="spots-label">spots<br>left</span>
-            </div>
-            <div class="spots-note">Once these spots fill, founding prices go up. No exceptions.</div>
+            <p>💚 <strong>Honest pricing, always.</strong> These are our standard prices — one-time payment, lifetime access, free updates forever. No countdown, no "spots."</p>
         </div>
 
         <!-- Bundle Deal Card -->
@@ -969,19 +959,10 @@
                 </div>
             </div>
 
-            <!-- Founding member urgency -->
-            <div class="bundle-urgency">
-                <span class="bundle-urgency-icon">⏱</span>
-                <span class="bundle-urgency-text">Founding member pricing ends in:</span>
-                <div class="bundle-urgency-countdown" id="bundle-countdown">
-                    <div class="bu-clock-unit"><span class="bu-clock-num" id="bu-days">0</span><span class="bu-clock-label">days</span></div>
-                    <span class="bu-sep">:</span>
-                    <div class="bu-clock-unit"><span class="bu-clock-num" id="bu-hours">00</span><span class="bu-clock-label">hrs</span></div>
-                    <span class="bu-sep">:</span>
-                    <div class="bu-clock-unit"><span class="bu-clock-num" id="bu-minutes">00</span><span class="bu-clock-label">min</span></div>
-                    <span class="bu-sep">:</span>
-                    <div class="bu-clock-unit"><span class="bu-clock-num" id="bu-seconds">00</span><span class="bu-clock-label">sec</span></div>
-                </div>
+            <!-- No countdown — honest pricing, no artificial urgency -->
+            <div style="margin-bottom:14px; padding:10px 14px; background:rgba(16,185,129,0.08); border:1px solid rgba(16,185,129,0.25); border-radius:8px; font-size:0.82em; color:#6ee7b7; display:flex; align-items:center; gap:10px;">
+                <span>💚</span>
+                <span><strong>Honest price.</strong> No countdown. No "spots." This is our standard price — one-time, yours forever.</span>
             </div>
             <!-- Trust Badges -->
             <div class="trust-badges">
@@ -1647,75 +1628,9 @@
             }, 50000);
         })();
 
-        // ── Bundle Countdown Timer ──────────────────────────────────────────────
-        (function() {
-            // Founding member pricing ends: 7 days from April 11, 2026 launch
-            var launchDate = new Date('2026-04-11T00:00:00Z');
-            var endDate = new Date(launchDate.getTime() + 7 * 24 * 60 * 60 * 1000);
-            var daysEl = document.getElementById('bu-days');
-            var hrsEl = document.getElementById('bu-hours');
-            var minEl = document.getElementById('bu-minutes');
-            var secEl = document.getElementById('bu-seconds');
-            if (!daysEl || !hrsEl || !minEl || !secEl) return;
-            function tick() {
-                var now = new Date();
-                var diff = endDate - now;
-                if (diff <= 0) {
-                    // Timer expired — hide countdown, update text
-                    document.getElementById('bundle-countdown').style.display = 'none';
-                    var txt = document.querySelector('.bundle-urgency-text');
-                    if (txt) txt.textContent = 'Founding member pricing has ended — but our best price is still available below.';
-                    return;
-                }
-                var totalSecs = Math.floor(diff / 1000);
-                var days = Math.floor(totalSecs / 86400);
-                var hrs = Math.floor((totalSecs % 86400) / 3600);
-                var mins = Math.floor((totalSecs % 3600) / 60);
-                var secs = totalSecs % 60;
-                daysEl.textContent = days;
-                hrsEl.textContent = String(hrs).padStart(2, '0');
-                minEl.textContent = String(mins).padStart(2, '0');
-                secEl.textContent = String(secs).padStart(2, '0');
-            }
-            tick();
-            setInterval(tick, 1000);
-        })();
+        // ── Countdown removed (launch ended April 10, 2026) — no fake urgency ──
 
-        // Founding Spots Counter — fluctuates slightly for urgency
-        (function() {
-            var spotsEl = document.getElementById('spots-num');
-            var spotsDisplay = document.getElementById('spots-num-display');
-            if (!spotsEl || !spotsDisplay) return;
-            var spots = parseInt(sessionStorage.getItem('ecc_spots') || '47', 10);
-            function updateSpots(val) {
-                spotsEl.textContent = val;
-                spotsDisplay.textContent = val;
-                sessionStorage.setItem('ecc_spots', val);
-                // Brief flash animation
-                spotsEl.classList.add('flash');
-                spotsDisplay.classList.add('flash');
-                setTimeout(function() {
-                    spotsEl.classList.remove('flash');
-                    spotsDisplay.classList.remove('flash');
-                }, 400);
-            }
-            function drift() {
-                // 70% chance: -1 (someone took a spot), 30% chance: +1 or 0 (rare opening)
-                var delta = Math.random() < 0.70 ? -1 : (Math.random() < 0.5 ? 0 : 1);
-                var newVal = Math.max(31, Math.min(51, spots + delta));
-                if (newVal !== spots) {
-                    spots = newVal;
-                    updateSpots(spots);
-                }
-                scheduleNext();
-            }
-            function scheduleNext() {
-                var delay = 25000 + Math.random() * 20000; // 25–45 seconds
-                setTimeout(drift, delay);
-            }
-            // Start drift after 20 seconds
-            setTimeout(drift, 20000);
-        })();
+        // ── Fake spots counter removed — honest business, no manufactured scarcity ──
     </script>
 
     <!-- Exit-Intent Popup Logic -->
@@ -1723,27 +1638,8 @@
     (function() {
         var overlay = document.getElementById('exit-overlay');
         if (!overlay) return;
-        var cdEl = document.getElementById('exit-countdown');
-        var cdTotal = 5 * 60; // 5 minutes
-        var cdStart = null;
-
-        function startCountdown() {
-            if (cdStart !== null) return;
-            cdStart = Date.now();
-            function tick() {
-                var elapsed = Math.floor((Date.now() - cdStart) / 1000);
-                var left = Math.max(0, cdTotal - elapsed);
-                var m = String(Math.floor(left / 60)).padStart(2, '0');
-                var s = String(left % 60).padStart(2, '0');
-                if (cdEl) cdEl.textContent = m + ':' + s;
-                if (left > 0) requestAnimationFrame(tick);
-            }
-            requestAnimationFrame(tick);
-        }
-
         function showExit() {
             overlay.classList.add('active');
-            startCountdown();
         }
 
         function closeExitPopup() {
@@ -1789,13 +1685,9 @@
     <div class="exit-overlay" id="exit-overlay">
         <div class="exit-popup">
             <button class="exit-close" onclick="closeExitPopup()" aria-label="Close">&times;</button>
-            <div class="exit-eyebrow">🔥 Wait — Special Offer</div>
-            <h2 class="exit-title">Don't Leave Without Your <strong>Founding Member Bonus</strong></h2>
-            <p class="exit-sub">Grab the Full Bundle at launch pricing and get 3 exclusive AI prompts — cold email template, LinkedIn viral post formula, and objection handling master list. Yours to keep even if you request a refund.</p>
-            <div class="exit-countdown">
-                <div class="cd-nums" id="exit-countdown">05:00</div>
-                <div class="cd-label">Launch week pricing<br>available for</div>
-            </div>
+            <div class="exit-eyebrow">🔥 Before You Go</div>
+            <h2 class="exit-title">Get the Full Bundle — <strong>One Price, Forever</strong></h2>
+            <p class="exit-sub">Python Scripts + Zapier Templates + AI Prompts — all 3 products for $99. One-time payment, lifetime access, free updates. No subscription. No countdown.</p>
             <div class="exit-bonus">
                 <p>🎁 <strong>Bonus:</strong> Order the Complete Bundle ($99) and receive 3 exclusive AI prompts — cold email template, LinkedIn viral post formula & objection handling master list.</p>
             </div>
