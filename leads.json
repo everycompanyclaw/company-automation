@@ -489,11 +489,65 @@
       "building_in_public": true,
       "lifetime_deal_buyer": true,
       "date_contacted": "2026-04-13T15:08:15.187255Z"
+    },
+    {
+      "name": "Curtis Li",
+      "email": "curtis.li.rpx@gmail.com",
+      "company": "RPX AI Automation Agency",
+      "role": "Founder",
+      "source": "linkedin_search",
+      "created": "2026-04-14T10:18:34Z",
+      "status": "contacted",
+      "linkedin": "https://hk.linkedin.com/in/curtis-li-unimelb",
+      "notes": "RPA expert certified in Google Gemini and Laiye RPA. Builds automation solutions for businesses in HK. Very relevant for Python Scripts Bundle - builds RPA workflows using Laiye, Python could complement his offerings.",
+      "outreach_template": "A",
+      "outreach_priority": "high",
+      "outreach_notes": "Guessed email address (curtis.li.rpx@gmail.com). LinkedIn outreach also possible. Very technical audience - emphasize Python Scripts Bundle quality and documentation.",
+      "product_interest": [
+        "Python Scripts Bundle",
+        "Zapier Templates"
+      ],
+      "date_contacted": "2026-04-14T10:18:34Z"
+    },
+    {
+      "name": "Shrestha Raj",
+      "email": "shrestha@elysiumai.io",
+      "company": "Elysium AI Automation Solutions",
+      "role": "Founder",
+      "source": "linkedin_search",
+      "created": "2026-04-14T10:18:34Z",
+      "status": "contacted",
+      "linkedin": "https://hk.linkedin.com/in/shrestha-raj-81a298374",
+      "notes": "Helps non-tech creators with AI-powered automation. HK-based. Passionate about democratizing automation. Perfect fit for Zapier Templates and AI Prompts Bundle - helps non-technical users implement automation.",
+      "outreach_template": "B",
+      "outreach_priority": "high",
+      "outreach_notes": "Guessed email address (shrestha@elysiumai.io). LinkedIn outreach also possible. Emphasize ease-of-use and no-code aspects. AI Prompts Bundle particularly relevant for their non-technical audience.",
+      "product_interest": [
+        "Zapier Templates",
+        "AI Prompts Bundle"
+      ],
+      "date_contacted": "2026-04-14T10:18:34Z"
+    },
+    {
+      "name": "Victor",
+      "email": "",
+      "company": "Bridge AI",
+      "role": "Founder & CEO",
+      "source": "hk_ai_startup",
+      "created": "2026-04-14T10:18:34Z",
+      "status": "researching",
+      "notes": "Builds AI-powered integrated intervention systems using emotion prediction wearables for students with special educational needs. 1000+ users. Cyberport-funded. Based in Hong Kong. Less directly relevant to our products - education-focused AI rather than workflow automation.",
+      "outreach_template": "L1-LinkedIn",
+      "outreach_priority": "low",
+      "outreach_notes": "No email found. Try LinkedIn connection request. Lower priority - their focus is EdTech/AI wearables, not workflow automation. Low match probability.",
+      "linkedin": "https://hk.linkedin.com/in/bridge-ai-victor",
+      "product_interest": [],
+      "website": "https://bridgeai.hk"
     }
   ],
-  "last_updated": "2026-04-13T15:04:00.000000+00:00",
-  "total_leads": 35,
-  "contacted": 31,
-  "pending": 2,
+  "last_updated": "2026-04-14T10:18:34Z",
+  "total_leads": 38,
+  "contacted": 35,
+  "pending": 3,
   "new": 2
 }
