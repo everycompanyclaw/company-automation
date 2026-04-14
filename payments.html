@@ -8,9 +8,18 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; line-height: 1.6; color: #333; background: #0a0a0f; min-height: 100vh; }
 
-        /* Top announcement bar */
-        .top-bar { background: linear-gradient(135deg, #0d1f0d 0%, #0a2a1a 100%); border-bottom: 1px solid #00cc88; color: #fff; text-align: center; padding: 8px 16px; font-size: 0.85em; }
-        .top-bar a { color: #00cc88; font-weight: bold; }
+        /* Top bar */
+        .top-bar { background: #635bff; color: #fff; text-align: center; padding: 8px 16px; font-size: 0.85em; }
+        .top-bar a { color: #fff; font-weight: bold; }
+
+        /* Countdown bar */
+        .countdown-bar { background: #1a1a2e; border-bottom: 1px solid #2a2a4a; padding: 12px 20px; text-align: center; }
+        .countdown-bar .label { color: #888; font-size: 0.85em; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 1px; }
+        .countdown { display: flex; justify-content: center; gap: 20px; }
+        .countdown-unit { display: inline-block; }
+        .countdown-num { color: #635bff; font-size: 1.5em; font-weight: bold; }
+        .countdown-unit-label { color: #555; font-size: 0.7em; text-transform: uppercase; margin-left: 4px; }
+        .countdown-sep { color: #333; font-size: 1.5em; align-self: center; }
 
         .container { max-width: 900px; margin: 0 auto; padding: 40px 20px; }
 
@@ -19,12 +28,12 @@
         .subtitle { color: #888; font-size: 1.1em; }
         .tagline-highlight { color: #635bff; font-weight: bold; }
 
-        /* Post-launch founding prices banner */
-        .launch-banner { background: linear-gradient(135deg, #0d1f0d 0%, #0a2a1a 100%); border: 1px solid #00cc88; border-radius: 14px; padding: 20px 30px; text-align: center; margin-bottom: 30px; }
+        /* Launch special banner */
+        .launch-banner { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); border: 1px solid #635bff; border-radius: 14px; padding: 20px 30px; text-align: center; margin-bottom: 30px; }
         .launch-banner .fire { font-size: 1.3em; }
         .launch-banner p { color: #c9d1e8; }
         .launch-banner .promo { color: #fff; font-weight: bold; font-size: 1.1em; margin-top: 6px; }
-        .launch-banner .promo code { background: #0a0a1a; border: 1px solid #444; padding: 3px 10px; border-radius: 6px; color: #00cc88; }
+        .launch-banner .promo code { background: #0a0a1a; border: 1px solid #444; padding: 3px 10px; border-radius: 6px; color: #635bff; }
 
         /* Trust row */
         .trust-row { display: flex; justify-content: center; gap: 24px; margin-bottom: 35px; flex-wrap: wrap; }
@@ -121,9 +130,97 @@
             .checkout-step:not(:last-child)::after { display: none; }
             .step-text { font-size: 0.75em; }
             .post-payment { flex-direction: column; text-align: center; gap: 12px; padding: 20px 16px; }
+            .ob-body { flex-direction: column; }
+            .ob-right { text-align: left; }
+            .ob-btn { display: block; text-align: center; }
         }
 
-        /* Purchase toast notifications */
+        /* Order bump */
+    .order-bump {
+        background: linear-gradient(135deg, #0f1a20 0%, #0a1520 100%);
+        border: 1px solid #1a3a4a;
+        border-left: 4px solid #667eea;
+        border-radius: 14px;
+        padding: 24px 28px;
+        margin: 30px 0;
+    }
+    .ob-header {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 14px;
+    }
+    .ob-tag {
+        background: #667eea;
+        color: #fff;
+        font-size: 0.72em;
+        font-weight: bold;
+        padding: 3px 10px;
+        border-radius: 4px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+    .ob-title {
+        color: #fff;
+        font-size: 1.05em;
+        font-weight: bold;
+    }
+    .ob-body {
+        display: flex;
+        align-items: center;
+        gap: 24px;
+        flex-wrap: wrap;
+    }
+    .ob-left {
+        flex: 1;
+        min-width: 240px;
+    }
+    .ob-product {
+        color: #667eea;
+        font-weight: bold;
+        margin-bottom: 6px;
+        font-size: 0.95em;
+    }
+    .ob-desc {
+        color: #888;
+        font-size: 0.88em;
+        line-height: 1.55;
+        margin-bottom: 8px;
+    }
+    .ob-bonus {
+        color: #00cc88;
+        font-size: 0.82em;
+        background: rgba(0,204,136,0.08);
+        border: 1px solid rgba(0,204,136,0.2);
+        border-radius: 6px;
+        padding: 8px 12px;
+    }
+    .ob-right {
+        text-align: right;
+        flex-shrink: 0;
+    }
+    .ob-btn {
+        display: inline-block;
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        color: #fff;
+        padding: 12px 24px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: bold;
+        font-size: 0.95em;
+        transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .ob-btn:hover {
+        transform: scale(1.03);
+        box-shadow: 0 4px 20px rgba(102,126,234,0.35);
+    }
+    .ob-note {
+        color: #555;
+        font-size: 0.78em;
+        margin-top: 6px;
+    }
+
+    /* Purchase toast notifications */
         .purchase-toast {
             position: fixed;
             bottom: 24px;
@@ -173,7 +270,7 @@
 
 <!-- Top announcement bar -->
 <div class="top-bar">
-    🎉 Launch Complete! Thank you to 100+ makers on Product Hunt · All products still available at founding prices · <a href="#products">Shop Now →</a>
+    💚 Founding Member Pricing Still Active · All products at launch prices · <a href="#products">Shop Now →</a>
 </div>
 
 <div class="container">
@@ -183,11 +280,11 @@
         <p class="subtitle">Ready-to-run scripts, templates & prompts for professionals who value their time</p>
     </header>
 
-    <!-- Post-launch founding prices banner -->
+    <!-- Founding member pricing banner -->
     <div class="launch-banner">
-        <div class="fire">💚 Founding Member Pricing — Still Active</div>
-        <p>Everything you need to automate your business. No coding required. One-time payment, lifetime access.</p>
-        <p class="promo">107 Product Hunt upvotes · 30-day money-back guarantee · All future updates free</p>
+        <div class="fire">💚 Founding Member Pricing — Up to 41% Off</div>
+        <p>Everything you need to automate your business. No coding required.</p>
+        <p class="promo">One-time payment · Lifetime access · <strong>Prices held — this is the best deal you'll get</strong></p>
     </div>
 
     <!-- Trust badges -->
@@ -217,8 +314,12 @@
 
     <!-- Social proof stats -->
     <div class="social-proof">
-        <h3>Trusted by founders and developers worldwide</h3>
+        <h3>Trusted by automation enthusiasts worldwide</h3>
         <div class="proof-grid">
+            <div class="proof-stat">
+                <div class="proof-num">124+</div>
+                <div class="proof-label">Founders Using Our Tools</div>
+            </div>
             <div class="proof-stat">
                 <div class="proof-num">107+</div>
                 <div class="proof-label">Product Hunt Upvotes</div>
@@ -228,12 +329,27 @@
                 <div class="proof-label">Python Scripts</div>
             </div>
             <div class="proof-stat">
-                <div class="proof-num">200+</div>
-                <div class="proof-label">AI Prompts</div>
-            </div>
-            <div class="proof-stat">
                 <div class="proof-num">25+</div>
                 <div class="proof-label">Zapier Templates</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Order Bump: Complete Your Stack -->
+    <div class="order-bump">
+        <div class="ob-header">
+            <span class="ob-tag">💡 Add-on</span>
+            <span class="ob-title">Complete Your Automation Stack</span>
+        </div>
+        <div class="ob-body">
+            <div class="ob-left">
+                <div class="ob-product">AI Prompts Library — add for <strong>$29</strong></div>
+                <div class="ob-desc">200+ curated prompts for ChatGPT, Claude & Gemini. Cold emails, LinkedIn posts, sales objections, business analysis — all copy-paste ready.</div>
+                <div class="ob-bonus">🎁 Bonus: Cold email template, LinkedIn viral formula & objection handling master list included — yours to keep even if you request a refund.</div>
+            </div>
+            <div class="ob-right">
+                <a href="https://buy.stripe.com/28E28talv2nucSg5i44AU06" class="ob-btn" target="_blank" rel="noopener">Add AI Prompts — $29 →</a>
+                <div class="ob-note">One-time · Instant delivery · 30-day refund</div>
             </div>
         </div>
     </div>
@@ -261,7 +377,7 @@
             <ul class="product-highlights">
                 <li>Email automation & web scraping</li>
                 <li>Data processing pipelines</li>
-                <li>API integrations (Stripe, Slack, Resend)</li>
+                <li>API integrations</li>
                 <li>Copy-paste, runs in minutes</li>
                 <li>Commercial license included</li>
             </ul>
@@ -326,7 +442,7 @@
             <a href="https://buy.stripe.com/9B65kF1OZfagcSg7qc4AU09" class="bundle-btn" target="_blank" rel="noopener">
                 Get the Bundle — $99
             </a>
-            <p class="bundle-note">💚 Founding member pricing active · One-time payment · No subscription · All future updates free forever</p>
+            <p class="bundle-note">💚 Founding member pricing — this is the best deal you'll get. No code needed.</p>
         </div>
     </div>
 
@@ -381,7 +497,9 @@
 </div>
 
 <script>
-// Purchase toast notifications (reduced frequency post-launch)
+// Post-launch: no countdown needed — founding member pricing is active
+
+// Purchase toast notifications
 const purchases = [
     { name: 'Marcus R.', product: 'Complete Bundle — $99', location: 'Amsterdam', ago: 'just now' },
     { name: 'Priya K.', product: 'Python Scripts Bundle', location: 'Bangalore', ago: '3 min ago' },
@@ -395,8 +513,6 @@ const purchases = [
     { name: 'Chris T.', product: 'AI Prompts Library', location: 'San Francisco', ago: '21 min ago' },
     { name: 'Nadia P.', product: 'Python Scripts Bundle', location: 'Dubai', ago: '23 min ago' },
     { name: 'Omar F.', product: 'Complete Bundle — $99', location: 'London', ago: '26 min ago' },
-    { name: 'Rachel N.', product: 'Python Scripts Bundle', location: 'Vancouver', ago: '28 min ago' },
-    { name: 'Kevin Z.', product: 'Complete Bundle — $99', location: 'Beijing', ago: '31 min ago' },
 ];
 let toastIdx = Math.floor(Math.random() * purchases.length);
 
@@ -412,13 +528,11 @@ function showToast() {
 }
 
 function scheduleToast() {
-    // Reduced frequency: 30–60 seconds post-launch (vs 15–35 during launch)
-    const delay = 30000 + Math.random() * 30000;
+    const delay = 15000 + Math.random() * 20000; // 15–35 seconds
     setTimeout(() => { showToast(); scheduleToast(); }, delay);
 }
 
-// Start toasts after a short delay
-setTimeout(() => { showToast(); scheduleToast(); }, 5000);
+setTimeout(() => { showToast(); scheduleToast(); }, 3000);
 </script>
 
 </body>
