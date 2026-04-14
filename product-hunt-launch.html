@@ -31,6 +31,23 @@
         .vote-number { font-size: 2.5em; font-weight: bold; color: #667eea; }
         .vote-label { color: #666; font-size: 0.85em; margin-top: 4px; }
 
+        /* ── Recent Purchase Social Proof Popup ── */
+        .social-popup { position: fixed; bottom: 24px; right: 24px; z-index: 9999; transform: translateY(120%); transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1); pointer-events: none; }
+        .social-popup.visible { transform: translateY(0); pointer-events: auto; }
+        .social-popup-inner { background: #111; border: 1px solid #667eea; border-radius: 14px; padding: 14px 18px; max-width: 300px; box-shadow: 0 8px 40px rgba(102,126,234,0.2); position: relative; }
+        .social-popup-close { position: absolute; top: 8px; right: 10px; background: none; border: none; color: #555; font-size: 1.1em; cursor: pointer; line-height: 1; padding: 0; }
+        .social-popup-close:hover { color: #888; }
+        .sp-header { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+        .sp-dot { width: 8px; height: 8px; background: #00cc66; border-radius: 50%; animation: pulse-dot 2s infinite; flex-shrink: 0; }
+        .sp-label { color: #00cc66; font-size: 0.75em; font-weight: bold; text-transform: uppercase; letter-spacing: 0.5px; }
+        .sp-body { display: flex; align-items: center; gap: 10px; }
+        .sp-avatar { width: 36px; height: 36px; border-radius: 50%; background: linear-gradient(135deg, #667eea, #764ba2); display: flex; align-items: center; justify-content: center; font-size: 0.85em; font-weight: bold; flex-shrink: 0; }
+        .sp-text { flex: 1; }
+        .sp-name { color: #fff; font-size: 0.88em; font-weight: bold; }
+        .sp-action { color: #667eea; font-size: 0.8em; }
+        .sp-time { color: #555; font-size: 0.75em; margin-top: 2px; }
+        @keyframes pulse-dot { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
         /* Countdown timer */
         /* Products */
         .products { padding: 40px 0; }
@@ -269,6 +286,10 @@
                     <div style="font-size:2em; font-weight:bold; color:#ff6154;" id="flash-mins">00</div>
                     <div style="color:#666; font-size:0.75em;">Minutes</div>
                 </div>
+                <div style="background:#0a0a0a; border:1px solid #333; border-radius:12px; padding:16px 20px; text-align:center; min-width:100px;">
+                    <div style="font-size:2em; font-weight:bold; color:#ff6154;" id="flash-secs">00</div>
+                    <div style="color:#666; font-size:0.75em;">Seconds</div>
+                </div>
             </div>
             <div style="background:#0a0a0a; border:1px solid #00cc88; border-radius:10px; padding:14px 20px; margin-bottom:20px; display:inline-block;">
                 <span style="color:#00cc88; font-weight:bold;">🎁 Launch Week Bonus:</span>
@@ -292,17 +313,20 @@
                 document.getElementById('flash-days').textContent = '00';
                 document.getElementById('flash-hours').textContent = '00';
                 document.getElementById('flash-mins').textContent = '00';
+                document.getElementById('flash-secs').textContent = '00';
                 return;
             }
             const days = Math.floor(diff / (1000 * 60 * 60 * 24));
             const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
             const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const secs = Math.floor((diff % (1000 * 60)) / 1000);
             document.getElementById('flash-days').textContent = String(days).padStart(2, '0');
             document.getElementById('flash-hours').textContent = String(hours).padStart(2, '0');
             document.getElementById('flash-mins').textContent = String(mins).padStart(2, '0');
+            document.getElementById('flash-secs').textContent = String(secs).padStart(2, '0');
         }
         updateFlashCountdown();
-        setInterval(updateFlashCountdown, 30000);
+        setInterval(updateFlashCountdown, 1000);
         </script>
 
         <!-- Post-Launch Banner (Legacy) -->
@@ -975,6 +999,64 @@
                 console.log('Email captured:', input.value);
             }
         }
+
+        // Social proof popup - recent purchase notifications
+        (function() {
+            const purchases = [
+                { name: 'Marcus T.', initials: 'MT', loc: 'AI Prompts Buyer', prod: 'Full Bundle', time: '2 min ago' },
+                { name: 'Kevin L.', initials: 'KL', loc: 'Python Scripts Buyer', prod: 'Python Scripts', time: '5 min ago' },
+                { name: 'Rachel P.', initials: 'RP', loc: 'Zapier Templates Buyer', prod: 'Complete Bundle', time: '12 min ago' },
+                { name: 'David A.', initials: 'DA', loc: 'Developer, HK', prod: 'Python Scripts', time: '18 min ago' },
+                { name: 'Elena V.', initials: 'EV', loc: 'Amsterdam, NL', prod: 'Full Bundle', time: '25 min ago' },
+                { name: 'James L.', initials: 'JL', loc: 'Sydney, AU', prod: 'Zapier Templates', time: '32 min ago' },
+            ];
+            let idx = Math.floor(Math.random() * 3);
+            const popup = document.getElementById('social-popup');
+            if (!popup) return;
+            const closeBtn = popup.querySelector('.social-popup-close');
+            let dismissed = false;
+            function showPopup() {
+                if (dismissed) return;
+                const p = purchases[idx % purchases.length];
+                popup.querySelector('.sp-name').textContent = p.name + ' · ' + p.loc;
+                popup.querySelector('.sp-avatar').textContent = p.initials;
+                popup.querySelector('.sp-action').textContent = 'just bought ' + p.prod;
+                popup.querySelector('.sp-time').textContent = '🕐 ' + p.time;
+                popup.classList.add('visible');
+                idx++;
+            }
+            function hidePopup() {
+                popup.classList.remove('visible');
+            }
+            if (closeBtn) closeBtn.addEventListener('click', function() {
+                dismissed = true;
+                hidePopup();
+            });
+            // Show first popup after 12 seconds (give page time to load first)
+            setTimeout(showPopup, 12000);
+            // Then show every 35 seconds
+            setInterval(function() {
+                hidePopup();
+                setTimeout(showPopup, 8000);
+            }, 35000);
+        })();
     </script>
+    <div class="social-popup" id="social-popup">
+        <div class="social-popup-inner">
+            <button class="social-popup-close" onclick="document.getElementById('social-popup').classList.remove('visible')" aria-label="Close">&times;</button>
+            <div class="sp-header">
+                <div class="sp-dot"></div>
+                <span class="sp-label">Recent purchase</span>
+            </div>
+            <div class="sp-body">
+                <div class="sp-avatar">MR</div>
+                <div class="sp-text">
+                    <div class="sp-name">Marcus R. · Singapore</div>
+                    <div class="sp-action">just bought Full Bundle</div>
+                    <div class="sp-time">🕐 2 min ago</div>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
