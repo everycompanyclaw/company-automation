@@ -249,11 +249,64 @@
             <p class="hero-note">⚡ Standard pricing active — one-time payment, lifetime access, free updates forever.</p>
         </div>
 
-        <!-- Post-Launch Banner -->
-        <div class="post-launch-banner">
-            <div class="banner-icon">🎉</div>
-            <p><strong>Launch Complete!</strong> Thank you to everyone who supported EveryCompanyClaw during launch week. Products are now available at regular pricing - still the best automation value you'll find.</p>
+        <!-- Launch Week Flash Sale Banner -->
+        <div style="background: linear-gradient(135deg, #1a0a2e 0%, #2d1b4e 100%); border: 2px solid #ff6154; border-radius: 16px; padding: 28px 24px; text-align:center; margin: 24px 0; position:relative; overflow:hidden;">
+            <div style="position:absolute; top:-20px; right:-20px; width:100px; height:100px; background:radial-gradient(circle, rgba(255,97,84,0.15) 0%, transparent 70%); border-radius:50%;"></div>
+            <div style="position:absolute; bottom:-30px; left:-30px; width:150px; height:150px; background:radial-gradient(circle, rgba(102,126,234,0.1) 0%, transparent 70%); border-radius:50%;"></div>
+            <div style="display:inline-block; background:#ff6154; color:#fff; padding:4px 14px; border-radius:20px; font-size:0.78em; font-weight:bold; margin-bottom:14px;">🔥 LAUNCH WEEK FLASH SALE</div>
+            <h3 style="font-size:1.6em; margin-bottom:8px;">Founding Member Pricing — Last Chance</h3>
+            <p style="color:#ccc; font-size:1em; margin-bottom:16px; max-width:520px; margin-left:auto; margin-right:auto;">Order during launch week and lock in founding prices forever — plus get an exclusive bonus bundle.</p>
+            <div style="display:flex; justify-content:center; gap:20px; flex-wrap:wrap; margin-bottom:20px;">
+                <div style="background:#0a0a0a; border:1px solid #333; border-radius:12px; padding:16px 20px; text-align:center; min-width:140px;">
+                    <div style="font-size:2em; font-weight:bold; color:#ff6154;" id="flash-days">04</div>
+                    <div style="color:#666; font-size:0.75em;">Days</div>
+                </div>
+                <div style="background:#0a0a0a; border:1px solid #333; border-radius:12px; padding:16px 20px; text-align:center; min-width:140px;">
+                    <div style="font-size:2em; font-weight:bold; color:#ff6154;" id="flash-hours">18</div>
+                    <div style="color:#666; font-size:0.75em;">Hours</div>
+                </div>
+                <div style="background:#0a0a0a; border:1px solid #333; border-radius:12px; padding:16px 20px; text-align:center; min-width:140px;">
+                    <div style="font-size:2em; font-weight:bold; color:#ff6154;" id="flash-mins">00</div>
+                    <div style="color:#666; font-size:0.75em;">Minutes</div>
+                </div>
+            </div>
+            <div style="background:#0a0a0a; border:1px solid #00cc88; border-radius:10px; padding:14px 20px; margin-bottom:20px; display:inline-block;">
+                <span style="color:#00cc88; font-weight:bold;">🎁 Launch Week Bonus:</span>
+                <span style="color:#ccc;"> Order the Complete Bundle ($99) and get <strong style="color:#667eea;">3 exclusive bonus AI prompts</strong> — cold email template, LinkedIn viral post formula, and objection handling master list. Yours to keep even if you request a refund.</span>
+            </div>
+            <div style="display:flex; justify-content:center; gap:12px; flex-wrap:wrap;">
+                <a href="https://buy.stripe.com/9B65kF1OZfagcSg7qc4AU09" class="cta" target="_blank" rel="noopener">🔥 Get Complete Bundle + Bonus — $99</a>
+                <a href="https://buy.stripe.com/8x2dRb51b9PW2dC25S4AU08" class="cta-secondary" target="_blank" rel="noopener">Python Scripts - $79</a>
+                <a href="https://buy.stripe.com/5kQ6oJ8dnaU08C09yk4AU07" class="cta-secondary" target="_blank" rel="noopener">Zapier Templates - $49</a>
+            </div>
+            <p style="color:#555; font-size:0.78em; margin-top:14px;">One-time payment · Lifetime access · 30-day money-back guarantee · Bonus delivered via email within 24hrs</p>
         </div>
+
+        <script>
+        // Launch week countdown: ends April 21, 2026 23:59 UTC
+        const launchEnd = new Date('2026-04-21T23:59:59Z').getTime();
+        function updateFlashCountdown() {
+            const now = Date.now();
+            const diff = launchEnd - now;
+            if (diff <= 0) {
+                document.getElementById('flash-days').textContent = '00';
+                document.getElementById('flash-hours').textContent = '00';
+                document.getElementById('flash-mins').textContent = '00';
+                return;
+            }
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            document.getElementById('flash-days').textContent = String(days).padStart(2, '0');
+            document.getElementById('flash-hours').textContent = String(hours).padStart(2, '0');
+            document.getElementById('flash-mins').textContent = String(mins).padStart(2, '0');
+        }
+        updateFlashCountdown();
+        setInterval(updateFlashCountdown, 30000);
+        </script>
+
+        <!-- Post-Launch Banner (Legacy) -->
+        <div class="post-launch-banner" style="display:none;"></div>
 
         <!-- Post-Launch Milestone Stats -->
         <div class="vote-counter" style="margin-top:8px;">
