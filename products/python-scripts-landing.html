@@ -179,7 +179,7 @@
     <!-- Post-Launch Banner -->
     <div style="background: linear-gradient(135deg, #0d1f0d 0%, #0a1a0a 100%); border-bottom: 1px solid #00cc88; padding: 12px 20px; text-align: center;">
         <p style="color: #a0d8b0; font-size: 0.88em;">
-            ✅ <strong style="color: #00cc88;">Product Hunt Launch Complete</strong> — 107+ upvotes, 124+ founders using our tools. Founding member pricing still active.
+            ✅ <strong style="color: #00cc88;">Product Hunt Launch Complete</strong> — 107+ upvotes, 124+ founders using our tools. All products available at standard pricing.
         </p>
     </div>
 
@@ -480,18 +480,13 @@
 
     <!-- Pricing -->
     <section class="pricing-section" id="buy">
-        <div class="section-eyebrow" style="margin-bottom: 8px;">Founding Member Pricing</div>
+        <div class="section-eyebrow" style="margin-bottom: 8px;">Standard Pricing</div>
         <h2 style="font-size: 2em; margin-bottom: 8px;">Get the Python Scripts Bundle</h2>
-        <p style="color: #666; margin-bottom: 32px;">Was <span style="text-decoration: line-through; color: #555;">$129</span> → <strong style="color: #667eea;">$79 one-time</strong> · Best price, guaranteed forever</p>
+        <p style="color: #666; margin-bottom: 32px;"><strong style="color: #667eea;">$79 one-time</strong> · One-time payment, lifetime access, free updates forever.</p>
 
         <div class="pricing-card">
-            <div class="pricing-badge">⚡ Founding Member Pricing — Best Price, Locked In</div>
-            <div class="pricing-amount">$79 <span class="was">$129</span></div>
+            <div class="pricing-amount">$79</div>
             <div class="pricing-note">One-time payment · Lifetime access · Free updates forever</div>
-            <div class="pricing-urgency" style="background: rgba(0,204,136,0.1); border-color: rgba(0,204,136,0.3); color: #7acc9a;">
-                ✅ Launch complete. Founding prices are still active — no deadline, but these prices won't last forever.<br>
-                <span id="founding-countdown" style="font-size: 0.85em; margin-top: 6px; display: block;"></span>
-            </div>
             <ul class="pricing-features">
                 <li><span class="check">✓</span> <strong>50+ production-ready Python scripts</strong></li>
                 <li><span class="check">✓</span> Full documentation + <code>config.py</code> templates</li>
@@ -530,8 +525,8 @@
                 <div class="faq-a">Yes. The commercial license lets you use these scripts in your own business and for client projects. Redistribution or resale of the bundle itself is not permitted.</div>
             </div>
             <div class="faq-item">
-                <div class="faq-q">Why is pricing still active post-launch?</div>
-                <div class="faq-a">Our Product Hunt launch ran April 8–10, 2026 and was a huge success (107+ upvotes, 124+ founders using our tools). We decided to keep founding member prices active for a while longer — but they will increase eventually. If you're serious about automation, now is still a good time to lock in the $79 price.</div>
+                <div class="faq-q">Is this pricing permanent?</div>
+                <div class="faq-a">Yes. This is our standard price — one-time $79, yours forever, with free updates. No countdown, no "spots." Our Product Hunt launch ran April 8–10, 2026 (107+ upvotes, 124+ founders using our tools), and we kept these prices as our permanent offer.</div>
             </div>
             <div class="faq-item">
                 <div class="faq-q">What if a script doesn't work for my use case?</div>
@@ -575,32 +570,13 @@
         }
         scheduleTicker();
 
-        // ── Post-launch countdown timer ────────────────────────────────────────
-        // Founding member pricing expires April 25, 2026 UTC
-        const countdownEnd = new Date('2026-04-25T00:00:00Z').getTime();
-        const countdownEl = document.getElementById('founding-countdown');
-        if (countdownEl) {
-            function updateCountdown() {
-                const now = Date.now();
-                const diff = countdownEnd - now;
-                if (diff <= 0) {
-                    countdownEl.innerHTML = 'Founding member pricing has ended — price increases soon.';
-                    return;
-                }
-                const d = Math.floor(diff / 86400000);
-                const h = Math.floor((diff % 86400000) / 3600000);
-                const m = Math.floor((diff % 3600000) / 60000);
-                const s = Math.floor((diff % 60000) / 1000);
-                countdownEl.innerHTML = `<strong style="color:#ff7a4f">${d}d ${h}h ${m}m ${s}s</strong> remaining at founding price`;
-            }
-            updateCountdown();
-            setInterval(updateCountdown, 1000);
-        }
+        // ── Honest pricing — no countdown, no artificial urgency ─────────────────
+        // Countdown removed April 14, 2026 — this is our standard price
 
         // Sticky CTA bar — shows when pricing section scrolls into view
         const stickyCta = document.createElement('div');
         stickyCta.className = 'sticky-cta';
-        stickyCta.innerHTML = '<span class="sticky-cta-text">🔥 Founding member price locked in — <strong>Python Scripts $79 (was $129)</strong></span><a href="https://buy.stripe.com/8x2dRb51b9PW2dC25S4AU08" class="btn-primary" target="_blank" rel="noopener">Buy Now →</a><button class="sticky-close" onclick="this.parentElement.classList.remove(\'visible\')">✕</button>';
+        stickyCta.innerHTML = '<span class="sticky-cta-text">💚 Python Scripts Bundle — <strong>$79 one-time, lifetime access</strong></span><a href="https://buy.stripe.com/8x2dRb51b9PW2dC25S4AU08" class="btn-primary" target="_blank" rel="noopener">Buy Now →</a><button class="sticky-close" onclick="this.parentElement.classList.remove(\'visible\')">✕</button>';
         document.body.appendChild(stickyCta);
 
         const pricingSection = document.getElementById('buy');
