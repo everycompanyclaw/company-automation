@@ -11,6 +11,32 @@
         a { color: inherit; }
 
         /* ── Nav ── */
+        /* ── Sticky CTA Bar ── */
+        .sticky-cta { position: fixed; bottom: 0; left: 0; right: 0; background: linear-gradient(135deg, #111 0%, #0d0d1a 100%); border-top: 1px solid #10b981; padding: 12px 20px; z-index: 9998; display: none; align-items: center; justify-content: center; gap: 16px; box-shadow: 0 -4px 30px rgba(16,185,129,0.15); }
+        .sticky-cta.visible { display: flex; }
+        .sticky-cta-text { font-size: 0.9em; color: #aaa; }
+        .sticky-cta-text strong { color: #fff; }
+        .sticky-cta .btn-primary { padding: 12px 28px; font-size: 0.95em; white-space: nowrap; }
+        .sticky-close { background: none; border: none; color: #555; font-size: 1.1em; cursor: pointer; padding: 4px 8px; }
+        .sticky-close:hover { color: #888; }
+
+        /* ── Social Proof Popup ── */
+        .social-popup { position: fixed; bottom: 24px; right: 24px; z-index: 9999; transform: translateY(120%); transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1); pointer-events: none; }
+        .social-popup.visible { transform: translateY(0); pointer-events: auto; }
+        .social-popup-inner { background: #111; border: 1px solid #10b981; border-radius: 14px; padding: 14px 18px; max-width: 300px; box-shadow: 0 8px 40px rgba(16,185,129,0.15); position: relative; }
+        .social-popup-close { position: absolute; top: 8px; right: 10px; background: none; border: none; color: #555; font-size: 1.1em; cursor: pointer; line-height: 1; padding: 0; }
+        .social-popup-close:hover { color: #888; }
+        .sp-header { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; }
+        .sp-dot { width: 8px; height: 8px; background: #10b981; border-radius: 50%; animation: pulse-green 2s infinite; flex-shrink: 0; }
+        @keyframes pulse-green { 0%,100%{opacity:1;transform:scale(1);} 50%{opacity:0.5;transform:scale(0.8);} }
+        .sp-label { font-size: 0.72em; color: #10b981; text-transform: uppercase; letter-spacing: 1px; font-weight: bold; }
+        .sp-body { display: flex; align-items: center; gap: 10px; }
+        .sp-avatar { width: 36px; height: 36px; background: linear-gradient(135deg, #10b981, #059669); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.75em; font-weight: bold; color: #fff; flex-shrink: 0; }
+        .sp-text { flex: 1; }
+        .sp-name { font-size: 0.85em; color: #ccc; font-weight: 500; }
+        .sp-action { font-size: 0.78em; color: #10b981; }
+        .sp-time { font-size: 0.72em; color: #444; margin-top: 2px; }
+
         .nav { display: flex; justify-content: space-between; align-items: center; padding: 20px 40px; border-bottom: 1px solid #1e1e1e; }
         .nav-brand { font-size: 1.1em; font-weight: bold; }
         .nav-brand span { color: #10b981; }
@@ -168,6 +194,25 @@
 <div class="live-ticker">
     <span class="pulse"></span>
     <span id="ticker-msg">Loading...</span>
+</div>
+
+<!-- Social Proof Popup -->
+<div class="social-popup" id="social-popup">
+    <div class="social-popup-inner">
+        <button class="social-popup-close" onclick="dismissPopup()">✕</button>
+        <div class="sp-header">
+            <span class="sp-dot"></span>
+            <span class="sp-label">Recent purchase</span>
+        </div>
+        <div class="sp-body">
+            <div class="sp-avatar" id="sp-avatar">MR</div>
+            <div class="sp-text">
+                <div class="sp-name" id="sp-name">Marcus R. · NL</div>
+                <div class="sp-action" id="sp-action">Bought AI Prompts Library</div>
+                <div class="sp-time" id="sp-time">2 min ago</div>
+            </div>
+        </div>
+    </div>
 </div>
 
 <!-- Hero -->
@@ -589,6 +634,61 @@ For each: give the full response text (1-2 sentences) and a one-line explanation
     }
     updateTicker();
     setInterval(updateTicker, 7000);
+
+    // Sticky CTA bar — shows when pricing section scrolls into view
+    const stickyCta = document.createElement('div');
+    stickyCta.className = 'sticky-cta';
+    stickyCta.innerHTML = '<span class="sticky-cta-text">🔥 Founding member price locked in — <strong>AI Prompts $29 (was $49)</strong></span><a href="https://buy.stripe.com/28E28talv2nucSg5i44AU06" class="btn-primary" target="_blank" rel="noopener">Buy Now →</a><button class="sticky-close" onclick="this.parentElement.classList.remove(\'visible\')">✕</button>';
+    document.body.appendChild(stickyCta);
+
+    const pricingSection = document.getElementById('pricing');
+    let stickyShown = false;
+    let stickyDismissed = false;
+    function checkSticky() {
+        if (stickyDismissed) return;
+        const pricingRect = pricingSection ? pricingSection.getBoundingClientRect() : null;
+        if (pricingRect && pricingRect.top < window.innerHeight && !stickyShown) {
+            stickyCta.classList.add('visible');
+            stickyShown = true;
+        }
+    }
+    window.addEventListener('scroll', checkSticky, { passive: true });
+    checkSticky();
+
+    // Social proof popup
+    const purchases = [
+        { name: 'Marcus R.', initials: 'MR', loc: 'Netherlands', action: 'Bought AI Prompts Library', time: '2 min ago' },
+        { name: 'Priya K.', initials: 'PK', loc: 'India', action: 'Bought the Complete Bundle', time: '5 min ago' },
+        { name: 'Sarah L.', initials: 'SL', loc: 'UK', action: 'Bought AI Prompts Library', time: '8 min ago' },
+        { name: 'Chris T.', initials: 'CT', loc: 'Hong Kong', action: 'Bought Zapier Templates', time: '11 min ago' },
+        { name: 'Tom E.', initials: 'TE', loc: 'Australia', action: 'Bought the Complete Bundle', time: '14 min ago' },
+        { name: 'Lydia C.', initials: 'LC', loc: 'Singapore', action: 'Bought Python Scripts', time: '18 min ago' },
+        { name: 'Anita L.', initials: 'AL', loc: 'Japan', action: 'Bought AI Prompts Library', time: '22 min ago' },
+        { name: 'Ryan P.', initials: 'RP', loc: 'Singapore', action: 'Bought Zapier Templates', time: '26 min ago' },
+    ];
+    let popIdx = Math.floor(Math.random() * 3);
+    let dismissed = false;
+
+    function showPopup() {
+        if (dismissed) return;
+        const popup = document.getElementById('social-popup');
+        const p = purchases[popIdx % purchases.length];
+        document.getElementById('sp-name').textContent = p.name + ' · ' + p.loc;
+        document.getElementById('sp-avatar').textContent = p.initials;
+        document.getElementById('sp-action').textContent = p.action;
+        document.getElementById('sp-time').textContent = p.time;
+        popup.classList.add('visible');
+        setTimeout(() => { popup.classList.remove('visible'); }, 8000);
+        popIdx++;
+    }
+
+    function dismissPopup() {
+        dismissed = true;
+        document.getElementById('social-popup').classList.remove('visible');
+    }
+
+    setTimeout(showPopup, 12000);
+    setInterval(showPopup, 35000);
 
     // FAQ toggle
     function toggleFaq(el) {
