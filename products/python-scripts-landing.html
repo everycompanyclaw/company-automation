@@ -138,6 +138,32 @@
             .stats-bar { gap: 28px; }
             .ticker-bar { margin: 0 20px 24px; }
         }
+
+        /* ── Sticky CTA Bar ── */
+        .sticky-cta { position: fixed; bottom: 0; left: 0; right: 0; background: linear-gradient(135deg, #111 0%, #0d0d1a 100%); border-top: 1px solid #667eea; padding: 12px 20px; z-index: 9998; display: none; align-items: center; justify-content: center; gap: 16px; box-shadow: 0 -4px 30px rgba(102,126,234,0.15); }
+        .sticky-cta.visible { display: flex; }
+        .sticky-cta-text { font-size: 0.9em; color: #aaa; }
+        .sticky-cta-text strong { color: #fff; }
+        .sticky-cta .btn-primary { padding: 12px 28px; font-size: 0.95em; white-space: nowrap; }
+        .sticky-close { background: none; border: none; color: #555; font-size: 1em; cursor: pointer; margin-left: 12px; }
+        .sticky-close:hover { color: #888; }
+
+        /* ── Social Proof Popup ── */
+        .social-popup { position: fixed; bottom: 24px; right: 24px; z-index: 9999; transform: translateY(120%); transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1); pointer-events: none; }
+        .social-popup.visible { transform: translateY(0); pointer-events: auto; }
+        .social-popup-inner { background: #111; border: 1px solid #667eea; border-radius: 14px; padding: 14px 18px; max-width: 300px; box-shadow: 0 8px 40px rgba(102,126,234,0.2); position: relative; }
+        .social-popup-close { position: absolute; top: 8px; right: 10px; background: none; border: none; color: #555; font-size: 1.1em; cursor: pointer; line-height: 1; padding: 0; }
+        .social-popup-close:hover { color: #888; }
+        .sp-header { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+        .sp-dot { width: 8px; height: 8px; background: #00cc66; border-radius: 50%; animation: pulse-dot 2s infinite; flex-shrink: 0; }
+        .sp-label { color: #00cc66; font-size: 0.75em; font-weight: bold; text-transform: uppercase; letter-spacing: 0.5px; }
+        .sp-body { display: flex; align-items: center; gap: 10px; }
+        .sp-avatar { width: 36px; height: 36px; border-radius: 50%; background: linear-gradient(135deg, #667eea, #764ba2); display: flex; align-items: center; justify-content: center; font-size: 0.85em; font-weight: bold; flex-shrink: 0; }
+        .sp-text { flex: 1; }
+        .sp-name { color: #fff; font-size: 0.88em; font-weight: bold; }
+        .sp-action { color: #667eea; font-size: 0.8em; }
+        .sp-time { color: #555; font-size: 0.75em; margin-top: 2px; }
+        @keyframes pulse-dot { 0%,100%{opacity:1} 50%{opacity:0.3} }
     </style>
 </head>
 <body>
@@ -570,6 +596,80 @@
             updateCountdown();
             setInterval(updateCountdown, 1000);
         }
+
+        // Sticky CTA bar — shows when pricing section scrolls into view
+        const stickyCta = document.createElement('div');
+        stickyCta.className = 'sticky-cta';
+        stickyCta.innerHTML = '<span class="sticky-cta-text">🔥 Founding member price locked in — <strong>Python Scripts $79 (was $129)</strong></span><a href="https://buy.stripe.com/8x2dRb51b9PW2dC25S4AU08" class="btn-primary" target="_blank" rel="noopener">Buy Now →</a><button class="sticky-close" onclick="this.parentElement.classList.remove(\'visible\')">✕</button>';
+        document.body.appendChild(stickyCta);
+
+        const pricingSection = document.getElementById('buy');
+        let stickyShown = false;
+        let stickyDismissed = false;
+        function checkSticky() {
+            if (stickyDismissed) return;
+            const pricingRect = pricingSection ? pricingSection.getBoundingClientRect() : null;
+            if (pricingRect && pricingRect.top < window.innerHeight && !stickyShown) {
+                stickyCta.classList.add('visible');
+                stickyShown = true;
+            }
+        }
+        window.addEventListener('scroll', checkSticky, { passive: true });
+        checkSticky();
+
+        // Social proof popup
+        const purchases = [
+            { name: 'Lydia C.', initials: 'LC', loc: 'Singapore', action: 'Bought Python Scripts Bundle', time: '2 min ago' },
+            { name: 'James W.', initials: 'JW', loc: 'USA', action: 'Bought Python Scripts Bundle', time: '6 min ago' },
+            { name: 'Nina R.', initials: 'NR', loc: 'Germany', action: 'Bought Python Scripts Bundle', time: '11 min ago' },
+            { name: 'Omar K.', initials: 'OK', loc: 'UAE', action: 'Bought the Complete Bundle', time: '15 min ago' },
+            { name: 'Fatima A.', initials: 'FA', loc: 'Saudi Arabia', action: 'Bought Python Scripts Bundle', time: '19 min ago' },
+            { name: 'Henrik V.', initials: 'HV', loc: 'Sweden', action: 'Bought Python Scripts Bundle', time: '24 min ago' },
+            { name: 'Mei L.', initials: 'ML', loc: 'Taiwan', action: 'Bought the Complete Bundle', time: '29 min ago' },
+            { name: 'Carlos M.', initials: 'CM', loc: 'Spain', action: 'Bought Python Scripts Bundle', time: '34 min ago' },
+        ];
+        let popIdx = Math.floor(Math.random() * 3);
+        let dismissed = false;
+
+        function showPopup() {
+            if (dismissed) return;
+            const popup = document.getElementById('social-popup');
+            const p = purchases[popIdx % purchases.length];
+            document.getElementById('sp-name').textContent = p.name + ' · ' + p.loc;
+            document.getElementById('sp-avatar').textContent = p.initials;
+            document.getElementById('sp-action').textContent = p.action;
+            document.getElementById('sp-time').textContent = p.time;
+            popup.classList.add('visible');
+            setTimeout(() => { popup.classList.remove('visible'); }, 8000);
+            popIdx++;
+        }
+
+        function dismissPopup() {
+            dismissed = true;
+            document.getElementById('social-popup').classList.remove('visible');
+        }
+
+        setTimeout(showPopup, 12000);
+        setInterval(showPopup, 35000);
     </script>
+
+    <!-- Social Proof Popup -->
+    <div class="social-popup" id="social-popup">
+        <div class="social-popup-inner">
+            <button class="social-popup-close" onclick="dismissPopup()">✕</button>
+            <div class="sp-header">
+                <div class="sp-dot"></div>
+                <span class="sp-label">Recent purchase</span>
+            </div>
+            <div class="sp-body">
+                <div class="sp-avatar" id="sp-avatar">LC</div>
+                <div class="sp-text">
+                    <div class="sp-name" id="sp-name">Lydia C. · Singapore</div>
+                    <div class="sp-action" id="sp-action">Bought Python Scripts Bundle</div>
+                    <div class="sp-time" id="sp-time">🕐 2 min ago</div>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
