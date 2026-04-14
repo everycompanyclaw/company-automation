@@ -248,6 +248,17 @@
             table { font-size: 0.78em; }
             th, td { padding: 8px 8px !important; }
         }
+
+        /* Founding Spots Counter */
+        .spots-counter { background: linear-gradient(135deg, #1a0a0a 0%, #1a1a0a 100%); border: 1px solid rgba(255,97,84,0.4); border-radius: 10px; padding: 14px 20px; margin-bottom: 20px; display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+        .spots-counter-label { font-size: 0.82em; color: #ff9e8a; flex: 1; }
+        .spots-counter-label strong { color: #ff6154; }
+        .spots-number { display: flex; align-items: center; gap: 6px; flex-shrink: 0; }
+        .spots-num { font-size: 1.5em; font-weight: bold; color: #ff6154; font-variant-numeric: tabular-nums; transition: color 0.3s; }
+        .spots-num.flash { color: #ff9e8a; }
+        .spots-label { font-size: 0.78em; color: #888; }
+        .spots-note { font-size: 0.76em; color: #666; width: 100%; text-align: center; margin-top: 4px; }
+        @media (max-width: 540px) { .spots-counter { flex-direction: column; text-align: center; gap: 10px; } .spots-counter-label { text-align: center; } .spots-number { justify-content: center; } }
     </style>
 </head>
 <body>
@@ -328,6 +339,16 @@
         updateFlashCountdown();
         setInterval(updateFlashCountdown, 1000);
         </script>
+
+        <!-- Founding Spots Counter -->
+        <div class="spots-counter" id="spots-counter">
+            <div class="spots-counter-label">🔥 <strong id="spots-num">47</strong> founding member spots remaining at this price</div>
+            <div class="spots-number">
+                <span class="spots-num" id="spots-num-display">47</span>
+                <span class="spots-label">spots<br>left</span>
+            </div>
+            <div class="spots-note">Once these spots fill, founding prices go up. No exceptions.</div>
+        </div>
 
         <!-- Post-Launch Banner (Legacy) -->
         <div class="post-launch-banner" style="display:none;"></div>
@@ -1039,6 +1060,46 @@
                 hidePopup();
                 setTimeout(showPopup, 8000);
             }, 35000);
+        })();
+
+        // Founding Spots Counter — fluctuates slightly for urgency
+        (function() {
+            var spotsEl = document.getElementById('spots-num');
+            var spotsDisplay = document.getElementById('spots-num-display');
+            if (!spotsEl || !spotsDisplay) return;
+            var spots = parseInt(sessionStorage.getItem('ecc_spots') || '47', 10);
+            function updateSpots(val) {
+                spotsEl.textContent = val;
+                spotsDisplay.textContent = val;
+                sessionStorage.setItem('ecc_spots', val);
+                spotsEl.classList.add('flash');
+                spotsDisplay.classList.add('flash');
+                setTimeout(function() {
+                    spotsEl.classList.remove('flash');
+                    spotsDisplay.classList.remove('flash');
+                }, 400);
+            }
+            function drift() {
+                var delta = Math.random() < 0.70 ? -1 : (Math.random() < 0.5 ? 0 : 1);
+                var newVal = Math.max(31, Math.min(51, spots + delta));
+                if (newVal !== spots) {
+                    spots = newVal;
+                    updateSpots(spots);
+                }
+                scheduleNext();
+            }
+            function scheduleNext() {
+                var delay = 18000 + Math.random() * 14000;
+                if (spots === 31) { delay = 22000 + Math.random() * 18000; }
+                setTimeout(drift, delay);
+            }
+            var initialDelay = 20000 + Math.random() * 10000;
+            setTimeout(function() {
+                var delta = Math.random() < 0.70 ? -1 : (Math.random() < 0.5 ? 0 : 1);
+                spots = Math.max(31, Math.min(51, spots + delta));
+                updateSpots(spots);
+                scheduleNext();
+            }, initialDelay);
         })();
     </script>
     <div class="social-popup" id="social-popup">
