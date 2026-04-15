@@ -1,17 +1,19 @@
 # EveryCompanyClaw — Email Outreach Templates (Post-Launch)
-*Updated: April 14, 2026 — Added Templates F/G/H for new HK leads + UTM tracking added to all links*
+*Updated: April 15, 2026 — Removed stale 'founding member pricing' language across all templates; updated context with honest pricing messaging*
 
 ---
 
 ## Context
 
-Product Hunt launch completed successfully:
+Product Hunt launch completed April 10, 2026:
 - 107 upvotes on Product Hunt
 - 3 products launched: Python Scripts ($79), Zapier Templates ($49), AI Prompts ($29), Bundle ($99)
-- All at founding member pricing (launch prices still active)
+- **Honest standard pricing — one-time payment, lifetime access, no countdown, no 'founding member' tiers**
 - 30-day money-back guarantee
 
-**Outbound goal:** Convert warm researching/ready_to_contact leads who didn't buy during launch.
+**Key messaging shift:** No more "founding member pricing" or countdown urgency. Our prices are honest and permanent. The value proposition is: one-time purchase vs. Zapier's $49+/month subscription trap.
+
+**Outbound goal:** Convert warm researching/ready_to_contact leads who didn't buy during launch. Lead with honest value, not manufactured scarcity.
 
 ---
 
@@ -38,17 +40,17 @@ https://buy.stripe.com/9B65kF1OZfagcSg7qc4AU09?utm_source=email&utm_medium=outre
 *For: Rachel Ng, Daniel Park, Mei Lin, Priya Nair (LaunchList), Kevin Zhang, Sasha Ivanova*
 *Priority: High — all have emails ready*
 
-**Subject:** We just launched on Product Hunt — thought you'd find this relevant 👀
+**Subject:** EveryCompanyClaw — honest automation tools for founders 👀
 
 Hi [NAME],
 
-Quick one — EveryCompanyClaw just wrapped up our Product Hunt launch. We built an AI company that runs itself 24/7 using automation scripts, Zapier templates, and AI prompts.
+Quick one — EveryCompanyClaw just wrapped up our Product Hunt launch (107 upvotes 🎉). We built an AI company that runs itself 24/7 using automation scripts, Zapier templates, and AI prompts.
 
-We're still in early days but the founding member pricing is still active:
-- 🐍 Python Scripts Bundle: 50+ production-ready scripts ($79, was $129)
-- ⚡ Zapier Templates: 25+ no-code automation workflows ($49, was $79)
-- 💡 AI Prompts Library: 200+ curated prompts ($29, was $49)
-- 🔥 Complete Bundle: all 3 for $99 (was $257)
+Standard pricing, no countdown, no subscription — just honest one-time prices:
+- 🐍 Python Scripts Bundle: 50+ production-ready scripts ($79)
+- ⚡ Zapier Templates: 25+ no-code automation workflows ($49)
+- 💡 AI Prompts Library: 200+ curated prompts ($29)
+- 🔥 Complete Bundle: all 3 for $99 (save $58 vs. buying separately)
 
 [YOUR_NAME/Company] came up in my research as someone building with AI and automation — exactly who we built this for.
 
@@ -67,20 +69,19 @@ EveryCompanyClaw
 ## Template B — Zapier/CRM-Focused (for automation agency founders)
 *For: Leo Cheung (Nexthook), Nina Patel (GrowthLab HK), Curtis Li (RPX AI)*
 
-**Subject:** Post-launch check-in — automation templates at founding prices
+**Subject:** EveryCompanyClaw — automation tools for your agency stack
 
 Hi [NAME],
 
 Saw what you're building at [COMPANY] — the automation agency model is exactly where the market is heading.
 
-We just closed our Product Hunt launch (107 upvotes 🎉) with a full automation toolkit:
-- ⚡ **Zapier Templates Bundle** — 25+ production-ready workflows, no-code setup in minutes
-- 🐍 **Python Scripts** — API integrations, webhooks, data pipelines for devs
-- 💡 **AI Prompts** — copy-paste prompts for content, sales, and outreach
+We just closed our Product Hunt launch (107 upvotes 🎉) with a full automation toolkit — honest one-time pricing, no subscription:
+- ⚡ **Zapier Templates Bundle** — 25+ production-ready workflows, no-code setup in minutes ($49 one-time)
+- 🐍 **Python Scripts** — API integrations, webhooks, data pipelines for devs ($79 one-time)
+- 💡 **AI Prompts** — copy-paste prompts for content, sales, and outreach ($29 one-time)
+- 🔥 **Bundle** — all 3 for $99 (save $58)
 
-Founding member pricing is still active — one-time payment, lifetime access, all future updates included.
-
-If your clients are always asking you to build the same workflows (lead gen, CRM sync, email sequences) — these templates are exactly what I'd send them.
+If your clients are always asking you to build the same workflows (lead gen, CRM sync, email sequences) — these templates are exactly what I'd send them. And unlike Zapier's monthly fees, you pay once and they're yours forever.
 
 Still building? Happy to do a 15-min call to see if there's a fit.
 
@@ -105,7 +106,7 @@ Quick follow-up — since you bought the Python Scripts, I wanted to make sure y
 
 **Complete Bundle ($99)** — If you want both the templates + AI Prompts Library on top of your scripts, the bundle is $99 total. You'd be paying $20 extra for $78 worth of product — essentially a free upgrade.
 
-Both at founding member pricing. No subscription — pay once, keep forever.
+Both at honest standard pricing. No subscription — pay once, keep forever.
 
 Worth considering if you want to close the gap between your Python automations and the rest of your stack.
 
@@ -132,7 +133,7 @@ We're an AI company that runs itself 24/7 — automation scripts, Zapier templat
 
 Thought of you since you're building in the same AI/automation space in Hong Kong.
 
-Founding member pricing is still active for another few days. If any of this fits your stack:
+Here's where we're at — honest standard prices, no countdown:
 
 🐍 Python Scripts: https://buy.stripe.com/8x2dRb51b9PW2dC25S4AU08?utm_source=email&utm_medium=outreach&utm_campaign=post_launch_2026&utm_content=[LEAD_NAME_UNDERSCORE]
 ⚡ Zapier Templates: https://buy.stripe.com/5kQ6oJ8dnaU08C09yk4AU07?utm_source=email&utm_medium=outreach&utm_campaign=post_launch_2026&utm_content=[LEAD_NAME_UNDERSCORE]
@@ -150,20 +151,20 @@ EveryCompanyClaw | Hong Kong
 *For: Victor Lam (StackFlow AI), Jessica Wu (AutomatedHQ), Aditya Mehta (BuildFast AI), Leo Cheung (Nexthook), Nina Patel (GrowthLab HK)*
 *Note: These leads are still "researching" — warm, not ready to buy yet. Longer-term nurture.*
 
-**Subject:** EveryCompanyClaw — founding member pricing update
+**Subject:** EveryCompanyClaw — launch complete, honest pricing continues
 
 Hi [NAME],
 
-Following up from my earlier note — EveryCompanyClaw just completed its Product Hunt launch and the response was solid (107 upvotes, 3 products, founding member pricing still active).
+Following up from my earlier note — EveryCompanyClaw completed its Product Hunt launch (107 upvotes, 3 products). Launch week is over, but our pricing hasn't changed — this is our standard rate, no countdown.
 
 I mentioned we built this for builders like yourself — AI/automation tools without the subscription trap.
 
-Since you're still evaluating, I wanted to share where we're at:
+Where we're at:
 - Launch complete ✅
-- Founding prices still active for [X] more days
+- Honest standard pricing — one-time, no subscription, lifetime access
 - 30-day money-back guarantee on everything
 
-No pressure — just wanted to make sure you had the info while founding prices are still available.
+No pressure — just wanted to make sure you had the info when you're ready.
 
 Here's the bundle link: https://buy.stripe.com/9B65kF1OZfagcSg7qc4AU09?utm_source=email&utm_medium=outreach&utm_campaign=post_launch_2026&utm_content=[LEAD_NAME_UNDERSCORE]
 
@@ -251,7 +252,7 @@ We built EveryCompanyClaw as a "done-for-you" automation toolkit for founders an
 
 Your non-technical creators don't want to build automations — they want results. Our prompts library gives them ready-to-use AI prompts they can paste into ChatGPT or Claude. Our Zapier templates are truly no-code — even the most non-technical user can set them up in minutes.
 
-Founding member pricing — one-time payment, lifetime access.
+**Honest one-time pricing — pay once, own forever, all future updates included.**
 
 AI Prompts Library: https://buy.stripe.com/28E28talv2nucSg5i44AU06?utm_source=email&utm_medium=outreach&utm_campaign=post_launch_2026&utm_content=shrestha_raj
 
@@ -323,7 +324,7 @@ EveryCompanyClaw update — we just closed our Product Hunt launch with 107+ upv
 💡 AI Prompts Library — 200+ curated prompts ($29 one-time)
 🔥 Complete Bundle — all 3 for $99 (was $257)
 
-Founding member pricing is still active — one-time payment, lifetime access, all future updates free.
+**Honest one-time pricing — pay once, own forever, all future updates included.** No subscription.
 
 If you're automating your own agency ops, or if your clients ever ask you to build the same workflows twice, these could save you serious hours.
 
@@ -392,13 +393,13 @@ Worth a look if you have 5 min.
 - **Follow-up cadence:** Send first email → wait 3 days → send follow-up → wait 7 days → send final
 - **UTM tracking:** All outbound links now have UTM parameters — check Stripe analytics + campaign dashboard weekly
 
-## Post-Launch Angle — Key Selling Points
+## Post-Launch Angle — Key Selling Points (Honest)
 
 1. **Social proof:** 107 Product Hunt upvotes, PH launch success
-2. **Pricing:** Founding member prices still active (one-time, not subscription)
-3. **Urgency:** "Limited time — founding member pricing" (MK to decide expiry)
+2. **Pricing:** Honest standard prices — one-time, not subscription (Python Scripts $79, Zapier Templates $49, AI Prompts $29, Bundle $99)
+3. **No urgency needed:** Our pricing is always this good — no countdown, no 'founding' tiers. Just one-time purchases that save you vs. subscription alternatives.
 4. **Risk reversal:** 30-day money-back guarantee, no questions asked
-5. **Differentiation:** One-time payment vs. Zapier's $49/mo subscription trap
+5. **Differentiation:** One-time payment vs. Zapier's $49+/mo subscription trap — EveryCompanyClaw pays for itself in weeks, not months
 6. **Future-proofing:** All future updates included free — bundle grows with buyer
 
 ---
@@ -413,11 +414,11 @@ Hi [NAME],
 
 Quick one — EveryCompanyClaw just wrapped up our Product Hunt launch. We built an AI company that runs itself 24/7 using automation scripts, Zapier templates, and AI prompts.
 
-We're still in early days but the founding member pricing is still active:
-- 🐍 Python Scripts Bundle: 50+ production-ready scripts ($79, was $129)
-- ⚡ Zapier Templates: 25+ no-code automation workflows ($49, was $79)
-- 💡 AI Prompts Library: 200+ curated prompts ($29, was $49)
-- 🔥 Complete Bundle: all 3 for $99 (was $257)
+Standard pricing, no countdown, no subscription — just honest one-time prices:
+- 🐍 Python Scripts Bundle: 50+ production-ready scripts ($79)
+- ⚡ Zapier Templates: 25+ no-code automation workflows ($49)
+- 💡 AI Prompts Library: 200+ curated prompts ($29)
+- 🔥 Complete Bundle: all 3 for $99 (save $58 vs. buying separately)
 
 [YOUR_NAME/Company] came up in my research as someone building with AI and automation — exactly who we built this for.
 
@@ -436,20 +437,19 @@ EveryCompanyClaw
 ## Template B — Zapier/CRM-Focused (for automation agency founders)
 *For: Jordan Lee (ZapWorks — already contacted), potentially for Leo Cheung (Nexthook), Nina Patel (GrowthLab HK)*
 
-**Subject:** Post-launch check-in — automation templates at founding prices
+**Subject:** EveryCompanyClaw — automation tools for your agency stack
 
 Hi [NAME],
 
 Saw what you're building at [COMPANY] — the automation agency model is exactly where the market is heading.
 
-We just closed our Product Hunt launch (107 upvotes 🎉) with a full automation toolkit:
-- ⚡ **Zapier Templates Bundle** — 25+ production-ready workflows, no-code setup in minutes
-- 🐍 **Python Scripts** — API integrations, webhooks, data pipelines for devs
-- 💡 **AI Prompts** — copy-paste prompts for content, sales, and outreach
+We just closed our Product Hunt launch (107 upvotes 🎉) with a full automation toolkit — honest one-time pricing, no subscription:
+- ⚡ **Zapier Templates Bundle** — 25+ production-ready workflows, no-code setup in minutes ($49 one-time)
+- 🐍 **Python Scripts** — API integrations, webhooks, data pipelines for devs ($79 one-time)
+- 💡 **AI Prompts** — copy-paste prompts for content, sales, and outreach ($29 one-time)
+- 🔥 **Bundle** — all 3 for $99 (save $58)
 
-Founding member pricing is still active — one-time payment, lifetime access, all future updates included.
-
-If your clients are always asking you to build the same workflows (lead gen, CRM sync, email sequences) — these templates are exactly what I'd send them.
+If your clients are always asking you to build the same workflows (lead gen, CRM sync, email sequences) — these templates are exactly what I'd send them. And unlike Zapier's monthly fees, you pay once and they're yours forever.
 
 Still building? Happy to do a 15-min call to see if there's a fit.
 
@@ -474,7 +474,7 @@ Quick follow-up — since you bought the Python Scripts, I wanted to make sure y
 
 **Complete Bundle ($99)** — If you want both the templates + AI Prompts Library on top of your scripts, the bundle is $99 total. You'd be paying $20 extra for $78 worth of product — essentially a free upgrade.
 
-Both at founding member pricing. No subscription — pay once, keep forever.
+Both at honest standard pricing. No subscription — pay once, keep forever.
 
 Worth considering if you want to close the gap between your Python automations and the rest of your stack.
 
@@ -501,7 +501,7 @@ We're an AI company that runs itself 24/7 — automation scripts, Zapier templat
 
 Thought of you since you're building in the same AI/automation space in Hong Kong.
 
-Founding member pricing is still active for another few days. If any of this fits your stack:
+Here's where we're at — honest standard prices, no countdown:
 
 🐍 Python Scripts: https://buy.stripe.com/8x2dRb51b9PW2dC25S4AU08?utm_source=email&utm_medium=outreach&utm_campaign=post_launch_2026&utm_content=[LEAD_NAME_UNDERSCORE]
 ⚡ Zapier Templates: https://buy.stripe.com/5kQ6oJ8dnaU08C09yk4AU07?utm_source=email&utm_medium=outreach&utm_campaign=post_launch_2026&utm_content=[LEAD_NAME_UNDERSCORE]
@@ -519,20 +519,20 @@ EveryCompanyClaw | Hong Kong
 *For: Victor Lam (StackFlow AI), Jessica Wu (AutomatedHQ), Aditya Mehta (BuildFast AI), Leo Cheung (Nexthook), Nina Patel (GrowthLab HK)*
 *Note: These leads are still "researching" — warm, not ready to buy yet. Longer-term nurture.*
 
-**Subject:** EveryCompanyClaw — founding member pricing update
+**Subject:** EveryCompanyClaw — launch complete, honest pricing continues
 
 Hi [NAME],
 
-Following up from my earlier note — EveryCompanyClaw just completed its Product Hunt launch and the response was solid (107 upvotes, 3 products, founding member pricing still active).
+Following up from my earlier note — EveryCompanyClaw completed its Product Hunt launch (107 upvotes, 3 products). Launch week is over, but our pricing hasn't changed — this is our standard rate, no countdown.
 
 I mentioned we built this for builders like yourself — AI/automation tools without the subscription trap.
 
-Since you're still evaluating, I wanted to share where we're at:
+Where we're at:
 - Launch complete ✅
-- Founding prices still active for [X] more days
+- Honest standard pricing — one-time, no subscription, lifetime access
 - 30-day money-back guarantee on everything
 
-No pressure — just wanted to make sure you had the info while founding prices are still available.
+No pressure — just wanted to make sure you had the info when you're ready.
 
 Here's the bundle link: https://buy.stripe.com/9B65kF1OZfagcSg7qc4AU09?utm_source=email&utm_medium=outreach&utm_campaign=post_launch_2026&utm_content=[LEAD_NAME_UNDERSCORE]
 
@@ -575,7 +575,7 @@ EveryCompanyClaw update — we just closed our Product Hunt launch with 107+ upv
 💡 AI Prompts Library — 200+ curated prompts ($29 one-time)
 🔥 Complete Bundle — all 3 for $99 (was $257)
 
-Founding member pricing is still active — one-time payment, lifetime access, all future updates free.
+**Honest one-time pricing — pay once, own forever, all future updates included.** No subscription.
 
 If you're automating your own agency ops, or if your clients ever ask you to build the same workflows twice, these could save you serious hours.
 
@@ -608,3 +608,52 @@ Worth a look if you have 5 min.
 2. Sales Agent → Send LinkedIn connection request to Gavin Fung
 3. After 5 days → Send follow-up DM to both with Template L1 DM copy
 4. After 7 days of no response → Try RocketReach/email lookup for direct email
+
+---
+
+## Template I — Subscription-Fatigued Solo SaaS Founder (for Lena Xu, AutoKit App)
+*For: Lena Xu (AutoKit App) — lena@autokitapp.com*
+*Priority: HIGH — highest-value prospect in current pipeline*
+*Pain point: $198/mo on Zapier ($149) + Make.com ($49), burning margins on $29/mo micro-SaaS*
+*Hook: Replace 2 subscriptions with 1 one-time purchase. Pays for itself in 2 weeks.*
+
+**Subject:** $198/mo → $99 one-time. Your automation stack, reorganized.
+
+Hi Lena,
+
+I saw you're building AutoKit App — solo founder shipping email automation tools. Not easy.
+
+I also noticed you're currently paying **$198/month** on automation: Zapier ($149/mo) + Make.com ($49/mo).
+
+On a $29/mo micro-SaaS, that's... 6.8x your revenue going to tools that eat your margins.
+
+I built EveryCompanyClaw for exactly this situation — founders who want automation power without the subscription trap.
+
+**What I'd recommend for your stack:**
+
+1. **Python Scripts Bundle ($79 one-time)** — Self-hosted scripts to replace your Zapier workflows. Same API integrations, webhook triggers, data pipelines — runs on your own server/VPS for free. One-time cost, forever.
+
+2. **Zapier Templates ($49 one-time)** — Since your existing Make/Zapier workflows are already mapped, I can help you migrate your top 3 workflows to our templates in a 20-min call. I know that's not nothing — but after that call, you cancel Zapier ($149/mo saved).
+
+3. **Complete Bundle ($99 one-time)** — Everything above + AI Prompts Library for customer email sequences. One-time $99 instead of $198/mo.
+
+**Do the math:**
+- Current: $198/mo = $2,376/year
+- After migration: $99 one-time, then $0/mo forever
+- Break-even: ~2 weeks
+
+I can offer you a **free migration call** — I'll personally help you move your top 3 Zapier/Make workflows to our templates. No charge, no obligation to buy. If after 20 minutes you don't see the value, I'll thank you for your time.
+
+But I suspect you'll see it.
+
+Here's the bundle link (honest standard pricing — no countdown, this is our always price):
+https://buy.stripe.com/9B65kF1OZfagcSg7qc4AU09?utm_source=email&utm_medium=outreach&utm_campaign=post_launch_2026&utm_content=lena_xu
+
+Or just reply and let's schedule that call. I'm flexible.
+
+Best,
+[YOUR_NAME]
+EveryCompanyClaw | Hong Kong
+
+---
+*Lead note: Lena is warm, contacted previously (Template B sent April 13). This is a high-trust, high-urgency follow-up — subscription fatigue is real, she's paying $198/mo on razor-thin micro-SaaS margins. One-time bundle at $99 vs $198/mo recurring is a no-brainer if we help her see the migration path clearly.*
