@@ -12,15 +12,6 @@
         .top-bar { background: #635bff; color: #fff; text-align: center; padding: 8px 16px; font-size: 0.85em; }
         .top-bar a { color: #fff; font-weight: bold; }
 
-        /* Countdown bar */
-        .countdown-bar { background: #1a1a2e; border-bottom: 1px solid #2a2a4a; padding: 12px 20px; text-align: center; }
-        .countdown-bar .label { color: #888; font-size: 0.85em; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 1px; }
-        .countdown { display: flex; justify-content: center; gap: 20px; }
-        .countdown-unit { display: inline-block; }
-        .countdown-num { color: #635bff; font-size: 1.5em; font-weight: bold; }
-        .countdown-unit-label { color: #555; font-size: 0.7em; text-transform: uppercase; margin-left: 4px; }
-        .countdown-sep { color: #333; font-size: 1.5em; align-self: center; }
-
         .container { max-width: 900px; margin: 0 auto; padding: 40px 20px; }
 
         header { text-align: center; margin-bottom: 40px; }
@@ -60,10 +51,32 @@
         .product-highlights li { color: #888; font-size: 0.85em; margin: 5px 0; list-style: none; padding-left: 16px; position: relative; }
         .product-highlights li::before { content: '✓'; position: absolute; left: 0; color: #00cc88; font-size: 0.85em; }
 
-        .buy-btn { display: block; background: #635bff; color: #fff; padding: 14px 20px; border-radius: 10px; text-decoration: none; font-weight: bold; font-size: 1em; transition: background 0.2s, box-shadow 0.2s, transform 0.2s; }
+        .buy-btn { display: block; background: #635bff; color: #fff; padding: 14px 20px; border-radius: 10px; text-decoration: none; font-weight: bold; font-size: 1em; transition: background 0.2s, box-shadow 0.2s, transform 0.2s; position: relative; }
         .buy-btn:hover { background: #5248d4; box-shadow: 0 4px 20px rgba(99, 91, 255, 0.35); transform: scale(1.02); }
         .buy-btn.secondary { background: #1a1a1a; border: 1px solid #333; color: #888; margin-top: 8px; font-size: 0.88em; padding: 10px 20px; }
         .buy-btn.secondary:hover { background: #222; color: #aaa; box-shadow: none; transform: none; }
+
+        /* Trust badge under buy button */
+        .btn-trust { display: flex; align-items: center; justify-content: center; gap: 5px; margin-top: 8px; color: #555; font-size: 0.72em; }
+        .btn-trust-icon { font-size: 0.9em; }
+
+        /* Coupon section */
+        .coupon-section { background: #0e0e0e; border: 1px solid #1e1e1e; border-radius: 12px; padding: 20px 24px; margin-bottom: 28px; text-align: center; }
+        .coupon-label { color: #888; font-size: 0.85em; margin-bottom: 10px; }
+        .coupon-label span { color: #635bff; font-weight: bold; }
+        .coupon-form { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
+        .coupon-input { background: #1a1a1a; border: 1px solid #333; border-radius: 8px; padding: 10px 14px; color: #fff; font-size: 0.95em; width: 180px; outline: none; transition: border-color 0.2s; font-family: inherit; }
+        .coupon-input:focus { border-color: #635bff; }
+        .coupon-input::placeholder { color: #555; }
+        .coupon-input.applied { border-color: #00cc88; color: #00cc88; }
+        .coupon-input.rejected { border-color: #ff4444; }
+        .coupon-btn { background: #222; border: 1px solid #444; color: #aaa; padding: 10px 20px; border-radius: 8px; font-size: 0.9em; cursor: pointer; font-family: inherit; font-weight: 600; transition: background 0.2s; }
+        .coupon-btn:hover { background: #333; color: #fff; }
+        .coupon-result { margin-top: 8px; font-size: 0.82em; font-weight: 600; }
+        .coupon-result.success { color: #00cc88; }
+        .coupon-result.error { color: #ff5555; }
+
+        .coupon-note { color: #444; font-size: 0.75em; margin-top: 8px; }
 
         /* Checkout stepper */
         .checkout-steps { display: flex; justify-content: center; gap: 0; margin: 30px 0 36px; }
@@ -270,7 +283,7 @@
 
 <!-- Top announcement bar -->
 <div class="top-bar">
-    💚 Founding Member Pricing Still Active · All products at launch prices · <a href="#products">Shop Now →</a>
+    ⚡ All Products Available · One-time payments · Lifetime access · <a href="#products">Shop Now →</a>
 </div>
 
 <div class="container">
@@ -280,11 +293,22 @@
         <p class="subtitle">Ready-to-run scripts, templates & prompts for professionals who value their time</p>
     </header>
 
-    <!-- Founding member pricing banner -->
+    <!-- Pricing banner -->
     <div class="launch-banner">
-        <div class="fire">💚 Founding Member Pricing — Up to 41% Off</div>
+        <div class="fire">⚡ Launch Special: All Products Available Now</div>
         <p>Everything you need to automate your business. No coding required.</p>
-        <p class="promo">One-time payment · Lifetime access · <strong>Prices held — this is the best deal you'll get</strong></p>
+        <p class="promo">One-time payment · Lifetime access · <span style="color:#00cc88">Free updates forever</span></p>
+    </div>
+
+    <!-- Coupon code section -->
+    <div class="coupon-section" id="couponSection">
+        <div class="coupon-label">Have a <span>discount code</span>? Apply it at checkout</div>
+        <form class="coupon-form" id="couponForm" onsubmit="return false;">
+            <input type="text" class="coupon-input" id="couponInput" placeholder="Enter code" autocomplete="off" spellcheck="false">
+            <button type="button" class="coupon-btn" onclick="applyCoupon()">Apply</button>
+        </form>
+        <div class="coupon-result" id="couponResult"></div>
+        <div class="coupon-note">Try: <strong style="color:#555">LAUNCH40</strong> or <strong style="color:#555">BUNDLE15</strong></div>
     </div>
 
     <!-- Trust badges -->
@@ -372,8 +396,8 @@
             <span class="badge top">⭐ Editor's Pick</span>
             <div class="product-name">Python Scripts Bundle</div>
             <div class="product-tagline">50+ battle-tested automation scripts</div>
-            <div class="product-price">$79<span class="was">$129</span></div>
-            <div class="price-note">One-time · Lifetime access · Free updates</div>
+            <div class="product-price">$79</div>
+            <div class="price-note">One-time · Lifetime access · Free updates forever</div>
             <ul class="product-highlights">
                 <li>Email automation & web scraping</li>
                 <li>Data processing pipelines</li>
@@ -384,6 +408,7 @@
             <a href="https://buy.stripe.com/8x2dRb51b9PW2dC25S4AU08" class="buy-btn" target="_blank" rel="noopener">
                 Get Python Scripts — $79
             </a>
+            <div class="btn-trust"><span class="btn-trust-icon">🔒</span> Secure checkout via Stripe</div>
         </div>
 
         <!-- Product 2: Zapier Templates -->
@@ -391,8 +416,8 @@
             <span class="badge new">⚡ Most Popular</span>
             <div class="product-name">Zapier Templates</div>
             <div class="product-tagline">25+ proven automation workflows</div>
-            <div class="product-price">$49<span class="was">$79</span></div>
-            <div class="price-note">One-time · Lifetime access · Free updates</div>
+            <div class="product-price">$49</div>
+            <div class="price-note">One-time · Lifetime access · Free updates forever</div>
             <ul class="product-highlights">
                 <li>CRM + Email automation</li>
                 <li>Social media scheduling</li>
@@ -403,6 +428,7 @@
             <a href="https://buy.stripe.com/5kQ6oJ8dnaU08C09yk4AU07" class="buy-btn" target="_blank" rel="noopener">
                 Get Zapier Templates — $49
             </a>
+            <div class="btn-trust"><span class="btn-trust-icon">🔒</span> Secure checkout via Stripe</div>
         </div>
 
         <!-- Product 3: AI Prompts Library -->
@@ -410,8 +436,8 @@
             <span class="badge new">✨ Best Value</span>
             <div class="product-name">AI Prompts Library</div>
             <div class="product-tagline">200+ curated prompts for AI tools</div>
-            <div class="product-price">$29<span class="was">$49</span></div>
-            <div class="price-note">One-time · Lifetime access · Free updates</div>
+            <div class="product-price">$29</div>
+            <div class="price-note">One-time · Lifetime access · Free updates forever</div>
             <ul class="product-highlights">
                 <li>ChatGPT, Claude & Gemini</li>
                 <li>Writing, coding & marketing</li>
@@ -422,6 +448,7 @@
             <a href="https://buy.stripe.com/28E28talv2nucSg5i44AU06" class="buy-btn" target="_blank" rel="noopener">
                 Get AI Prompts — $29
             </a>
+            <div class="btn-trust"><span class="btn-trust-icon">🔒</span> Secure checkout via Stripe</div>
         </div>
 
     </div>
@@ -432,8 +459,8 @@
             <div class="bundle-badge">🔥 BEST VALUE — SAVE $58</div>
             <h2 class="bundle-title">Complete Automation Bundle</h2>
             <p class="bundle-desc">All 3 products in one package — everything you need to automate your entire business</p>
-            <div class="bundle-price">$99<span class="was">$157</span></div>
-            <div class="bundle-save">You save $58 vs buying separately</div>
+            <div class="bundle-price">$99</div>
+            <div class="bundle-save">All 3 products included — Python Scripts + Zapier Templates + AI Prompts</div>
             <div class="bundle-items">
                 <div class="bundle-item"><span class="val">Python Scripts</span> $79 value</div>
                 <div class="bundle-item"><span class="val">Zapier Templates</span> $49 value</div>
@@ -442,7 +469,8 @@
             <a href="https://buy.stripe.com/9B65kF1OZfagcSg7qc4AU09" class="bundle-btn" target="_blank" rel="noopener">
                 Get the Bundle — $99
             </a>
-            <p class="bundle-note">💚 Founding member pricing — this is the best deal you'll get. No code needed.</p>
+            <div class="btn-trust" style="margin-top:10px;"><span class="btn-trust-icon">🔒</span> Secure checkout via Stripe</div>
+            <p class="bundle-note">💚 One-time payment, lifetime access. No code needed.</p>
         </div>
     </div>
 
@@ -497,7 +525,104 @@
 </div>
 
 <script>
-// Post-launch: no countdown needed — founding member pricing is active
+// Coupon validation
+const VALID_COUPONS = {
+    'LAUNCH40': { discount: 0.40, label: '40% off' },
+    'BUNDLE15': { discount: 0.15, label: '15% off' },
+    'EARLYBIRD': { discount: 0.25, label: '25% off' },
+};
+
+let appliedCoupon = null;
+
+function applyCoupon() {
+    const input = document.getElementById('couponInput');
+    const result = document.getElementById('couponResult');
+    const code = input.value.trim().toUpperCase();
+
+    if (!code) {
+        result.textContent = 'Please enter a discount code';
+        result.className = 'coupon-result error';
+        input.className = 'coupon-input rejected';
+        return;
+    }
+
+    if (VALID_COUPONS[code]) {
+        appliedCoupon = { code, ...VALID_COUPONS[code] };
+        input.className = 'coupon-input applied';
+        result.textContent = `✓ Code applied — you're getting ${appliedCoupon.label}!`;
+        result.className = 'coupon-result success';
+        updatePricesWithDiscount();
+    } else {
+        appliedCoupon = null;
+        input.className = 'coupon-input rejected';
+        result.textContent = '✗ Invalid code. Try LAUNCH40 or BUNDLE15.';
+        result.className = 'coupon-result error';
+        resetPrices();
+    }
+}
+
+function updatePricesWithDiscount() {
+    if (!appliedCoupon) return;
+    const prices = [
+        { el: document.querySelector('.product-card.top-pick .product-price'), original: 79 },
+        { el: document.querySelector('.product-card:nth-child(2) .product-price'), original: 49 },
+        { el: document.querySelector('.product-card:nth-child(3) .product-price'), original: 29 },
+        { el: document.querySelector('.bundle-price'), original: 99 },
+    ];
+    prices.forEach(({ el, original }) => {
+        if (!el) return;
+        const discounted = Math.round(original * (1 - appliedCoupon.discount));
+        const wasEl = el.querySelector('.was');
+        if (!wasEl) {
+            const was = document.createElement('span');
+            was.className = 'was';
+            was.textContent = `$${original}`;
+            el.appendChild(was);
+        }
+        el.childNodes[0].textContent = `$${discounted}`;
+    });
+    // Update button text
+    const btns = document.querySelectorAll('.buy-btn');
+    const originalPrices = [79, 49, 29];
+    btns.forEach((btn, i) => {
+        if (i < 3 && originalPrices[i]) {
+            const discounted = Math.round(originalPrices[i] * (1 - appliedCoupon.discount));
+            const productNames = ['Python Scripts', 'Zapier Templates', 'AI Prompts'];
+            btn.childNodes[0].textContent = `Get ${productNames[i]} — $${discounted}`;
+        }
+    });
+    const bundleBtn = document.querySelector('.bundle-btn');
+    if (bundleBtn) {
+        const discounted = Math.round(99 * (1 - appliedCoupon.discount));
+        bundleBtn.childNodes[0].textContent = `Get the Bundle — $${discounted}`;
+    }
+}
+
+function resetPrices() {
+    const priceEls = [
+        { el: document.querySelector('.product-card.top-pick .product-price'), original: '$79' },
+        { el: document.querySelector('.product-card:nth-child(2) .product-price'), original: '$49' },
+        { el: document.querySelector('.product-card:nth-child(3) .product-price'), original: '$29' },
+    ];
+    priceEls.forEach(({ el, original }) => {
+        if (!el) return;
+        const wasEl = el.querySelector('.was');
+        if (wasEl) wasEl.remove();
+        el.childNodes[0].textContent = original;
+    });
+    const btns = document.querySelectorAll('.buy-btn');
+    const productNames = ['Python Scripts', 'Zapier Templates', 'AI Prompts'];
+    const originalPrices = [79, 49, 29];
+    btns.forEach((btn, i) => {
+        if (i < 3) {
+            btn.childNodes[0].textContent = `Get ${productNames[i]} — $${originalPrices[i]}`;
+        }
+    });
+    const bundleBtn = document.querySelector('.bundle-btn');
+    if (bundleBtn) {
+        bundleBtn.childNodes[0].textContent = 'Get the Bundle — $99';
+    }
+}
 
 // Purchase toast notifications
 const purchases = [
