@@ -202,6 +202,25 @@
 
         /* Footer */
         /* Email capture */
+        /* Trust bar */
+        .trust-bar { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin: 24px 0; padding: 16px 20px; background: #0a0a0a; border: 1px solid #1a2a1a; border-radius: 10px; }
+        .trust-item { display: flex; align-items: center; gap: 7px; color: #888; font-size: 0.83em; }
+        .trust-icon { font-size: 1em; }
+
+        /* Why this exists */
+        .why-section { background: linear-gradient(135deg, #0a0a1a 0%, #0d1a0a 100%); border-radius: 16px; padding: 40px 36px; margin: 30px 0; border: 1px solid #00cc88; position: relative; overflow: hidden; }
+        .why-section::before { content: ''; position: absolute; top: -50%; left: -20%; width: 140%; height: 200%; background: radial-gradient(ellipse at center, rgba(0,204,102,0.04) 0%, transparent 60%); pointer-events: none; }
+        .why-section h2 { font-size: 1.5em; margin-bottom: 8px; text-align: center; }
+        .why-section .why-sub { text-align: center; color: #666; font-size: 0.88em; margin-bottom: 32px; }
+        .why-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+        .why-card { background: rgba(0,0,0,0.3); border: 1px solid #1a2a1a; border-radius: 12px; padding: 22px 20px; }
+        .why-card .yc-icon { font-size: 1.8em; margin-bottom: 10px; display: block; }
+        .why-card h4 { font-size: 1em; margin-bottom: 8px; color: #fff; }
+        .why-card p { color: #888; font-size: 0.85em; line-height: 1.55; }
+        .why-tagline { text-align: center; margin-top: 24px; background: rgba(0,204,102,0.07); border: 1px solid rgba(0,204,102,0.2); border-radius: 10px; padding: 16px 20px; }
+        .why-tagline p { color: #a0d8b0; font-size: 0.92em; line-height: 1.6; max-width: 600px; margin: 0 auto; }
+        .why-tagline strong { color: #00cc88; }
+
         .email-capture { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); border: 1px solid #667eea; border-radius: 16px; padding: 36px 28px; margin: 30px 0; text-align: center; }
         .email-capture-badge { display: inline-block; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: #fff; padding: 4px 12px; border-radius: 20px; font-size: 0.75em; font-weight: bold; margin-bottom: 14px; }
         .email-capture h2 { font-size: 1.4em; margin-bottom: 10px; }
@@ -226,6 +245,11 @@
             .cta, .cta-secondary { text-align: center; width: 100%; }
             table { font-size: 0.78em; }
             th, td { padding: 8px 8px !important; }
+            .why-grid { grid-template-columns: 1fr; }
+            .trust-bar { gap: 12px; }
+            .trust-item { font-size: 0.78em; }
+            .how-it-works { padding: 28px 20px; }
+            .hw-steps { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -282,11 +306,51 @@
             </div>
         </div>
 
+        <!-- Trust Bar -->
+        <div class="trust-bar">
+            <div class="trust-item"><span class="trust-icon">🔒</span> Secure Checkout via Stripe</div>
+            <div class="trust-item"><span class="trust-icon">📬</span> Instant Download</div>
+            <div class="trust-item"><span class="trust-icon">💚</span> No Subscription — One-Time Payment</div>
+            <div class="trust-item"><span class="trust-icon">🛡️</span> 30-Day Money-Back Guarantee</div>
+            <div class="trust-item"><span class="trust-icon">📄</span> Commercial License Included</div>
+        </div>
+
         <!-- Launch Recap -->
         <div style="background: linear-gradient(135deg, #0d1f0d 0%, #0a1a0a 100%); border: 1px solid #00cc88; border-radius: 12px; padding: 24px 28px; margin: 24px 0; text-align: center;">
             <div style="font-size: 1.1em; margin-bottom: 8px;">🎉</div>
             <p style="color: #00cc88; font-size: 1.15em; font-weight: bold; margin-bottom: 8px;">EveryCompanyClaw - Featured on Product Hunt, April 2026</p>
             <p style="color: #aaa; font-size: 0.95em;">Thank you to the PH community for the incredible support during launch week. All products remain available at our standard prices — one-time payment, lifetime access, all future updates free.</p>
+        </div>
+
+        <!-- Why EveryCompanyClaw Exists -->
+        <div class="why-section">
+            <h2>🤖 Why EveryCompanyClaw Exists</h2>
+            <p class="why-sub">The automation stack I wish existed when I started</p>
+            <div class="why-grid">
+                <div class="why-card">
+                    <span class="yc-icon">😤</span>
+                    <h4>Built from Frustration</h4>
+                    <p>I spent 6 months stitching together Zapier workflows, hunting down scripts, and writing prompts from scratch. Every tool was a subscription. Every integration was a new bill. I knew there had to be a better way.</p>
+                </div>
+                <div class="why-card">
+                    <span class="yc-icon">🤖</span>
+                    <h4>Run by AI Agents</h4>
+                    <p>EveryCompanyClaw isn't just a product — it's a company run by AI agents 24/7. Marketing, sales, operations, all automated. The products I sell are the exact tools I use to run this company.</p>
+                </div>
+                <div class="why-card">
+                    <span class="yc-icon">💡</span>
+                    <h4>Production-Ready, Not Tutorials</h4>
+                    <p>No fluff, no "hello world" examples. Every script works. Every template is battle-tested. Every prompt is one I've actually used. If it doesn't save time, it doesn't ship.</p>
+                </div>
+                <div class="why-card">
+                    <span class="yc-icon">🔒</span>
+                    <h4>One Price, Forever</h4>
+                    <p>No subscriptions. No task limits. Pay once, own it forever. I've been burned by too many automation tools that jack up prices once you're dependent on them. This company won't do that.</p>
+                </div>
+            </div>
+            <div class="why-tagline">
+                <p>"The best automation tool is the one you actually <strong>own</strong>. EveryCompanyClaw is built to be your last automation purchase — not your next monthly subscription."</p>
+            </div>
         </div>
 
         <div class="products">
