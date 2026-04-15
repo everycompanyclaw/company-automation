@@ -187,7 +187,7 @@
     <!-- Post-Launch Banner -->
     <div style="background: linear-gradient(135deg, #0d1f0d 0%, #0a1a0a 100%); border-bottom: 1px solid #00cc88; padding: 12px 20px; text-align: center;">
         <p style="color: #a0d8b0; font-size: 0.88em;">
-            ✅ <strong style="color: #00cc88;">Product Hunt Launch Complete</strong> — 107+ upvotes, 124+ founders using our tools. Founding member pricing still active.
+            ✅ <strong style="color: #00cc88;">Product Hunt Launch Complete</strong> — 107+ upvotes, 124+ founders. <strong>Honest standard pricing</strong> — one-time $29, no countdown, no subscription.
         </p>
     </div>
 
@@ -217,7 +217,7 @@
 
 <!-- Hero -->
 <section class="hero">
-    <div class="hero-eyebrow">🎯 Founding Member Pricing — Still Active</div>
+    <div class="hero-eyebrow">🎯 Honest Standard Pricing — One-Time $29</div>
     <h1>Stop Writing the Same Prompt 50 Times</h1>
     <p class="hero-sub">200+ battle-tested AI prompts for ChatGPT, Claude & Gemini — cold emails, LinkedIn posts, sales copy, blog content, decision frameworks. Copy. Paste. Done in 2 minutes.</p>
     <div class="hero-cta-row">
@@ -546,7 +546,7 @@ For each: give the full response text (1-2 sentences) and a one-line explanation
 <!-- Pricing -->
 <section class="pricing-section" id="pricing">
     <div class="pricing-card">
-        <div class="pricing-badge">⚡ Founding Member Pricing — Best Price Locked In</div>
+        <div class="pricing-badge">⚡ Honest Standard Pricing — One-Time $29</div>
         <div class="pricing-amount">$29 <span class="was">$49</span></div>
         <p class="pricing-note">One-time payment · Lifetime access · Free updates forever</p>
         <ul class="pricing-features">
@@ -557,8 +557,8 @@ For each: give the full response text (1-2 sentences) and a one-line explanation
             <li><span class="check">✓</span> Commercial license (use for clients)</li>
             <li><span class="check">✓</span> Instant digital delivery</li>
         </ul>
-        <div class="pricing-urgency">
-            ✅ Founding member pricing is still active — this is the best price you'll get on the AI Prompts Library, guaranteed.
+        <div class="pricing-urgency" style="background: rgba(0,204,136,0.08); border-color: rgba(0,204,136,0.25); color: #a0d8b0;">
+            ✅ Honest pricing always — one-time $29, no countdown, no subscription. This is our standard price.
         </div>
         <a href="https://buy.stripe.com/28E28talv2nucSg5i44AU06" target="_blank" rel="noopener" class="btn-primary">Buy AI Prompts — $29</a>
     </div>
@@ -580,8 +580,8 @@ For each: give the full response text (1-2 sentences) and a one-line explanation
     <h2 class="section-title" style="margin-bottom:32px;">Common Questions</h2>
 
         <div class="faq-item">
-        <div class="faq-q" onclick="toggleFaq(this)">Why is founding pricing still active?<span class="icon">+</span></div>
-        <div class="faq-a">Our Product Hunt launch ran April 8–10, 2026 and was a success — 107+ upvotes, 124+ founders using our tools. We kept founding member pricing active as a thank-you to early supporters. These prices won't last forever, but they're available now while stock lasts.</div>
+        <div class="faq-q" onclick="toggleFaq(this)">Is this pricing permanent?<span class="icon">+</span></div>
+        <div class="faq-a">Yes — this is our standard, permanent pricing. Our Product Hunt launch (April 8–10, 2026: 107+ upvotes, 124+ founders) proved these prices work. One-time $29, lifetime access, free updates. No countdown, no "spots remaining."</div>
     </div>
     <div class="faq-item">
         <div class="faq-q" onclick="toggleFaq(this)">What AI models do these prompts work with?<span class="icon">+</span></div>
@@ -638,7 +638,7 @@ For each: give the full response text (1-2 sentences) and a one-line explanation
     // Sticky CTA bar — shows when pricing section scrolls into view
     const stickyCta = document.createElement('div');
     stickyCta.className = 'sticky-cta';
-    stickyCta.innerHTML = '<span class="sticky-cta-text">🔥 Founding member price locked in — <strong>AI Prompts $29 (was $49)</strong></span><a href="https://buy.stripe.com/28E28talv2nucSg5i44AU06" class="btn-primary" target="_blank" rel="noopener">Buy Now →</a><button class="sticky-close" onclick="this.parentElement.classList.remove(\'visible\')">✕</button>';
+    stickyCta.innerHTML = '<span class="sticky-cta-text">🔥 AI Prompts Library — <strong>$29 one-time</strong></span><a href="https://buy.stripe.com/28E28talv2nucSg5i44AU06" class="btn-primary" target="_blank" rel="noopener">Buy Now →</a><button class="sticky-close" onclick="this.parentElement.classList.remove(\'visible\')">✕</button>';
     document.body.appendChild(stickyCta);
 
     const pricingSection = document.getElementById('pricing');
