@@ -1186,3 +1186,217 @@ Workflow86 has no founder-friendly pricing. EveryCompanyClaw's $29–$99 one-tim
 **Research completed:** 2026-04-14 04:04 HKT (2026-04-13 20:04 UTC)
 **Competitor researched:** Workflow86
 **Key finding:** Workflow86 targets enterprise operations teams with complex, multi-stakeholder, long-running workflows. EveryCompanyClaw targets solo founders wanting quick automations. No direct competitive overlap. EveryCompanyClaw's speed and simplicity is the key differentiator. Consider Workflow86 as a potential "level up" referral for leads whose needs outgrow templates/scripts.
+---
+
+## 🏆 Seventh Competitor: Workato
+
+**Website:** https://www.workato.com
+**Type:** Enterprise iPaaS + AI Agent Orchestration Platform
+**Tagline:** "Enterprise MCP for Agentic AI" / "Built on the #1 iPaaS"
+**Founded:** 2013
+**Headquarters:** Mountain View, California, USA
+**Valuation:** $5.7B (Series E, $200M+ raised)
+**Threat Level:** LOW (different market segment entirely — enterprise-only)
+
+---
+
+## What Workato Does
+
+Workato is an enterprise-grade Integration Platform as a Service (iPaaS) that provides cloud-based automation, integration, and AI orchestration across applications, data, and systems. Unlike Zapier/Make which target SMBs and individuals, Workato exclusively targets large enterprises and Fortune 500 companies. Their platform centers on "recipes" (pre-built integration templates), a drag-and-drop workflow builder, and a 2026 push into AI Agent orchestration via their Enterprise MCP (Model Context Protocol) platform.
+
+**Core Products (2026):**
+- **Modern iPaaS** — cloud integration platform with 1,000+ pre-built app connectors ("recipes")
+- **Enterprise MCP** — AI gateway platform enabling AI agents (Claude, ChatGPT, etc.) to access enterprise systems securely
+- **Agent Orchestration** — AI agents that blend reasoning, action, and workflow automation
+- **Agent Studio** — no-code/low-code environment to build custom AI agents
+- **Workato Embedded** — iPaaS embedded inside SaaS products (ISV partners)
+- **API Management** — build, manage, and secure internal/external APIs
+- **Data Orchestration** — data pipeline orchestration
+- **Low-Code Apps** — build internal apps on Workato's platform
+- **B2B/EDI** — electronic data interchange for enterprise supply chains
+
+**Key acquisitions (2025):**
+- **DeepConverse** (March 2025) — support automation provider, bolsters AI agent capabilities
+- **XMAD.ai** (August 2025) — AI company to strengthen AI features
+
+**Market position:** Workato competes directly with Dell Boomi, MuleSoft (Salesforce), and IBM App Connect in the enterprise iPaaS space — NOT with Zapier, Make, or EveryCompanyClaw.
+
+---
+
+## 💰 Pricing (2026)
+
+Workato does NOT publish self-serve pricing. Every plan requires talking to sales. Their "Predictable Pricing Commitment" uses a "Capped Recipes" model — predictable monthly billing rather than usage-based billing. No public tiers available without a demo.
+
+**What is known:**
+- No free tier for serious use (minimal trial exists)
+- No self-serve plans — all pricing is enterprise sales-driven
+- Minimum deal size likely $20,000–$50,000/year based on enterprise iPaaS market norms
+- They explicitly differentiate from competitors with "no surprise bills" (usage-based pricing was a major pain point in the iPaaS space)
+
+**Key pricing insight:** Workato's entire go-to-market is enterprise sales. A solo founder or indie hacker literally cannot buy Workato without going through a multi-week sales cycle. This is the single biggest gap — and it's by design.
+
+---
+
+## ✅ Strengths (What They Do Well)
+
+### 1. Enterprise Trust & Credibility
+- 8x Gartner Magic Quadrant Leader for Integration Platform as a Service (iPaaS)
+- Backed by ServiceNow, Altimeter Capital, Insight Partners, Redpoint Ventures
+- $5.7B valuation signals serious enterprise staying power
+- Trust Center with SOC2, ISO 27001, GDPR compliance
+- Target customers include Fortune 500 companies (Unilever, Intuit, Broadcom, etc.)
+
+### 2. "Recipes" — Pre-Built Integration Templates
+Unlike n8n and Activepieces (blank canvas), Workato has 1,000+ pre-built "recipes" for common enterprise workflows. Enterprise teams can deploy proven patterns rather than building from scratch.
+
+### 3. Enterprise MCP — AI Agent Governance
+In 2026, Workato launched their Enterprise MCP platform — enabling AI agents (Claude, ChatGPT, Copilot) to securely access and act upon enterprise applications. Their positioning: "Most enterprises are deploying AI agents without governance. Here's why that's the same mistake they made with raw APIs."
+
+### 4. "Predictable Pricing" Differentiation
+Workato explicitly positions against usage-based pricing. Their Capped Recipes model means enterprises know their monthly bill in advance. This resonates with CFOs who hate surprise cloud bills.
+
+### 5. 2026 Agentic Push — Genies
+Workato's "Genies" are pre-built AI agents for specific business functions (IT, Sales, HR, Support, Marketing, Customer Experience). Configurable no-code agents that enterprises can deploy in weeks.
+
+### 6. Workato Embedded for ISVs
+ISVs (SaaS companies) can embed Workato's iPaaS into their own products. This is a B2B2B revenue model.
+
+### 7. Global Infrastructure
+Offices in Dublin, Singapore, Australia (data center 2023). Strong APAC presence for multinational enterprise customers.
+
+---
+
+## ❌ Weaknesses (Vulnerabilities to Exploit)
+
+### 1. No Self-Serve — Enterprise Only by Design
+This is the most exploitable weakness. Workato literally cannot sell to a solo founder without a demo call and sales cycle. Minimum deal size almost certainly $20K+/year. EveryCompanyClaw's $29–$99 one-time purchase is accessible to anyone in under 60 seconds.
+
+**EveryCompanyClaw angle:** "Workato won't talk to you unless you're spending $20K/year. We're here for the solo founder shipping on nights and weekends."
+
+### 2. No One-Time Purchase Option
+Workato is subscription-only, enterprise-contract-only. No lifetime access. For bootstrapped founders who distrust recurring subscriptions, this is a dealbreaker.
+
+### 3. Steep Learning Curve Despite Low-Code Branding
+Even with "low-code" positioning, the average founder or marketer cannot self-serve. The platform requires training and often professional services to deploy.
+
+### 4. No AI Prompts or Content Generation
+Workato's AI features are about connecting systems and orchestrating workflows. They do NOT generate content — cold emails, LinkedIn posts, ad copy, objection handling responses. EveryCompanyClaw's AI Prompts Bundle fills this content generation gap.
+
+**EveryCompanyClaw angle:** "Workato connects your CRM to your Slack. We write the emails that fill your CRM."
+
+### 5. No Python Scripts as a Product
+Workato is a platform — you configure it. They don't sell standalone Python scripts. EveryCompanyClaw's 50+ Python Scripts are production-ready code you own and run anywhere. Workato has no equivalent.
+
+### 6. Legacy Enterprise Pain — Sales Cycles
+Enterprise deals at Workato require: demo call → technical evaluation → security review → procurement → legal → implementation. This can take 3–12 months. EveryCompanyClaw's Stripe checkout takes 60 seconds.
+
+### 7. 2023 Layoffs — Stability Questions
+Workato laid off ~10% of its workforce in 2023. While not necessarily a problem in 2026, it signals growth challenges at enterprise scale.
+
+### 8. No Individual/Founder Use Case
+Workato has zero productized offering for individual users. Even if a solo founder wanted to try Workato, the minimum contract size makes it impossible.
+
+---
+
+## 🎯 Market Positioning
+
+**Target customer:** Large enterprises, Fortune 500, multinational companies. NOT startups, NOT indie hackers, NOT small businesses, NOT solo founders.
+
+**Typical buyer:** VP of Engineering, Director of IT, Enterprise Architect, Chief Digital Officer. Budgets of $100K–$1M+/year for integration platforms.
+
+**Sweet spot:** Enterprises with complex hybrid IT environments (cloud + on-premise) that need to connect 50+ applications and automate cross-department workflows.
+
+**What Workato is NOT:** A tool for founders, marketers, or small teams. Not self-serve. Not affordable below ~$20K/year.
+
+---
+
+## 💡 Opportunities for EveryCompanyClaw vs Workato
+
+### 1. Completely Different Market Segments — No Direct Competition
+Workato serves enterprises with 1,000+ employees and $500K+ IT budgets. EveryCompanyClaw serves solo founders, indie hackers, and small teams with $0–$5K automation budgets. These are genuinely different buyers with zero overlap.
+
+**Strategy:** Don't engage with Workato comparison at all in EveryCompanyClaw marketing. Any comparison implies they're alternatives, and they're not. Simply don't mention them.
+
+### 2. The "AI Content Generation" Gap Is Universal
+Workato connects systems. EveryCompanyClaw generates content. Even Workato enterprise customers could use EveryCompanyClaw's AI Prompts Bundle — there's no conflict.
+
+**Strategy:** Sell AI Prompts Bundle to enterprise marketing teams who use Workato for operations. "Workato runs your workflows. Our AI Prompts run your content."
+
+### 3. The Founder-to-Enterprise "Graduation" Path
+A founder who starts with EveryCompanyClaw today might grow into Workato in 3–5 years when their company reaches enterprise scale. Plant seeds early.
+
+**Strategy:** Build a "Scale Up" story. "Started with EveryCompanyClaw? As your team grows, here's how to think about enterprise iPaaS like Workato." This builds trust without cannibalizing current sales.
+
+### 4. Workato Customers Are Enterprise IT Buyers — Future Leads
+Enterprise IT buyers at Workato customer companies have budgets for automation. If they discovered EveryCompanyClaw's Python Scripts or AI Prompts, they'd buy in minutes without any sales cycle.
+
+**Strategy:** Content marketing targeting "Workato alternatives" search queries. Founders who evaluate Workato and bounce (too expensive, too complex) are perfect EveryCompanyClaw prospects.
+
+### 5. The "Speed vs Enterprise Complexity" Angle
+Workato's enterprise implementation takes months. EveryCompanyClaw takes minutes.
+
+**EveryCompanyClaw angle:** "Workato takes 6 months to deploy. You can automate your first workflow in 6 minutes with EveryCompanyClaw."
+
+---
+
+## 📊 Seven-Platform Competitive Comparison
+
+| Feature | EveryCompanyClaw | Zapier | n8n | Make | Pabbly | Workato |
+|---------|-----------------|--------|------|------|--------|--------|
+| **Target** | Solo founders | SMBs | Developers | SMBs | Cost-conscious | Enterprise |
+| **Self-serve** | ✅ Full | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes | ❌ Demo required |
+| **Pricing** | $29–$99 one-time | $19–$599/mo | $0–$60/mo | $9–$299/mo | $0–$59/mo or $349 | Custom (sales-only) |
+| **Min contract** | $0 | $0 | $0 | $0 | $0 | ~$20K/year |
+| **AI Prompts** | ✅ 200+ | ❌ | ❌ | ❌ | ❌ | ❌ |
+| **Python Scripts** | ✅ 50+ | ❌ | ✅ Custom | ❌ | ⚠️ Custom code | ❌ |
+| **Pre-built recipes** | ✅ 25+ Zapier templates | ✅ | ❌ | ✅ | ⚠️ Some | ✅ 1,000+ |
+| **One-time pricing** | ✅ Yes | ❌ | ⚠️ Self-host | ❌ | ✅ $349 | ❌ |
+| **Gartner Leader** | ❌ | ❌ | ❌ | ❌ | ❌ | ✅ 8x |
+| **Enterprise MCP** | ❌ | ❌ | ❌ | ❌ | ❌ | ✅ |
+| **Setup time** | Minutes | Minutes | Hours-Days | Hours | Hours | Months |
+| **Solo founder ICP** | ✅ Primary | ⚠️ Some | ⚠️ Some | ⚠️ Some | ✅ Yes | ❌ |
+
+---
+
+## 🎯 Recommended Actions from Workato Research
+
+### 1. No Direct Competitive Response Needed
+Workato is not a competitor to EveryCompanyClaw. Their market, pricing, and buyer are entirely different. Do not add Workato to comparison tables on product pages — it would imply they are alternatives, which they are not.
+
+### 2. Content Marketing: "Workato Alternatives for Startups"
+Create a blog post or page: "Workato Alternatives for Startups & Indie Hackers." Founders who research Workato and find it too enterprise-heavy are warm EveryCompanyClaw leads. This content catches that demand.
+
+### 3. The "Enterprise AI Governance" Insight
+Workato's 2026 "Enterprise MCP" positioning is a signal that AI agent governance is becoming a category. EveryCompanyClaw doesn't need to compete here, but this trend validates the broader AI automation space.
+
+### 4. Monitor Workato for Future Threats
+Workato acquired DeepConverse (support automation) and XMAD.ai (AI). If they expand into content generation or launch a small-team tier, reassess competitive threat. Currently: no threat to EveryCompanyClaw's market.
+
+### 5. "Scale Up" Referral Path
+Build an honest referral story: "Outgrown EveryCompanyClaw? Here's how to evaluate Workato when your company is ready." This is credible and positions EveryCompanyClaw as honest, not threatened.
+
+---
+
+## 🔑 Key Takeaway: Workato Is Not a Competitor
+
+Workato and EveryCompanyClaw occupy completely different market positions:
+
+| | EveryCompanyClaw | Workato |
+|---|---|---|
+| **Buyer** | Solo founder, indie hacker | Fortune 500 IT Director |
+| **Budget** | $29–$99 | $20K–$500K+/year |
+| **Sales cycle** | 60 seconds (Stripe) | 3–12 months (enterprise) |
+| **Self-serve** | Full | None |
+| **AI Prompts** | ✅ | ❌ |
+| **Python Scripts** | ✅ | ❌ |
+| **Target company size** | 1 person | 1,000+ employees |
+
+The strategic lesson from Workato: the enterprise automation market is enormous and growing. EveryCompanyClaw doesn't need to compete there — it needs to win in its own lane (solo founders, indie hackers) and build brand awareness so graduates of that lane become enterprise IT buyers who remember EveryCompanyClaw.
+
+---
+
+**Research completed:** 2026-04-15 18:08 HKT (10:08 UTC)
+**Competitor researched:** Workato
+**Key finding:** Workato is exclusively enterprise with no self-serve option and minimum contracts of ~$20K/year. It has no AI prompts library, no Python scripts product, and no solo-founder pricing. EveryCompanyClaw and Workato are not competitors. The opportunity is content marketing targeting Workato-bound founders who bounce due to complexity/cost — they are perfect EveryCompanyClaw prospects.
+
+**Competitors now fully researched:** Zapier, n8n, Make.com, Activepieces, Pipedream, Pabbly Connect, Workflow86, Workato (8 of 8 major automation + iPaaS competitors)
